@@ -874,10 +874,21 @@ print.bpnme <- function(x, ...){
 #'
 #'
 
-traceplot.bpnr <- function(object, type = "trace", parameter = "SAM", variable){
+traceplot.bpnr <- function(object, type = "trace", parameter = "SAM", variable = NULL){
 
- text <- paste0(as.character(bquote(object)), "$", parameter)
- plot.ts(eval(parse(text = text))[,variable], ylab = variable, xlab = "Iteration", main = "Traceplots")
+ if(is.null(variable)){
+
+   text <- paste0(as.character(bquote(object)), "$", parameter)
+   plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots")
+
+ }else{
+
+   text <- paste0(as.character(bquote(object)), "$", parameter)
+   plot.ts(eval(parse(text = text))[,variable], ylab = variable, xlab = "Iteration", main = "Traceplots")
+
+ }
+
+
 
 }
 

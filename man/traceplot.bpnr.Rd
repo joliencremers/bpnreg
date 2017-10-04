@@ -5,7 +5,7 @@
 \title{Traceplots for a Bayesian circular regression model}
 \usage{
 \method{traceplot}{bpnr}(object, type = "trace", parameter = "SAM",
-  variable)
+  variable = NULL)
 }
 \arguments{
 \item{object}{a \code{bpnr object} obtained from the function \code{bpnr()}}
