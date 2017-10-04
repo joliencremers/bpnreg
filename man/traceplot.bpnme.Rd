@@ -4,7 +4,7 @@
 \alias{traceplot.bpnme}
 \title{Traceplots for a Bayesian circular mixed-effects model}
 \usage{
-\method{traceplot}{bpnme}(object, parameter = "SAM", variable)
+\method{traceplot}{bpnme}(object, parameter = "SAM", variable = NULL)
 }
 \arguments{
 \item{object}{a \code{bpnme object} obtained from the function \code{bpnme()}}

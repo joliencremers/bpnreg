@@ -12,7 +12,7 @@
 #'
 #'
 
-traceplot <- function(object, parameter = "SAM", variable){
+traceplot <- function(object, parameter = "SAM", variable = NULL){
 
 UseMethod("traceplot", object)
 
@@ -909,17 +909,17 @@ traceplot.bpnr <- function(object, type = "trace", parameter = "SAM", variable =
 #'
 #'
 
-traceplot.bpnme <- function(object, parameter = "SAM", variable){
+traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
 
-  if(effect == "fixed"){
+  if(is.null(variable)){
+
+    text <- paste0(as.character(bquote(object)), "$", parameter)
+    plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots")
+
+  }else{
 
     text <- paste0(as.character(bquote(object)), "$", parameter)
     plot.ts(eval(parse(text = text))[,variable], ylab = variable, xlab = "Iteration", main = "Traceplots")
-
-  }
-
-  if(effect == "random"){
-
 
   }
 

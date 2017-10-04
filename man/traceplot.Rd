@@ -4,7 +4,7 @@
 \alias{traceplot}
 \title{Traceplots}
 \usage{
-traceplot(object, parameter = "SAM", variable)
+traceplot(object, parameter = "SAM", variable = NULL)
 }
 \arguments{
 \item{object}{an object used to select a method}
