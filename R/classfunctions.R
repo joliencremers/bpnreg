@@ -878,12 +878,9 @@ traceplot.bpnr <- function(object, type = "trace", parameter = "SAM", variable =
 
  if(is.null(variable)){
 
-   mar <- par()$mar
-   mar[1] <- 8
-   par(mar = mar)
-
    text <- paste0(as.character(bquote(object)), "$", parameter)
-   plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots")
+   plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots",
+           mar=c(gap=0.5, 5.1, gap=0.5, 2.1))
 
  }else{
 
@@ -917,12 +914,9 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
 
   if(is.null(variable)){
 
-    mar <- par()$mar
-    mar[1] <- 8
-    par(mar = mar)
-
     text <- paste0(as.character(bquote(object)), "$", parameter)
-    plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots")
+    plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots",
+            mar=c(gap=0.5, 5.1, gap=0.5, 2.1))
 
   }else{
 
