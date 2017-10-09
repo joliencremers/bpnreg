@@ -17,3 +17,10 @@ A matrix with posterior summaries of the linear coefficients in a
 Gives the coefficients tables of the linear coefficients for a circular
 regression model
 }
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+coef_lin(fit.Motor)
+
+}

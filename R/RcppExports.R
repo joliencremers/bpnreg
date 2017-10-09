@@ -6,7 +6,7 @@
 #' @param theta a circular variable in radians.
 #'
 rho <- function(theta) {
-    .Call('_bpnreg_rho', PACKAGE = 'bpnreg', theta)
+    .Call(`_bpnreg_rho`, theta)
 }
 
 #' Compute a mean direction
@@ -14,7 +14,7 @@ rho <- function(theta) {
 #' @inheritParams rho
 #'
 theta_bar <- function(theta) {
-    .Call('_bpnreg_theta_bar', PACKAGE = 'bpnreg', theta)
+    .Call(`_bpnreg_theta_bar`, theta)
 }
 
 #' Compute Eigenvalues
@@ -22,7 +22,7 @@ theta_bar <- function(theta) {
 #' @param X A matrix.
 #'
 eigen_val <- function(X) {
-    .Call('_bpnreg_eigen_val', PACKAGE = 'bpnreg', X)
+    .Call(`_bpnreg_eigen_val`, X)
 }
 
 #' Compute Eigenvectors
@@ -30,7 +30,7 @@ eigen_val <- function(X) {
 #' @inheritParams eigen_val
 #'
 eigen_vec <- function(X) {
-    .Call('_bpnreg_eigen_vec', PACKAGE = 'bpnreg', X)
+    .Call(`_bpnreg_eigen_vec`, X)
 }
 
 #' Sample from a multivariate normal distribution
@@ -40,7 +40,7 @@ eigen_vec <- function(X) {
 #' @param n An integer indicating the number of samples to take.
 #'
 mvrnorm_arma_eigen <- function(n, mu, sigma) {
-    .Call('_bpnreg_mvrnorm_arma_eigen', PACKAGE = 'bpnreg', n, mu, sigma)
+    .Call(`_bpnreg_mvrnorm_arma_eigen`, n, mu, sigma)
 }
 
 #' Compute circular coefficients
@@ -51,7 +51,7 @@ mvrnorm_arma_eigen <- function(n, mu, sigma) {
 #' @param b2 slope estimate of component I.
 #'
 circ_coef_rcpp <- function(a1, a2, b1, b2) {
-    .Call('_bpnreg_circ_coef_rcpp', PACKAGE = 'bpnreg', a1, a2, b1, b2)
+    .Call(`_bpnreg_circ_coef_rcpp`, a1, a2, b1, b2)
 }
 
 #' Compute the Likelihood of the PN distribution
@@ -64,7 +64,7 @@ circ_coef_rcpp <- function(a1, a2, b1, b2) {
 #' @param n sample size
 #'
 lik <- function(X1, X2, theta, b1, b2, n) {
-    .Call('_bpnreg_lik', PACKAGE = 'bpnreg', X1, X2, theta, b1, b2, n)
+    .Call(`_bpnreg_lik`, X1, X2, theta, b1, b2, n)
 }
 
 #' Compute Model Fit Measures Regression Model
@@ -74,7 +74,7 @@ lik <- function(X1, X2, theta, b1, b2, n) {
 #' @param X2 model matrix for the second component
 #'
 DIC_reg <- function(Output, X1, X2) {
-    .Call('_bpnreg_DIC_reg', PACKAGE = 'bpnreg', Output, X1, X2)
+    .Call(`_bpnreg_DIC_reg`, Output, X1, X2)
 }
 
 #' A slice sampler for the latent lengths r
@@ -88,7 +88,7 @@ DIC_reg <- function(Output, X1, X2) {
 #' @param r A matrix with the estimates of r of the previous iteration.
 #'
 slice_rcpp <- function(X1, X2, theta, b1, b2, n, r) {
-    .Call('_bpnreg_slice_rcpp', PACKAGE = 'bpnreg', X1, X2, theta, b1, b2, n, r)
+    .Call(`_bpnreg_slice_rcpp`, X1, X2, theta, b1, b2, n, r)
 }
 
 #' A Gibbs sampler for a projected normal regression model
@@ -101,7 +101,7 @@ slice_rcpp <- function(X1, X2, theta, b1, b2, n, r) {
 #' @param burn An integer specifying the number of burn-in iterations.
 #'
 pnr <- function(theta, X1r, X2r, its, lag, burn) {
-    .Call('_bpnreg_pnr', PACKAGE = 'bpnreg', theta, X1r, X2r, its, lag, burn)
+    .Call(`_bpnreg_pnr`, theta, X1r, X2r, its, lag, burn)
 }
 
 #' Estimate the mode by finding the highest posterior density interval
@@ -112,7 +112,7 @@ pnr <- function(theta, X1r, X2r, its, lag, burn) {
 #' @return a scalar containing the estimate of the mode
 #'
 hmodeC <- function(x, cip) {
-    .Call('_bpnreg_hmodeC', PACKAGE = 'bpnreg', x, cip)
+    .Call(`_bpnreg_hmodeC`, x, cip)
 }
 
 #' Find the highest density interval of a circular variable
@@ -122,7 +122,7 @@ hmodeC <- function(x, cip) {
 #' @return a vector of length 2 containing the lower and upper bound of the interval
 #'
 hmodeciC <- function(x, cip) {
-    .Call('_bpnreg_hmodeciC', PACKAGE = 'bpnreg', x, cip)
+    .Call(`_bpnreg_hmodeciC`, x, cip)
 }
 
 #' Estimate the mode by finding the highest posterior density interval
@@ -132,7 +132,7 @@ hmodeciC <- function(x, cip) {
 #' @return a scalar containing the estimate of the mode
 #'
 hmode <- function(x, cip) {
-    .Call('_bpnreg_hmode', PACKAGE = 'bpnreg', x, cip)
+    .Call(`_bpnreg_hmode`, x, cip)
 }
 
 #' Find the highest density interval.
@@ -143,6 +143,6 @@ hmode <- function(x, cip) {
 #' @return a vector of length 2 containing the lower and upper bound of the interval.
 #'
 hmodeci <- function(x, cip) {
-    .Call('_bpnreg_hmodeci', PACKAGE = 'bpnreg', x, cip)
+    .Call(`_bpnreg_hmodeci`, x, cip)
 }
 

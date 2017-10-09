@@ -6,7 +6,7 @@
 \title{Phase differences in hand flexion-extension movements.}
 \format{A data frame with 42 rows and 7 variables:
 \describe{
-  \item{Condition}{a factor variable indicating the condition a participant
+  \item{Cond}{a factor variable indicating the condition a participant
   was placed in; 1 = 'implicit', 2 = 'semi.implicit' or 3 = 'explicit'}
   \item{PhaseDiff}{a numeric variable the phase difference between 'observer'
   and 'mover' in degrees}

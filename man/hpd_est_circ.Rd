@@ -12,3 +12,8 @@ hpd_est_circ(x)
 \description{
 Compute the 95 percent HPD of a vector of circular data
 }
+\examples{
+library(bpnreg)
+hpd_est_circ(subset(Motor, Cond = "exp")$Phaserad)
+
+}

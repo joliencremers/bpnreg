@@ -37,8 +37,8 @@
 #'   Statistical Association, 93 (443), 1068 - 1077.
 #'
 #' @examples
-#' library(pnreg)
-#' bpnr(Phaserad ~ Condition + AvAmp, Motor)
+#' library(bpnreg)
+#' bpnr(Phaserad ~ Cond + AvAmp, Motor)
 #'
 #' @export
 #'
@@ -118,7 +118,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   Statistical Association, 93 (443), 1068 - 1077.
 #'
 #' @examples
-#' library(pnreg)
+#' library(bpnreg)
 #' bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps)
 #'
 #' @export

@@ -8,6 +8,12 @@
 #' @param variable a character string with variable name(s) to indicate for
 #'   which variable(s) a traceplot is required
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' traceplot(fit.Motor, parameter = "B1")
+#'
 #' @export
 #'
 #'
@@ -28,8 +34,14 @@ UseMethod("traceplot", object)
 #' @param type type of hypothesis to test c("anchor", "isotropic")
 #' @param ... further arguments passed to or from other methods
 #'
-#' @details the methods \link[pnreg]{BFc.bpnr} and
-#'   \link[pnreg]{BFc.bpnme} have their own help page
+#' @details the methods \link[bpnreg]{BFc.bpnr} and
+#'   \link[bpnreg]{BFc.bpnme} have their own help page
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' BFc(fit.Motor, hypothesis = "Condsemi.imp < Condexp")
 #'
 #' @export
 #'
@@ -46,8 +58,15 @@ BFc <- function(object, hypothesis, type = "anchor"){
 #'
 #' @param object an object used to select a method
 #'
-#' @details the methods \link[pnreg]{fit.bpnr} and
-#'   \link[pnreg]{fit.bpnme} have their own help page
+#' @details the methods \link[bpnreg]{fit.bpnr} and
+#'   \link[bpnreg]{fit.bpnme} have their own help page
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' fit(fit.Motor)
+#'
 #'
 #' @export
 #'
@@ -64,8 +83,14 @@ fit <- function(object){
 #'
 #' @param object an object used to select a method
 #'
-#' @details the methods \link[pnreg]{coef_lin.bpnr} and
-#'   \link[pnreg]{coef_lin.bpnme} have their own help page
+#' @details the methods \link[bpnreg]{coef_lin.bpnr} and
+#'   \link[bpnreg]{coef_lin.bpnme} have their own help page
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' coef_lin(fit.Motor)
 #'
 #' @export
 #'
@@ -84,9 +109,15 @@ coef_lin <- function(object){
 #' @param type one of c("continuous", "categorical") to get either the
 #'   coefficients for the continuous or categorical predictor variables
 #'
-#' @details the methods \link[pnreg]{coef_circ.bpnr} and
-#'   \link[pnreg]{coef_circ.bpnme} have their own help page
+#' @details the methods \link[bpnreg]{coef_circ.bpnr} and
+#'   \link[bpnreg]{coef_circ.bpnme} have their own help page
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' coef_circ(fit.Motor)
+#' coef_circ(fit.Motor, type = "categorical")
 #'
 #' @export
 #'
@@ -105,7 +136,15 @@ coef_circ <- function(object, type = "continuous"){
 #' @param type one of c("linear", "circular") to get either the
 #'   linear or circular variances of the random effects
 #'
-#' @details the method \link[pnreg]{coef_ran.bpnme} has its own help page
+#' @details the method \link[bpnreg]{coef_ran.bpnme} has its own help page
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+#' data = Maps,
+#' its = 100, burn = 10, n.lag = 3)
+#' coef_ran(fit.Maps)
+#' coef_ran(fit.Maps, type = "circular")
 #'
 #'
 #' @export
@@ -130,6 +169,12 @@ coef_ran <- function(object, type = "linear"){
 #' @return Bayes Factors for inequality constrained hypothesis on mean differences
 #'
 #' @method BFc bpnr
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' BFc(fit.Motor, hypothesis = "Condsemi.imp < Condexp")
 #'
 #' @export
 #'
@@ -293,6 +338,12 @@ BFc.bpnme <- function(object, hypothesis, type = "anchor"){
 #'
 #' @method predict bpnr
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' predict(fit.Motor)
+#'
 #' @export
 #'
 
@@ -320,6 +371,12 @@ predict.bpnr <- function(object, ...){
 #'   for the circular outcome for each iteration of the MCMC sampler.
 #'
 #' @method predict bpnme
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' predict(fit.Motor)
 #'
 #' @export
 #'
@@ -365,6 +422,13 @@ predict.bpnme <- function(object, ...){
 #'
 #' @method residuals bpnr
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' residuals(fit.Motor)
+#' residuals(fit.Motor, type = "cos")
+#'
 #' @export
 #'
 
@@ -406,6 +470,14 @@ residuals.bpnr <- function(object, type = "arc", ...){
 #'
 #' @method residuals bpnme
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+#' data = Maps,
+#' its = 100, burn = 10, n.lag = 3)
+#' residuals(fit.Maps)
+#' residuals(fit.Maps, type = "cos")
+#'
 #' @export
 #'
 
@@ -442,6 +514,13 @@ residuals.bpnme <- function(object, type = "arc", ...){
 #'
 #' @return A matrix with posterior summaries of the random effect variances
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+#' data = Maps,
+#' its = 100, burn = 10, n.lag = 3)
+#' coef_ran(fit.Maps)
+#' coef_ran(fit.Maps, type = "circular")
 #'
 #' @export
 #'
@@ -476,6 +555,12 @@ coef_ran.bpnme <- function(object, type = "linear"){
 #'
 #' @method coef_lin bpnr
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' coef_lin(fit.Motor)
+#'
 #' @export
 #'
 #'
@@ -497,6 +582,13 @@ coef_lin.bpnr <- function(object){
 #'   Bayesian circular mixed-effects model
 #'
 #' @method coef_lin bpnme
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+#' data = Maps,
+#' its = 100, burn = 10, n.lag = 3)
+#' coef_lin(fit.Maps)
 #'
 #' @export
 #'
@@ -521,6 +613,13 @@ coef_lin.bpnme <- function(object){
 #'   Bayesian circular regression model
 #'
 #' @method coef_circ bpnr
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' coef_circ(fit.Motor)
+#' coef_circ(fit.Motor, type = "categorical")
 #'
 #' @export
 #'
@@ -581,6 +680,14 @@ coef_circ.bpnr <- function(object, type = "continuous"){
 #'   Bayesian circular mixed-effects model
 #'
 #' @method coef_circ bpnme
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+#' data = Maps,
+#' its = 100, burn = 10, n.lag = 3)
+#' coef_circ(fit.Maps)
+#' coef_circ(fit.Maps, type = "categorical")
 #'
 #' @export
 #'
@@ -645,6 +752,12 @@ coef_circ.bpnme <- function(object, type = "continuous"){
 #'
 #' @method fit bpnr
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' fit(fit.Motor)
+#'
 #' @export
 #'
 
@@ -677,6 +790,13 @@ fit.bpnr <- function(object){
 #'
 #' @method fit bpnme
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+#' data = Maps,
+#' its = 100, burn = 10, n.lag = 3)
+#' fit(fit.Maps)
+#'
 #' @export
 #'
 
@@ -704,6 +824,12 @@ fit.bpnme <- function(object){
 #' @return a print of selected output from a Bayesian circular regression model
 #'
 #' @method print bpnr
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' print(fit.Motor)
 #'
 #' @export
 #'
@@ -778,6 +904,13 @@ print.bpnr <- function(x, ...){
 #' @return a print of selected output from a Bayesian circular mixed-effects model
 #'
 #' @method print bpnme
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+#' data = Maps,
+#' its = 100, burn = 10, n.lag = 3)
+#' print(fit.Maps)
 #'
 #' @export
 #'
@@ -870,11 +1003,17 @@ print.bpnme <- function(x, ...){
 #'
 #' @method traceplot bpnr
 #'
+#' @examples
+#' library(bpnreg)
+#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+#' its = 100, burn = 10, n.lag = 3)
+#' traceplot(fit.Motor, parameter = "B1")
+#'
 #' @export
 #'
 #'
 
-traceplot.bpnr <- function(object, type = "trace", parameter = "SAM", variable = NULL){
+traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 
  if(is.null(variable)){
 
@@ -905,6 +1044,13 @@ traceplot.bpnr <- function(object, type = "trace", parameter = "SAM", variable =
 #'   to indicate for which variable(s) a traceplot is required
 #'
 #' @method traceplot bpnme
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+#' data = Maps,
+#' its = 100, burn = 10, n.lag = 3)
+#' traceplot(fit.Maps)
 #'
 #' @export
 #'

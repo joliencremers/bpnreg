@@ -16,5 +16,15 @@ linear or circular variances of the random effects}
 \code{coef_ran} gives posterior summaries of the circular or linear random effect variances
 }
 \details{
-the method \link[pnreg]{coef_ran.bpnme} has its own help page
+the method \link[bpnreg]{coef_ran.bpnme} has its own help page
+}
+\examples{
+library(bpnreg)
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+data = Maps,
+its = 100, burn = 10, n.lag = 3)
+coef_ran(fit.Maps)
+coef_ran(fit.Maps, type = "circular")
+
+
 }

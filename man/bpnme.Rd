@@ -56,7 +56,7 @@ Because the model is based on the projected normal distribution, a
   Mainhard & Klugkist (2017, working paper).
 }
 \examples{
-library(pnreg)
+library(bpnreg)
 bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps)
 
 }

@@ -22,3 +22,10 @@ a matrix containing the computed log pointwise predictive density
 \description{
 Outputs several model fit statistics for the Bayesian circular regression model
 }
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+fit(fit.Motor)
+
+}

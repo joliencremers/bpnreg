@@ -12,3 +12,8 @@ mode_est_circ(x)
 \description{
 Compute the mode of a vector of circular data
 }
+\examples{
+library(bpnreg)
+mode_est_circ(subset(Motor, Cond = "exp")$Phaserad)
+
+}

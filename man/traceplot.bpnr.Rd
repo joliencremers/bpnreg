@@ -4,8 +4,7 @@
 \alias{traceplot.bpnr}
 \title{Traceplots for a Bayesian circular regression model}
 \usage{
-\method{traceplot}{bpnr}(object, type = "trace", parameter = "SAM",
-  variable = NULL)
+\method{traceplot}{bpnr}(object, parameter = "SAM", variable = NULL)
 }
 \arguments{
 \item{object}{a \code{bpnr object} obtained from the function \code{bpnr()}}
@@ -18,4 +17,11 @@ which variable(s) a traceplot is required}
 }
 \description{
 General plot function for a \code{bpnr object}.
+}
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+traceplot(fit.Motor, parameter = "B1")
+
 }

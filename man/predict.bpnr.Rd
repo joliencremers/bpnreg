@@ -20,3 +20,10 @@ a matrix (rows = N, columns = iterations) containing predicted values
 Outputs predicted values for a Bayesian circular regression model for each iteration
 of the MCMC sampler
 }
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+predict(fit.Motor)
+
+}

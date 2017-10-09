@@ -12,3 +12,8 @@ mode_est(x)
 \description{
 Compute the mode of a vector of linear data
 }
+\examples{
+library(bpnreg)
+mode_est(Motor$AvAmp)
+
+}

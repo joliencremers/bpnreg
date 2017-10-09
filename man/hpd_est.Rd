@@ -12,3 +12,8 @@ hpd_est(x)
 \description{
 Compute the 95 percept HPD of a vector of linear data
 }
+\examples{
+library(bpnreg)
+hpd_est(Motor$AvAmp)
+
+}

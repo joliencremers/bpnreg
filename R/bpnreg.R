@@ -44,7 +44,7 @@
 #' @source Cremers, J., & Klugkist, I. (2017). How to analyze circular data: A
 #'    tutorial for projected normal regression models. Working paper.
 #'
-#' @useDynLib bpnreg
+#' @useDynLib bpnreg, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 #' @importFrom stats sd rnorm runif pnorm dnorm var model.matrix predict rWishart terms model.frame plot.ts
 #' @importFrom MASS mvrnorm

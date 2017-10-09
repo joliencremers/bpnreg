@@ -14,3 +14,8 @@ rho_circ(theta, type = "radians")
 \description{
 Compute the mean resultant length of a vector of circular data
 }
+\examples{
+library(bpnreg)
+rho_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
+
+}

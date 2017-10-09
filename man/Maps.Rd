@@ -14,9 +14,9 @@
   \item{Trial.type}{a within subjects factor indicating the type of target (0
   = standard, 1 = probe)}
    \item{Error}{a numeric variable containing the angular error in degrees}
-  \item{Learning}{a numeric variable indicating the number of trials a
+  \item{Learn}{a numeric variable indicating the number of trials a
   participant completed in the training phase}
-  \item{Learning.c}{mean centered Learning}
+  \item{Learn.c}{mean centered Learning}
   \item{Error.rad}{a numeric variable containing the angular error in radians}
 }}
 \source{

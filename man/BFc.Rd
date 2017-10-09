@@ -20,6 +20,13 @@ BFc(object, hypothesis, type = "anchor")
 circular mean differences
 }
 \details{
-the methods \link[pnreg]{BFc.bpnr} and
-  \link[pnreg]{BFc.bpnme} have their own help page
+the methods \link[bpnreg]{BFc.bpnr} and
+  \link[bpnreg]{BFc.bpnme} have their own help page
+}
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+BFc(fit.Motor, hypothesis = "Condsemi.imp < Condexp")
+
 }

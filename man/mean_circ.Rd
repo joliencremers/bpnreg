@@ -14,3 +14,8 @@ mean_circ(theta, type = "radians")
 \description{
 Compute the mean of a vector of circular data
 }
+\examples{
+library(bpnreg)
+mean_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
+
+}

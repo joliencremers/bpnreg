@@ -54,7 +54,7 @@ Because the model is based on the projected normal distribution, a
   Mulder & Klugkist (2017) and Cremers, Mainhard & Klugkist (2017, under review).
 }
 \examples{
-library(pnreg)
-bpnr(Phaserad ~ Condition + AvAmp, Motor)
+library(bpnreg)
+bpnr(Phaserad ~ Cond + AvAmp, Motor)
 
 }

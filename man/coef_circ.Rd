@@ -16,6 +16,14 @@ coefficients for the continuous or categorical predictor variables}
 \code{coef_circ} gives posterior summaries of the circular coefficients
 }
 \details{
-the methods \link[pnreg]{coef_circ.bpnr} and
-  \link[pnreg]{coef_circ.bpnme} have their own help page
+the methods \link[bpnreg]{coef_circ.bpnr} and
+  \link[bpnreg]{coef_circ.bpnme} have their own help page
+}
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+coef_circ(fit.Motor)
+coef_circ(fit.Motor, type = "categorical")
+
 }

@@ -25,3 +25,11 @@ a matrix (rows = N, columns = iterations) containing residuals for
 Outputs residuals for a Bayesian circular regression model for each iteration
 of the MCMC sampler
 }
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+residuals(fit.Motor)
+residuals(fit.Motor, type = "cos")
+
+}

@@ -49,6 +49,10 @@ circ_coef <- function(a1, a2, b1, b2){
 #' @param theta a circular variable in radians.
 #' @param type measurement units of the circular variable c("radians", "degrees")
 #'
+#' @examples
+#' library(bpnreg)
+#' sd_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
+#'
 #' @export
 
 sd_circ <- function(theta, type = "radians"){
@@ -71,6 +75,10 @@ sd_circ <- function(theta, type = "radians"){
 #'
 #' @inheritParams sd_circ
 #'
+#' @examples
+#' library(bpnreg)
+#' mean_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
+#'
 #' @export
 
 mean_circ <- function(theta, type = "radians"){
@@ -90,6 +98,10 @@ mean_circ <- function(theta, type = "radians"){
 #' Compute the mean resultant length of a vector of circular data
 #'
 #' @inheritParams sd_circ
+#'
+#' @examples
+#' library(bpnreg)
+#' rho_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
 #'
 #' @export
 
@@ -111,6 +123,10 @@ rho_circ <- function(theta, type = "radians"){
 #'
 #' @param x a vector of linear data
 #'
+#' @examples
+#' library(bpnreg)
+#' mode_est(Motor$AvAmp)
+#'
 #' @export
 
 mode_est <- function(x){hmode(x, 0.1)}
@@ -118,6 +134,10 @@ mode_est <- function(x){hmode(x, 0.1)}
 #' Compute the 95 percept HPD of a vector of linear data
 #'
 #' @inheritParams mode_est
+#'
+#' @examples
+#' library(bpnreg)
+#' hpd_est(Motor$AvAmp)
 #'
 #' @export
 
@@ -127,11 +147,19 @@ hpd_est <- function(x){hmodeci(x, 0.95)}
 #'
 #' @param x a vector of circular data
 #'
+#' @examples
+#' library(bpnreg)
+#' mode_est_circ(subset(Motor, Cond = "exp")$Phaserad)
+#'
 #' @export
 
 mode_est_circ <- function(x){hmodeC(x, 0.1)}
 
 #' Compute the 95 percent HPD of a vector of circular data
+#'
+#' @examples
+#' library(bpnreg)
+#' hpd_est_circ(subset(Motor, Cond = "exp")$Phaserad)
 #'
 #' @inheritParams mode_est_circ
 #'

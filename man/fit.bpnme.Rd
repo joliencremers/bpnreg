@@ -22,3 +22,11 @@ a matrix containing the computed log pointwise predictive density
 \description{
 Outputs several model fit statistics for the Bayesian circular mixed-effects model
 }
+\examples{
+library(bpnreg)
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+data = Maps,
+its = 100, burn = 10, n.lag = 3)
+fit(fit.Maps)
+
+}

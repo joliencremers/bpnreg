@@ -14,3 +14,8 @@ sd_circ(theta, type = "radians")
 \description{
 Compute the standard deviation of a vector of circular data
 }
+\examples{
+library(bpnreg)
+sd_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
+
+}

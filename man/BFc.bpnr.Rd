@@ -21,3 +21,10 @@ Bayes Factors for inequality constrained hypothesis on mean differences
 Outputs Bayes Factors for the circular differences between several levels of
 a categorical variable and the baseline
 }
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+BFc(fit.Motor, hypothesis = "Condsemi.imp < Condexp")
+
+}

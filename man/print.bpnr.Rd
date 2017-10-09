@@ -18,3 +18,10 @@ a print of selected output from a Bayesian circular regression model
 \description{
 Prints selected output from a Bayesian circular regression model
 }
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+print(fit.Motor)
+
+}

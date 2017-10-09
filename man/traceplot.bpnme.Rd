@@ -19,3 +19,11 @@ to indicate for which variable(s) a traceplot is required}
 \description{
 General plot function for a \code{bpnme object}.
 }
+\examples{
+library(bpnreg)
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+data = Maps,
+its = 100, burn = 10, n.lag = 3)
+traceplot(fit.Maps)
+
+}

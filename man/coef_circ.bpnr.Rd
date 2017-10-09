@@ -20,3 +20,11 @@ A matrix with posterior summaries of the circular coefficients in a
 \description{
 Gives the coefficients tables of the circular coefficients for a Bayesian circular regression model
 }
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+coef_circ(fit.Motor)
+coef_circ(fit.Motor, type = "categorical")
+
+}

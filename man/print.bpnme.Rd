@@ -18,3 +18,11 @@ a print of selected output from a Bayesian circular mixed-effects model
 \description{
 Prints selected output from a Bayesian circular mixed-effects model
 }
+\examples{
+library(bpnreg)
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+data = Maps,
+its = 100, burn = 10, n.lag = 3)
+print(fit.Maps)
+
+}

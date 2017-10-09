@@ -13,6 +13,13 @@ coef_lin(object)
 \code{coef_lin} gives posterior summaries of the linear coefficients
 }
 \details{
-the methods \link[pnreg]{coef_lin.bpnr} and
-  \link[pnreg]{coef_lin.bpnme} have their own help page
+the methods \link[bpnreg]{coef_lin.bpnr} and
+  \link[bpnreg]{coef_lin.bpnme} have their own help page
+}
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+coef_lin(fit.Motor)
+
 }

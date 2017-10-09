@@ -36,9 +36,9 @@
 #'   \item{Trial.type}{a within subjects factor indicating the type of target (0
 #'   = standard, 1 = probe)}
 #'    \item{Error}{a numeric variable containing the angular error in degrees}
-#'   \item{Learning}{a numeric variable indicating the number of trials a
+#'   \item{Learn}{a numeric variable indicating the number of trials a
 #'   participant completed in the training phase}
-#'   \item{Learning.c}{mean centered Learning}
+#'   \item{Learn.c}{mean centered Learning}
 #'   \item{Error.rad}{a numeric variable containing the angular error in radians}
 #'}
 #'
@@ -85,7 +85,7 @@
 #'
 #' @format A data frame with 42 rows and 7 variables:
 #' \describe{
-#'   \item{Condition}{a factor variable indicating the condition a participant
+#'   \item{Cond}{a factor variable indicating the condition a participant
 #'   was placed in; 1 = 'implicit', 2 = 'semi.implicit' or 3 = 'explicit'}
 #'   \item{PhaseDiff}{a numeric variable the phase difference between 'observer'
 #'   and 'mover' in degrees}

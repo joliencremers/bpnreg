@@ -18,3 +18,12 @@ A matrix with posterior summaries of the random effect variances
 \description{
 Gives posterior summaries of the circular or linear random effect variances
 }
+\examples{
+library(bpnreg)
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+data = Maps,
+its = 100, burn = 10, n.lag = 3)
+coef_ran(fit.Maps)
+coef_ran(fit.Maps, type = "circular")
+
+}

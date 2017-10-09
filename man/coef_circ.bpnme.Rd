@@ -20,3 +20,12 @@ A matrix with posterior summaries of the circular coefficients in a
 \description{
 Gives the coefficients tables of the circular coefficients for a Bayesian circular mixed-effects model
 }
+\examples{
+library(bpnreg)
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+data = Maps,
+its = 100, burn = 10, n.lag = 3)
+coef_circ(fit.Maps)
+coef_circ(fit.Maps, type = "categorical")
+
+}

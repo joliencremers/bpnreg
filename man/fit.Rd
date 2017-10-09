@@ -13,6 +13,14 @@ fit(object)
 \code{fit} gives several model fit statistics
 }
 \details{
-the methods \link[pnreg]{fit.bpnr} and
-  \link[pnreg]{fit.bpnme} have their own help page
+the methods \link[bpnreg]{fit.bpnr} and
+  \link[bpnreg]{fit.bpnme} have their own help page
+}
+\examples{
+library(bpnreg)
+fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
+its = 100, burn = 10, n.lag = 3)
+fit(fit.Motor)
+
+
 }

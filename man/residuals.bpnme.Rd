@@ -25,3 +25,12 @@ a matrix (rows = N, columns = iterations) containing residuals for
 Outputs residuals for a Bayesian circular mixed-effects model for each iteration
 of the MCMC sampler
 }
+\examples{
+library(bpnreg)
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+data = Maps,
+its = 100, burn = 10, n.lag = 3)
+residuals(fit.Maps)
+residuals(fit.Maps, type = "cos")
+
+}
