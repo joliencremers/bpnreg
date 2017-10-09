@@ -554,7 +554,7 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
 
   output <- list(Beta.I = Beta.I, Beta.II = Beta.II, B.I = B.I, B.II = B.II,
                  VCovI = VCovI, VCovII = VCovII, predictiva = predictiva,
-                 circular.ri = circular.ri,
+                 circular.ri = circular.ri, N = mm$N,
                  its = its, n.lag = n.lag, burn = burn, p1 = p1, p2 = p2, q1 = q1, q2 = q2)
 
   summary.stats <- summe(output, mm)
