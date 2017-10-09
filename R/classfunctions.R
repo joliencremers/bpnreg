@@ -147,7 +147,7 @@ BFc.bpnr <- function(object, hypothesis, type = "anchor"){
 
     no.diff <- length(variables)
 
-    data <- as.data.frame(object$circ.diff)[,variables]
+    data <- as.data.frame(abs(object$circ.diff))[,variables]
 
     colnames(data) <- letters[1:no.diff]
 
@@ -228,7 +228,7 @@ BFc.bpnme <- function(object, hypothesis, type = "anchor"){
 
     no.diff <- length(variables)
 
-    data <- as.data.frame(object$circ.diff)[,variables]
+    data <- as.data.frame(abs(object$circ.diff))[,variables]
 
     colnames(data) <- letters[1:no.diff]
 
