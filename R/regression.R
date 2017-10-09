@@ -568,6 +568,9 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
   output$AS <- summary.stats$AS
   output$SSDO <- summary.stats$SSDO
   output$circ.diff <- summary.stats$circ.diff
+  output$cRSnum <- summary.stats$varrand.num
+  output$cRScat <- summary.stats$varrand.cat
+  output$cRI <- summary.stats$circ.varrand.ri
 
   output$Call <- match.call()
   output$lin.coef.I <- summary.stats$lin.res.I

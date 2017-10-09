@@ -369,7 +369,9 @@ sumr <- function(output, mm){
 
       }
 
-      circDiff <- pi - abs(pi - abs(baseline - dummy))
+      diff <- baseline - dummy
+      sign <- sign(sin(diff))
+      circDiff <- (pi - abs(pi - abs(diff)))*sign
 
       circ.diff[,c] <- circDiff
 
@@ -403,7 +405,9 @@ sumr <- function(output, mm){
 
         }
 
-        circDiff <- pi - abs(pi - abs(baseline - dummy))
+        diff <- baseline - dummy
+        sign <- sign(sin(diff))
+        circDiff <- (pi - abs(pi - abs(diff)))*sign
 
         circ.diff[,c] <- circDiff
 
@@ -431,7 +435,9 @@ sumr <- function(output, mm){
 
         }
 
-        circDiff <- pi - abs(pi - abs(baseline - dummy))
+        diff <- baseline - dummy
+        sign <- sign(sin(diff))
+        circDiff <- (pi - abs(pi - abs(diff)))*sign
 
         circ.diff[,c] <- circDiff
 
@@ -459,7 +465,9 @@ sumr <- function(output, mm){
 
         }
 
-        circDiff <- pi - abs(pi - abs(baseline - dummy))
+        diff <- baseline - dummy
+        sign <- sign(sin(diff))
+        circDiff <- (pi - abs(pi - abs(diff)))*sign
 
         circ.diff[,c] <- circDiff
 
@@ -814,7 +822,9 @@ summe <- function(output, mm){
 
       }
 
-      circDiff <- pi - abs(pi - abs(baseline - dummy))
+      diff <- baseline - dummy
+      sign <- sign(sin(diff))
+      circDiff <- (pi - abs(pi - abs(diff)))*sign
 
       circ.diff[,c] <- circDiff
 
@@ -848,7 +858,9 @@ summe <- function(output, mm){
 
         }
 
-        circDiff <- pi - abs(pi - abs(baseline - dummy))
+        diff <- baseline - dummy
+        sign <- sign(sin(diff))
+        circDiff <- (pi - abs(pi - abs(diff)))*sign
 
         circ.diff[,c] <- circDiff
 
@@ -876,7 +888,9 @@ summe <- function(output, mm){
 
         }
 
-        circDiff <- pi - abs(pi - abs(baseline - dummy))
+        diff <- baseline - dummy
+        sign <- sign(sin(diff))
+        circDiff <- (pi - abs(pi - abs(diff)))*sign
 
         circ.diff[,c] <- circDiff
 
@@ -904,7 +918,9 @@ summe <- function(output, mm){
 
         }
 
-        circDiff <- pi - abs(pi - abs(baseline - dummy))
+        diff <- baseline - dummy
+        sign <- sign(sin(diff))
+        circDiff <- (pi - abs(pi - abs(diff)))*sign
 
         circ.diff[,c] <- circDiff
 
@@ -1196,7 +1212,12 @@ summe <- function(output, mm){
 
   if(length(var.num.rand) == 0){
 
+    varrand.num = "There are no continuous variables with a random slope"
+
   }else{
+
+    varrand.num = matrix(NA, output$its, length(var.num.rand))
+    colnames(varrand.num) <- var.num.rand
 
     for(v in var.num.rand){
 
@@ -1242,7 +1263,7 @@ summe <- function(output, mm){
 
       }
 
-      varrand.num <- apply(circest.rand.num[,,"bc"], 2, var)
+      varrand.num[,v] <- apply(circest.rand.num[,,"bc"], 2, var)
 
       circ.res.varrand[paste("RS", v), 1] <- mean(varrand.num)
       circ.res.varrand[paste("RS", v), 2] <- mode_est(varrand.num)
@@ -1256,7 +1277,12 @@ summe <- function(output, mm){
 
   if(length(var.cat.rand) == 0){
 
+    varrand.cat = "There are no categorical variables with a random slope"
+
   }else{
+
+    varrand.cat = matrix(NA, output$its, length(var.cat.rand))
+    colnames(varrand.cat) <- var.cat.rand
 
     for(c in var.cat.rand){
 
@@ -1272,7 +1298,9 @@ summe <- function(output, mm){
           baseline <- atan2(a2, a1)
           dummy <- atan2(a2 + b2, a1 + b1)
 
-          circDiff <- pi - abs(pi - abs(baseline - dummy))
+          diff <- baseline - dummy
+          sign <- sign(sin(diff))
+          circDiff <- (pi - abs(pi - abs(diff)))*sign
 
           circest.rand.cat[i,,] <- circDiff
 
@@ -1290,7 +1318,9 @@ summe <- function(output, mm){
           baseline <- atan2(a2, a1)
           dummy <- atan2(a2 + b2, a1 + b1)
 
-          circDiff <- pi - abs(pi - abs(baseline - dummy))
+          diff <- baseline - dummy
+          sign <- sign(sin(diff))
+          circDiff <- (pi - abs(pi - abs(diff)))*sign
 
           circest.rand.cat[i,,] <- circDiff
 
@@ -1309,7 +1339,9 @@ summe <- function(output, mm){
           baseline <- atan2(a2, a1)
           dummy <- atan2(a2 + b2, a1 + b1)
 
-          circDiff <- pi - abs(pi - abs(baseline - dummy))
+          diff <- baseline - dummy
+          sign <- sign(sin(diff))
+          circDiff <- (pi - abs(pi - abs(diff)))*sign
 
           circest.rand.cat[i,,] <- circDiff
 
@@ -1317,7 +1349,7 @@ summe <- function(output, mm){
 
       }
 
-      varrand.cat <- apply(circest.rand.cat[,,"circ.diff"], 2, rho_circ)
+      varrand.cat[,c] <- apply(circest.rand.cat[,,"circ.diff"], 2, rho_circ)
 
       circ.res.varrand[paste("RS", c), 1] <- mean(varrand.cat)
       circ.res.varrand[paste("RS", c), 2] <- mode_est(varrand.cat)
@@ -1531,6 +1563,9 @@ summe <- function(output, mm){
   list(model.fit = model.fit,
        lin.res.I = lin.res.I,
        lin.res.II = lin.res.II,
+       varrand.num = varrand.num,
+       varrand.cat = varrand.cat,
+       circ.varrand.ri = circ.varrand.ri,
        circ.res = circ.res,
        circ.res.cat = circ.res.cat,
        a.x = a.x, a.c = a.c, b.c = b.c, SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
