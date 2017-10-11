@@ -1060,14 +1060,70 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
 
   if(is.null(variable)){
 
-    text <- paste0(as.character(bquote(object)), "$", parameter)
-    plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots",
-            mar=c(gap=0.5, 5.1, gap=0.5, 2.1))
+    if(parameter == "VCovI"){
+
+      Vars <- as.matrix(object$VCovI[1,1,])
+
+      if(object$q1 > 1){
+
+        for(i in 2:object$q1){
+
+          Vars <- cbind(Vars, object$VCovI[i,i,])
+
+        }
+
+      }
+
+      colnames(Vars) <- colnames(object$mm$mm_ran.I)
+      plot.ts(Vars, xlab = "Iteration", main = "Traceplots",
+              mar=c(gap=0.5, 5.1, gap=0.5, 2.1))
+
+
+    }else if(parameter == "VCovII"){
+
+      Vars <- as.matrix(object$VCovII[1,1,])
+
+      if(object$q2 > 1){
+
+        for(i in 2:object$q2){
+
+          Vars <- cbind(Vars, object$VCovII[i,i,])
+          colnames(Vars) <- colnames(object$mm$mm_ran.II)
+
+        }
+
+      }
+
+      plot.ts(Vars, xlab = "Iteration", main = "Traceplots",
+              mar=c(gap=0.5, 5.1, gap=0.5, 2.1))
+
+    }else if(parameter == "cRI"){
+
+      Vars <- as.matrix(object$cRI)
+      colnames(Vars) <- "(Intercept)"
+      plot.ts(Vars, xlab = "Iteration", main = "Traceplots",
+              mar=c(gap=0.5, 5.1, gap=0.5, 2.1))
+
+    }else{
+
+      text <- paste0(as.character(bquote(object)), "$", parameter)
+      plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots",
+              mar=c(gap=0.5, 5.1, gap=0.5, 2.1))
+
+    }
 
   }else{
 
-    text <- paste0(as.character(bquote(object)), "$", parameter)
-    plot.ts(eval(parse(text = text))[,variable], ylab = variable, xlab = "Iteration", main = "Traceplots")
+    if(parameter == "VCovI" | parameter == "VCovII" | parameter == "cRI"){
+
+      stop("Cannot request separate plots for random effect variances")
+
+    }else{
+
+      text <- paste0(as.character(bquote(object)), "$", parameter)
+      plot.ts(eval(parse(text = text))[,variable], ylab = variable, xlab = "Iteration", main = "Traceplots")
+
+    }
 
   }
 

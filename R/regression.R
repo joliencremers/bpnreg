@@ -129,8 +129,6 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
 
   set.seed(seed)
 
-  #SortLevels(data, index1, index2)
-
   mm <- mmme(pred.I, data, pred.II)
 
   if(!"(Intercept)" %in% colnames(mm$mm_ran.I) | !"(Intercept)" %in% colnames(mm$mm_ran.II)){
