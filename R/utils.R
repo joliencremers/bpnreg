@@ -205,8 +205,8 @@ mmme <- function(pred.I, data, pred.II){
   ran_form.I <- pred.I
   ran_form.II <- pred.II
 
-  lme4:::RHSForm(ran_form.I) <- lme4::subbars(lme4:::RHSForm(lme4:::reOnly(ran_form.I)))
-  lme4:::RHSForm(ran_form.II) <- lme4::subbars(lme4:::RHSForm(lme4:::reOnly(ran_form.II)))
+  RHSForm(ran_form.I) <- subbars(RHSForm(reOnly(ran_form.I)))
+  RHSForm(ran_form.II) <- subbars(RHSForm(reOnly(ran_form.II)))
 
   lab_ran.I <- attr(terms(ran_form.I), "term.labels")
   lab_ran.II <- attr(terms(ran_form.II), "term.labels")
@@ -214,8 +214,8 @@ mmme <- function(pred.I, data, pred.II){
   no_terms_ran.I <- length(lab_ran.I)
   no_terms_ran.II <- length(lab_ran.II)
 
-  lme4:::RHSForm(fix_form.I) <- lme4::nobars(lme4:::RHSForm(fix_form.I))
-  lme4:::RHSForm(fix_form.II) <- lme4::nobars(lme4:::RHSForm(fix_form.II))
+  RHSForm(fix_form.I) <- nobars(RHSForm(fix_form.I))
+  RHSForm(fix_form.II) <- nobars(RHSForm(fix_form.II))
 
   theta <- split(model.frame(ran_form.I, data)[,1], data[,lab_ran.I[no_terms_ran.I]])
 
