@@ -568,6 +568,7 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
   output$circ.diff <- summary.stats$circ.diff
   output$cRSnum <- summary.stats$varrand.num
   output$cRScat <- summary.stats$varrand.cat
+  output$cRS <- cbind(summary.stats$varrand.cat, summary.stats$varrand.num)
   output$cRI <- summary.stats$circ.varrand.ri
 
   output$Call <- match.call()
