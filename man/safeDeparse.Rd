@@ -12,9 +12,6 @@ Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 \usage{
 safeDeparse(x, collapse = " ")
 }
-\arguments{
-\item{collapse}{}
-}
 \description{
 Function to help divide input formula of bpnme object into a fixed and random part
 }

@@ -46,7 +46,8 @@
 #'
 #' @useDynLib bpnreg, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
-#' @importFrom stats sd rnorm runif pnorm dnorm var model.matrix predict rWishart terms model.frame plot.ts reformulate
+#' @importFrom stats sd rnorm runif pnorm dnorm var model.matrix predict rWishart terms
+#' @importFrom stats model.frame plot.ts reformulate as.formula formula
 #' @importFrom MASS mvrnorm
 #' @importFrom haven read_spss
 #'

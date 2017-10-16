@@ -12,9 +12,6 @@ Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 \usage{
 expandDoubleVerts(term)
 }
-\arguments{
-\item{term}{}
-}
 \description{
 Function to help divide input formula of bpnme object into a fixed and random part
 }

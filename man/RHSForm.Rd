@@ -12,11 +12,6 @@ Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 \usage{
 RHSForm(form, as.form = FALSE)
 }
-\arguments{
-\item{form}{an object of class formula}
-
-\item{as.form}{if TRUE creates a formula from a character vector}
-}
 \description{
 Function to help divide input formula of bpnme object into a fixed and random part
 }

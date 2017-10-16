@@ -1088,12 +1088,12 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
         for(i in 2:object$q2){
 
           Vars <- cbind(Vars, object$VCovII[i,i,])
-          colnames(Vars) <- colnames(object$mm$mm_ran.II)
 
         }
 
       }
 
+      colnames(Vars) <- colnames(object$mm$mm_ran.II)
       plot.ts(Vars, xlab = "Iteration", main = "Traceplots",
               mar=c(gap=0.5, 5.1, gap=0.5, 2.1))
 

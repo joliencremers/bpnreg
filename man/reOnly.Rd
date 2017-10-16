@@ -12,9 +12,6 @@ Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 \usage{
 reOnly(f, response = FALSE)
 }
-\arguments{
-\item{response}{}
-}
 \description{
 Function to help divide input formula of bpnme object into a fixed and random part
 }
