@@ -47,6 +47,8 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
                  its = 1000, burn = 1, n.lag = 1,
                  seed = 101){
 
+  set.seed(seed)
+
   mm <- mmr(pred.I, data, pred.II)
 
   output <- pnr(mm$theta, mm$XI, mm$XII, its, n.lag, burn)
