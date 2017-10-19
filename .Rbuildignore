@@ -4,3 +4,4 @@
 ^\.Rproj\.user$
 ^data_raw$
 ^\.travis\.yml$
+^README\.Rmd$
