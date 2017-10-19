@@ -4,7 +4,7 @@
 \name{Maps}
 \alias{Maps}
 \title{The geometry of humans' knowledge of navigation space.}
-\format{A data frame with 312 rows and 7 variables:
+\format{A data frame with 160 rows and 7 variables:
 \describe{
   \item{Subject}{a numeric variable indicating the participant number}
   \item{Trial.no}{a numeric variable indicating the trial number of the
@@ -31,7 +31,7 @@ knowledge of navigation space.
 }
 \details{
 In their research Warren et.al. (2017) conduct an experiment in which a total
-of 39 participants had to navigate through one of two versions of a virtual
+of 20 participants had to navigate through one of two versions of a virtual
 maze using virtual reality headsets. One is the standard version, Euclidean
 maze, with several objects hidden inside and shortcuts to these objects. The
 other maze is exactly the same apart from that it contains wormholes by which

@@ -13,6 +13,6 @@ LazyData: true
 LinkingTo: 
     Rcpp, RcppArmadillo, BH
 Imports: 
-    Rcpp, RcppArmadillo, BH, MASS, haven
+    Rcpp, RcppArmadillo, BH, MASS, haven, methods
 RoxygenNote: 6.0.1
 

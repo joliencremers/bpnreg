@@ -50,6 +50,7 @@
 #' @importFrom stats model.frame plot.ts reformulate as.formula formula
 #' @importFrom MASS mvrnorm
 #' @importFrom haven read_spss
+#' @importFrom methods is
 #'
 #' @docType package
 #' @name bpnreg

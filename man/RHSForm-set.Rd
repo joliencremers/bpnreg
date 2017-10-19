@@ -12,6 +12,11 @@ Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 \usage{
 RHSForm(formula) <- value
 }
+\arguments{
+\item{formula}{see lme4 package documentation}
+
+\item{value}{see lme4 package documentation}
+}
 \description{
 Function to help divide input formula of bpnme object into a fixed and random part
 }

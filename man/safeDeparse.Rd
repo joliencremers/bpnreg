@@ -12,6 +12,11 @@ Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 \usage{
 safeDeparse(x, collapse = " ")
 }
+\arguments{
+\item{x}{see lme4 package documentation}
+
+\item{collapse}{see lme4 package documentation}
+}
 \description{
 Function to help divide input formula of bpnme object into a fixed and random part
 }
