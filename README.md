@@ -3,6 +3,8 @@
 bpnreg
 ======
 
+[![Build Status](https://travis-ci.org/joliencremers/bpnreg.svg?branch=master)](https://travis-ci.org/joliencremers/bpnreg)
+
 The goal of bpnreg is to fit Bayesian projected normal regression models for circular data.
 
 Installation
