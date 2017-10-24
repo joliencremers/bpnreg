@@ -25,6 +25,6 @@ a categorical variable and the baseline
 library(bpnreg)
 fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
 its = 100, burn = 10, n.lag = 3)
-BFc(fit.Motor, hypothesis = "Condsemi.imp < Condexp")
+BFc(fit.Motor, hypothesis = "Condsemi.imp < Condimp")
 
 }
