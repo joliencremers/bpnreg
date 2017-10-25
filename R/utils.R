@@ -439,6 +439,11 @@ sumr <- function(output, mm){
 
     }
 
+    circ.res.means[1,1] <- theta_bar(baseline)
+    circ.res.means[1,2] <- mode_est_circ(baseline)
+    circ.res.means[1,3] <- sd_circ(baseline)
+    circ.res.means[1,4:5] <- hpd_est_circ(baseline)
+
   }else{
 
     for(c in var.cat){
@@ -552,12 +557,14 @@ sumr <- function(output, mm){
 
     }
 
+    circ.res.means[1,1] <- theta_bar(baseline)
+    circ.res.means[1,2] <- mode_est_circ(baseline)
+    circ.res.means[1,3] <- sd_circ(baseline)
+    circ.res.means[1,4:5] <- hpd_est_circ(baseline)
+
   }
 
-  circ.res.means[1,1] <- theta_bar(baseline)
-  circ.res.means[1,2] <- mode_est_circ(baseline)
-  circ.res.means[1,3] <- sd_circ(baseline)
-  circ.res.means[1,4:5] <- hpd_est_circ(baseline)
+
 
   if(length(var.num) == 0){
 
@@ -923,6 +930,11 @@ summe <- function(output, mm){
 
     }
 
+    circ.res.means[1,1] <- theta_bar(baseline)
+    circ.res.means[1,2] <- mode_est_circ(baseline)
+    circ.res.means[1,3] <- sd_circ(baseline)
+    circ.res.means[1,4:5] <- hpd_est_circ(baseline)
+
   }else{
 
     for(c in var.cat){
@@ -1036,12 +1048,13 @@ summe <- function(output, mm){
 
     }
 
+    circ.res.means[1,1] <- theta_bar(baseline)
+    circ.res.means[1,2] <- mode_est_circ(baseline)
+    circ.res.means[1,3] <- sd_circ(baseline)
+    circ.res.means[1,4:5] <- hpd_est_circ(baseline)
+
   }
 
-  circ.res.means[1,1] <- theta_bar(baseline)
-  circ.res.means[1,2] <- mode_est_circ(baseline)
-  circ.res.means[1,3] <- sd_circ(baseline)
-  circ.res.means[1,4:5] <- hpd_est_circ(baseline)
 
   if(length(var.num) == 0){
 
