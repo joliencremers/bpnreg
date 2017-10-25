@@ -4,18 +4,18 @@
 \alias{sd_circ}
 \title{Compute the standard deviation of a vector of circular data}
 \usage{
-sd_circ(theta, type = "radians")
+sd_circ(theta, units = "radians")
 }
 \arguments{
 \item{theta}{a circular variable in radians.}
 
-\item{type}{measurement units of the circular variable c("radians", "degrees")}
+\item{units}{measurement units of the circular variable c("radians", "degrees")}
 }
 \description{
 Compute the standard deviation of a vector of circular data
 }
 \examples{
 library(bpnreg)
-sd_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
+sd_circ(subset(Motor, Cond == "exp")$PhaseDiff, units = "degrees")
 
 }

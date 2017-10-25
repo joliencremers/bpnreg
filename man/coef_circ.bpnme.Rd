@@ -4,7 +4,7 @@
 \alias{coef_circ.bpnme}
 \title{Obtain the circular coefficients of a Bayesian circular mixed-effects model}
 \usage{
-\method{coef_circ}{bpnme}(object, type = "continuous")
+\method{coef_circ}{bpnme}(object, type = "continuous", units = "radians")
 }
 \arguments{
 \item{object}{a \code{bpnme object} obtained from the function
@@ -12,6 +12,9 @@
 
 \item{type}{one of c("continuous", "categorical") to get either the
 coefficients for the continuous or categorical predictor variables}
+
+\item{units}{one of c("degrees", "radians") to get categorical coefficients
+estimates and estimates for $a_c$ in degrees or radians}
 }
 \value{
 A matrix with posterior summaries of the circular coefficients in a

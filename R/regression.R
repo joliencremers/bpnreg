@@ -72,6 +72,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
   output$lin.coef.II <- summary.stats$lin.res.II
   output$circ.coef <- summary.stats$circ.res
   output$circ.coef.cat <- summary.stats$circ.res.cat
+  output$circ.coef.means <- summary.stats$circ.res.means
   output$model.fit <- summary.stats$model.fit
   output$mm <- mm
 
@@ -578,6 +579,7 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
   output$lin.coef.II <- summary.stats$lin.res.II
   output$circ.coef <- summary.stats$circ.res
   output$circ.coef.cat <- summary.stats$circ.res.cat
+  output$circ.coef.means <- summary.stats$circ.res.means
   output$model.fit <- summary.stats$model.fit
   output$lin.res.varrand.I <- summary.stats$lin.res.varrand.I
   output$lin.res.varrand.II <- summary.stats$lin.res.varrand.II

@@ -4,21 +4,24 @@
 \alias{coef_circ.bpnr}
 \title{Obtain the circular coefficients of a Bayesian circular regression model}
 \usage{
-\method{coef_circ}{bpnr}(object, type = "continuous")
+\method{coef_circ}{bpnr}(object, type = "continuous", units = "radians")
 }
 \arguments{
-\item{object}{a \code{bpnr object} obtained from the function
-\code{bpnr()}}
+\item{object}{a \code{bpnr object} obtained from the function \code{bpnr()}}
 
 \item{type}{one of c("continuous", "categorical") to get either the
 coefficients for the continuous or categorical predictor variables}
+
+\item{units}{one of c("degrees", "radians") to get categorical coefficients
+estimates and estimates for $a_c$ in degrees or radians}
 }
 \value{
 A matrix with posterior summaries of the circular coefficients in a
   Bayesian circular regression model
 }
 \description{
-Gives the coefficients tables of the circular coefficients for a Bayesian circular regression model
+Gives the coefficients tables of the circular coefficients for a Bayesian
+circular regression model
 }
 \examples{
 library(bpnreg)

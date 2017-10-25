@@ -122,7 +122,7 @@ coef_lin <- function(object){
 #' @export
 #'
 
-coef_circ <- function(object, type = "continuous"){
+coef_circ <- function(object, type = "continuous", units = "radians"){
 
   UseMethod("coef_circ", object)
 
@@ -180,6 +180,12 @@ coef_ran <- function(object, type = "linear"){
 #'
 
 BFc.bpnr <- function(object, hypothesis, type = "anchor"){
+
+  if(!(type == "anchor")){
+
+    stop("Invalid type argument")
+
+  }
 
   if(type == "anchor"){
 
@@ -261,6 +267,12 @@ BFc.bpnr <- function(object, hypothesis, type = "anchor"){
 #'
 
 BFc.bpnme <- function(object, hypothesis, type = "anchor"){
+
+  if(!(type == "anchor")){
+
+    stop("Invalid type argument")
+
+  }
 
   if(type == "anchor"){
 
@@ -434,6 +446,12 @@ predict.bpnme <- function(object, ...){
 
 residuals.bpnr <- function(object, type = "arc", ...){
 
+  if(!(type == "arc" | type == "cos")){
+
+    stop("Invalid type argument")
+
+  }
+
   pred.val <- predict(object)
   diff <- pred.val - as.numeric(object$theta)
   sign <- sign(sin(diff))
@@ -527,6 +545,12 @@ residuals.bpnme <- function(object, type = "arc", ...){
 
 coef_ran.bpnme <- function(object, type = "linear"){
 
+  if(!(type == "linear" | type == "circular")){
+
+    stop("Invalid type argument")
+
+  }
+
   if(type == "linear"){
 
     return(rbind(object$lin.res.varrand.I, object$lin.res.varrand.II))
@@ -602,12 +626,14 @@ coef_lin.bpnme <- function(object){
 
 #' Obtain the circular coefficients of a Bayesian circular regression model
 #'
-#' Gives the coefficients tables of the circular coefficients for a Bayesian circular regression model
+#' Gives the coefficients tables of the circular coefficients for a Bayesian
+#' circular regression model
 #'
-#' @param object a \code{bpnr object} obtained from the function
-#'   \code{bpnr()}
+#' @param object a \code{bpnr object} obtained from the function \code{bpnr()}
 #' @param type one of c("continuous", "categorical") to get either the
 #'   coefficients for the continuous or categorical predictor variables
+#' @param units one of c("degrees", "radians") to get categorical coefficients
+#'   estimates and estimates for $a_c$ in degrees or radians
 #'
 #' @return A matrix with posterior summaries of the circular coefficients in a
 #'   Bayesian circular regression model
@@ -625,7 +651,19 @@ coef_lin.bpnme <- function(object){
 #'
 #'
 
-coef_circ.bpnr <- function(object, type = "continuous"){
+coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
+
+  if(!(type == "continuous" | type == "categorical")){
+
+    stop("Invalid type argument")
+
+  }
+
+  if(!(units == "degrees" | units == "radians")){
+
+    stop("Invalid units argument")
+
+  }
 
   if(type == "continuous"){
 
@@ -638,17 +676,20 @@ coef_circ.bpnr <- function(object, type = "continuous"){
 
 
       a.x = object$circ.coef[,1:5]
-      a.c = object$circ.coef[,6:10]
+      if(units == "degrees"){
+        a.c = object$circ.coef[,6:10]*(180/pi)
+      }else if(units == "radians"){
+        a.c = object$circ.coef[,6:10]
+      }
       b.c = object$circ.coef[,11:15]
       AS = object$circ.coef[,16:20]
       SAM = object$circ.coef[,21:25]
       SSDO = object$circ.coef[,26:30]
 
-      coefficients <- array(c(a.x, a.c, b.c, AS, SAM, SSDO),
-                            dim = c(nrow(object$circ.coef), 5, 6))
-      dimnames(coefficients) <- list(rownames(object$circ.coef),
-                                     c("mean", "mode", "sd", "LB HPD", "UB HPD"),
-                                     c("ax", "ac", "bc", "AS", "SAM", "SSDO"))
+      coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
+
+      colnames(coefficients) <-  c("mean", "mode", "sd", "LB HPD", "UB HPD")
+      rownames(coefficients) <- paste(rep(rownames(object$circ.coef), each = 5),c("ax", "ac", "bc", "AS", "SAM", "SSDO"))
 
       return(coefficients)
 
@@ -657,7 +698,24 @@ coef_circ.bpnr <- function(object, type = "continuous"){
 
   }else if(type == "categorical"){
 
-    return(object$circ.coef.cat)
+    if(class(object$circ.coef.cat) == "character"){
+
+      return(object$circ.coef.cat)
+
+    }else{
+
+      if(units == "degrees"){
+
+        return(list(Means = object$circ.coef.means*(180/pi), Differences = object$circ.coef.cat*(180/pi)))
+
+      }else if(units == "radians"){
+
+        return(list(Means = object$circ.coef.means, Differences = object$circ.coef.cat))
+
+      }
+
+
+    }
 
   }else{
 
@@ -675,6 +733,8 @@ coef_circ.bpnr <- function(object, type = "continuous"){
 #'   \code{bpnme()}
 #' @param type one of c("continuous", "categorical") to get either the
 #'   coefficients for the continuous or categorical predictor variables
+#' @param units one of c("degrees", "radians") to get categorical coefficients
+#'   estimates and estimates for $a_c$ in degrees or radians
 #'
 #' @return A matrix with posterior summaries of the circular coefficients in a
 #'   Bayesian circular mixed-effects model
@@ -693,7 +753,19 @@ coef_circ.bpnr <- function(object, type = "continuous"){
 #'
 #'
 
-coef_circ.bpnme <- function(object, type = "continuous"){
+coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
+
+  if(!(type == "continuous" | type == "categorical")){
+
+    stop("Invalid type argument")
+
+  }
+
+  if(!(units == "degrees" | units == "radians")){
+
+    stop("Invalid units argument")
+
+  }
 
   if(type == "continuous"){
 
@@ -703,20 +775,21 @@ coef_circ.bpnme <- function(object, type = "continuous"){
 
     }else{
 
-
-
       a.x = object$circ.coef[,1:5]
-      a.c = object$circ.coef[,6:10]
+      if(units == "degrees"){
+        a.c = object$circ.coef[,6:10]*(180/pi)
+      }else if(units == "radians"){
+        a.c = object$circ.coef[,6:10]
+      }
       b.c = object$circ.coef[,11:15]
       AS = object$circ.coef[,16:20]
       SAM = object$circ.coef[,21:25]
       SSDO = object$circ.coef[,26:30]
 
-      coefficients <- array(c(a.x, a.c, b.c, AS, SAM, SSDO),
-                            dim = c(nrow(object$circ.coef), 5, 6))
-      dimnames(coefficients) <- list(rownames(object$circ.coef),
-                                     c("mean", "mode", "sd", "LB HPD", "UB HPD"),
-                                     c("ax", "ac", "bc", "AS", "SAM", "SSDO"))
+      coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
+
+      colnames(coefficients) <-  c("mean", "mode", "sd", "LB HPD", "UB HPD")
+      rownames(coefficients) <- paste(rep(rownames(object$circ.coef), each = 5),c("ax", "ac", "bc", "AS", "SAM", "SSDO"))
 
       return(coefficients)
 
@@ -725,7 +798,24 @@ coef_circ.bpnme <- function(object, type = "continuous"){
 
   }else if(type == "categorical"){
 
-    return(object$circ.coef.cat)
+    if(class(object$circ.coef.cat) == "character"){
+
+      return(object$circ.coef.cat)
+
+    }else{
+
+      if(units == "degrees"){
+
+        return(list(Means = object$circ.coef.means*(180/pi), Differences = object$circ.coef.cat*(180/pi)))
+
+      }else if(units == "radians"){
+
+        return(list(Means = object$circ.coef.means, Differences = object$circ.coef.cat))
+
+      }
+
+
+    }
 
   }else{
 
@@ -887,7 +977,11 @@ print.bpnr <- function(x, ...){
   }
   cat("\n")
 
-  cat("Categorical variables: \n")
+  cat("Categorical variables: \n\n")
+  cat("Means: \n")
+  print(x$circ.coef.means)
+  cat("\n")
+  cat("Differences: \n")
   print(x$circ.coef.cat)
   cat("\n")
 
@@ -970,7 +1064,11 @@ print.bpnme <- function(x, ...){
   }
   cat("\n")
 
-  cat("Categorical variables: \n")
+  cat("Categorical variables: \n\n")
+  cat("Means: \n")
+  print(x$circ.coef.means)
+  cat("\n")
+  cat("Differences: \n")
   print(x$circ.coef.cat)
   cat("\n\n")
 

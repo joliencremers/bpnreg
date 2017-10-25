@@ -4,7 +4,7 @@
 \alias{coef_circ}
 \title{Circular coefficients}
 \usage{
-coef_circ(object, type = "continuous")
+coef_circ(object, type = "continuous", units = "radians")
 }
 \arguments{
 \item{object}{an object used to select a method}

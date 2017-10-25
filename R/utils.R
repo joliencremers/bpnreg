@@ -47,24 +47,29 @@ circ_coef <- function(a1, a2, b1, b2){
 #' Compute the standard deviation of a vector of circular data
 #'
 #' @param theta a circular variable in radians.
-#' @param type measurement units of the circular variable c("radians", "degrees")
+#' @param units measurement units of the circular variable c("radians", "degrees")
 #'
 #' @examples
 #' library(bpnreg)
-#' sd_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
+#' sd_circ(subset(Motor, Cond == "exp")$PhaseDiff, units = "degrees")
 #'
 #' @export
 
-sd_circ <- function(theta, type = "radians"){
+sd_circ <- function(theta, units = "radians"){
 
+  if(!(units == "degrees" | units == "radians")){
 
-  if(type == "radians"){
+    stop("Invalid units argument")
+
+  }
+
+  if(units == "radians"){
 
     sqrt(-2*log(rho_circ(theta)))
 
-  }else if(type == "degrees"){
+  }else if(units == "degrees"){
 
-    sqrt(-2*log(rho_circ(theta, type = "degrees")))
+    sqrt(-2*log(rho_circ(theta, units = "degrees")))
 
   }
 
@@ -77,17 +82,23 @@ sd_circ <- function(theta, type = "radians"){
 #'
 #' @examples
 #' library(bpnreg)
-#' mean_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
+#' mean_circ(subset(Motor, Cond == "exp")$PhaseDiff, units = "degrees")
 #'
 #' @export
 
-mean_circ <- function(theta, type = "radians"){
+mean_circ <- function(theta, units = "radians"){
 
-  if(type == "radians"){
+  if(!(units == "degrees" | units == "radians")){
+
+    stop("Invalid units argument")
+
+  }
+
+  if(units == "radians"){
 
     theta_bar(theta)
 
-  }else if(type == "degrees"){
+  }else if(units == "degrees"){
 
     theta_bar(theta*(pi/180))*(180/pi)
 
@@ -101,17 +112,23 @@ mean_circ <- function(theta, type = "radians"){
 #'
 #' @examples
 #' library(bpnreg)
-#' rho_circ(subset(Motor, Cond == "exp")$PhaseDiff, type = "degrees")
+#' rho_circ(subset(Motor, Cond == "exp")$PhaseDiff, units = "degrees")
 #'
 #' @export
 
-rho_circ <- function(theta, type = "radians"){
+rho_circ <- function(theta, units = "radians"){
 
-  if(type == "radians"){
+  if(!(units == "degrees" | units == "radians")){
+
+    stop("Invalid units argument")
+
+  }
+
+  if(units == "radians"){
 
     rho(theta)$rho
 
-  }else if(type == "degrees"){
+  }else if(units == "degrees"){
 
     rho(theta*(pi/180))$rho
 
@@ -352,7 +369,12 @@ sumr <- function(output, mm){
 
   circ.res.cat <- matrix(NA, length(var.cat), 5)
   rownames(circ.res.cat) <- var.cat
-  colnames(circ.res.cat) <- c("mean circDiff", "mode circDiff", "sd circDiff", "LB circDiff", "UB circDiff")
+  colnames(circ.res.cat) <- c("mean", "mode", "sd", "LB", "UB")
+
+  circ.res.means <- matrix(NA, length(var.cat) + 1, 5)
+  rownames(circ.res.means) <- c("(Intercept)", var.cat)
+  colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
+
 
   circ.res <- matrix(NA, length(var.num), 5*6)
   rownames(circ.res) <- var.num
@@ -369,6 +391,7 @@ sumr <- function(output, mm){
   if(length(var.cat) == 0){
 
     circ.res.cat <- "There are no categorical predictors in the model"
+    circ.res.means <- "There are no categorical predictors in the model"
     circ.diff <- "There are no categorical predictors in the model"
 
   }else if(!("(Intercept)" %in% colnames(mm$XI)) & !("(Intercept)" %in% colnames(mm$XII))){
@@ -408,6 +431,12 @@ sumr <- function(output, mm){
       circ.res.cat[c,3] <- sd_circ(circDiff)
       circ.res.cat[c,4:5] <- hpd_est_circ(circDiff)
 
+      circ.res.means[c,1] <- theta_bar(dummy)
+      circ.res.means[c,2] <- mode_est_circ(dummy)
+      circ.res.means[c,3] <- sd_circ(dummy)
+      circ.res.means[c,4:5] <- hpd_est_circ(dummy)
+
+
     }
 
   }else{
@@ -444,6 +473,11 @@ sumr <- function(output, mm){
         circ.res.cat[c,3] <- sd_circ(circDiff)
         circ.res.cat[c,4:5] <- hpd_est_circ(circDiff)
 
+        circ.res.means[c,1] <- theta_bar(dummy)
+        circ.res.means[c,2] <- mode_est_circ(dummy)
+        circ.res.means[c,3] <- sd_circ(dummy)
+        circ.res.means[c,4:5] <- hpd_est_circ(dummy)
+
       }else if(all(!colnames(output$B2) == c)){
 
         if(!("(Intercept)" %in% colnames(mm$XI))){
@@ -473,6 +507,11 @@ sumr <- function(output, mm){
         circ.res.cat[c,2] <- mode_est_circ(circDiff)
         circ.res.cat[c,3] <- sd_circ(circDiff)
         circ.res.cat[c,4:5] <- hpd_est_circ(circDiff)
+
+        circ.res.means[c,1] <- theta_bar(dummy)
+        circ.res.means[c,2] <- mode_est_circ(dummy)
+        circ.res.means[c,3] <- sd_circ(dummy)
+        circ.res.means[c,4:5] <- hpd_est_circ(dummy)
 
       }else{
 
@@ -504,12 +543,21 @@ sumr <- function(output, mm){
         circ.res.cat[c,3] <- sd_circ(circDiff)
         circ.res.cat[c,4:5] <- hpd_est_circ(circDiff)
 
+        circ.res.means[c,1] <- theta_bar(dummy)
+        circ.res.means[c,2] <- mode_est_circ(dummy)
+        circ.res.means[c,3] <- sd_circ(dummy)
+        circ.res.means[c,4:5] <- hpd_est_circ(dummy)
+
       }
 
     }
 
   }
 
+  circ.res.means[1,1] <- theta_bar(baseline)
+  circ.res.means[1,2] <- mode_est_circ(baseline)
+  circ.res.means[1,3] <- sd_circ(baseline)
+  circ.res.means[1,4:5] <- hpd_est_circ(baseline)
 
   if(length(var.num) == 0){
 
@@ -697,7 +745,7 @@ sumr <- function(output, mm){
 
 
   list(lin.res.I = lin.res.I, lin.res.II = lin.res.II,
-       circ.res = circ.res, circ.res.cat = circ.res.cat,
+       circ.res = circ.res, circ.res.cat = circ.res.cat, circ.res.means = circ.res.means,
        a.x = a.x, a.c = a.c, b.c = b.c, SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
        B1 = output$B1, B2 = output$B2,
        model.fit = model.fit, var.num = var.num, var.cat = var.cat)
@@ -799,7 +847,12 @@ summe <- function(output, mm){
 
   circ.res.cat <- matrix(NA, length(var.cat), 5)
   rownames(circ.res.cat) <- var.cat
-  colnames(circ.res.cat) <- c("mean circDiff", "mode circDiff", "sd circDiff", "LB circDiff", "UB circDiff")
+  colnames(circ.res.cat) <- c("mean", "mode", "sd", "LB", "UB")
+
+  circ.res.means <- matrix(NA, length(var.cat) + 1, 5)
+  rownames(circ.res.means) <- c("(Intercept)", var.cat)
+  colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
+
 
   circ.res <- matrix(NA, length(var.num), 5*6)
   rownames(circ.res) <- var.num
@@ -822,11 +875,13 @@ summe <- function(output, mm){
   if(length(var.cat) == 0){
 
     circ.res.cat <- "There are no categorical predictors in the model"
+    circ.res.means <- "There are no categorical predictors in the model"
     circ.diff <- "There are no categorical predictors in the model"
 
   }else if(!("(Intercept)" %in% colnames(mm$mm.I)) & !("(Intercept)" %in% colnames(mm$mm.II))){
 
     circ.res.cat <- "There is no intercept in the model"
+    circ.res.means <- "There is no intercept in the model"
     circ.diff <- "There is no intercept in the model"
 
   }else if(all.equal(var.cat.I, var.cat.II) == TRUE){
@@ -860,6 +915,11 @@ summe <- function(output, mm){
       circ.res.cat[c,2] <- mode_est_circ(circDiff)
       circ.res.cat[c,3] <- sd_circ(circDiff)
       circ.res.cat[c,4:5] <- hpd_est_circ(circDiff)
+
+      circ.res.means[c,1] <- theta_bar(dummy)
+      circ.res.means[c,2] <- mode_est_circ(dummy)
+      circ.res.means[c,3] <- sd_circ(dummy)
+      circ.res.means[c,4:5] <- hpd_est_circ(dummy)
 
     }
 
@@ -897,6 +957,11 @@ summe <- function(output, mm){
         circ.res.cat[c,3] <- sd_circ(circDiff)
         circ.res.cat[c,4:5] <- hpd_est_circ(circDiff)
 
+        circ.res.means[c,1] <- theta_bar(dummy)
+        circ.res.means[c,2] <- mode_est_circ(dummy)
+        circ.res.means[c,3] <- sd_circ(dummy)
+        circ.res.means[c,4:5] <- hpd_est_circ(dummy)
+
       }else if(all(!colnames(output$Beta.II) == c)){
 
         if(!("(Intercept)" %in% colnames(mm$mm.I))){
@@ -926,6 +991,11 @@ summe <- function(output, mm){
         circ.res.cat[c,2] <- mode_est_circ(circDiff)
         circ.res.cat[c,3] <- sd_circ(circDiff)
         circ.res.cat[c,4:5] <- hpd_est_circ(circDiff)
+
+        circ.res.means[c,1] <- theta_bar(dummy)
+        circ.res.means[c,2] <- mode_est_circ(dummy)
+        circ.res.means[c,3] <- sd_circ(dummy)
+        circ.res.means[c,4:5] <- hpd_est_circ(dummy)
 
       }else{
 
@@ -957,13 +1027,21 @@ summe <- function(output, mm){
         circ.res.cat[c,3] <- sd_circ(circDiff)
         circ.res.cat[c,4:5] <- hpd_est_circ(circDiff)
 
+        circ.res.means[c,1] <- theta_bar(dummy)
+        circ.res.means[c,2] <- mode_est_circ(dummy)
+        circ.res.means[c,3] <- sd_circ(dummy)
+        circ.res.means[c,4:5] <- hpd_est_circ(dummy)
+
       }
 
     }
 
   }
 
-
+  circ.res.means[1,1] <- theta_bar(baseline)
+  circ.res.means[1,2] <- mode_est_circ(baseline)
+  circ.res.means[1,3] <- sd_circ(baseline)
+  circ.res.means[1,4:5] <- hpd_est_circ(baseline)
 
   if(length(var.num) == 0){
 
@@ -1596,6 +1674,7 @@ summe <- function(output, mm){
        circ.varrand.ri = circ.varrand.ri,
        circ.res = circ.res,
        circ.res.cat = circ.res.cat,
+       circ.res.means = circ.res.means,
        a.x = a.x, a.c = a.c, b.c = b.c, SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
        lin.res.varrand.I = lin.res.varrand.I,
        lin.res.varrand.II = lin.res.varrand.II,
