@@ -108,6 +108,8 @@ coef_lin <- function(object){
 #' @param object an object used to select a method
 #' @param type one of c("continuous", "categorical") to get either the
 #'   coefficients for the continuous or categorical predictor variables
+#' @param units one of c("degrees", "radians") to get categorical coefficients
+#'   estimates and estimates for $a_c$ in degrees or radians
 #'
 #' @details the methods \link[bpnreg]{coef_circ.bpnr} and
 #'   \link[bpnreg]{coef_circ.bpnme} have their own help page

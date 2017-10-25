@@ -11,6 +11,9 @@ coef_circ(object, type = "continuous", units = "radians")
 
 \item{type}{one of c("continuous", "categorical") to get either the
 coefficients for the continuous or categorical predictor variables}
+
+\item{units}{one of c("degrees", "radians") to get categorical coefficients
+estimates and estimates for $a_c$ in degrees or radians}
 }
 \description{
 \code{coef_circ} gives posterior summaries of the circular coefficients
