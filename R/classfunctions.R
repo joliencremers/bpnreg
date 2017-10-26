@@ -691,7 +691,7 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
 
       colnames(coefficients) <-  c("mean", "mode", "sd", "LB HPD", "UB HPD")
-      rownames(coefficients) <- paste(rownames(coefficients),rep(c("ax", "ac", "bc", "AS", "SAM", "SSDO"), each = length(rownames)/6))
+      rownames(coefficients) <- paste(rownames(coefficients),rep(c("ax", "ac", "bc", "AS", "SAM", "SSDO"), each = length(rownames(coefficients))/6))
 
       return(coefficients)
 
@@ -793,7 +793,7 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
 
       colnames(coefficients) <-  c("mean", "mode", "sd", "LB HPD", "UB HPD")
-      rownames(coefficients) <- paste(rownames(coefficients),rep(c("ax", "ac", "bc", "AS", "SAM", "SSDO"), each = length(rownames)/6))
+      rownames(coefficients) <- paste(rownames(coefficients),rep(c("ax", "ac", "bc", "AS", "SAM", "SSDO"), each = length(rownames(coefficients))/6))
 
       return(coefficients)
 
