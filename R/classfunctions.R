@@ -691,7 +691,7 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
 
       colnames(coefficients) <-  c("mean", "mode", "sd", "LB HPD", "UB HPD")
-      rownames(coefficients) <- paste(rep(rownames(object$circ.coef), each = 5),c("ax", "ac", "bc", "AS", "SAM", "SSDO"))
+      rownames(coefficients) <- paste(rownames(coefficients),rep(c("ax", "ac", "bc", "AS", "SAM", "SSDO"), each = lenght(rownames)/6))
 
       return(coefficients)
 
@@ -778,11 +778,13 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
     }else{
 
       a.x = object$circ.coef[,1:5]
+
       if(units == "degrees"){
         a.c = object$circ.coef[,6:10]*(180/pi)
       }else if(units == "radians"){
         a.c = object$circ.coef[,6:10]
       }
+
       b.c = object$circ.coef[,11:15]
       AS = object$circ.coef[,16:20]
       SAM = object$circ.coef[,21:25]
@@ -791,7 +793,7 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
 
       colnames(coefficients) <-  c("mean", "mode", "sd", "LB HPD", "UB HPD")
-      rownames(coefficients) <- paste(rep(rownames(object$circ.coef), each = 5),c("ax", "ac", "bc", "AS", "SAM", "SSDO"))
+      rownames(coefficients) <- paste(rownames(coefficients),rep(c("ax", "ac", "bc", "AS", "SAM", "SSDO"), each = lenght(rownames)/6))
 
       return(coefficients)
 
