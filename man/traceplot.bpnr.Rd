@@ -9,8 +9,9 @@
 \arguments{
 \item{object}{a \code{bpnr object} obtained from the function \code{bpnr()}}
 
-\item{parameter}{one of c("B1", "B2", "a.x", "a.c", "b.c", "SAM", "AS", "SSDO",
-"circ.diff") to indicate for which parameter a traceplot is required}
+\item{parameter}{one of c("Beta.I", "Beta.II", a.x", "a.c", "b.c", "SAM",
+"AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS") to indicate for
+which parameter a traceplot is required}
 
 \item{variable}{a character string with variable name(s) to indicate for
 which variable(s) a traceplot is required}

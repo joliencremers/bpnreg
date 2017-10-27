@@ -691,7 +691,7 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
 
       colnames(coefficients) <-  c("mean", "mode", "sd", "LB HPD", "UB HPD")
-      rownames(coefficients) <- paste(rownames(coefficients),rep(c("ax", "ac", "bc", "AS", "SAM", "SSDO"), each = length(rownames(coefficients))/6))
+      rownames(coefficients) <- paste(rownames(object$circ.coef),rep(c("ax", "ac", "bc", "AS", "SAM", "SSDO"), each = length(rownames(coefficients))/6))
 
       return(coefficients)
 
@@ -1098,8 +1098,9 @@ print.bpnme <- function(x, ...){
 #' General plot function for a \code{bpnr object}.
 #'
 #' @param object a \code{bpnr object} obtained from the function \code{bpnr()}
-#' @param parameter one of c("B1", "B2", "a.x", "a.c", "b.c", "SAM", "AS", "SSDO",
-#'   "circ.diff") to indicate for which parameter a traceplot is required
+#' @param parameter one of c("Beta.I", "Beta.II", a.x", "a.c", "b.c", "SAM",
+#'   "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS") to indicate for
+#'   which parameter a traceplot is required
 #' @param variable a character string with variable name(s) to indicate for
 #'   which variable(s) a traceplot is required
 #'
