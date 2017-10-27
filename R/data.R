@@ -38,7 +38,7 @@
 #'    \item{Error}{a numeric variable containing the angular error in degrees}
 #'   \item{Learn}{a numeric variable indicating the number of trials a
 #'   participant completed in the training phase}
-#'   \item{Learn.c}{mean centered Learning}
+#'   \item{L.c}{mean centered Learning}
 #'   \item{Error.rad}{a numeric variable containing the angular error in radians}
 #'}
 #'

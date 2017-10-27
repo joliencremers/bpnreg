@@ -1,4 +1,4 @@
-Maps <- haven::read_spss(file = "data-raw/Cognitive Maps/WarrenExp1.sav")
+Maps <- haven::read_spss(file = "data_raw/Cognitive Maps/WarrenExp1.sav")
 
 Maps$Error.rad <- (Maps$Error/180)*pi
 Maps$L.c <- Maps$Learn-mean(Maps$Learn)
