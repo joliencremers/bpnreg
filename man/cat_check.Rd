@@ -7,11 +7,11 @@
 cat_check(x)
 }
 \arguments{
-\item{x}{vector containing values of a variable}
+\item{x}{vector containing values of a variable.}
 }
 \value{
 TRUE, if the vector only contains 0 and 1, FALSE is the vector
-  contains other values
+  contains other values.
 }
 \description{
 \code{cat_check} checks whether a vector contains only 0 and 1 and thus is a

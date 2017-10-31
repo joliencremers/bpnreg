@@ -7,20 +7,20 @@
 coef_circ(object, type = "continuous", units = "radians")
 }
 \arguments{
-\item{object}{an object used to select a method}
+\item{object}{an object used to select a method.}
 
 \item{type}{one of c("continuous", "categorical") to get either the
-coefficients for the continuous or categorical predictor variables}
+coefficients for the continuous or categorical predictor variables.}
 
 \item{units}{one of c("degrees", "radians") to get categorical coefficients
-estimates and estimates for $a_c$ in degrees or radians}
+estimates and estimates for $a_c$ in degrees or radians.}
 }
 \description{
-\code{coef_circ} gives posterior summaries of the circular coefficients
+\code{coef_circ} gives posterior summaries of the circular coefficients.
 }
 \details{
 the methods \link[bpnreg]{coef_circ.bpnr} and
-  \link[bpnreg]{coef_circ.bpnme} have their own help page
+  \link[bpnreg]{coef_circ.bpnme} have their own help page.
 }
 \examples{
 library(bpnreg)

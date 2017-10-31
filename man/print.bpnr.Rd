@@ -8,15 +8,15 @@
 }
 \arguments{
 \item{x}{a \code{bpnr object} obtained from the function
-\code{bpnr()}}
+\code{bpnr()}.}
 
-\item{...}{further arguments passed to or from other methods}
+\item{...}{further arguments passed to or from other methods.}
 }
 \value{
-a print of selected output from a Bayesian circular regression model
+A print of selected output from a Bayesian circular regression model.
 }
 \description{
-Prints selected output from a Bayesian circular regression model
+Prints selected output from a Bayesian circular regression model.
 }
 \examples{
 library(bpnreg)

@@ -8,16 +8,16 @@
 }
 \arguments{
 \item{object}{a \code{bpnme object} obtained from the function
-\code{bpnme()}}
+\code{bpnme()}.}
 
-\item{hypothesis}{the inequality constrained hypothesis to test}
+\item{hypothesis}{the inequality constrained hypothesis to test.}
 
-\item{type}{type of hypothesis to test c("anchor", "isotropic")}
+\item{type}{type of hypothesis to test c("anchor", "isotropic").}
 }
 \value{
-Bayes Factors for inequality constrained hypothesis on mean differences
+Bayes Factors for inequality constrained hypotheses on mean differences.
 }
 \description{
 Outputs Bayes Factors for inequality constrained hypotheses on the circular
-differences between several levels of a categorical variable and the baseline
+differences between several levels of a categorical variable and the baseline.
 }

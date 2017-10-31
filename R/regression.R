@@ -3,13 +3,13 @@
 #' This function fits a Bayesian circular regression model based on the
 #' projected normal distribution.
 #'
-#' @param pred.I model equation for effects of component 1
-#' @param data the dataframe used for analysis
-#' @param pred.II model equation for effects of component 2
-#' @param its output iterations of the MCMC sampler
-#' @param burn number of burn-in iterations
-#' @param n.lag amount of lag for the iterations and burn-in
-#' @param seed user-specified random seed
+#' @param pred.I model equation for effects of component 1.
+#' @param data the dataframe used for analysis.
+#' @param pred.II model equation for effects of component 2.
+#' @param its output iterations of the MCMC sampler.
+#' @param burn number of burn-in iterations.
+#' @param n.lag amount of lag for the iterations and burn-in.
+#' @param seed user-specified random seed.
 #'
 #' @details Because the model is based on the projected normal distribution, a
 #'   model equation has to be given for two components. By default the equation
@@ -85,13 +85,13 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #' This function fits a Bayesian circular mixed-effects model based on the
 #' projected normal distribution.
 #'
-#' @param pred.I model equation for effects of component 1
-#' @param data the dataframe used for analysis
-#' @param pred.II model equation for effects of component 2
-#' @param its output iterations of the MCMC sampler
-#' @param burn number of burn-in iterations
-#' @param n.lag amount of lag for the iterations and burn-in
-#' @param seed user-specified random seed
+#' @param pred.I model equation for effects of component 1.
+#' @param data the dataframe used for analysis.
+#' @param pred.II model equation for effects of component 2.
+#' @param its output iterations of the MCMC sampler.
+#' @param burn number of burn-in iterations.
+#' @param n.lag amount of lag for the iterations and burn-in.
+#' @param seed user-specified random seed.
 #'
 #' @details Because the model is based on the projected normal distribution, a
 #'   model equation has to be given for the fixed and random effects of thetwo

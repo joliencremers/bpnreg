@@ -7,20 +7,20 @@
 coef_ran(object, type = "linear")
 }
 \arguments{
-\item{object}{an object used to select a method}
+\item{object}{an object used to select a method.}
 
 \item{type}{one of c("linear", "circular") to get either the
-linear or circular variances of the random effects}
+linear or circular random effect variances.}
 }
 \description{
-\code{coef_ran} gives posterior summaries of the circular or linear random effect variances
+\code{coef_ran} gives posterior summaries of the circular or linear random effect variances.
 }
 \details{
-the method \link[bpnreg]{coef_ran.bpnme} has its own help page
+the method \link[bpnreg]{coef_ran.bpnme} has its own help page.
 }
 \examples{
 library(bpnreg)
-fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 data = Maps,
 its = 100, burn = 10, n.lag = 3)
 coef_ran(fit.Maps)

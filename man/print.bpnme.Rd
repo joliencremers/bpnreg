@@ -8,19 +8,19 @@
 }
 \arguments{
 \item{x}{a \code{bpnme object} obtained from the function
-\code{bpnme()}}
+\code{bpnme()}.}
 
-\item{...}{further arguments passed to or from other methods}
+\item{...}{further arguments passed to or from other methods.}
 }
 \value{
-a print of selected output from a Bayesian circular mixed-effects model
+A print of selected output from a Bayesian circular mixed-effects model.
 }
 \description{
-Prints selected output from a Bayesian circular mixed-effects model
+Prints selected output from a Bayesian circular mixed-effects model.
 }
 \examples{
 library(bpnreg)
-fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 data = Maps,
 its = 100, burn = 10, n.lag = 3)
 print(fit.Maps)

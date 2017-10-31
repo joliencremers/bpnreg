@@ -7,25 +7,25 @@
 \method{coef_circ}{bpnme}(object, type = "continuous", units = "radians")
 }
 \arguments{
-\item{object}{a \code{bpnme object} obtained from the function
-\code{bpnme()}}
+\item{object}{a \code{bpnme object} obtained from the function \code{bpnme()}}
 
 \item{type}{one of c("continuous", "categorical") to get either the
 coefficients for the continuous or categorical predictor variables}
 
 \item{units}{one of c("degrees", "radians") to get categorical coefficients
-estimates and estimates for $a_c$ in degrees or radians}
+estimates and estimates for $a_c$ in degrees or radians.}
 }
 \value{
-A matrix with posterior summaries of the circular coefficients in a
-  Bayesian circular mixed-effects model
+A matrix or list with posterior summaries of the circular
+  coefficients in a Bayesian circular mixed-effects model.
 }
 \description{
-Gives the coefficients tables of the circular coefficients for a Bayesian circular mixed-effects model
+Gives the coefficients tables of the circular coefficients for a Bayesian
+circular mixed-effects model.
 }
 \examples{
 library(bpnreg)
-fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 data = Maps,
 its = 100, burn = 10, n.lag = 3)
 coef_circ(fit.Maps)

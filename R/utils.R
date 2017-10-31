@@ -3,10 +3,10 @@
 #' \code{cat_check} checks whether a vector contains only 0 and 1 and thus is a
 #' dummy variable.
 #'
-#' @param x vector containing values of a variable
+#' @param x vector containing values of a variable.
 #'
 #' @return TRUE, if the vector only contains 0 and 1, FALSE is the vector
-#'   contains other values
+#'   contains other values.
 #'
 
 cat_check <- function(x){
@@ -19,10 +19,10 @@ cat_check <- function(x){
 #' a circular effect, the slope at the inflection point and the unsigned and
 #' signed shortest distance to the origin.
 #'
-#' @param a1 intercept of the first linear component
-#' @param a2 intercept of the second linear component
-#' @param b1 slope of the first linear component
-#' @param b2 slope of the second linear component
+#' @param a1 intercept of the first linear component.
+#' @param a2 intercept of the second linear component.
+#' @param b1 slope of the first linear component.
+#' @param b2 slope of the second linear component.
 #'
 #' @return A dataframe containing the coordinates of the inflection point of a
 #'   circular effect, the slope at the inflection point and the unsigned and
@@ -47,7 +47,7 @@ circ_coef <- function(a1, a2, b1, b2){
 #' Compute the standard deviation of a vector of circular data
 #'
 #' @param theta a circular variable in radians.
-#' @param units measurement units of the circular variable c("radians", "degrees")
+#' @param units measurement units of the circular variable c("radians", "degrees").
 #'
 #' @examples
 #' library(bpnreg)

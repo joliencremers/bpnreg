@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{object}{a \code{bpnme object} obtained from the function
-\code{bpnme()}}
+\code{bpnme()}.}
 }
 \value{
 a matrix containing the computed log pointwise predictive density
@@ -24,7 +24,7 @@ Outputs several model fit statistics for the Bayesian circular mixed-effects mod
 }
 \examples{
 library(bpnreg)
-fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 data = Maps,
 its = 100, burn = 10, n.lag = 3)
 fit(fit.Maps)

@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{object}{a \code{bpnr object} obtained from the function
-\code{bpnr()}}
+\code{bpnr()}.}
 }
 \value{
 a matrix containing the computed log pointwise predictive density

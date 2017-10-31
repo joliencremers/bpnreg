@@ -4,7 +4,7 @@
 \name{Motor}
 \alias{Motor}
 \title{Phase differences in hand flexion-extension movements.}
-\format{A data frame with 42 rows and 7 variables:
+\format{A data frame with 42 rows and 4 variables:
 \describe{
   \item{Cond}{a factor variable indicating the condition a participant
   was placed in; 1 = 'explicit', 2 = 'semi.implicit' or 3 = 'implicit'}

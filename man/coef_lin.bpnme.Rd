@@ -7,19 +7,19 @@
 \method{coef_lin}{bpnme}(object)
 }
 \arguments{
-\item{object}{a \code{bpnme object} obtained from the function \code{bpnme()}}
+\item{object}{a \code{bpnme object} obtained from the function \code{bpnme()}.}
 }
 \value{
 A matrix with posterior summaries of the linear coefficients in a
-  Bayesian circular mixed-effects model
+  Bayesian circular mixed-effects model.
 }
 \description{
 Gives the coefficients tables of the linear coefficients for a Bayesian
-circular mixed-effects model
+circular mixed-effects model.
 }
 \examples{
 library(bpnreg)
-fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + Learn.c + (1|Subject),
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 data = Maps,
 its = 100, burn = 10, n.lag = 3)
 coef_lin(fit.Maps)

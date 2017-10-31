@@ -7,13 +7,13 @@
 circ_coef(a1, a2, b1, b2)
 }
 \arguments{
-\item{a1}{intercept of the first linear component}
+\item{a1}{intercept of the first linear component.}
 
-\item{a2}{intercept of the second linear component}
+\item{a2}{intercept of the second linear component.}
 
-\item{b1}{slope of the first linear component}
+\item{b1}{slope of the first linear component.}
 
-\item{b2}{slope of the second linear component}
+\item{b2}{slope of the second linear component.}
 }
 \value{
 A dataframe containing the coordinates of the inflection point of a

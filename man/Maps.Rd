@@ -4,21 +4,24 @@
 \name{Maps}
 \alias{Maps}
 \title{The geometry of humans' knowledge of navigation space.}
-\format{A data frame with 160 rows and 7 variables:
+\format{A data frame with 160 rows and 8 variables:
 \describe{
-  \item{Subject}{a numeric variable indicating the participant number}
-  \item{Trial.no}{a numeric variable indicating the trial number of the
-  target a participant had to locate (1-8)}
-  \item{Maze}{a between subjects factor variable indicating the type of maze
-  a participant was in (0 = Euclidean, 1 = non-Euclidean)}
-  \item{Trial.type}{a within subjects factor indicating the type of target (0
-  = standard, 1 = probe)}
-   \item{Error}{a numeric variable containing the angular error in degrees}
-  \item{Learn}{a numeric variable indicating the number of trials a
-  participant completed in the training phase}
-  \item{L.c}{mean centered Learning}
-  \item{Error.rad}{a numeric variable containing the angular error in radians}
-}}
+ \item{Subject}{a numeric variable indicating the participant number}
+ \item{Trial.no}{a numeric variable indicating the trial number of the target
+ a participant had to locate (1-8)}
+ \item{Maze}{a between subjects factor
+ variable indicating the type of maze a participant was in (0 = Euclidean, 1
+ = non-Euclidean)}
+ \item{Trial.type}{a within subjects factor indicating the
+ type of target (0 = standard, 1 = probe)}
+ \item{Error}{a numeric variable
+ containing the angular error in degrees}
+ \item{Learn}{a numeric variable
+ indicating the number of trials a participant completed in the training
+ phase}
+ \item{L.c}{mean centered Learning}
+ \item{Error.rad}{a numeric
+ variable containing the angular error in radians} }}
 \source{
 \url{https://doi.org/10.1016/j.cognition.2017.05.020}
 }
@@ -30,27 +33,38 @@ A dataset from a research by Warren et.al. (2017) on the geometry of humans'
 knowledge of navigation space.
 }
 \details{
-In their research Warren et.al. (2017) conduct an experiment in which a total
-of 20 participants had to navigate through one of two versions of a virtual
-maze using virtual reality headsets. One is the standard version, Euclidean
-maze, with several objects hidden inside and shortcuts to these objects. The
-other maze is exactly the same apart from that it contains wormholes by which
-participants can be 'teleported' from one place in the maze to another, the
-non-Euclidean maze.
+In their study Warren et.al. (2017) amongst others conduct an experiment in
+which a total of 20 participants used virtual reality headsets to navigate
+through one of two versions of a virtual maze. One version of the maze is the
+standard or Euclidean maze. The other version of the maze, the non-Euclidean
+maze, has exactly the same layout as the standard maze apart from that it
+contains wormholes by which participants can be 'teleported' from one place in
+the maze to another.
 
-The task participants had to execute was to walk to the several target
-objects in the maze from a certain start object. There were two types of
-targets, probe and standard and for each of the types there were 4 different
-ones resulting in a total of 8 targets.
+In a training phase participants had learned to navigate between different
+pairs of start and target objects in one of two versions of the maze. The
+number of trials each participants completed in this training phase was
+recorded.
 
-Before the actual experiment participants first completed a training phase in
-which participants were trained to walk to each target object.
+In the test phase of the experiment participants first walked to a start
+object. When they had reached this object the maze dissappeared and only a
+"textured groundplane" of the maze remained visible. The participants then
+turned toward the location of the target object that they had remembered
+during the training phase and started to walk toward the target. The angular
+difference, angular error, between the initial walking direction of a
+participant from the start object and the location of the target object was
+recorded as an outcome variable in the experiment.The angular error is a
+circular variable and can be described and analyzed using circular statistics.
 
-The variable of interest in this experiment was the angular error, the angle
-between the intial walking direction of the participant and the target's
-location (for specifics see article by Warren et.al.).
-
-The angular error is a circular variable and can be described and analyzed
-using circular statistics.
+Apart from the between-subjects factor, the type of maze, the experiment also
+included a within-subjects factor, trial number. All participants had to
+complete 8 trials in the test phase of the experiment. In each of these trials
+they had to walk to a specific target object. An additional within-subjects
+factor is the type of target object. Pairs of start and target objects were of
+two types: probe and standard. The probe objects were located near the
+entrance and exit of a wormhole whereas the standard objects were located at
+some distance from the wormholes. For each of these two types of objects
+participants had to find 4 different targets resulting in a total of 8 trials
+per participant.
 }
 \keyword{datasets}

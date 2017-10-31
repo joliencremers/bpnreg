@@ -7,14 +7,14 @@
 coef_lin(object)
 }
 \arguments{
-\item{object}{an object used to select a method}
+\item{object}{an object used to select a method.}
 }
 \description{
-\code{coef_lin} gives posterior summaries of the linear coefficients
+\code{coef_lin} gives posterior summaries of the linear coefficients.
 }
 \details{
 the methods \link[bpnreg]{coef_lin.bpnr} and
-  \link[bpnreg]{coef_lin.bpnme} have their own help page
+  \link[bpnreg]{coef_lin.bpnme} have their own help page.
 }
 \examples{
 library(bpnreg)

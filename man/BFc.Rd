@@ -7,21 +7,21 @@
 BFc(object, hypothesis, type = "anchor")
 }
 \arguments{
-\item{object}{an object used to select a method}
+\item{object}{an object used to select a method.}
 
-\item{hypothesis}{the inequality constrained hypothesis to test}
+\item{hypothesis}{the inequality constrained hypothesis to test.}
 
-\item{type}{type of hypothesis to test c("anchor", "isotropic")}
+\item{type}{type of hypothesis to test c("anchor", "isotropic").}
 
-\item{...}{further arguments passed to or from other methods}
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 \code{BF} gives bayes factors for inequality constrained hypotheses on
-circular mean differences
+circular mean differences.
 }
 \details{
 the methods \link[bpnreg]{BFc.bpnr} and
-  \link[bpnreg]{BFc.bpnme} have their own help page
+  \link[bpnreg]{BFc.bpnme} have their own help page.
 }
 \examples{
 library(bpnreg)

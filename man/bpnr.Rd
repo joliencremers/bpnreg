@@ -23,19 +23,19 @@ bpnr(pred.I, data, pred.II = pred.I, its = 1000, burn = 1, n.lag = 1,
   seed = 101)
 }
 \arguments{
-\item{pred.I}{model equation for effects of component 1}
+\item{pred.I}{model equation for effects of component 1.}
 
-\item{data}{the dataframe used for analysis}
+\item{data}{the dataframe used for analysis.}
 
-\item{pred.II}{model equation for effects of component 2}
+\item{pred.II}{model equation for effects of component 2.}
 
-\item{its}{output iterations of the MCMC sampler}
+\item{its}{output iterations of the MCMC sampler.}
 
-\item{burn}{number of burn-in iterations}
+\item{burn}{number of burn-in iterations.}
 
-\item{n.lag}{amount of lag for the iterations and burn-in}
+\item{n.lag}{amount of lag for the iterations and burn-in.}
 
-\item{seed}{user-specified random seed}
+\item{seed}{user-specified random seed.}
 }
 \description{
 This function fits a Bayesian circular regression model based on the

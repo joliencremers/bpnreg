@@ -13,15 +13,15 @@
 coefficients for the continuous or categorical predictor variables}
 
 \item{units}{one of c("degrees", "radians") to get categorical coefficients
-estimates and estimates for $a_c$ in degrees or radians}
+estimates and estimates for $a_c$ in degrees or radians.}
 }
 \value{
-A matrix with posterior summaries of the circular coefficients in a
-  Bayesian circular regression model
+A matrix or list with posterior summaries of the circular
+  coefficients in a Bayesian circular regression model.
 }
 \description{
 Gives the coefficients tables of the circular coefficients for a Bayesian
-circular regression model
+circular regression model.
 }
 \examples{
 library(bpnreg)

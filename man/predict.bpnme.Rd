@@ -8,9 +8,9 @@
 }
 \arguments{
 \item{object}{a \code{bpnme object} obtained from the function
-\code{bpnme()}}
+\code{bpnme()}.}
 
-\item{...}{further arguments passed to or from other methods}
+\item{...}{further arguments passed to or from other methods.}
 }
 \value{
 a matrix (rows = N, columns = iterations) containing predicted values
@@ -18,7 +18,7 @@ a matrix (rows = N, columns = iterations) containing predicted values
 }
 \description{
 Outputs predicted values for a Bayesian circular mixed-effects model for each iteration
-of the MCMC sampler
+of the MCMC sampler.
 }
 \examples{
 library(bpnreg)

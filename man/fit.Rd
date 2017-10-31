@@ -7,14 +7,14 @@
 fit(object)
 }
 \arguments{
-\item{object}{an object used to select a method}
+\item{object}{an object used to select a method.}
 }
 \description{
-\code{fit} gives several model fit statistics
+\code{fit} gives several model fit statistics.
 }
 \details{
 the methods \link[bpnreg]{fit.bpnr} and
-  \link[bpnreg]{fit.bpnme} have their own help page
+  \link[bpnreg]{fit.bpnme} have their own help page.
 }
 \examples{
 library(bpnreg)

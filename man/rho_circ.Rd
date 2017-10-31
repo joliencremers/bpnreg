@@ -9,7 +9,7 @@ rho_circ(theta, units = "radians")
 \arguments{
 \item{theta}{a circular variable in radians.}
 
-\item{units}{measurement units of the circular variable c("radians", "degrees")}
+\item{units}{measurement units of the circular variable c("radians", "degrees").}
 }
 \description{
 Compute the mean resultant length of a vector of circular data

@@ -8,14 +8,14 @@
 }
 \arguments{
 \item{object}{a \code{bpnr object} obtained from the function
-\code{bpnr()}}
+\code{bpnr()}.}
 
 \item{type}{the type of residuals, one of \code{c("arc", "cos")}. The "arc"
 residuals are based on a computation of the circular arc length between
 predicted value and original outcome. The "cos" residuals are based on the
 cosine of the difference between predicted value and original outcome.}
 
-\item{...}{further arguments passed to or from other methods}
+\item{...}{further arguments passed to or from other methods.}
 }
 \value{
 a matrix (rows = N, columns = iterations) containing residuals for
@@ -23,7 +23,7 @@ a matrix (rows = N, columns = iterations) containing residuals for
 }
 \description{
 Outputs residuals for a Bayesian circular regression model for each iteration
-of the MCMC sampler
+of the MCMC sampler.
 }
 \examples{
 library(bpnreg)
