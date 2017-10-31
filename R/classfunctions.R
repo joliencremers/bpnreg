@@ -152,7 +152,7 @@ coef_circ <- function(object, type = "continuous", units = "radians"){
 #' library(bpnreg)
 #' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 #' data = Maps,
-#' its = 100, burn = 10, n.lag = 3)
+#' its = 100, burn = 1, n.lag = 1)
 #' coef_ran(fit.Maps)
 #' coef_ran(fit.Maps, type = "circular")
 #'
@@ -502,7 +502,7 @@ residuals.bpnr <- function(object, type = "arc", ...){
 #' library(bpnreg)
 #' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 #' data = Maps,
-#' its = 100, burn = 10, n.lag = 3)
+#' its = 100, burn = 1, n.lag = 1)
 #' residuals(fit.Maps)
 #' residuals(fit.Maps, type = "cos")
 #'
@@ -546,7 +546,7 @@ residuals.bpnme <- function(object, type = "arc", ...){
 #' library(bpnreg)
 #' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 #' data = Maps,
-#' its = 100, burn = 10, n.lag = 3)
+#' its = 100, burn = 1, n.lag = 1)
 #' coef_ran(fit.Maps)
 #' coef_ran(fit.Maps, type = "circular")
 #'
@@ -621,7 +621,7 @@ coef_lin.bpnr <- function(object){
 #' library(bpnreg)
 #' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 #' data = Maps,
-#' its = 100, burn = 10, n.lag = 3)
+#' its = 100, burn = 1, n.lag = 1)
 #' coef_lin(fit.Maps)
 #'
 #' @export
@@ -896,7 +896,7 @@ fit.bpnr <- function(object){
 #' library(bpnreg)
 #' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 #' data = Maps,
-#' its = 100, burn = 10, n.lag = 3)
+#' its = 100, burn = 1, n.lag = 1)
 #' fit(fit.Maps)
 #'
 #' @export
@@ -1015,7 +1015,7 @@ print.bpnr <- function(x, ...){
 #' library(bpnreg)
 #' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 #' data = Maps,
-#' its = 100, burn = 10, n.lag = 3)
+#' its = 100, burn = 1, n.lag = 1)
 #' print(fit.Maps)
 #'
 #' @export
@@ -1169,7 +1169,7 @@ traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 #' library(bpnreg)
 #' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 #' data = Maps,
-#' its = 100, burn = 10, n.lag = 3)
+#' its = 100, burn = 1, n.lag = 1)
 #' traceplot(fit.Maps)
 #'
 #' @export

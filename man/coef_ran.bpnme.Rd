@@ -22,7 +22,7 @@ Gives posterior summaries of the circular or linear random effect variances.
 library(bpnreg)
 fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 data = Maps,
-its = 100, burn = 10, n.lag = 3)
+its = 100, burn = 1, n.lag = 1)
 coef_ran(fit.Maps)
 coef_ran(fit.Maps, type = "circular")
 

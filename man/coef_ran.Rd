@@ -22,7 +22,7 @@ the method \link[bpnreg]{coef_ran.bpnme} has its own help page.
 library(bpnreg)
 fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 data = Maps,
-its = 100, burn = 10, n.lag = 3)
+its = 100, burn = 1, n.lag = 1)
 coef_ran(fit.Maps)
 coef_ran(fit.Maps, type = "circular")
 

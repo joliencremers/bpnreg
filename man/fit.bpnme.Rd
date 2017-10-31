@@ -26,7 +26,7 @@ Outputs several model fit statistics for the Bayesian circular mixed-effects mod
 library(bpnreg)
 fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
 data = Maps,
-its = 100, burn = 10, n.lag = 3)
+its = 100, burn = 1, n.lag = 1)
 fit(fit.Maps)
 
 }

@@ -57,6 +57,6 @@ Because the model is based on the projected normal distribution, a
 }
 \examples{
 library(bpnreg)
-bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps)
+bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps, its = 100)
 
 }

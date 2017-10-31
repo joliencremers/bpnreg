@@ -122,7 +122,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'
 #' @examples
 #' library(bpnreg)
-#' bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps)
+#' bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps, its = 100)
 #'
 #' @export
 
