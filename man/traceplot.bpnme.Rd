@@ -9,12 +9,6 @@
 \arguments{
 \item{object}{a \code{bpnme object} obtained from the function \code{bpnme()}}
 
-\item{parameter}{one of c("Beta.I", "Beta.II", a.x", "a.c", "b.c", "SAM",}
-
-\item{variable}{a character string with variable name(s) to indicate for
-which variable(s) a traceplot is required. This cannot be used in
-combination with the parameters c("VCovI", "VCovII", "cRI", "cRS").}
-
 \item{parameter}{one of c(Beta.I", "Beta.II", a.x", "a.c", "b.c", "SAM",
 "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS") to indicate for
 which parameter a traceplot is required. Beta.I and Beta.II are the fixed
@@ -23,6 +17,10 @@ differences with the intercept on the outcome variable for the different
 levels of categorical variabes. VCovI and VCovII are the linear random
 effect variances and cRI and cRS are the variances of the circular random
 intercept and circular random slope.}
+
+\item{variable}{a character string with variable name(s) to indicate for
+which variable(s) a traceplot is required. This cannot be used in
+combination with the parameters c("VCovI", "VCovII", "cRI", "cRS").}
 }
 \description{
 General plot function for a \code{bpnme object}.

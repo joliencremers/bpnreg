@@ -1151,7 +1151,6 @@ traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 #' General plot function for a \code{bpnme object}.
 #'
 #' @param object a \code{bpnme object} obtained from the function \code{bpnme()}
-#' @param parameter one of c("Beta.I", "Beta.II", a.x", "a.c", "b.c", "SAM",
 #' @param parameter one of c(Beta.I", "Beta.II", a.x", "a.c", "b.c", "SAM",
 #'   "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS") to indicate for
 #'   which parameter a traceplot is required. Beta.I and Beta.II are the fixed
