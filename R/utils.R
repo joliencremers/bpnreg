@@ -100,7 +100,7 @@ mean_circ <- function(theta, units = "radians"){
 
   }else if(units == "degrees"){
 
-    theta_bar(theta*(pi/180))*(180/pi)
+    theta_bar(theta)*(180/pi)
 
   }
 
@@ -367,13 +367,39 @@ sumr <- function(output, mm){
 
   #Circular effects
 
-  circ.res.cat <- matrix(NA, length(var.cat), 5)
-  rownames(circ.res.cat) <- var.cat
-  colnames(circ.res.cat) <- c("mean", "mode", "sd", "LB", "UB")
+  if(length(var.cat) >= 2){
 
-  circ.res.means <- matrix(NA, length(var.cat) + 1, 5)
-  rownames(circ.res.means) <- c("(Intercept)", var.cat)
-  colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
+    var.comb.cat <- combn(var.cat, 2)
+
+    circ.res.means <- matrix(NA, length(var.cat) + ncol(var.comb.cat) + 1, 5)
+    names <- sapply(1:ncol(var.comb.cat), function(w){paste(var.comb.cat[,w], sep = "", collapse = "")})
+    rownames(circ.res.means) <- c("(Intercept)", var.cat, names)
+    colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
+
+    circ.diff <- matrix(NA, output$its, length(var.cat) + ncol(var.comb.cat))
+    colnames(circ.diff) <- c(var.cat, names)
+
+    circ.res.cat <- matrix(NA, length(var.cat) + ncol(var.comb.cat), 5)
+    rownames(circ.res.cat) <- c(var.cat, names)
+    colnames(circ.res.cat) <- c("mean", "mode", "sd", "LB", "UB")
+
+  }else{
+
+    var.comb.cat <- 0
+
+    circ.res.means <- matrix(NA, length(var.cat) + 1, 5)
+    rownames(circ.res.means) <- c("(Intercept)", var.cat)
+    colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
+
+    circ.diff <- matrix(NA, output$its, length(var.cat))
+    colnames(circ.diff) <- var.cat
+
+    circ.res.cat <- matrix(NA, length(var.cat), 5)
+    rownames(circ.res.cat) <- var.cat
+    colnames(circ.res.cat) <- c("mean", "mode", "sd", "LB", "UB")
+
+
+  }
 
 
   circ.res <- matrix(NA, length(var.num), 5*6)
@@ -384,9 +410,6 @@ sumr <- function(output, mm){
                           "mean AS", "mode AS", "sd AS", "LB AS", "UB AS",
                           "mean SAM", "mode SAM", "sd SAM", "LB SAM", "UB SAM",
                           "mean SSDO", "mode SSDO", "sd SSDO", "LB SSSO", "UB SSDO")
-
-  circ.diff <- matrix(NA, output$its, length(var.cat))
-  colnames(circ.diff) <- var.cat
 
   if(length(var.cat) == 0){
 
@@ -443,6 +466,51 @@ sumr <- function(output, mm){
     circ.res.means[1,2] <- mode_est_circ(baseline)
     circ.res.means[1,3] <- sd_circ(baseline)
     circ.res.means[1,4:5] <- hpd_est_circ(baseline)
+
+    if(length(var.cat) >= 2){
+
+      for(c in 1:ncol(var.comb.cat)){
+
+        if(!("(Intercept)" %in% colnames(mm$XI))){
+
+          baseline <- atan2(output$B2[, "(Intercept)"], rep(0, output$its))
+          dummy <- atan2(output$B2[, "(Intercept)"] + output$B2[, var.comb.cat[1,c]] + output$B2[, var.comb.cat[2,c]],
+                         rep(0, output$its) + output$B1[, var.comb.cat[1,c]] + output$B1[, var.comb.cat[2,c]])
+
+        }else if(!("(Intercept)" %in% colnames(mm$XII))){
+
+          baseline <- atan2(rep(0, output$its), output$B1[, "(Intercept)"])
+          dummy <- atan2(rep(0, output$its) + output$B2[, var.comb.cat[1,c]] + output$B2[, var.comb.cat[2,c]],
+                         output$B1[, "(Intercept)"] + output$B1[, var.comb.cat[1,c]] + output$B1[, var.comb.cat[2,c]])
+
+        }else{
+
+          baseline <- atan2(output$B2[, "(Intercept)"], output$B1[, "(Intercept)"])
+          dummy <- atan2(output$B2[, "(Intercept)"] + output$B2[, var.comb.cat[1,c]] + output$B2[, var.comb.cat[2,c]],
+                         output$B1[, "(Intercept)"] + output$B1[, var.comb.cat[1,c]] + output$B1[, var.comb.cat[2,c]])
+
+        }
+
+        diff <- baseline - dummy
+        sign <- sign(sin(diff))
+        circDiff <- (pi - abs(pi - abs(diff)))*sign
+
+        circ.diff[,c + length(var.cat)] <- circDiff
+
+        circ.res.cat[c + length(var.cat),1] <- theta_bar(circDiff)
+        circ.res.cat[c + length(var.cat),2] <- mode_est_circ(circDiff)
+        circ.res.cat[c + length(var.cat),3] <- sd_circ(circDiff)
+        circ.res.cat[c + length(var.cat),4:5] <- hpd_est_circ(circDiff)
+
+        circ.res.means[c + 1 + length(var.cat),1] <- theta_bar(dummy)
+        circ.res.means[c + 1 + length(var.cat),2] <- mode_est_circ(dummy)
+        circ.res.means[c + 1 + length(var.cat),3] <- sd_circ(dummy)
+        circ.res.means[c + 1 + length(var.cat),4:5] <- hpd_est_circ(dummy)
+
+
+    }
+
+    }
 
   }else{
 
@@ -852,13 +920,39 @@ summe <- function(output, mm){
 
   }
 
-  circ.res.cat <- matrix(NA, length(var.cat), 5)
-  rownames(circ.res.cat) <- var.cat
-  colnames(circ.res.cat) <- c("mean", "mode", "sd", "LB", "UB")
+  if(length(var.cat) >= 2){
 
-  circ.res.means <- matrix(NA, length(var.cat) + 1, 5)
-  rownames(circ.res.means) <- c("(Intercept)", var.cat)
-  colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
+    var.comb.cat <- combn(var.cat, 2)
+
+    circ.res.means <- matrix(NA, length(var.cat) + ncol(var.comb.cat) + 1, 5)
+    names <- sapply(1:ncol(var.comb.cat), function(w){paste(var.comb.cat[,w], sep = "", collapse = "")})
+    rownames(circ.res.means) <- c("(Intercept)", var.cat, names)
+    colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
+
+    circ.diff <- matrix(NA, output$its, length(var.cat) + ncol(var.comb.cat))
+    colnames(circ.diff) <- c(var.cat, names)
+
+    circ.res.cat <- matrix(NA, length(var.cat) + ncol(var.comb.cat), 5)
+    rownames(circ.res.cat) <- c(var.cat, names)
+    colnames(circ.res.cat) <- c("mean", "mode", "sd", "LB", "UB")
+
+  }else{
+
+    var.comb.cat <- 0
+
+    circ.res.means <- matrix(NA, length(var.cat) + 1, 5)
+    rownames(circ.res.means) <- c("(Intercept)", var.cat)
+    colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
+
+    circ.diff <- matrix(NA, output$its, length(var.cat))
+    colnames(circ.diff) <- var.cat
+
+    circ.res.cat <- matrix(NA, length(var.cat), 5)
+    rownames(circ.res.cat) <- var.cat
+    colnames(circ.res.cat) <- c("mean", "mode", "sd", "LB", "UB")
+
+  }
+
 
 
   circ.res <- matrix(NA, length(var.num), 5*6)
@@ -875,9 +969,6 @@ summe <- function(output, mm){
 
   colnames(groupmeans.I) <- var.num.I
   colnames(groupmeans.II) <- var.num.II
-
-  circ.diff <- matrix(NA, output$its, length(var.cat))
-  colnames(circ.diff) <- var.cat
 
   if(length(var.cat) == 0){
 
@@ -934,6 +1025,50 @@ summe <- function(output, mm){
     circ.res.means[1,2] <- mode_est_circ(baseline)
     circ.res.means[1,3] <- sd_circ(baseline)
     circ.res.means[1,4:5] <- hpd_est_circ(baseline)
+
+    if(length(var.cat) >= 2){
+
+      for(c in 1:ncol(var.comb.cat)){
+
+        if(!("(Intercept)" %in% colnames(mm$mm.I))){
+
+          baseline <- atan2(output$Beta.II[, "(Intercept)"], rep(0, output$its))
+          dummy <- atan2(output$Beta.II[, "(Intercept)"] + output$Beta.II[, var.comb.cat[1,c]] + output$Beta.II[, var.comb.cat[2,c]],
+                         rep(0, output$its) + output$Beta.I[, var.comb.cat[1,c]] + output$Beta.I[, var.comb.cat[2,c]])
+
+        }else if(!("(Intercept)" %in% colnames(mm$mm.II))){
+
+          baseline <- atan2(rep(0, output$its), output$Beta.I[, "(Intercept)"])
+          dummy <- atan2(rep(0, output$its) + output$Beta.II[, var.comb.cat[1,c]] + output$Beta.II[, var.comb.cat[2,c]],
+                         output$Beta.I[, "(Intercept)"] + output$Beta.I[, var.comb.cat[1,c]] + output$Beta.I[, var.comb.cat[2,c]])
+
+        }else{
+
+          baseline <- atan2(output$Beta.II[, "(Intercept)"], output$Beta.I[, "(Intercept)"])
+          dummy <- atan2(output$Beta.II[, "(Intercept)"] + output$Beta.II[, var.comb.cat[1,c]] + output$Beta.II[, var.comb.cat[2,c]],
+                         output$Beta.I[, "(Intercept)"] + output$Beta.I[, var.comb.cat[1,c]] + output$Beta.I[, var.comb.cat[2,c]])
+
+        }
+
+        diff <- baseline - dummy
+        sign <- sign(sin(diff))
+        circDiff <- (pi - abs(pi - abs(diff)))*sign
+
+        circ.diff[,c + length(var.cat)] <- circDiff
+
+        circ.res.cat[c + length(var.cat),1] <- theta_bar(circDiff)
+        circ.res.cat[c + length(var.cat),2] <- mode_est_circ(circDiff)
+        circ.res.cat[c + length(var.cat),3] <- sd_circ(circDiff)
+        circ.res.cat[c + length(var.cat),4:5] <- hpd_est_circ(circDiff)
+
+        circ.res.means[c + 1 + length(var.cat),1] <- theta_bar(dummy)
+        circ.res.means[c + 1 + length(var.cat),2] <- mode_est_circ(dummy)
+        circ.res.means[c + 1 + length(var.cat),3] <- sd_circ(dummy)
+        circ.res.means[c + 1 + length(var.cat),4:5] <- hpd_est_circ(dummy)
+
+      }
+
+    }
 
   }else{
 

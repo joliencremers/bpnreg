@@ -51,6 +51,7 @@
 #' @importFrom MASS mvrnorm
 #' @importFrom haven read_spss
 #' @importFrom methods is
+#' @importFrom utils combn
 #'
 #' @docType package
 #' @name bpnreg

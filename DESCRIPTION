@@ -6,13 +6,13 @@ Authors@R: person("Jolien", "Cremers", email = "joliencremers@gmail.com",
                   role = c("aut", "cre"))
 Description: Fitting multivariate and mixed-effect 
     regression models for circular data based on the projected Normal distribution.
-Depends: R (>= 2.10)
+Depends: R (>= 3.4.1)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 LinkingTo: 
-    Rcpp, RcppArmadillo, BH
+    Rcpp (>= 0.12.13), RcppArmadillo (>= 0.7.960.1.2), BH (>= 1.65.0.1)
 Imports: 
-    Rcpp, MASS, haven, methods
+   Rcpp (>= 0.12.13), MASS (>= 7.3.47), haven (>= 1.1.0), methods (>= 3.4.1)
 RoxygenNote: 6.0.1
 

@@ -716,11 +716,13 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
 
       if(units == "degrees"){
 
-        return(list(Means = object$circ.coef.means*(180/pi), Differences = object$circ.coef.cat*(180/pi)))
+        return(list(Means = object$circ.coef.means*(180/pi),
+                    Differences = object$circ.coef.cat*(180/pi)))
 
       }else if(units == "radians"){
 
-        return(list(Means = object$circ.coef.means, Differences = object$circ.coef.cat))
+        return(list(Means = object$circ.coef.means*(180/pi),
+                    Differences = object$circ.coef.cat))
 
       }
 
@@ -817,11 +819,13 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 
       if(units == "degrees"){
 
-        return(list(Means = object$circ.coef.means*(180/pi), Differences = object$circ.coef.cat*(180/pi)))
+        return(list(Means = object$circ.coef.means*(180/pi),
+                    Differences = object$circ.coef.cat*(180/pi)))
 
       }else if(units == "radians"){
 
-        return(list(Means = object$circ.coef.means, Differences = object$circ.coef.cat))
+        return(list(Means = object$circ.coef.means,
+                    Differences = object$circ.coef.cat))
 
       }
 
