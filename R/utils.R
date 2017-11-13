@@ -100,7 +100,7 @@ mean_circ <- function(theta, units = "radians"){
 
   }else if(units == "degrees"){
 
-    theta_bar(theta)*(180/pi)
+    theta_bar((theta*(pi/180)))*(180/pi)
 
   }
 
