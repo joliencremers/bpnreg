@@ -69,7 +69,7 @@ sd_circ <- function(theta, units = "radians"){
 
   }else if(units == "degrees"){
 
-    sqrt(-2*log(rho_circ(theta, units = "degrees")))
+    sqrt(-2*log(rho_circ(theta, units = "degrees")))*(180/pi)
 
   }
 
