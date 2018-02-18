@@ -7,13 +7,15 @@
 \method{coef_circ}{bpnr}(object, type = "continuous", units = "radians")
 }
 \arguments{
-\item{object}{a \code{bpnr object} obtained from the function \code{bpnr()}}
+\item{object}{a \code{bpnr object} obtained from the function
+\code{\link{bpnr}}}
 
-\item{type}{one of c("continuous", "categorical") to get either the
+\item{type}{one of \code{c("continuous", "categorical")} to get either the
 coefficients for the continuous or categorical predictor variables}
 
-\item{units}{one of c("degrees", "radians") to get categorical coefficients
-estimates and estimates for $a_c$ in degrees or radians.}
+\item{units}{one of \code{c("degrees", "radians")} to get categorical
+coefficients estimates and estimates for \code{$a_c$} in degrees or
+radians.}
 }
 \value{
 A matrix or list with posterior summaries of the circular

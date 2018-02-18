@@ -38,6 +38,65 @@ bpnme(pred.I, data, pred.II = pred.I, its = 1000, burn = 1, n.lag = 1,
 
 \item{seed}{user-specified random seed.}
 }
+\value{
+A \code{bpnme} object, which can be further analyzed using the
+  associated functions \code{\link{traceplot.bpnme}}, \code{\link{BFc.bpnme}},
+  \code{\link{coef_lin.bpnme}}, \code{\link{coef_circ.bpnme}}, \code{\link{coef_ran.bpnme}},
+  \code{\link{residuals.bpnme}}, \code{\link{predict.bpnme}},
+  \code{\link{fit.bpnme}} and \code{\link{print.bpnme}}.
+
+  A \code{bpnr} object contains the following elements (some elements are not
+  returned if not applicable)
+
+  \describe{
+  \item{\code{Beta.I}}{A vector of the fixed effects for the first component.}
+  \item{\code{Beta.II}}{A vector of the fixed effects for the second component.}
+  \item{\code{B.I}}{out.}
+  \item{\code{B.II}}{out.}
+  \item{\code{VCovI}}{The random effect variances in the first component.}
+  \item{\code{VCovII}}{The random effect variances in the second component.}
+  \item{\code{predictiva}}{out.}
+  \item{\code{circular.ri}}{The circular random intercepts.}
+  \item{\code{N}}{Number of observed cases.}
+  \item{\code{its}}{Number of output iterations.}
+  \item{\code{n.lag}}{Number of iterations to save.
+  one in \code{lag} iterations will be saved. Set lag to 1 to save all iterations (default).}
+  \item{\code{burn}}{Burn-in time for the MCMC sampler.}
+  \item{\code{p1}}{Number of parameters in the first component.}
+  \item{\code{p2}}{Number of parameters in the second component.}
+  \item{\code{q1}}{out.}
+  \item{\code{q2}}{out.}
+  \item{\code{a.x}}{Describes the location of the
+  inflection point of the regression curve on the axis of the circular outcome.}
+  \item{\code{a.c}}{Describes the axis of the predictor.}
+  \item{\code{b.c}}{Describes the slope of the tangent line at the inflection point.}
+  \item{\code{SAM}}{A vector of circular regression slopes at the mean.}
+  \item{\code{AS}}{A vector of average slopes of the circular regression.}
+  \item{\code{SSDO}}{The signed shorted distance to the origin.}
+  \item{\code{circ.diff}}{The circular difference found between categorical variables in each iteration.}
+  \item{\code{CRSnum}}{Values for the circular random slope of continuoes variables.}
+  \item{\code{CRScat}}{Values for the circular random slope of categorical variables.}
+  \item{\code{CRS}}{Values for the circular random slope.}
+  \item{\code{CRI}}{The mean resultant length of the random intercept, a measure of concentration.}
+  \item{\code{Call}}{The matched call.}
+  \item{\code{lin.coef.I}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density of the linear coefficients for \code{B1}.}
+  \item{\code{lin.coef.II}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density of the linear coefficients for \code{B2}.}
+  \item{\code{circ.coef}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density for the \code{a.x}, \code{a.c},
+  \code{b.c}, \code{AS}, \code{SAM} and \code{SSDO} of the circular coefficients.}
+  \item{\code{circ.coef.cat}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density of the categorical coefficients}
+  \item{\code{circ.coef.means}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density of the categorical coefficients including an intercept.}
+  \item{\code{model.fit}}{A list of information criteria for assesment of model fit.}
+  \item{\code{lin.res.varrand.I}}{out.}
+  \item{\code{lin.res.varrand.II}}{out.}
+  \item{\code{circ.res.varrand}}{out.}
+  \item{\code{mm}}{A list of information on the specified model.}
+  }
+}
 \description{
 This function fits a Bayesian circular mixed-effects model based on the
 projected normal distribution.

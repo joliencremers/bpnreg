@@ -8,12 +8,13 @@
 }
 \arguments{
 \item{object}{a \code{bpnme object} obtained from the function
-\code{bpnme()}.}
+\code{\link{bpnme}}.}
 
-\item{type}{the type of residuals, one of \code{c("arc", "cos")}. The "arc"
-residuals are based on a computation of the circular arc length between
-predicted value and original outcome. The "cos" residuals are based on the
-cosine of the difference between predicted value and original outcome.}
+\item{type}{the type of residuals, one of \code{c("arc", "cos")}. The
+\code{"arc"} residuals are based on a computation of the circular arc
+length between predicted value and original outcome. The \code{"cos"}
+residuals are based on the cosine of the difference between predicted value
+and original outcome.}
 
 \item{...}{further arguments passed to or from other methods.}
 }
@@ -22,8 +23,8 @@ a matrix (rows = N, columns = iterations) containing residuals for
   each iteration of the MCMC sampler.
 }
 \description{
-Outputs residuals for a Bayesian circular mixed-effects model for each iteration
-of the MCMC sampler.
+Outputs residuals for a Bayesian circular mixed-effects model for each
+iteration of the MCMC sampler.
 }
 \examples{
 library(bpnreg)

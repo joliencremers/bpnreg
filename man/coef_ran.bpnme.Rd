@@ -7,10 +7,11 @@
 \method{coef_ran}{bpnme}(object, type = "linear")
 }
 \arguments{
-\item{object}{a \code{bpnme object} obtained from the function \code{bpnme()}.}
+\item{object}{a \code{bpnme object} obtained from the function
+\code{\link{bpnme}}.}
 
-\item{type}{one of c("linear", "circular") to get either the
-linear or circular random effect variances.}
+\item{type}{one of \code{c("linear", "circular")} to get either the linear or
+circular random effect variances.}
 }
 \value{
 A matrix with posterior summaries of the random effect variances.

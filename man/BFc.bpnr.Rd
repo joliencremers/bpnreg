@@ -7,15 +7,15 @@
 \method{BFc}{bpnr}(object, hypothesis, type = "anchor")
 }
 \arguments{
-\item{object}{a \code{bpnr object} obtained from the function
-\code{bpnr()}.}
+\item{object}{a \code{bpnr object} obtained from the function \code{bpnr()}.}
 
 \item{hypothesis}{the inequality constrained hypothesis to test.}
 
-\item{type}{type of hypothesis to test c("anchor", "isotropic").}
+\item{type}{type of hypothesis to test \code{c("anchor", "isotropic")}.}
 }
 \value{
-Bayes Factors for inequality constrained hypotheses on mean differences.
+Bayes Factors for inequality constrained hypotheses on mean
+  differences.
 }
 \description{
 Outputs Bayes Factors for the circular differences between several levels of

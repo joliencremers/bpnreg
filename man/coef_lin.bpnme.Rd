@@ -7,7 +7,8 @@
 \method{coef_lin}{bpnme}(object)
 }
 \arguments{
-\item{object}{a \code{bpnme object} obtained from the function \code{bpnme()}.}
+\item{object}{a \code{bpnme object} obtained from the function
+\code{\link{bpnme}}.}
 }
 \value{
 A matrix with posterior summaries of the linear coefficients in a

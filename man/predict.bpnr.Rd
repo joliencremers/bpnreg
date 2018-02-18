@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{object}{a \code{bpnr object} obtained from the function
-\code{bpnr()}.}
+\code{\link{bpnr}}.}
 
 \item{...}{further arguments passed to or from other methods.}
 }
@@ -17,8 +17,8 @@ a matrix (rows = N, columns = iterations) containing predicted values
   for the circular outcome for each iteration of the MCMC sampler.
 }
 \description{
-Outputs predicted values for a Bayesian circular regression model for each iteration
-of the MCMC sampler.
+Outputs predicted values for a Bayesian circular regression model for each
+iteration of the MCMC sampler.
 }
 \examples{
 library(bpnreg)

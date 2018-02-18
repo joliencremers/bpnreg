@@ -7,14 +7,15 @@
 \method{traceplot}{bpnr}(object, parameter = "SAM", variable = NULL)
 }
 \arguments{
-\item{object}{a \code{bpnr object} obtained from the function \code{bpnr()}}
+\item{object}{a \code{bpnr object} obtained from the function
+\code{\link{bpnr}}}
 
 \item{parameter}{one of c("B1", "B2", a.x", "a.c", "b.c", "SAM", "AS",
 "SSDO", "circ.diff") to indicate for which parameter a traceplot is
-required. B1 and B2 are the linear intercepts and coefficients of the first
-and second component. circ.diff are the circular differences with the
-intercept on the outcome variable for the different levels of categorical
-variabes.}
+required. \code{B1} and \code{B2} are the linear intercepts and
+coefficients of the first and second component. \code{circ.diff} are the
+circular differences with the intercept on the outcome variable for the
+different levels of categorical variabes.}
 
 \item{variable}{a character string with variable name(s) to indicate for
 which variable(s) a traceplot is required.}

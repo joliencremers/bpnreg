@@ -7,8 +7,7 @@
 \method{print}{bpnr}(x, ...)
 }
 \arguments{
-\item{x}{a \code{bpnr object} obtained from the function
-\code{bpnr()}.}
+\item{x}{a \code{bpnr object} obtained from the function \code{\link{bpnr}}.}
 
 \item{...}{further arguments passed to or from other methods.}
 }

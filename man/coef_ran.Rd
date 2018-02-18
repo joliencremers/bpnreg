@@ -9,11 +9,12 @@ coef_ran(object, type = "linear")
 \arguments{
 \item{object}{an object used to select a method.}
 
-\item{type}{one of c("linear", "circular") to get either the
-linear or circular random effect variances.}
+\item{type}{one of \code{c("linear", "circular")} to get either the linear or
+circular random effect variances.}
 }
 \description{
-\code{coef_ran} gives posterior summaries of the circular or linear random effect variances.
+\code{coef_ran} gives posterior summaries of the circular or linear random
+effect variances.
 }
 \details{
 the method \link[bpnreg]{coef_ran.bpnme} has its own help page.

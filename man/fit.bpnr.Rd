@@ -7,8 +7,7 @@
 \method{fit}{bpnr}(object)
 }
 \arguments{
-\item{object}{a \code{bpnr object} obtained from the function
-\code{bpnr()}.}
+\item{object}{a \code{bpnr object} obtained from the function \code{bpnr()}.}
 }
 \value{
 a matrix containing the computed log pointwise predictive density
@@ -20,7 +19,8 @@ a matrix containing the computed log pointwise predictive density
   (2014) in *Bayesian Data Analysis*.
 }
 \description{
-Outputs several model fit statistics for the Bayesian circular regression model
+Outputs several model fit statistics for the Bayesian circular regression
+model
 }
 \examples{
 library(bpnreg)

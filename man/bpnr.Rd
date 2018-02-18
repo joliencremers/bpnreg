@@ -8,11 +8,12 @@ Cremers, J., Mulder, K.T. & Klugkist, I. (In press). Circular
   interpretation of regression coefficients. British Journal of Mathematical
   and Statistical Psychology.
 
-Cremers, J., Mainhard, M.T. & Klugkist, I. (2017). Assessing a Bayesian
-  Embedding Approach to Circular Regression Models. Manuscript under review.
+Cremers, J., Mainhard, M.T. & Klugkist, I. (2017). Assessing a
+  Bayesian Embedding Approach to Circular Regression Models. Manuscript under
+  review.
 
 Cremers, J., & Klugkist, I. (2017). How to analyze circular data: A
-   tutorial for projected normal regression models. Working paper.
+  tutorial for projected normal regression models. Working paper.
 
 Presnell, B., Morrison, S.P. & Littell, R.C. (1998). Projected
   multivariate linear models for directional data. Journal of the Americal
@@ -37,6 +38,53 @@ bpnr(pred.I, data, pred.II = pred.I, its = 1000, burn = 1, n.lag = 1,
 
 \item{seed}{user-specified random seed.}
 }
+\value{
+A \code{bpnr} object, which can be further analyzed using the
+  associated functions \code{\link{traceplot.bpnr}}, \code{\link{BFc.bpnr}},
+  \code{\link{coef_lin.bpnr}}, \code{\link{coef_circ.bpnr}},
+  \code{\link{residuals.bpnr}} ,\code{\link{predict.bpnr}},
+  \code{\link{fit.bpnr}} and \code{\link{print.bpnr}}.
+
+  A \code{bpnr} object contains the following elements (some elements are not
+  returned if not applicable)
+
+  \describe{
+  \item{\code{B1}}{A vector of predicted values \code{B1}
+  for the first component.}
+  \item{\code{B2}}{A vector of predicted values \code{B2}
+  for the second component.}
+  \item{\code{Likelihood}}{A matrix containing the likelihood for all iterations.}
+  \item{\code{its}}{Number of output iterations.}
+  \item{\code{lag}}{Number of iterations to save.
+  one in \code{lag} iterations will be saved. Set lag to 1 to save all iterations (default).}
+  \item{\code{burn-in}}{Burn-in time for the MCMC sampler.}
+  \item{\code{p1}}{Number of parameters in the first component.}
+  \item{\code{p2}}{Number of parameters in the second component.}
+  \item{\code{theta}}{A vector of predicted angles.}
+  \item{\code{a.x}}{Describes the location of the
+  inflection point of the regression curve on the axis of the circular outcome.}
+  \item{\code{a.c}}{Describes the axis of the predictor.}
+  \item{\code{b.c}}{Describes the slope of the tangent line at the inflection point.}
+  \item{\code{SAM}}{A vector of circular regression slopes at the mean.}
+  \item{\code{AS}}{A vector of average slopes of the circular regression.}
+  \item{\code{SSDO}}{The signed shorted distance to the origin.}
+  \item{\code{circ.diff}}{The circular difference found between categorical variables in each iteration.}
+  \item{\code{Call}}{The matched call.}
+  \item{\code{lin.coef.I}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density of the linear coefficients for \code{B1}.}
+  \item{\code{lin.coef.II}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density of the linear coefficients for \code{B2}.}
+  \item{\code{circ.coef}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density for the \code{a.x}, \code{a.c},
+  \code{b.c}, \code{AS}, \code{SAM} and \code{SSDO} of the circular coefficients.}
+  \item{\code{circ.coef.cat}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density of the categorical coefficients}
+  \item{\code{circ.coef.means}}{The mean, mode, standard deviation and confidence
+  interval of the highest posterior density of the categorical coefficients including an intercept.}
+  \item{\code{model.fit}}{A list of information criteria for assesment of model fit.}
+  \item{\code{mm}}{A list of information on the specified model.}
+  }
+}
 \description{
 This function fits a Bayesian circular regression model based on the
 projected normal distribution.
@@ -51,7 +99,8 @@ Because the model is based on the projected normal distribution, a
   A tutorial on how to use this function can be found in Cremers & Klugkist
   (2017, working paper). More details on the sampling algorithm and
   interpretation of the coefficients from the model can be found in Cremers,
-  Mulder & Klugkist (2017) and Cremers, Mainhard & Klugkist (2017, under review).
+  Mulder & Klugkist (2017) and Cremers, Mainhard & Klugkist (2017, under
+  review).
 }
 \examples{
 library(bpnreg)

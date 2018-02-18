@@ -7,20 +7,22 @@
 \method{traceplot}{bpnme}(object, parameter = "SAM", variable = NULL)
 }
 \arguments{
-\item{object}{a \code{bpnme object} obtained from the function \code{bpnme()}}
+\item{object}{a \code{bpnme object} obtained from the function
+\code{\link{bpnme}}}
 
-\item{parameter}{one of c(Beta.I", "Beta.II", a.x", "a.c", "b.c", "SAM",
-"AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS") to indicate for
-which parameter a traceplot is required. Beta.I and Beta.II are the fixed
-effects coefficients of a mixed-effects model. circ.diff are the circular
-differences with the intercept on the outcome variable for the different
-levels of categorical variabes. VCovI and VCovII are the linear random
-effect variances and cRI and cRS are the variances of the circular random
+\item{parameter}{one of \code{c(Beta.I", "Beta.II", a.x", "a.c", "b.c",
+"SAM", "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS")} to
+indicate for which parameter a traceplot is required. \code{Beta.I} and
+\code{Beta.II} are the fixed effects coefficients of a mixed-effects model.
+\code{circ.diff} are the circular differences with the intercept on the
+outcome variable for the different levels of categorical variabes.
+\code{VCovI} and \code{VCovII} are the linear random effect variances and
+\code{cRI} and \code{cRS} are the variances of the circular random
 intercept and circular random slope.}
 
 \item{variable}{a character string with variable name(s) to indicate for
 which variable(s) a traceplot is required. This cannot be used in
-combination with the parameters c("VCovI", "VCovII", "cRI", "cRS").}
+combination with the parameters \code{c("VCovI", "VCovII", "cRI", "cRS")}.}
 }
 \description{
 General plot function for a \code{bpnme object}.
