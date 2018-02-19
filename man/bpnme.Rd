@@ -61,10 +61,10 @@ A \code{bpnme} object, which can be further analyzed using the
   \item{\code{n.lag}}{Number of iterations to save.
   one in \code{lag} iterations will be saved. Set lag to 1 to save all iterations (default).}
   \item{\code{burn}}{Burn-in time for the MCMC sampler.}
-  \item{\code{p1}}{Number of fixed effect parameters in the first component.}
-  \item{\code{p2}}{Number of fixed effect parameters in the second component.}
-  \item{\code{q1}}{Number of random effect parameters in the first component.}
-  \item{\code{q2}}{Number of random effect parameters in the second component.}
+  \item{\code{p1}}{Number of fixed effect parameters predicting the first component.}
+  \item{\code{p2}}{Number of fixed effect parameters predicting the second component.}
+  \item{\code{q1}}{Number of random effect parameters predicting the first component.}
+  \item{\code{q2}}{Number of random effect parameters predicting the second component.}
   \item{\code{a.x}}{A matrix of posterior samples for \code{a.x} which describes the location of the
   inflection point of the regression curve on the axis of the predictor.}
   \item{\code{a.c}}{A matrix of posterior samples for \code{a.c} which describes the location of the
