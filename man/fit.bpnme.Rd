@@ -20,7 +20,8 @@ a matrix containing the computed log pointwise predictive density
   (2014) in *Bayesian Data Analysis*.
 }
 \description{
-Outputs several model fit statistics for the Bayesian circular mixed-effects model
+Outputs several model fit statistics for the Bayesian circular mixed-effects
+model
 }
 \examples{
 library(bpnreg)

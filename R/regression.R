@@ -45,9 +45,9 @@
 
 bpnr <- function(pred.I, data, pred.II = pred.I,
                  its = 1000, burn = 1, n.lag = 1,
-                 seed = 101){
+                 seed = NULL){
 
-  set.seed(seed)
+  if (!is.null(seed)){set.seed(seed)}
 
   mm <- mmr(pred.I, data, pred.II)
 
@@ -128,9 +128,9 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 
 bpnme <- function(pred.I, data, pred.II = pred.I,
                   its = 1000, burn = 1, n.lag = 1,
-                  seed = 101){
+                  seed = NULL){
 
-  set.seed(seed)
+  if (!is.null(seed)){set.seed(seed)}
 
   mm <- mmme(pred.I, data, pred.II)
 
@@ -250,7 +250,7 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
               norm2  <- mu.ij.I^2 + mu.ij.II^2
               c         <- (1 + ( (bb * pnorm(bb)) / dnorm(bb)))
 
-              predictiva[[i]][ii,j] <- as.numeric( (1/(2*pi)) * exp(-0.5 * norm2)) * c
+              predictiva[[i]][ii,j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2))*c
             }
           }
         }
@@ -329,7 +329,7 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
         for(j in 1:mm$no.Meas[i]){
 
           t.aux     <- mm$theta[[i]][j]
-          mu.ij.I   <- c(beta.I %*% mm$XI[[i]][j, ] + b.I[i, ] %*% mm$ZI[[i]][j, ])
+          mu.ij.I   <- c(beta.I %*% mm$XI[[i]][j, ]+b.I[i, ]%*%mm$ZI[[i]][j, ])
           mu.ij.II  <- c(beta.II %*% mm$XII[[i]][j, ] + b.II[i])
           bb        <- Dbd(t.aux, mu.ij.I, mu.ij.II)
           mm$R[[i]][j] <- slice_r_me(t.aux, mu.ij.I, mu.ij.II, mm$R[[i]][j])
@@ -341,7 +341,7 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
               norm2  <- mu.ij.I^2 + mu.ij.II^2
               c         <- (1 + ( (bb * pnorm(bb)) / dnorm(bb)))
 
-              predictiva[[i]][ii,j] <- as.numeric( (1 / (2*pi)) * exp(-0.5 * norm2)) * c
+              predictiva[[i]][ii,j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2))*c
             }
           }
         }
@@ -556,7 +556,8 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
   output <- list(Beta.I = Beta.I, Beta.II = Beta.II, B.I = B.I, B.II = B.II,
                  VCovI = VCovI, VCovII = VCovII, predictiva = predictiva,
                  circular.ri = circular.ri, N = mm$N,
-                 its = its, n.lag = n.lag, burn = burn, p1 = p1, p2 = p2, q1 = q1, q2 = q2)
+                 its = its, n.lag = n.lag, burn = burn,
+                 p1 = p1, p2 = p2, q1 = q1, q2 = q2)
 
   summary.stats <- summe(output, mm)
 

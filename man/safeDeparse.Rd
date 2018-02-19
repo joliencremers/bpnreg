@@ -18,5 +18,6 @@ safeDeparse(x, collapse = " ")
 \item{collapse}{see lme4 package documentation}
 }
 \description{
-Function to help divide input formula of bpnme object into a fixed and random part
+Function to help divide input formula of bpnme object into a fixed and random
+part
 }

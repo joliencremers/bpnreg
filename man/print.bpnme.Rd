@@ -7,13 +7,13 @@
 \method{print}{bpnme}(x, ...)
 }
 \arguments{
-\item{x}{a \code{bpnme object} obtained from the function
-\code{bpnme()}.}
+\item{x}{a \code{bpnme object} obtained from the function \code{bpnme()}.}
 
 \item{...}{further arguments passed to or from other methods.}
 }
 \value{
-A print of selected output from a Bayesian circular mixed-effects model.
+A print of selected output from a Bayesian circular mixed-effects
+  model.
 }
 \description{
 Prints selected output from a Bayesian circular mixed-effects model.

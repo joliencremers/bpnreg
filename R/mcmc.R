@@ -31,7 +31,9 @@ betaBlock.fRI <- function(Omega, Y, X, Z, p, A, N){
   Var.beta <- chol2inv(chol(A + sXtVX ))
 
   #Compute the mean of the distribution for the coefficients vector.
-  sXtVY <- sapply( (1:N), function(w){t(X[[w]]) %*% invVi[[w]] %*% Y[[w]]})
+  sXtVY <- vapply( (1:N),
+                   function(w){t(X[[w]]) %*% invVi[[w]] %*% Y[[w]]},
+                   FUN.VALUE = rep(1,p))
 
   if(p > 1){
     sXtVY <- rowSums(sXtVY)
@@ -62,7 +64,7 @@ betaBlock.fRS <- function(Omega, Y, X, Z, p, A, N){
   invVi <- list(NA)
 
   for (i in 1:N){
-    Vi[[i]]    <- (Z[[i]] %*% invOmega %*% t(Z[[i]])) + diag(length(Z[[i]][, 1]))
+    Vi[[i]]    <- (Z[[i]] %*% invOmega %*% t(Z[[i]])) + diag(length(Z[[i]][,1]))
     invVi[[i]] <- chol2inv(chol(Vi[[i]]))
   }
 
@@ -75,7 +77,9 @@ betaBlock.fRS <- function(Omega, Y, X, Z, p, A, N){
   Var.beta <- chol2inv(chol(A + sXtVX ))
 
   #Compute the mean of the distribution for the coefficients vector.
-  sXtVY <- sapply( (1:N), function(w){t(X[[w]]) %*% invVi[[w]] %*% Y[[w]]})
+  sXtVY <-vapply( (1:N),
+                  function(w){t(X[[w]]) %*% invVi[[w]] %*% Y[[w]]},
+                  FUN.VALUE = rep(1,p))
 
   if (p > 1){
     sXtVY <- rowSums(sXtVY)
@@ -122,7 +126,9 @@ b.f<-function(Omega, beta, Y, X, q, Z, ZtZ, N){
   }
 
   #Sample subject specific random effects vectors
-  b.aux <- t(as.matrix(sapply( (1:N), function(w){MASS::mvrnorm(1, bF[w,], invD[,,w])})))
+  b.aux <- t(as.matrix(vapply( (1:N),
+                               function(w){MASS::mvrnorm(1, bF[w,], invD[,,w])},
+                               FUN.VALUE = rep(1,q))))
 
   drop(b.aux)
 }

@@ -1,14 +1,16 @@
 #' RHSForm function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#' Function to help divide input formula of bpnme object into a fixed and random
+#' part
 #'
 #' @param formula see lme4 package documentation
 #' @param value see lme4 package documentation
 #'
 #' @source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
-#'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
-#'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'   Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
+#'   Software, 67(1),
+#'   1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 #'
 
@@ -20,14 +22,17 @@
 
 #' expandDoubleVerts function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#' Function to help divide input formula of bpnme object into a fixed and random
+#' part
 #'
 #' @param term see lme4 package documentation
 #'
 #' @source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
-#'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
-#'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'   Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
+#'   Software, 67(1),
+#'   1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
+#'
 #'
 #'
 
@@ -58,16 +63,18 @@ expandDoubleVerts <- function (term)
   term
 }
 
-#' findbars function from lme4 package
+#'findbars function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#'Function to help divide input formula of bpnme object into a fixed and random
+#'part
 #'
-#' @param term see lme4 package documentation
+#'@param term see lme4 package documentation
 #'
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 #'
 
@@ -119,16 +126,18 @@ findbars <- function (term)
   expandSlash(fb(modterm))
 }
 
-#' isAnyArgBar function from lme4 package
+#'isAnyArgBar function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#'Function to help divide input formula of bpnme object into a fixed and random
+#'part
 #'
-#' @param term see lme4 package documentation
+#'@param term see lme4 package documentation
 #'
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 #'
 
@@ -143,16 +152,18 @@ isAnyArgBar <- function (term)
   FALSE
 }
 
-#' isBars function from lme4 package
+#'isBars function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#'Function to help divide input formula of bpnme object into a fixed and random
+#'part
 #'
-#' @param term see lme4 package documentation
+#'@param term see lme4 package documentation
 #'
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 #'
 
@@ -168,14 +179,16 @@ isBar <- function (term)
 
 #' anyBars function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#' Function to help divide input formula of bpnme object into a fixed and random
+#' part
 #'
 #' @param term see lme4 package documentation
 #'
 #' @source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
-#'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
-#'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'   Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
+#'   Software, 67(1),
+#'   1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 #'
 
@@ -184,16 +197,18 @@ anyBars <- function (term)
   any(c("|", "||") %in% all.names(term))
 }
 
-#' nobars_ function from lme4 package
+#'nobars_ function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#'Function to help divide input formula of bpnme object into a fixed and random
+#'part
 #'
-#' @param term see lme4 package documentation
+#'@param term see lme4 package documentation
 #'
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 #'
 
@@ -224,16 +239,18 @@ nobars_ <-
     term
   }
 
-#' nobars function from lme4 package
+#'nobars function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#'Function to help divide input formula of bpnme object into a fixed and random
+#'part
 #'
-#' @param term see lme4 package documentation
+#'@param term see lme4 package documentation
 #'
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 #'
 nobars <- function(term)
@@ -250,16 +267,18 @@ nobars <- function(term)
   nb
 }
 
-#' subbars function from lme4 package
+#'subbars function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#'Function to help divide input formula of bpnme object into a fixed and random
+#'part
 #'
-#' @param term see lme4 package documentation
+#'@param term see lme4 package documentation
 #'
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 #'
 
@@ -279,17 +298,19 @@ subbars <- function (term){
   term
 }
 
-#' RHSForm function from lme4 package
+#'RHSForm function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#'Function to help divide input formula of bpnme object into a fixed and random
+#'part
 #'
-#' @param form see lme4 package documentation
-#' @param as.form see lme4 package documentation
+#'@param form see lme4 package documentation
+#'@param as.form see lme4 package documentation
 #'
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 #'
 
@@ -302,17 +323,19 @@ RHSForm <- function(form, as.form = FALSE){
 
 }
 
-#' reOnly function from lme4 package
+#'reOnly function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#'Function to help divide input formula of bpnme object into a fixed and random
+#'part
 #'
-#' @param f see lme4 package documentation
-#' @param response see lme4 package documentation
+#'@param f see lme4 package documentation
+#'@param response see lme4 package documentation
 #'
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
 #'
 
 reOnly <- function(f, response = FALSE){
@@ -325,17 +348,20 @@ reOnly <- function(f, response = FALSE){
 
 }
 
-#' reOnly function from lme4 package
+#'reOnly function from lme4 package
 #'
-#' Function to help divide input formula of bpnme object into a fixed and random part
+#'Function to help divide input formula of bpnme object into a fixed and random
+#'part
 #'
-#' @param x see lme4 package documentation
-#' @param collapse see lme4 package documentation
+#'@param x see lme4 package documentation
+#'@param collapse see lme4 package documentation
 #'
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'
+#'
 #'
 
 safeDeparse <- function(x, collapse = " "){
