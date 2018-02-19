@@ -295,8 +295,8 @@ mmme <- function(pred.I, data, pred.II){
 
 sumr <- function(output, mm){
 
-  var.names.I = colnames(mm$XI)
-  var.names.II = colnames(mm$XII)
+  var.names.I <-  colnames(mm$XI)
+  var.names.II <-  colnames(mm$XII)
 
   if("(Intercept)" %in% colnames(mm$XI)){
 
@@ -373,7 +373,8 @@ sumr <- function(output, mm){
     var.comb.cat <- combn(var.cat, 2)
 
     circ.res.means <- matrix(NA, length(var.cat) + ncol(var.comb.cat) + 1, 5)
-    names <- sapply(1:ncol(var.comb.cat), function(w){paste(var.comb.cat[,w], sep = "", collapse = "")})
+    names <- sapply(seq_along(var.comb.cat[1,]),
+                    function(w){paste(var.comb.cat[,w], sep = "", collapse = "")})
     rownames(circ.res.means) <- c("(Intercept)", var.cat, names)
     colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
 
@@ -470,7 +471,7 @@ sumr <- function(output, mm){
 
     if(length(var.cat) >= 2){
 
-      for(c in 1:ncol(var.comb.cat)){
+      for(c in seq_along(var.comb.cat[1,])){
 
         if(!("(Intercept)" %in% colnames(mm$XI))){
 
@@ -703,7 +704,7 @@ sumr <- function(output, mm){
 
         ASs <- matrix(NA, output$its, length(mm$XII[,1]))
 
-        for(i in 1:length(mm$XII[,1])){
+        for(i in seq_along(mm$XII[,1])){
           ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(mm$XII[i,v])-circest$ax)))
         }
 
@@ -737,7 +738,7 @@ sumr <- function(output, mm){
 
         ASs <- matrix(NA, output$its, length(mm$XI[,1]))
 
-        for(i in 1:length(mm$XI[,1])){
+        for(i in seq_along(mm$XI[,1])){
           ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(mm$XI[i,v])-circest$ax)))
         }
 
@@ -771,7 +772,7 @@ sumr <- function(output, mm){
 
         ASs <- matrix(NA, output$its, length(mm$XI[,1]))
 
-        for(i in 1:length(mm$XI[,1])){
+        for(i in seq_along(mm$XI[,1])){
           ASs[,i] <- circest$bc/(1+(circest$bc*(mm$XI[i,v]-circest$ax)))
         }
 
@@ -821,8 +822,10 @@ sumr <- function(output, mm){
 
 
   list(lin.res.I = lin.res.I, lin.res.II = lin.res.II,
-       circ.res = circ.res, circ.res.cat = circ.res.cat, circ.res.means = circ.res.means,
-       a.x = a.x, a.c = a.c, b.c = b.c, SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
+       circ.res = circ.res, circ.res.cat = circ.res.cat,
+       circ.res.means = circ.res.means,
+       a.x = a.x, a.c = a.c, b.c = b.c,
+       SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
        B1 = output$B1, B2 = output$B2,
        model.fit = model.fit, var.num = var.num, var.cat = var.cat)
 
@@ -926,7 +929,8 @@ summe <- function(output, mm){
     var.comb.cat <- combn(var.cat, 2)
 
     circ.res.means <- matrix(NA, length(var.cat) + ncol(var.comb.cat) + 1, 5)
-    names <- sapply(1:ncol(var.comb.cat), function(w){paste(var.comb.cat[,w], sep = "", collapse = "")})
+    names <- sapply(seq_along(var.comb.cat[1,]),
+                    function(w){paste(var.comb.cat[,w], sep = "", collapse = "")})
     rownames(circ.res.means) <- c("(Intercept)", var.cat, names)
     colnames(circ.res.means) <- c("mean", "mode", "sd", "LB", "UB")
 
@@ -1029,7 +1033,7 @@ summe <- function(output, mm){
 
     if(length(var.cat) >= 2){
 
-      for(c in 1:ncol(var.comb.cat)){
+      for(c in seq_along(var.comb.cat[1,])){
 
         if(!("(Intercept)" %in% colnames(mm$mm.I))){
 
@@ -1402,7 +1406,7 @@ summe <- function(output, mm){
   lin.res.varrand.II <- matrix(NA, output$q2, 5)
   colnames(lin.res.varrand.II) <- c("mean", "mode", "sd", "LB HPD", "UB HPD")
 
-  circ.res.varrand <- matrix(NA, length(var.num.rand)+ length(var.cat.rand) +1, 5)
+  circ.res.varrand <- matrix(NA, length(var.num.rand)+length(var.cat.rand)+1, 5)
   colnames(circ.res.varrand) <- c("mean", "mode", "sd", "LB", "UB")
 
   if(output$q1 ==1 & output$q2 ==1){
@@ -1411,7 +1415,8 @@ summe <- function(output, mm){
 
   }else{
 
-    rownames(circ.res.varrand) <- c("RI", paste("RS", c(var.num.rand, var.cat.rand)))
+    rownames(circ.res.varrand) <- c("RI",
+                                    paste("RS", c(var.num.rand, var.cat.rand)))
 
   }
 
@@ -1420,7 +1425,9 @@ summe <- function(output, mm){
     rownames(lin.res.varrand.I) <- c("RI")
 
   }else{
-    rownames(lin.res.varrand.I) <- c("RI", paste("RS", c(var.num.rand.I, var.cat.rand.I)))
+    rownames(lin.res.varrand.I) <- c("RI",
+                                     paste("RS",
+                                           c(var.num.rand.I, var.cat.rand.I)))
   }
 
   if(output$q2 == 1){
@@ -1467,11 +1474,11 @@ summe <- function(output, mm){
 
   if(length(var.num.rand) == 0){
 
-    varrand.num = "There are no continuous variables with a random slope"
+    varrand.num <-  "There are no continuous variables with a random slope"
 
   }else{
 
-    varrand.num = matrix(NA, output$its, length(var.num.rand))
+    varrand.num <-  matrix(NA, output$its, length(var.num.rand))
     colnames(varrand.num) <- var.num.rand
 
     for(v in var.num.rand){
@@ -1532,11 +1539,11 @@ summe <- function(output, mm){
 
   if(length(var.cat.rand) == 0){
 
-    varrand.cat = "There are no categorical variables with a random slope"
+    varrand.cat <- "There are no categorical variables with a random slope"
 
   }else{
 
-    varrand.cat = matrix(NA, output$its, length(var.cat.rand))
+    varrand.cat <- matrix(NA, output$its, length(var.cat.rand))
     colnames(varrand.cat) <- var.cat.rand
 
     for(c in var.cat.rand){
@@ -1665,7 +1672,7 @@ summe <- function(output, mm){
         mu.ij.II  <- c(BII%*%mm$XII[[i]][j,] + apply(output$B.II[i,,], 1, mode_est)%*%mm$ZII[[i]][j,])
         bb        <- Dbd(t.aux, mu.ij.I, mu.ij.II)
         norm2.M   <- mu.ij.I^2 + mu.ij.II^2
-        c = (1 + ((bb*pnorm(bb))/dnorm(bb)))
+        c <- (1 + ((bb*pnorm(bb))/dnorm(bb)))
         predictiva.M[[i]][j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2.M))*c
         ll.mean.its <- log(mean(output$predictiva[[i]][,j]))
         mean.ll.its <- mean(log(output$predictiva[[i]][,j]))
@@ -1699,7 +1706,7 @@ summe <- function(output, mm){
         mu.ij.II  <- c(BII%*%mm$XII[[i]][j,] + apply(t(as.matrix(output$B.II[i,,])), 1, mode_est)%*%mm$ZII[[i]][j,])
         bb        <- Dbd(t.aux, mu.ij.I, mu.ij.II)
         norm2.M   <- mu.ij.I^2 + mu.ij.II^2
-        c = (1 + ((bb*pnorm(bb))/dnorm(bb)))
+        c <- (1 + ((bb*pnorm(bb))/dnorm(bb)))
         predictiva.M[[i]][j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2.M))*c
         ll.mean.its <- log(mean(output$predictiva[[i]][,j]))
         mean.ll.its <- mean(log(output$predictiva[[i]][,j]))
@@ -1734,7 +1741,7 @@ summe <- function(output, mm){
         mu.ij.II  <- c(BII%*%mm$XII[[i]][j,] + apply(output$B.II[i,,], 1, mode_est)%*%mm$ZII[[i]][j,])
         bb        <- Dbd(t.aux, mu.ij.I, mu.ij.II)
         norm2.M   <- mu.ij.I^2 + mu.ij.II^2
-        c = (1 + ((bb*pnorm(bb))/dnorm(bb)))
+        c <- (1 + ((bb*pnorm(bb))/dnorm(bb)))
         predictiva.M[[i]][j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2.M))*c
         ll.mean.its <- log(mean(output$predictiva[[i]][,j]))
         mean.ll.its <- mean(log(output$predictiva[[i]][,j]))
@@ -1768,7 +1775,7 @@ summe <- function(output, mm){
         mu.ij.II  <- c(BII%*%mm$XII[[i]][j,] + apply(t(as.matrix(output$B.II[i,,])), 1, mode_est)%*%mm$ZII[[i]][j,])
         bb        <- Dbd(t.aux, mu.ij.I, mu.ij.II)
         norm2.M   <- mu.ij.I^2 + mu.ij.II^2
-        c = (1 + ((bb*pnorm(bb))/dnorm(bb)))
+        c <- (1 + ((bb*pnorm(bb))/dnorm(bb)))
         predictiva.M[[i]][j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2.M))*c
         ll.mean.its <- log(mean(output$predictiva[[i]][,j]))
         mean.ll.its <- mean(log(output$predictiva[[i]][,j]))
@@ -1807,11 +1814,14 @@ summe <- function(output, mm){
 
   WAIC <- -2*(lppd - pWAIC)
   WAIC2 <- -2*(lppd - pWAIC2)
-  DIC = -2*(Dhat - pD)
-  DICalt = -2*(Dhat - pV)
+  DIC <- -2*(Dhat - pD)
+  DICalt <- -2*(Dhat - pV)
 
-  model.fit <- cbind(lppd, Dhat, Dbar, DIC, DICalt, WAIC, WAIC2, pD, pV, pWAIC, pWAIC2)
-  colnames(model.fit)<- c("lppd", "Dhat", "Dbar", "DIC", "DICalt", "WAIC", "WAIC2",
+  model.fit <- cbind(lppd,
+                     Dhat, Dbar, DIC, DICalt, WAIC, WAIC2,
+                     pD, pV, pWAIC, pWAIC2)
+  colnames(model.fit)<- c("lppd",
+                          "Dhat", "Dbar", "DIC", "DICalt", "WAIC", "WAIC2",
                           "pD", "pV", "pWAIC", "pWAIC2")
 
 
@@ -1824,7 +1834,8 @@ summe <- function(output, mm){
        circ.res = circ.res,
        circ.res.cat = circ.res.cat,
        circ.res.means = circ.res.means,
-       a.x = a.x, a.c = a.c, b.c = b.c, SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
+       a.x = a.x, a.c = a.c, b.c = b.c,
+       SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
        lin.res.varrand.I = lin.res.varrand.I,
        lin.res.varrand.II = lin.res.varrand.II,
        circ.res.varrand = circ.res.varrand)

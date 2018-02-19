@@ -423,9 +423,9 @@ predict.bpnme <- function(object, ...){
   for(i in 1:object$mm$N){
 
     YI[[i]] <- object$mm$XI[[i]] %*% t(object$Beta.I) +
-      object$mm$ZI[[i]]%*%object$B.I[i,,]
+               object$mm$ZI[[i]]%*%object$B.I[i,,]
     YII[[i]] <- object$mm$XII[[i]]%*%t(object$Beta.II) +
-      object$mm$ZII[[i]]%*%object$B.II[i,,]
+                object$mm$ZII[[i]]%*%object$B.II[i,,]
 
     theta[[i]] <- atan2(YII[[i]], YI[[i]])
 
@@ -705,22 +705,23 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
 
 
 
-      a.x = object$circ.coef[,1:5]
+      a.x <-  object$circ.coef[,1:5]
       if(units == "degrees"){
-        a.c = object$circ.coef[,6:10]*(180/pi)
+        a.c <-  object$circ.coef[,6:10]*(180/pi)
       }else if(units == "radians"){
-        a.c = object$circ.coef[,6:10]
+        a.c <-  object$circ.coef[,6:10]
       }
-      b.c = object$circ.coef[,11:15]
-      AS = object$circ.coef[,16:20]
-      SAM = object$circ.coef[,21:25]
-      SSDO = object$circ.coef[,26:30]
+      b.c <- object$circ.coef[,11:15]
+      AS <-  object$circ.coef[,16:20]
+      SAM <-  object$circ.coef[,21:25]
+      SSDO <-  object$circ.coef[,26:30]
 
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
 
       colnames(coefficients) <-  c("mean", "mode", "sd", "LB HPD", "UB HPD")
       rownames(coefficients) <- paste(rownames(object$circ.coef),
-                                      rep(c("ax", "ac", "bc", "AS", "SAM", "SSDO"),
+                                      rep(c("ax", "ac", "bc",
+                                            "AS", "SAM", "SSDO"),
                                           each = length(rownames(coefficients))/6))
 
       return(coefficients)
@@ -810,18 +811,18 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 
     }else{
 
-      a.x = object$circ.coef[,1:5]
+      a.x <- object$circ.coef[,1:5]
 
       if(units == "degrees"){
-        a.c = object$circ.coef[,6:10]*(180/pi)
+        a.c <-  object$circ.coef[,6:10]*(180/pi)
       }else if(units == "radians"){
-        a.c = object$circ.coef[,6:10]
+        a.c <-  object$circ.coef[,6:10]
       }
 
-      b.c = object$circ.coef[,11:15]
-      AS = object$circ.coef[,16:20]
-      SAM = object$circ.coef[,21:25]
-      SSDO = object$circ.coef[,26:30]
+      b.c <-  object$circ.coef[,11:15]
+      AS <-  object$circ.coef[,16:20]
+      SAM <-  object$circ.coef[,21:25]
+      SSDO <-  object$circ.coef[,26:30]
 
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
 
@@ -973,8 +974,9 @@ print.bpnr <- function(x, ...){
   cat("Projected Normal Regression \n\n")
   cat("Model \n\n")
 
-  cat("Call: \n", paste(deparse(x$Call), sep = "\n", collapse = "\n"), "\n\n",
-      sep = "")
+  cat("Call: \n",
+      paste(deparse(x$Call), sep = "\n", collapse = "\n"),
+      "\n\n", sep = "")
 
   cat("MCMC: \n", paste("iterations = ", x$its, "\n",
                         "burn-in = ", x$burn, "\n",
@@ -1036,8 +1038,7 @@ print.bpnr <- function(x, ...){
 #'
 #' Prints selected output from a Bayesian circular mixed-effects model.
 #'
-#' @param x a \code{bpnme object} obtained from the function
-#'   \code{\link{bpnme}}.
+#' @param x a \code{bpnme object} obtained from the function \code{bpnme()}.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @return A print of selected output from a Bayesian circular mixed-effects
@@ -1060,8 +1061,9 @@ print.bpnme <- function(x, ...){
   cat("Projected Normal Mixed Effects \n\n")
   cat("Model \n\n")
 
-  cat("Call: \n", paste(deparse(x$Call), sep = "\n", collapse = "\n"), "\n\n",
-      sep = "")
+  cat("Call: \n",
+      paste(deparse(x$Call), sep = "\n", collapse = "\n"),
+      "\n\n", sep = "")
 
   cat("MCMC: \n", paste("iterations = ", x$its, "\n",
                         "burn-in = ", x$burn, "\n",
@@ -1170,14 +1172,18 @@ traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
  if(is.null(variable)){
 
    text <- paste0(as.character(bquote(object)), "$", parameter)
-   plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots",
+   plot.ts(eval(parse(text = text)),
+           xlab = "Iteration",
+           main = "Traceplots",
            mar.multi=c(gap=0.5, 5.1, gap=0.5, 2.1))
 
  }else{
 
    text <- paste0(as.character(bquote(object)), "$", parameter)
-   plot.ts(eval(parse(text = text))[,variable], ylab = variable,
-           xlab = "Iteration", main = "Traceplots")
+   plot.ts(eval(parse(text = text))[,variable],
+           ylab = variable,
+           xlab = "Iteration",
+           main = "Traceplots")
 
  }
 
@@ -1236,7 +1242,10 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
       }
 
       colnames(Vars) <- colnames(object$mm$mm_ran.I)
-      plot.ts(Vars, xlab = "Iteration", main = "Traceplots",
+
+      plot.ts(Vars,
+              xlab = "Iteration",
+              main = "Traceplots",
               mar.multi=c(gap=0.5, 5.1, gap=0.5, 2.1))
 
 
@@ -1255,27 +1264,39 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
       }
 
       colnames(Vars) <- colnames(object$mm$mm_ran.II)
-      plot.ts(Vars, xlab = "Iteration", main = "Traceplots",
+
+      plot.ts(Vars,
+              xlab = "Iteration",
+              main = "Traceplots",
               mar.multi=c(gap=0.5, 5.1, gap=0.5, 2.1))
 
     }else if(parameter == "cRI"){
 
       Vars <- as.matrix(object$cRI)
       colnames(Vars) <- "(Intercept)"
-      plot.ts(Vars, xlab = "Iteration", main = "Traceplots")
+
+      plot.ts(Vars,
+              xlab = "Iteration",
+              main = "Traceplots")
 
     }else if(parameter == "cRS"){
 
       if(is.character(object$cRSnum)){
 
         text <- paste0(as.character(bquote(object)), "$", "cRScat")
-        plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots",
+
+        plot.ts(eval(parse(text = text)),
+                xlab = "Iteration",
+                main = "Traceplots",
                 mar.multi=c(gap=0.5, 5.1, gap=0.5, 2.1))
 
       }else if(is.character(object$cRScat)){
 
         text <- paste0(as.character(bquote(object)), "$", "cRSnum")
-        plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots",
+
+        plot.ts(eval(parse(text = text)),
+                xlab = "Iteration",
+                main = "Traceplots",
                 mar.multi=c(gap=0.5, 5.1, gap=0.5, 2.1))
 
       }else if(is.character(object$cRSnum) & is.character(object$cRScat)){
@@ -1285,7 +1306,10 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
       }else{
 
         text <- paste0(as.character(bquote(object)), "$", parameter)
-        plot.ts(eval(parse(text = text)), xlab = "Iteration", main = "Traceplots",
+
+        plot.ts(eval(parse(text = text)),
+                xlab = "Iteration",
+                main = "Traceplots",
                 mar.multi=c(gap=0.5, 5.1, gap=0.5, 2.1))
 
       }
@@ -1309,8 +1333,11 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
     }else{
 
       text <- paste0(as.character(bquote(object)), "$", parameter)
-      plot.ts(eval(parse(text = text))[,variable], ylab = variable,
-              xlab = "Iteration", main = "Traceplots")
+
+      plot.ts(eval(parse(text = text))[,variable],
+              ylab = variable,
+              xlab = "Iteration",
+              main = "Traceplots")
 
     }
 

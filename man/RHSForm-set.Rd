@@ -5,9 +5,9 @@
 \title{RHSForm function from lme4 package}
 \source{
 Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
- Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
- Software, 67(1),
- 1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
+  Software, 67(1),
+  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 }
 \usage{
 RHSForm(formula) <- value
@@ -18,5 +18,6 @@ RHSForm(formula) <- value
 \item{value}{see lme4 package documentation}
 }
 \description{
-Function to help divide input formula of bpnme object into a fixed and random part
+Function to help divide input formula of bpnme object into a fixed and random
+part
 }

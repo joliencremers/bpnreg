@@ -7,9 +7,7 @@
 \method{print}{bpnme}(x, ...)
 }
 \arguments{
-\item{x}{a \code{bpnme object} obtained from the function
-\code{\link{bpnme}}.}
-
+\item{x}{a \code{bpnme object} obtained from the function \code{bpnme()}.}
 \item{...}{further arguments passed to or from other methods.}
 }
 \value{
