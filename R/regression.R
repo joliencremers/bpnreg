@@ -212,7 +212,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   interval of the variances of the random intercepts and slopes of component II.}
 #'   \item{\code{circ.res.varrand}}{The mean, mode, standard deviation and 95 % confidence
 #'   interval of the circular variances of the random intercepts and slopes.}
-#'   \item{\code{mm}}{A list of information on the specified model.}
+#'   \item{\code{mm}}{A list of information, model matrices, sample size, etc. on the specified model.}
 #'   }
 #'
 #' @source Cremers, J., Mainhard, M.T. & Klugkist, I. (in press). Assessing a
