@@ -8,16 +8,25 @@
 }
 \arguments{
 \item{object}{a \code{bpnme object} obtained from the function
-\code{bpnme()}.}
+\code{\link{bpnme}}.}
 
 \item{hypothesis}{the inequality constrained hypothesis to test.}
 
-\item{type}{type of hypothesis to test c("anchor", "isotropic").}
+\item{type}{type of hypothesis to test \code{c("anchor", "isotropic")}.}
 }
 \value{
-Bayes Factors for inequality constrained hypotheses on mean differences.
+Bayes Factors for inequality constrained hypotheses on mean
+  differences.
 }
 \description{
 Outputs Bayes Factors for inequality constrained hypotheses on the circular
-differences between several levels of a categorical variable and the baseline.
+differences between several levels of a categorical variable and the
+baseline.
+}
+\examples{
+library(bpnreg)
+fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
+data = Maps, its = 100, burn = 1, n.lag = 1)
+BFc(fit.Maps, hypothesis = "Maze1 < Trial.type1")
+
 }

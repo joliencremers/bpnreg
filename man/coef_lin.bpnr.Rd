@@ -7,7 +7,8 @@
 \method{coef_lin}{bpnr}(object)
 }
 \arguments{
-\item{object}{a \code{bpnr object} obtained from the function \code{bpnr()}.}
+\item{object}{a \code{bpnr object} obtained from the function
+\code{\link{bpnr}}.}
 }
 \value{
 A matrix with posterior summaries of the linear coefficients in a

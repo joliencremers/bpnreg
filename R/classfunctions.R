@@ -3,15 +3,16 @@
 #' Traceplot function for a \code{bpnr object} or \code{bpnme object}.
 #'
 #' @param object an object used to select a method.
-#' @param parameter one of c("B1", "B2", Beta.I", "Beta.II", a.x", "a.c", "b.c",
-#'   "SAM", "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS") to
-#'   indicate for which parameter a traceplot is required. B1, Beta.I, B2 and
-#'   Beta.II are the linear intercepts and coefficients of the first and second
-#'   component for a regression model and the fixed effects coefficients of a
-#'   mixed-effects model. circ.diff are the circular differences with the
-#'   intercept on the outcome variable for the different levels of categorical
-#'   variabes. VCovI and VCovII are the linear random effect variances and cRI
-#'   and cRS are the variances of the circular random intercept and circular
+#' @param parameter one of \code{c("B1", "B2", Beta.I", "Beta.II", a.x", "a.c",
+#'   "b.c", "SAM", "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS")}
+#'   to indicate for which parameter a traceplot is required. \code{B1},
+#'   \code{Beta.I}, \code{B2} and \code{Beta.II} are the linear intercepts and
+#'   coefficients of the first and second component for a regression model and
+#'   the fixed effects coefficients of a mixed-effects model. \code{circ.diff}
+#'   are the circular differences with the intercept on the outcome variable for
+#'   the different levels of categorical variabes. \code{VCovI} and
+#'   \code{VCovII} are the linear random effect variances and \code{cRI} and
+#'   \code{cRS} are the variances of the circular random intercept and circular
 #'   random slope.
 #' @param variable a character string with variable name(s) to indicate for
 #'   which variable(s) a traceplot is required.
@@ -114,10 +115,11 @@ coef_lin <- function(object){
 #' \code{coef_circ} gives posterior summaries of the circular coefficients.
 #'
 #' @param object an object used to select a method.
-#' @param type one of c("continuous", "categorical") to get either the
+#' @param type one of \code{c("continuous", "categorical")} to get either the
 #'   coefficients for the continuous or categorical predictor variables.
-#' @param units one of c("degrees", "radians") to get categorical coefficients
-#'   estimates and estimates for $a_c$ in degrees or radians.
+#' @param units one of \code{c("degrees", "radians")} to get categorical
+#'   coefficients estimates and estimates for \code{$a_c$} in degrees or
+#'   radians.
 #'
 #' @details the methods \link[bpnreg]{coef_circ.bpnr} and
 #'   \link[bpnreg]{coef_circ.bpnme} have their own help page.
@@ -140,11 +142,12 @@ coef_circ <- function(object, type = "continuous", units = "radians"){
 
 #' Random effect variances
 #'
-#' \code{coef_ran} gives posterior summaries of the circular or linear random effect variances.
+#' \code{coef_ran} gives posterior summaries of the circular or linear random
+#' effect variances.
 #'
 #' @param object an object used to select a method.
-#' @param type one of c("linear", "circular") to get either the
-#'   linear or circular random effect variances.
+#' @param type one of \code{c("linear", "circular")} to get either the linear or
+#'   circular random effect variances.
 #'
 #' @details the method \link[bpnreg]{coef_ran.bpnme} has its own help page.
 #'
@@ -171,12 +174,12 @@ coef_ran <- function(object, type = "linear"){
 #' Outputs Bayes Factors for the circular differences between several levels of
 #' a categorical variable and the baseline.
 #'
-#' @param object a \code{bpnr object} obtained from the function
-#'   \code{bpnr()}.
+#' @param object a \code{bpnr object} obtained from the function \code{bpnr()}.
 #' @param hypothesis the inequality constrained hypothesis to test.
-#' @param type type of hypothesis to test c("anchor", "isotropic").
+#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}.
 #'
-#' @return Bayes Factors for inequality constrained hypotheses on mean differences.
+#' @return Bayes Factors for inequality constrained hypotheses on mean
+#'   differences.
 #'
 #' @method BFc bpnr
 #'
@@ -262,16 +265,24 @@ BFc.bpnr <- function(object, hypothesis, type = "anchor"){
 #' Bayes Factors for a Bayesian circular mixed-effects model
 #'
 #' Outputs Bayes Factors for inequality constrained hypotheses on the circular
-#' differences between several levels of a categorical variable and the baseline.
+#' differences between several levels of a categorical variable and the
+#' baseline.
 #'
 #' @param object a \code{bpnme object} obtained from the function
-#'   \code{bpnme()}.
+#'   \code{\link{bpnme}}.
 #' @param hypothesis the inequality constrained hypothesis to test.
-#' @param type type of hypothesis to test c("anchor", "isotropic").
+#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}.
 #'
-#' @return Bayes Factors for inequality constrained hypotheses on mean differences.
+#' @return Bayes Factors for inequality constrained hypotheses on mean
+#'   differences.
 #'
 #' @method BFc bpnme
+#'
+#' @examples
+#' library(bpnreg)
+#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
+#' data = Maps, its = 100, burn = 1, n.lag = 1)
+#' BFc(fit.Maps, hypothesis = "Maze1 < Trial.type1")
 #'
 #' @export
 #'
@@ -348,11 +359,11 @@ BFc.bpnme <- function(object, hypothesis, type = "anchor"){
 
 #' Predicted values for a Bayesian circular regression model
 #'
-#' Outputs predicted values for a Bayesian circular regression model for each iteration
-#' of the MCMC sampler.
+#' Outputs predicted values for a Bayesian circular regression model for each
+#' iteration of the MCMC sampler.
 #'
 #' @param object a \code{bpnr object} obtained from the function
-#'   \code{bpnr()}.
+#'   \code{\link{bpnr}}.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @return a matrix (rows = N, columns = iterations) containing predicted values
@@ -382,11 +393,11 @@ predict.bpnr <- function(object, ...){
 
 #' Predicted values for a Bayesian circular mixed-effects model
 #'
-#' Outputs predicted values for a Bayesian circular mixed-effects model for each iteration
-#' of the MCMC sampler.
+#' Outputs predicted values for a Bayesian circular mixed-effects model for each
+#' iteration of the MCMC sampler.
 #'
 #' @param object a \code{bpnme object} obtained from the function
-#'   \code{bpnme()}.
+#'   \code{\link{bpnme}}.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @return a matrix (rows = N, columns = iterations) containing predicted values
@@ -434,11 +445,12 @@ predict.bpnme <- function(object, ...){
 #' of the MCMC sampler.
 #'
 #' @param object a \code{bpnr object} obtained from the function
-#'   \code{bpnr()}.
-#' @param type the type of residuals, one of \code{c("arc", "cos")}. The "arc"
-#'   residuals are based on a computation of the circular arc length between
-#'   predicted value and original outcome. The "cos" residuals are based on the
-#'   cosine of the difference between predicted value and original outcome.
+#'   \code{\link{bpnr}}.
+#' @param type the type of residuals, one of \code{c("arc", "cos")}. The
+#'   \code{"arc"} residuals are based on a computation of the circular arc
+#'   length between predicted value and original outcome. The \code{"cos"}
+#'   residuals are based on the cosine of the difference between predicted value
+#'   and original outcome.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @return a matrix (rows = N, columns = iterations) containing residuals for
@@ -484,15 +496,16 @@ residuals.bpnr <- function(object, type = "arc", ...){
 
 #' Residuals for a Bayesian circular mixed-effects model
 #'
-#' Outputs residuals for a Bayesian circular mixed-effects model for each iteration
-#' of the MCMC sampler.
+#' Outputs residuals for a Bayesian circular mixed-effects model for each
+#' iteration of the MCMC sampler.
 #'
 #' @param object a \code{bpnme object} obtained from the function
-#'   \code{bpnme()}.
-#' @param type the type of residuals, one of \code{c("arc", "cos")}. The "arc"
-#'   residuals are based on a computation of the circular arc length between
-#'   predicted value and original outcome. The "cos" residuals are based on the
-#'   cosine of the difference between predicted value and original outcome.
+#'   \code{\link{bpnme}}.
+#' @param type the type of residuals, one of \code{c("arc", "cos")}. The
+#'   \code{"arc"} residuals are based on a computation of the circular arc
+#'   length between predicted value and original outcome. The \code{"cos"}
+#'   residuals are based on the cosine of the difference between predicted value
+#'   and original outcome.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @return a matrix (rows = N, columns = iterations) containing residuals for
@@ -538,9 +551,10 @@ residuals.bpnme <- function(object, type = "arc", ...){
 #'
 #' Gives posterior summaries of the circular or linear random effect variances.
 #'
-#' @param object a \code{bpnme object} obtained from the function \code{bpnme()}.
-#' @param type one of c("linear", "circular") to get either the
-#'   linear or circular random effect variances.
+#' @param object a \code{bpnme object} obtained from the function
+#'   \code{\link{bpnme}}.
+#' @param type one of \code{c("linear", "circular")} to get either the linear or
+#'   circular random effect variances.
 #'
 #' @return A matrix with posterior summaries of the random effect variances.
 #'
@@ -584,7 +598,8 @@ coef_ran.bpnme <- function(object, type = "linear"){
 #' Gives the coefficients tables of the linear coefficients for a circular
 #' regression model.
 #'
-#' @param object a \code{bpnr object} obtained from the function \code{bpnr()}.
+#' @param object a \code{bpnr object} obtained from the function
+#'   \code{\link{bpnr}}.
 #'
 #' @return A matrix with posterior summaries of the linear coefficients in a
 #'   Bayesian circular regression model.
@@ -612,7 +627,8 @@ coef_lin.bpnr <- function(object){
 #' Gives the coefficients tables of the linear coefficients for a Bayesian
 #' circular mixed-effects model.
 #'
-#' @param object a \code{bpnme object} obtained from the function \code{bpnme()}.
+#' @param object a \code{bpnme object} obtained from the function
+#'   \code{\link{bpnme}}.
 #'
 #' @return A matrix with posterior summaries of the linear coefficients in a
 #'   Bayesian circular mixed-effects model.
@@ -641,11 +657,13 @@ coef_lin.bpnme <- function(object){
 #' Gives the coefficients tables of the circular coefficients for a Bayesian
 #' circular regression model.
 #'
-#' @param object a \code{bpnr object} obtained from the function \code{bpnr()}
-#' @param type one of c("continuous", "categorical") to get either the
+#' @param object a \code{bpnr object} obtained from the function
+#'   \code{\link{bpnr}}
+#' @param type one of \code{c("continuous", "categorical")} to get either the
 #'   coefficients for the continuous or categorical predictor variables
-#' @param units one of c("degrees", "radians") to get categorical coefficients
-#'   estimates and estimates for $a_c$ in degrees or radians.
+#' @param units one of \code{c("degrees", "radians")} to get categorical
+#'   coefficients estimates and estimates for \code{$a_c$} in degrees or
+#'   radians.
 #'
 #' @return A matrix or list with posterior summaries of the circular
 #'   coefficients in a Bayesian circular regression model.
@@ -747,11 +765,13 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
 #' Gives the coefficients tables of the circular coefficients for a Bayesian
 #' circular mixed-effects model.
 #'
-#' @param object a \code{bpnme object} obtained from the function \code{bpnme()}
-#' @param type one of c("continuous", "categorical") to get either the
+#' @param object a \code{bpnme object} obtained from the function
+#'   \code{\link{bpnme}}
+#' @param type one of \code{c("continuous", "categorical")} to get either the
 #'   coefficients for the continuous or categorical predictor variables
-#' @param units one of c("degrees", "radians") to get categorical coefficients
-#'   estimates and estimates for $a_c$ in degrees or radians.
+#' @param units one of \code{c("degrees", "radians")} to get categorical
+#'   coefficients estimates and estimates for \code{$a_c$} in degrees or
+#'   radians.
 #'
 #' @return A matrix or list with posterior summaries of the circular
 #'   coefficients in a Bayesian circular mixed-effects model.
@@ -850,10 +870,10 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 
 #' Model fit for a Bayesian circular regression model
 #'
-#' Outputs several model fit statistics for the Bayesian circular regression model
+#' Outputs several model fit statistics for the Bayesian circular regression
+#' model
 #'
-#' @param object a \code{bpnr object} obtained from the function
-#'   \code{bpnr()}.
+#' @param object a \code{bpnr object} obtained from the function \code{bpnr()}.
 #'
 #' @return a matrix containing the computed log pointwise predictive density
 #'   (lppd), Deviance Information Criterion (DIC), an alternative version of the
@@ -892,7 +912,7 @@ fit.bpnr <- function(object){
 #' model
 #'
 #' @param object a \code{bpnme object} obtained from the function
-#'   \code{bpnme()}.
+#'   \code{\link{bpnme}}.
 #'
 #' @return a matrix containing the computed log pointwise predictive density
 #'   (lppd), Deviance Information Criterion (DIC), an alternative version of the
@@ -919,9 +939,11 @@ fit.bpnme <- function(object){
   mf <- matrix(NA, 5L, 2L)
   colnames(mf) <- c("Statistic", "Parameters")
   rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
-  mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in% c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
+  mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in%
+                               c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
   mf[,2] <- c(object$p1 + object$p2 + (object$N*2),
-              object$model.fit[dimnames(object$model.fit)[[2]] %in% c("pD", "pV", "pWAIC", "pWAIC2")])
+              object$model.fit[dimnames(object$model.fit)[[2]] %in%
+                                 c("pD", "pV", "pWAIC", "pWAIC2")])
   as.data.frame(mf)
 
 }
@@ -931,8 +953,7 @@ fit.bpnme <- function(object){
 #'
 #' Prints selected output from a Bayesian circular regression model.
 #'
-#' @param x a \code{bpnr object} obtained from the function
-#'   \code{bpnr()}.
+#' @param x a \code{bpnr object} obtained from the function \code{\link{bpnr}}.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @return A print of selected output from a Bayesian circular regression model.
@@ -1054,9 +1075,11 @@ print.bpnme <- function(x, ...){
   mf <- matrix(NA, 5L, 2L)
   colnames(mf) <- c("Statistic", "Parameters")
   rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
-  mf[,1] <- x$model.fit[dimnames(x$model.fit)[[2]] %in% c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
+  mf[,1] <- x$model.fit[dimnames(x$model.fit)[[2]] %in%
+                          c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
   mf[,2] <- c(x$p1 + x$p2,
-              x$model.fit[dimnames(x$model.fit)[[2]] %in% c("pD", "pV", "pWAIC", "pWAIC2")])
+              x$model.fit[dimnames(x$model.fit)[[2]] %in%
+                            c("pD", "pV", "pWAIC", "pWAIC2")])
   print(mf)
   cat("\n\n")
 
@@ -1121,13 +1144,14 @@ print.bpnme <- function(x, ...){
 #'
 #' General plot function for a \code{bpnr object}.
 #'
-#' @param object a \code{bpnr object} obtained from the function \code{bpnr()}
+#' @param object a \code{bpnr object} obtained from the function
+#'   \code{\link{bpnr}}
 #' @param parameter one of c("B1", "B2", a.x", "a.c", "b.c", "SAM", "AS",
 #'   "SSDO", "circ.diff") to indicate for which parameter a traceplot is
-#'   required. B1 and B2 are the linear intercepts and coefficients of the first
-#'   and second component. circ.diff are the circular differences with the
-#'   intercept on the outcome variable for the different levels of categorical
-#'   variabes.
+#'   required. \code{B1} and \code{B2} are the linear intercepts and
+#'   coefficients of the first and second component. \code{circ.diff} are the
+#'   circular differences with the intercept on the outcome variable for the
+#'   different levels of categorical variabes.
 #' @param variable a character string with variable name(s) to indicate for
 #'   which variable(s) a traceplot is required.
 #'
@@ -1171,18 +1195,20 @@ traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 #'
 #' General plot function for a \code{bpnme object}.
 #'
-#' @param object a \code{bpnme object} obtained from the function \code{bpnme()}
-#' @param parameter one of c(Beta.I", "Beta.II", a.x", "a.c", "b.c", "SAM",
-#'   "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS") to indicate for
-#'   which parameter a traceplot is required. Beta.I and Beta.II are the fixed
-#'   effects coefficients of a mixed-effects model. circ.diff are the circular
-#'   differences with the intercept on the outcome variable for the different
-#'   levels of categorical variabes. VCovI and VCovII are the linear random
-#'   effect variances and cRI and cRS are the variances of the circular random
+#' @param object a \code{bpnme object} obtained from the function
+#'   \code{\link{bpnme}}
+#' @param parameter one of \code{c(Beta.I", "Beta.II", a.x", "a.c", "b.c",
+#'   "SAM", "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS")} to
+#'   indicate for which parameter a traceplot is required. \code{Beta.I} and
+#'   \code{Beta.II} are the fixed effects coefficients of a mixed-effects model.
+#'   \code{circ.diff} are the circular differences with the intercept on the
+#'   outcome variable for the different levels of categorical variabes.
+#'   \code{VCovI} and \code{VCovII} are the linear random effect variances and
+#'   \code{cRI} and \code{cRS} are the variances of the circular random
 #'   intercept and circular random slope.
 #' @param variable a character string with variable name(s) to indicate for
 #'   which variable(s) a traceplot is required. This cannot be used in
-#'   combination with the parameters c("VCovI", "VCovII", "cRI", "cRS").
+#'   combination with the parameters \code{c("VCovI", "VCovII", "cRI", "cRS")}.
 #'
 #' @method traceplot bpnme
 #'
@@ -1299,7 +1325,8 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
 
   }else{
 
-    if(parameter == "VCovI" | parameter == "VCovII" | parameter == "cRI" | parameter == "cRS"){
+    if(parameter == "VCovI" | parameter == "VCovII" |
+       parameter == "cRI" | parameter == "cRS"){
 
       stop("Cannot request separate plots for random effect variances")
 

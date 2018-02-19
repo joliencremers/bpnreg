@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{object}{a \code{bpnme object} obtained from the function
-\code{bpnme()}.}
+\code{\link{bpnme}}.}
 }
 \value{
 a matrix containing the computed log pointwise predictive density

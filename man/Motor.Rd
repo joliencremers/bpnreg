@@ -4,17 +4,13 @@
 \name{Motor}
 \alias{Motor}
 \title{Phase differences in hand flexion-extension movements.}
-\format{A data frame with 42 rows and 4 variables:
-\describe{
-  \item{Cond}{a factor variable indicating the condition a participant
-  was placed in; 1 = 'explicit', 2 = 'semi.implicit' or 3 = 'implicit'}
-  \item{PhaseDiff}{a numeric variable the phase difference between 'observer'
-  and 'mover' in degrees}
-  \item{AvAmp}{a numeric variable indicating the average amplitude of the
-  hand movement of the 'observer'}
-  \item{Phaserad}{a numeric variable the phase difference between 'observer'
-  and 'mover' in radians}
-}}
+\format{A data frame with 42 rows and 4 variables: \describe{ \item{Cond}{a
+  factor variable indicating the condition a participant was placed in; 1 =
+  'explicit', 2 = 'semi.implicit' or 3 = 'implicit'} \item{PhaseDiff}{a
+  numeric variable the phase difference between 'observer' and 'mover' in
+  degrees} \item{AvAmp}{a numeric variable indicating the average amplitude
+  of the hand movement of the 'observer'} \item{Phaserad}{a numeric variable
+  the phase difference between 'observer' and 'mover' in radians} }}
 \source{
 \url{https://doi.org/10.1371/journal.pone.0177457}
 }
@@ -22,8 +18,8 @@
 Motor
 }
 \description{
-A dataset from a research by Puglisi et.al. (2017) on the role of attention
-in human motor resonance.
+A dataset from a study by Puglisi et.al. (2017) on the role of attention in
+human motor resonance.
 }
 \details{
 In their research Puglisi et.al. (2017) conduct a between subjects experiment
@@ -47,13 +43,14 @@ front of them.
 have to look at an inanimate object that moves in an identical manner to the
 hand.
 
-The idea of motor resonance is then that the `observer' because he is looking
-explicitly or implicitly at the hand of the `mover' starts moving his or her
-hand in the same manner. This is the resonant response. In each condition the
-hand movements of the observers were measured and the phase difference
-between the observers' hand and the hand they observed (the movers' hand) was
-calculated. This was not done for the baseline condition because in this
-condition there was no periodic pattern of movement in the `observers' hand.
+The idea of motor resonance is then that the `observer', because they are
+looking explicitly or implicitly at the hand of the `mover', starts moving
+his or her hand in the same manner. This is the resonant response. In each
+condition the hand movements of the observers were measured and the phase
+difference between the observers' hand and the hand they observed (the
+movers' hand) was calculated. This was not done for the baseline condition
+because in this condition there was no periodic pattern of movement in the
+`observers' hand.
 
 The phase difference is a circular variable and can be described and analyzed
 using circular statistics.

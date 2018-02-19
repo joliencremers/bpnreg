@@ -46,8 +46,9 @@ circ_coef <- function(a1, a2, b1, b2){
 
 #' Compute the standard deviation of a vector of circular data
 #'
-#' @param theta a circular variable in radians.
-#' @param units measurement units of the circular variable c("radians", "degrees").
+#' @param theta a circular variable in radians or degrees.
+#' @param units measurement units of the circular variable c("radians",
+#'   "degrees").
 #'
 #' @examples
 #' library(bpnreg)
