@@ -52,11 +52,10 @@ A \code{bpnr} object, which can be further analyzed using the
   of the first component.}
   \item{\code{B2}}{A matrix of posterior samples for the coefficients \code{B2}
   for the second component.}
-  \item{\code{Likelihood}}{A matrix containing the density values for all individuals in the dataset
+  \item{\code{Likelihood}}{A matrix containing the posterior density values for all individuals in the dataset
    for all iterations. The rowsums of this matrix are the likelihood values for all iterations}
   \item{\code{its}}{Number of output iterations.}
-  \item{\code{lag}}{Number of iterations to save.
-  one in \code{lag} iterations will be saved. Set lag to 1 to save all iterations (default).}
+  \item{\code{n.lag}}{One in \code{n.lag} iterations will be saved as output iteration. Set lag to 1 to save all iterations (default).}
   \item{\code{burn-in}}{Burn-in time for the MCMC sampler.}
   \item{\code{p1}}{Number of parameters predicting the first component.}
   \item{\code{p2}}{Number of parameters predicting the second component.}

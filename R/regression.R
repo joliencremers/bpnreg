@@ -36,11 +36,10 @@
 #'   of the first component.}
 #'   \item{\code{B2}}{A matrix of posterior samples for the coefficients \code{B2}
 #'   for the second component.}
-#'   \item{\code{Likelihood}}{A matrix containing the density values for all individuals in the dataset
+#'   \item{\code{Likelihood}}{A matrix containing the posterior density values for all individuals in the dataset
 #'    for all iterations. The rowsums of this matrix are the likelihood values for all iterations}
 #'   \item{\code{its}}{Number of output iterations.}
-#'   \item{\code{lag}}{Number of iterations to save.
-#'   one in \code{lag} iterations will be saved. Set lag to 1 to save all iterations (default).}
+#'   \item{\code{n.lag}}{One in \code{n.lag} iterations will be saved as output iteration. Set lag to 1 to save all iterations (default).}
 #'   \item{\code{burn-in}}{Burn-in time for the MCMC sampler.}
 #'   \item{\code{p1}}{Number of parameters predicting the first component.}
 #'   \item{\code{p2}}{Number of parameters predicting the second component.}
@@ -169,12 +168,12 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   \item{\code{B.II}}{An array of posterior samples for the random effects coefficients for the second component.}
 #'   \item{\code{VCovI}}{An array of posterior samples for the random effect variances of the first component.}
 #'   \item{\code{VCovII}}{An array of posterior samples for the random effect variances of the second component.}
-#'   \item{\code{predictiva}}{out.}
+#'   \item{\code{predictiva}}{A list containing the posterior density values for all timepoints of individuals in the dataset
+#'    for all iterations. The rowsums of this matrix are the likelihood values for all iterations}
 #'   \item{\code{circular.ri}}{A vector of posterior samples for the circular random intercepts.}
 #'   \item{\code{N}}{Number of observed cases.}
 #'   \item{\code{its}}{Number of output iterations.}
-#'   \item{\code{n.lag}}{Number of iterations to save.
-#'   one in \code{lag} iterations will be saved. Set lag to 1 to save all iterations (default).}
+#'   \item{\code{n.lag}}{One in \code{n.lag} iterations will be saved as output iteration. Set lag to 1 to save all iterations (default).}
 #'   \item{\code{burn}}{Burn-in time for the MCMC sampler.}
 #'   \item{\code{p1}}{Number of fixed effect parameters predicting the first component.}
 #'   \item{\code{p2}}{Number of fixed effect parameters predicting the second component.}
