@@ -1146,8 +1146,8 @@ print.bpnme <- function(x, ...){
 #'
 #' @param object a \code{bpnr object} obtained from the function
 #'   \code{\link{bpnr}}
-#' @param parameter one of c("B1", "B2", a.x", "a.c", "b.c", "SAM", "AS",
-#'   "SSDO", "circ.diff") to indicate for which parameter a traceplot is
+#' @param parameter one of \code{c("B1", "B2", "a.x", "a.c", "b.c", "SAM", "AS",
+#'   "SSDO", "circ.diff")} to indicate for which parameter a traceplot is
 #'   required. \code{B1} and \code{B2} are the linear intercepts and
 #'   coefficients of the first and second component. \code{circ.diff} are the
 #'   circular differences with the intercept on the outcome variable for the
