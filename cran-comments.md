@@ -5,5 +5,12 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs
 
+There was 1 NOTE:
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Jolien Cremers <joliencremers@gmail.com>'
+
+Note used as reminder for CRAN maintainers, safe to ignore.
+
 ## Downstream dependencies
 There are currently no downstream dependencies for this package.
