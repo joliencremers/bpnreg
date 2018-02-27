@@ -3,3 +3,4 @@ packrat/lib*/
 .Rhistory
 .RData
 .Ruserdata
+*.Rproj
