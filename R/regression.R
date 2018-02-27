@@ -156,7 +156,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   A tutorial on how to use this function can be found in Cremers & Klugkist
 #'   (2017, working paper). More details on the sampling algorithm and
 #'   interpretation of the coefficients from the model can be found in
-#'   Nuñez-Antonio & Guttiérez-Peña (2014) and Cremers & Klugkist (2017, working
+#'   Nuñez-Antonio & Guttiérrez-Peña (2014) and Cremers & Klugkist (2017, working
 #'   paper).
 #'
 #' @return A \code{bpnme} object, which can be further analyzed using the
@@ -245,7 +245,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #' @source Cremers, J., & Klugkist, I. (2017). Longitudinal circular modelling
 #'   of circumplex measurements for teacher behavior. Working paper.
 #'
-#' @source Nuñez-Antonio, G. & Guttiérez-Peña, E. (2014). A Bayesian model for
+#' @source Nuñez-Antonio, G. & Gutiérrez-Peña, E. (2014). A Bayesian model for
 #'   longitudinal circular data based on the projected normal distribution.
 #'   Computational Statistics and Data Analysis, 71, 506-519.
 #'

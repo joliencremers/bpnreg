@@ -11,7 +11,7 @@
 #' A tutorial on how to use this package can be found in Cremers & Klugkist
 #' (2017, under review). More details on the sampling algorithm and
 #' interpretation of the coefficients from the model can be found in Cremers,
-#' Mulder & Klugkist (2018), Nuñez-Antonio & Guttiérez-Peña and Cremers,
+#' Mulder & Klugkist (2018), Nuñez-Antonio & Gutiérrez-Peña and Cremers,
 #' Mainhard & Klugkist (in press).
 #'
 #' @section Functions: The main functions of the package are:
@@ -42,7 +42,7 @@
 #' @source Cremers, J. & Klugkist, I. (2017). How to analyze circular data: A
 #'   tutorial for projected normal regression models. Working paper.
 #'
-#' @source Nuñez-Antonio, G. & Guttiérez-Peña, E. (2014). A Bayesian model for
+#' @source Nuñez-Antonio, G. & Gutiérrez-Peña, E. (2014). A Bayesian model for
 #'   longitudinal circular data based on the projected normal distribution.
 #'   Computational Statistics and Data Analysis, 71, 506-519.
 #'
