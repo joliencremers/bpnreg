@@ -1,5 +1,5 @@
 ## Test environments:
-*Local Windows Install, R 3.4.1
+*CRAN win-builder (devel and release)
 *Ubuntu 14.04 (on travis.ci), R 3.4.2
 
 ## R CMD check results
