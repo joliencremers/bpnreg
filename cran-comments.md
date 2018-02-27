@@ -1,4 +1,6 @@
-## Resubmission This is a resubmission. In this version I have:
+## Resubmission 
+
+This is a resubmission. In this version I have:
 
 * Removed capitalization of Normal in the description file except in the title 
 which has to be title case
