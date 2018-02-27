@@ -33,5 +33,6 @@ See 'Writing portable packages' in the 'Writing R Extensions' manual.
 This is a known false positive on Windows. It did not occur on the CRAN 
 win-builder or on Ubuntu.
 
-## Downstream dependencies There are currently no downstream dependencies for 
-this package.
+## Downstream dependencies 
+
+There are currently no downstream dependencies for this package.
