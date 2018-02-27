@@ -1,2 +1,5 @@
 packrat/lib*/
 .Rproj.user
+.Rhistory
+.RData
+.Ruserdata
