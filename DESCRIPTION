@@ -5,9 +5,11 @@ Version: 1.0.0
 Authors@R: person("Jolien", "Cremers", email = "joliencremers@gmail.com",
                   role = c("aut", "cre"))
 Description: Fitting Bayesian multiple and mixed-effect regression models for 
-    circular data based on the projected Normal distribution. Both continuous 
+    circular data based on the projected normal distribution. Both continuous 
     and categorical predictors can be included. Sampling from the posterior is 
-    performed via an MCMC algorithm. Posterior descriptives of all parameters, 
+    performed via an MCMC algorithm see Cremers et.al. (2018) 
+    <doi:10.1111/bmsp.12108> and Nuñez-Antonio et.al. (2014) 
+    <doi:10.1016/j.csda.2012.07.025>  Posterior descriptives of all parameters, 
     model fit statistics and Bayes factors for hypothesis tests for inequality 
     constrained hypotheses are provided. 
 Depends: R (>= 3.4.0)
