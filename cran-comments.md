@@ -6,7 +6,9 @@ which has to be title case
 * Included references for the method in the 'Description' field of the
 DESCRIPTION file.
 
-## Test environments: *Local Windows Install, R 3.4.1
+## Test environments: 
+
+*Local Windows Install, R 3.4.1
 
 *CRAN win-builder (devel and release)
 
