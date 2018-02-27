@@ -13,6 +13,10 @@ Cremers, J., & Klugkist, I. (2017). How to analyze circular data: A
 Cremers, J., & Klugkist, I. (2017). Longitudinal circular modelling
   of circumplex measurements for teacher behavior. Working paper.
 
+Nuñez-Antonio, G. & Guttiérez-Peña, E. (2014). A Bayesian model for
+  longitudinal circular data based on the projected normal distribution.
+  Computational Statistics and Data Analysis, 71, 506-519.
+
 Presnell, B., Morrison, S.P. & Littell, R.C. (1998). Projected
   multivariate linear models for directional data. Journal of the American
   Statistical Association, 93 (443), 1068 - 1077.
@@ -128,8 +132,9 @@ Because the model is based on the projected normal distribution, a
 
   A tutorial on how to use this function can be found in Cremers & Klugkist
   (2017, working paper). More details on the sampling algorithm and
-  interpretation of the coefficients from the model can be found in Cremers &
-  Klugkist (2017, working paper).
+  interpretation of the coefficients from the model can be found in
+  Nuñez-Antonio & Guttiérez-Peña (2014) and Cremers & Klugkist (2017, working
+  paper).
 }
 \examples{
 library(bpnreg)

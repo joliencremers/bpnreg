@@ -14,8 +14,12 @@ Cremers, J., Mulder, K.T. & Klugkist, I. (2018). Circular
 Cremers, J., Mainhard, M.T. & Klugkist, I. (in press). Assessing a
   Bayesian Embedding Approach to Circular Regression Models. Methodology
 
-Cremers, J., & Klugkist, I. (2017). How to analyze circular data: A
+Cremers, J. & Klugkist, I. (2017). How to analyze circular data: A
   tutorial for projected normal regression models. Working paper.
+
+Nuñez-Antonio, G. & Guttiérez-Peña, E. (2014). A Bayesian model for
+  longitudinal circular data based on the projected normal distribution.
+  Computational Statistics and Data Analysis, 71, 506-519.
 }
 \description{
 This package contains functions to analyze circular regression type models
@@ -23,13 +27,14 @@ This package contains functions to analyze circular regression type models
 circular modelling and makes use of the projected normal distribution. Its
 estimation method is a Bayesian MCMC sampler. Further technical details can
 be found in Cremers, Mulder & Klugkist (2018) and Cremers & Klugkist (2017,
-under review).
+working paper).
 }
 \details{
 A tutorial on how to use this package can be found in Cremers & Klugkist
 (2017, under review). More details on the sampling algorithm and
 interpretation of the coefficients from the model can be found in Cremers,
-Mulder & Klugkist (2018) and Cremers, Mainhard & Klugkist (in press).
+Mulder & Klugkist (2018), Nuñez-Antonio & Guttiérez-Peña and Cremers,
+Mainhard & Klugkist (in press).
 }
 \section{Functions}{
  The main functions of the package are:

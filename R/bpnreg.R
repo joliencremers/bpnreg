@@ -6,12 +6,13 @@
 #' circular modelling and makes use of the projected normal distribution. Its
 #' estimation method is a Bayesian MCMC sampler. Further technical details can
 #' be found in Cremers, Mulder & Klugkist (2018) and Cremers & Klugkist (2017,
-#' under review).
+#' working paper).
 #'
 #' A tutorial on how to use this package can be found in Cremers & Klugkist
 #' (2017, under review). More details on the sampling algorithm and
 #' interpretation of the coefficients from the model can be found in Cremers,
-#' Mulder & Klugkist (2018) and Cremers, Mainhard & Klugkist (in press).
+#' Mulder & Klugkist (2018), Nuñez-Antonio & Guttiérez-Peña and Cremers,
+#' Mainhard & Klugkist (in press).
 #'
 #' @section Functions: The main functions of the package are:
 #'
@@ -38,8 +39,12 @@
 #' @source Cremers, J., Mainhard, M.T. & Klugkist, I. (in press). Assessing a
 #'   Bayesian Embedding Approach to Circular Regression Models. Methodology
 #'
-#' @source Cremers, J., & Klugkist, I. (2017). How to analyze circular data: A
+#' @source Cremers, J. & Klugkist, I. (2017). How to analyze circular data: A
 #'   tutorial for projected normal regression models. Working paper.
+#'
+#' @source Nuñez-Antonio, G. & Guttiérez-Peña, E. (2014). A Bayesian model for
+#'   longitudinal circular data based on the projected normal distribution.
+#'   Computational Statistics and Data Analysis, 71, 506-519.
 #'
 #' @useDynLib bpnreg, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
