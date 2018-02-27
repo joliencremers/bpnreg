@@ -9,7 +9,7 @@ hmodeci(x, cip)
 \arguments{
 \item{x}{a  sample from which to estimate the interval}
 
-\item{cip}{bandwith for the algorithm, ranging from 0 to 1}
+\item{cip}{bandwidth for the algorithm, ranging from 0 to 1}
 }
 \value{
 a vector of length 2 containing the lower and upper bound of the interval.

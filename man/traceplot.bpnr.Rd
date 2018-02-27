@@ -15,7 +15,7 @@
 required. \code{B1} and \code{B2} are the linear intercepts and
 coefficients of the first and second component. \code{circ.diff} are the
 circular differences with the intercept on the outcome variable for the
-different levels of categorical variabes.}
+different levels of categorical variables.}
 
 \item{variable}{a character string with variable name(s) to indicate for
 which variable(s) a traceplot is required.}

@@ -239,8 +239,8 @@ Rcpp::List DIC_reg(Rcpp::List Output, arma::mat X1, arma::mat X2){
 //' @param X1 A model matrix for component I.
 //' @param X2 A model matrix for component II.
 //' @param theta A vector with the circular dependent variable.
-//' @param b1 A matrix containing the coefficients of componetn I for the current iteration.
-//' @param b2 A matrix containing the coefficients of componetn II for the current iteration.
+//' @param b1 A matrix containing the coefficients of component I for the current iteration.
+//' @param b2 A matrix containing the coefficients of component II for the current iteration.
 //' @param n An integer indicating the sample size of the data.
 //' @param r A matrix with the estimates of r of the previous iteration.
 //'
@@ -386,7 +386,7 @@ Rcpp::List pnr(arma::vec theta,
 //' Estimate the mode by finding the highest posterior density interval
 //'
 //' @param x a  sample from which to estimate the interval
-//' @param cip bandwith for the algorithm, ranging from 0 to 1
+//' @param cip bandwidth for the algorithm, ranging from 0 to 1
 //'
 //' @return a scalar containing the estimate of the mode
 //'

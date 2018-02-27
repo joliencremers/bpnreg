@@ -15,7 +15,7 @@ Cremers, J., & Klugkist, I. (2017). How to analyze circular data: A
   tutorial for projected normal regression models. Under review.
 
 Presnell, B., Morrison, S.P. & Littell, R.C. (1998). Projected
-  multivariate linear models for directional data. Journal of the Americal
+  multivariate linear models for directional data. Journal of the American
   Statistical Association, 93 (443), 1068 - 1077.
 }
 \usage{
@@ -86,7 +86,7 @@ A \code{bpnr} object, which can be further analyzed using the
   the intercept.} \item{\code{circ.coef.means}}{The mean, mode, standard
   deviation and 95 % confidence interval of the highest posterior density of
   circular means of the categorical variables.} \item{\code{model.fit}}{A
-  list of information criteria for assesment of model fit.}
+  list of information criteria for assessment of model fit.}
   \item{\code{mm}}{A list of information, model matrices, sample size, etc.
   on the specified model.} }
 }

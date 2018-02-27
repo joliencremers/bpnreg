@@ -15,7 +15,7 @@
 indicate for which parameter a traceplot is required. \code{Beta.I} and
 \code{Beta.II} are the fixed effects coefficients of a mixed-effects model.
 \code{circ.diff} are the circular differences with the intercept on the
-outcome variable for the different levels of categorical variabes.
+outcome variable for the different levels of categorical variables.
 \code{VCovI} and \code{VCovII} are the linear random effect variances and
 \code{cRI} and \code{cRS} are the variances of the circular random
 intercept and circular random slope.}

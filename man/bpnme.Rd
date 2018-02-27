@@ -2,7 +2,7 @@
 % Please edit documentation in R/regression.R
 \name{bpnme}
 \alias{bpnme}
-\title{Fit a Baysian circular mixed-effects model}
+\title{Fit a Bayesian circular mixed-effects model}
 \source{
 Cremers, J., Mainhard, M.T. & Klugkist, I. (in press). Assessing a
   Bayesian Embedding Approach to Circular Regression Models. Methodology
@@ -14,7 +14,7 @@ Cremers, J., & Klugkist, I. (2017). Longitudinal circular modelling
   of circumplex measurements for teacher behavior. Working paper.
 
 Presnell, B., Morrison, S.P. & Littell, R.C. (1998). Projected
-  multivariate linear models for directional data. Journal of the Americal
+  multivariate linear models for directional data. Journal of the American
   Statistical Association, 93 (443), 1068 - 1077.
 }
 \usage{
@@ -104,7 +104,7 @@ A \code{bpnme} object, which can be further analyzed using the
   \item{\code{circ.coef.means}}{The mean, mode, standard deviation and 95 %
   confidence interval of the highest posterior density of circular means of
   the categorical variables.} \item{\code{model.fit}}{A list of information
-  criteria for assesment of model fit.} \item{\code{lin.res.varrand.I}}{The
+  criteria for assessment of model fit.} \item{\code{lin.res.varrand.I}}{The
   mean, mode, standard deviation and 95 % confidence interval of  the
   variances of the random intercepts and slopes of component I.}
   \item{\code{lin.res.varrand.II}}{The mean, mode, standard deviation and 95
@@ -120,7 +120,7 @@ projected normal distribution.
 }
 \details{
 Because the model is based on the projected normal distribution, a
-  model equation has to be given for the fixed and random effects of thetwo
+  model equation has to be given for the fixed and random effects of the two
   components. By default the model equation of the second component
   \code{pred.II} is set to be equal to that of the first component. For more
   information about the projected normal distribution see Presnell, Morrisson

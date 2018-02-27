@@ -16,7 +16,7 @@ BFc(object, hypothesis, type = "anchor")
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{
-\code{BF} gives bayes factors for inequality constrained hypotheses on
+\code{BF} gives Bayes factors for inequality constrained hypotheses on
 circular mean differences.
 }
 \details{

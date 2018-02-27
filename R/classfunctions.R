@@ -10,7 +10,7 @@
 #'   coefficients of the first and second component for a regression model and
 #'   the fixed effects coefficients of a mixed-effects model. \code{circ.diff}
 #'   are the circular differences with the intercept on the outcome variable for
-#'   the different levels of categorical variabes. \code{VCovI} and
+#'   the different levels of categorical variables. \code{VCovI} and
 #'   \code{VCovII} are the linear random effect variances and \code{cRI} and
 #'   \code{cRS} are the variances of the circular random intercept and circular
 #'   random slope.
@@ -35,7 +35,7 @@ UseMethod("traceplot", object)
 
 #' Bayes Factors
 #'
-#' \code{BF} gives bayes factors for inequality constrained hypotheses on
+#' \code{BF} gives Bayes factors for inequality constrained hypotheses on
 #' circular mean differences.
 #'
 #' @param object an object used to select a method.
@@ -880,7 +880,7 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 #'   DIC (DIC_alt), and the Watanabe-Akaike Information Criterion computed in
 #'   two different ways (WAIC, WAIC2). The matrix also contains the number of
 #'   parameters or 'effective number' of parameters that the several statistics
-#'   are based on. Computation of the criteria is done accoring to Gelman et.al
+#'   are based on. Computation of the criteria is done according to Gelman et.al
 #'   (2014) in *Bayesian Data Analysis*.
 #'
 #' @method fit bpnr
@@ -919,7 +919,7 @@ fit.bpnr <- function(object){
 #'   DIC (DIC_alt), and the Watanabe-Akaike Information Criterion computed in
 #'   two different ways (WAIC, WAIC2). The matrix also contains the number of
 #'   parameters or 'effective number' of parameters that the several statistics
-#'   are based on. Computation of the criteria is done accoring to Gelman et.al
+#'   are based on. Computation of the criteria is done according to Gelman et.al
 #'   (2014) in *Bayesian Data Analysis*.
 #'
 #' @method fit bpnme
@@ -1151,7 +1151,7 @@ print.bpnme <- function(x, ...){
 #'   required. \code{B1} and \code{B2} are the linear intercepts and
 #'   coefficients of the first and second component. \code{circ.diff} are the
 #'   circular differences with the intercept on the outcome variable for the
-#'   different levels of categorical variabes.
+#'   different levels of categorical variables.
 #' @param variable a character string with variable name(s) to indicate for
 #'   which variable(s) a traceplot is required.
 #'
@@ -1202,7 +1202,7 @@ traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 #'   indicate for which parameter a traceplot is required. \code{Beta.I} and
 #'   \code{Beta.II} are the fixed effects coefficients of a mixed-effects model.
 #'   \code{circ.diff} are the circular differences with the intercept on the
-#'   outcome variable for the different levels of categorical variabes.
+#'   outcome variable for the different levels of categorical variables.
 #'   \code{VCovI} and \code{VCovII} are the linear random effect variances and
 #'   \code{cRI} and \code{cRS} are the variances of the circular random
 #'   intercept and circular random slope.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{hpd_est}
 \alias{hpd_est}
-\title{Compute the 95 percept HPD of a vector of linear data}
+\title{Compute the 95 percent HPD of a vector of linear data}
 \usage{
 hpd_est(x)
 }
@@ -10,7 +10,7 @@ hpd_est(x)
 \item{x}{a vector of linear data}
 }
 \description{
-Compute the 95 percept HPD of a vector of linear data
+Compute the 95 percent HPD of a vector of linear data
 }
 \examples{
 library(bpnreg)

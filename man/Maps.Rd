@@ -40,7 +40,7 @@ number of trials each participants completed in this training phase was
 recorded.
 
 In the test phase of the experiment participants first walked to a start
-object. When they had reached this object the maze dissappeared and only a
+object. When they had reached this object the maze disappeared and only a
 "textured groundplane" of the maze remained visible. The participants then
 turned toward the location of the target object that they had remembered
 during the training phase and started to walk toward the target. The angular

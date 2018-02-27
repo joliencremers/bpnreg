@@ -13,9 +13,9 @@ slice_rcpp(X1, X2, theta, b1, b2, n, r)
 
 \item{theta}{A vector with the circular dependent variable.}
 
-\item{b1}{A matrix containing the coefficients of componetn I for the current iteration.}
+\item{b1}{A matrix containing the coefficients of component I for the current iteration.}
 
-\item{b2}{A matrix containing the coefficients of componetn II for the current iteration.}
+\item{b2}{A matrix containing the coefficients of component II for the current iteration.}
 
 \item{n}{An integer indicating the sample size of the data.}
 

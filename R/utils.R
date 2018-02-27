@@ -149,7 +149,7 @@ rho_circ <- function(theta, units = "radians"){
 
 mode_est <- function(x){hmode(x, 0.1)}
 
-#' Compute the 95 percept HPD of a vector of linear data
+#' Compute the 95 percent HPD of a vector of linear data
 #'
 #' @inheritParams mode_est
 #'

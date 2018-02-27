@@ -70,7 +70,7 @@
 #'   the intercept.} \item{\code{circ.coef.means}}{The mean, mode, standard
 #'   deviation and 95 % confidence interval of the highest posterior density of
 #'   circular means of the categorical variables.} \item{\code{model.fit}}{A
-#'   list of information criteria for assesment of model fit.}
+#'   list of information criteria for assessment of model fit.}
 #'   \item{\code{mm}}{A list of information, model matrices, sample size, etc.
 #'   on the specified model.} }
 #'
@@ -86,7 +86,7 @@
 #'   tutorial for projected normal regression models. Under review.
 #'
 #' @source Presnell, B., Morrison, S.P. & Littell, R.C. (1998). Projected
-#'   multivariate linear models for directional data. Journal of the Americal
+#'   multivariate linear models for directional data. Journal of the American
 #'   Statistical Association, 93 (443), 1068 - 1077.
 #'
 #' @examples
@@ -133,7 +133,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 
 }
 
-#' Fit a Baysian circular mixed-effects model
+#' Fit a Bayesian circular mixed-effects model
 #'
 #' This function fits a Bayesian circular mixed-effects model based on the
 #' projected normal distribution.
@@ -147,7 +147,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #' @param seed user-specified random seed.
 #'
 #' @details Because the model is based on the projected normal distribution, a
-#'   model equation has to be given for the fixed and random effects of thetwo
+#'   model equation has to be given for the fixed and random effects of the two
 #'   components. By default the model equation of the second component
 #'   \code{pred.II} is set to be equal to that of the first component. For more
 #'   information about the projected normal distribution see Presnell, Morrisson
@@ -225,7 +225,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   \item{\code{circ.coef.means}}{The mean, mode, standard deviation and 95 %
 #'   confidence interval of the highest posterior density of circular means of
 #'   the categorical variables.} \item{\code{model.fit}}{A list of information
-#'   criteria for assesment of model fit.} \item{\code{lin.res.varrand.I}}{The
+#'   criteria for assessment of model fit.} \item{\code{lin.res.varrand.I}}{The
 #'   mean, mode, standard deviation and 95 % confidence interval of  the
 #'   variances of the random intercepts and slopes of component I.}
 #'   \item{\code{lin.res.varrand.II}}{The mean, mode, standard deviation and 95
@@ -245,7 +245,7 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   of circumplex measurements for teacher behavior. Working paper.
 #'
 #' @source Presnell, B., Morrison, S.P. & Littell, R.C. (1998). Projected
-#'   multivariate linear models for directional data. Journal of the Americal
+#'   multivariate linear models for directional data. Journal of the American
 #'   Statistical Association, 93 (443), 1068 - 1077.
 #'
 #' @examples
