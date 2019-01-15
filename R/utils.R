@@ -257,7 +257,7 @@ mmme <- function(pred.I, data, pred.II){
   Z_I   <- split(model.matrix(ran_form.I, data)[,-(no_terms_ran.I + 1)], data[,lab_ran.I[no_terms_ran.I]])
   Z_II  <- split(model.matrix(ran_form.II, data)[, -(no_terms_ran.II + 1)], data[,lab_ran.II[no_terms_ran.II]])
 
-  N <- nrow(unique(data[,lab_ran.I[no_terms_ran.I]]))
+  N <- nrow(unique(data[,lab_ran.I[no_terms_ran.I], drop = FALSE]))
 
   ZtZ_I   <- list()
   ZtZ_II  <- list()
