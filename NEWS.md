@@ -5,3 +5,4 @@ This is the first version of the package.
 This is a developement version.
 
 The function bpnme can now also handle the standard R data.frame instead of only Data Frame Tbl (from dplyr, tbl_df(data))
+The function coef.bpnr now correctly returns radians instead of degrees when option units == "radians" is chosen.
