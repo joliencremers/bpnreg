@@ -11,11 +11,13 @@ Cremers, J., Mulder, K.T. & Klugkist, I. (2018). Circular
   interpretation of regression coefficients. British Journal of Mathematical
   and Statistical Psychology, 71(1), 75-95.
 
-Cremers, J., Mainhard, M.T. & Klugkist, I. (in press). Assessing a
-  Bayesian Embedding Approach to Circular Regression Models. Methodology
+Cremers, J., Mainhard, M.T. & Klugkist, I. (2018). Assessing a
+  Bayesian Embedding Approach to Circular Regression Models. Methodology, 14,
+  69-81.
 
-Cremers, J. & Klugkist, I. (2017). How to analyze circular data: A
-  tutorial for projected normal regression models. Working paper.
+Cremers, J. & Klugkist, I. (2018). One direction? A tutorial for
+  circular data with examples in cognitive psychology. Frontiers in
+  Psychology: Cognitive Science.
 
 Nuñez-Antonio, G. & Gutiérrez-Peña, E. (2014). A Bayesian model for
   longitudinal circular data based on the projected normal distribution.

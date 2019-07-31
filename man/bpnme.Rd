@@ -4,14 +4,16 @@
 \alias{bpnme}
 \title{Fit a Bayesian circular mixed-effects model}
 \source{
-Cremers, J., Mainhard, M.T. & Klugkist, I. (in press). Assessing a
-  Bayesian Embedding Approach to Circular Regression Models. Methodology
+Cremers, J., Mainhard, M.T. & Klugkist, I. (2018). Assessing a
+  Bayesian Embedding Approach to Circular Regression Models. Methodology, 14, 69-81.
 
-Cremers, J., & Klugkist, I. (2017). How to analyze circular data: A
-  tutorial for projected normal regression models. Under review.
+Cremers, J. & Klugkist, I. (2018). One direction? A tutorial for
+  circular data with examples in cognitive psychology. Frontiers in
+  Psychology: Cognitive Science.
 
-Cremers, J., & Klugkist, I. (2017). Longitudinal circular modelling
-  of circumplex measurements for teacher behavior. Working paper.
+Cremers, J., Pennings, H.J.M., Mainhard, M.T. & Klugkist, I. (2019).
+  Circular Modelling of Circumplex Measurements for Interpersonal Behavior.
+  Assessment, Online First.
 
 Nuñez-Antonio, G. & Gutiérrez-Peña, E. (2014). A Bayesian model for
   longitudinal circular data based on the projected normal distribution.
@@ -22,8 +24,8 @@ Presnell, B., Morrison, S.P. & Littell, R.C. (1998). Projected
   Statistical Association, 93 (443), 1068 - 1077.
 }
 \usage{
-bpnme(pred.I, data, pred.II = pred.I, its = 1000, burn = 1, n.lag = 1,
-  seed = NULL)
+bpnme(pred.I, data, pred.II = pred.I, its = 1000, burn = 1,
+  n.lag = 1, seed = NULL)
 }
 \arguments{
 \item{pred.I}{model equation for effects of component 1.}
@@ -126,15 +128,15 @@ projected normal distribution.
 Because the model is based on the projected normal distribution, a
   model equation has to be given for the fixed and random effects of the two
   components. By default the model equation of the second component
-  \code{pred.II} is set to be equal to that of the first component. For more
-  information about the projected normal distribution see Presnell, Morrisson
-  & Littell (1998).
+  \code{pred.II} is set to be equal to that of the first component. Note that
+  the circular outcome needs to be measured in radians on a scale from 0 to
+  2\eqn{\pi}. For more information about the projected normal distribution see
+  Presnell, Morrisson & Littell (1998).
 
   A tutorial on how to use this function can be found in Cremers & Klugkist
-  (2017, working paper). More details on the sampling algorithm and
-  interpretation of the coefficients from the model can be found in
-  Nuñez-Antonio & Guttiérrez-Peña (2014) and Cremers & Klugkist (2017, working
-  paper).
+  (2018). More details on the sampling algorithm and interpretation of the
+  coefficients from the model can be found in Nuñez-Antonio & Guttiérrez-Peña
+  (2014) and Cremers, Pennings, Mainhard & Klugkist (2019).
 }
 \examples{
 library(bpnreg)
