@@ -196,6 +196,13 @@ mmr <- function(pred.I, data, pred.II){
 
   theta <- model.frame(pred.I, data)[,1]
 
+  #Warning message if theta is not measures in radians:
+
+  if(max(theta) > 2*pi | min(theta) < 0){
+    cat("The circular outcome contains values that are out of range. \n")
+    cat("Please check that the circular outcome is measured in radians.")
+  }
+
   X_I   <- model.matrix(pred.I, data)
   X_II  <- model.matrix(pred.II, data)
 
@@ -275,6 +282,13 @@ mmme <- function(pred.I, data, pred.II){
     Z_II[[i]]     <- matrix(Z_II[[i]], no.Meas[i], length(Z_II[[i]])/no.Meas[i], dimnames = list(NULL, colnames(mm_ran.II)))
     ZtZ_I[[i]]    <- t((Z_I[[i]]))%*%(Z_I[[i]])
     ZtZ_II[[i]]   <- t((Z_II[[i]]))%*%(Z_II[[i]])
+  }
+
+  #Warning message if theta is not measures in radians:
+
+  if(max(unlist(theta)) > 2*pi | min(unlist(theta)) < 0){
+    cat("The circular outcome contains values that are out of range. \n")
+    cat("Please check that the circular outcome is measured in radians.")
   }
 
   list(XI = X_I, XII = X_II, ZI = Z_I, ZII = Z_II, N = N,
