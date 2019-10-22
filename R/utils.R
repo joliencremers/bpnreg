@@ -8,6 +8,8 @@
 #' @return TRUE, if the vector only contains 0 and 1, FALSE is the vector
 #'   contains other values.
 #'
+#' @keywords internal
+#'
 
 cat_check <- function(x){
   length(which(!x%in%c(0,1))) == 0
@@ -191,6 +193,7 @@ hpd_est_circ <- function(x){hmodeciC(x, 0.95)}
 #' @param data the dataframe used for analysis
 #' @param pred.II model equation for effects of component 2
 #'
+#'
 
 mmr <- function(pred.I, data, pred.II){
 
@@ -221,6 +224,8 @@ mmr <- function(pred.I, data, pred.II){
 #' @param pred.I model equation for effects of component 1
 #' @param data the dataframe used for analysis
 #' @param pred.II model equation for effects of component 2
+#'
+#'
 #'
 
 mmme <- function(pred.I, data, pred.II){
@@ -305,6 +310,8 @@ mmme <- function(pred.I, data, pred.II){
 #'
 #' @param output from the regression estimation function pnr()
 #' @param mm output from the function mmr()
+#'
+#' @keywords internal
 #'
 
 sumr <- function(output, mm){
@@ -850,6 +857,8 @@ sumr <- function(output, mm){
 #'
 #' @param output from a mixed-effects model
 #' @param mm output from the function mmme()
+#'
+#' @keywords internal
 #'
 
 summe <- function(output, mm){

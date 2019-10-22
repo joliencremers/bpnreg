@@ -7,6 +7,9 @@
 #' @param p dimension X (number of columns/variables+indicator variables)
 #' @param A prior variance of fixed effect coefficients
 #' @param N sample size at second level
+#'
+#' @keywords internal
+#'
 
 betaBlock.fRI <- function(Omega, Y, X, Z, p, A, N){
 
@@ -53,6 +56,9 @@ betaBlock.fRI <- function(Omega, Y, X, Z, p, A, N){
 #' Sample fixed effect coefficients in a Random Slope model
 #'
 #' @inheritParams betaBlock.fRI
+#'
+#' @keywords internal
+#'
 
 betaBlock.fRS <- function(Omega, Y, X, Z, p, A, N){
 
@@ -105,6 +111,9 @@ betaBlock.fRS <- function(Omega, Y, X, Z, p, A, N){
 #' @param Z design matrix for random effects (differs per person)
 #' @param ZtZ transpose(Z)*Z
 #' @param N sample size at second level
+#'
+#' @keywords internal
+#'
 
 b.f<-function(Omega, beta, Y, X, q, Z, ZtZ, N){
 
@@ -141,6 +150,9 @@ b.f<-function(Omega, beta, Y, X, q, Z, ZtZ, N){
 #' @param q dimension Z(number of random effects)
 #' @param v prior df=dimension Z
 #' @param N sample size at second level
+#'
+#' @keywords internal
+#'
 
 Omega.f<-function(b, B, v, q, N){
 
@@ -159,6 +171,9 @@ Omega.f<-function(b, B, v, q, N){
 #' @param mu1 current predicted linear mean of the first component
 #' @param mu2 current predicted linear mean of the second component
 #' @param r current value for r
+#'
+#' @keywords internal
+#'
 
 slice_r_me<-function(t, mu1, mu2, r){
   b    <- Dbd(t, mu1, mu2)
@@ -176,5 +191,8 @@ slice_r_me<-function(t, mu1, mu2, r){
 #' @param t current outcome value
 #' @param mu1 current predicted linear mean of the first component
 #' @param mu2 current predicted linear mean of the second component
+#'
+#' @keywords internal
+#'
 
 Dbd <- function(t, mu1, mu2){ cos(t)*mu1 + sin(t)*mu2 }
