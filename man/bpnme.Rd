@@ -136,7 +136,8 @@ Because the model is based on the projected normal distribution, a
   A tutorial on how to use this function can be found in Cremers & Klugkist
   (2018). More details on the sampling algorithm and interpretation of the
   coefficients from the model can be found in Nuñez-Antonio & Guttiérrez-Peña
-  (2014) and Cremers, Pennings, Mainhard & Klugkist (2019).
+  (2014) and Cremers, Pennings, Mainhard & Klugkist (2019). The uninformative priors
+  for the fixed effect regression coefficients of the two components are set to N(0, 10000).
 }
 \examples{
 library(bpnreg)
