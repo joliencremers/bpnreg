@@ -12,3 +12,4 @@ theta_bar(theta)
 \description{
 Compute a mean direction
 }
+\keyword{internal}

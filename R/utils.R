@@ -257,11 +257,11 @@ mmme <- function(pred.I, data, pred.II){
   n_ran.I <- colnames(mm_ran.I)
   n_ran.II <- colnames(mm_ran.II)
 
-  mm_ran.I <- as.matrix(mm_ran.I[,-(no_terms_ran.I+1)])
-  colnames(mm_ran.I) <- n_ran.I[-(no_terms_ran.I+1)]
+  mm_ran.I <- as.matrix(mm_ran.I[,1:ncol(mm_ran.I)-1])
+  colnames(mm_ran.I) <- n_ran.I[1:ncol(mm_ran.I)]
 
-  mm_ran.II <- as.matrix(mm_ran.II[,-(no_terms_ran.II+1)])
-  colnames(mm_ran.II) <- n_ran.II[-(no_terms_ran.II+1)]
+  mm_ran.II <- as.matrix(mm_ran.II[,1:ncol(mm_ran.II)-1])
+  colnames(mm_ran.II) <- n_ran.II[1:ncol(mm_ran.II)]
 
   X_I   <- split(model.matrix(fix_form.I, data), data[,lab_ran.I[no_terms_ran.I]])
   X_II  <- split(model.matrix(fix_form.II, data), data[,lab_ran.II[no_terms_ran.II]])
