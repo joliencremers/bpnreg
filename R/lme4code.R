@@ -11,7 +11,7 @@
 #'   Software, 67(1),
 #'   1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#' @keywords internal
 #'
 
 `RHSForm<-` <- function (formula, value)
@@ -32,8 +32,7 @@
 #'   Software, 67(1),
 #'   1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
-#'
+#' @keywords internal
 #'
 
 expandDoubleVerts <- function (term)
@@ -75,7 +74,7 @@ expandDoubleVerts <- function (term)
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#' @keywords internal
 #'
 
 findbars <- function (term)
@@ -138,7 +137,7 @@ findbars <- function (term)
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#'@keywords internal
 #'
 
 isAnyArgBar <- function (term)
@@ -164,7 +163,7 @@ isAnyArgBar <- function (term)
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#'@keywords internal
 #'
 
 isBar <- function (term)
@@ -189,7 +188,7 @@ isBar <- function (term)
 #'   Software, 67(1),
 #'   1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#'@keywords internal
 #'
 
 anyBars <- function (term)
@@ -209,7 +208,7 @@ anyBars <- function (term)
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#'@keywords internal
 #'
 
 nobars_ <-
@@ -251,7 +250,7 @@ nobars_ <-
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#'@keywords internal
 #'
 nobars <- function(term)
 {
@@ -279,7 +278,7 @@ nobars <- function(term)
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#'@keywords internal
 #'
 
 subbars <- function (term){
@@ -311,7 +310,7 @@ subbars <- function (term){
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#'@keywords internal
 #'
 
 RHSForm <- function(form, as.form = FALSE){
@@ -336,6 +335,7 @@ RHSForm <- function(form, as.form = FALSE){
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
+#'@keywords internal
 #'
 
 reOnly <- function(f, response = FALSE){
@@ -361,7 +361,7 @@ reOnly <- function(f, response = FALSE){
 #'  Software, 67(1),
 #'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
 #'
-#'
+#'@keywords internal
 #'
 
 safeDeparse <- function(x, collapse = " "){

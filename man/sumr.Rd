@@ -14,3 +14,4 @@ sumr(output, mm)
 \description{
 Compute summary and model fit statistics for the circular regression model
 }
+\keyword{internal}

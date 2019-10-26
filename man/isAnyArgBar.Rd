@@ -19,3 +19,4 @@ isAnyArgBar(term)
 Function to help divide input formula of bpnme object into a fixed and random
 part
 }
+\keyword{internal}

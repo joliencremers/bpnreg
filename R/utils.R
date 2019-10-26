@@ -8,6 +8,8 @@
 #' @return TRUE, if the vector only contains 0 and 1, FALSE is the vector
 #'   contains other values.
 #'
+#' @keywords internal
+#'
 
 cat_check <- function(x){
   length(which(!x%in%c(0,1))) == 0
@@ -191,6 +193,7 @@ hpd_est_circ <- function(x){hmodeciC(x, 0.95)}
 #' @param data the dataframe used for analysis
 #' @param pred.II model equation for effects of component 2
 #'
+#'
 
 mmr <- function(pred.I, data, pred.II){
 
@@ -222,6 +225,8 @@ mmr <- function(pred.I, data, pred.II){
 #' @param data the dataframe used for analysis
 #' @param pred.II model equation for effects of component 2
 #'
+#'
+#'
 
 mmme <- function(pred.I, data, pred.II){
 
@@ -252,11 +257,11 @@ mmme <- function(pred.I, data, pred.II){
   n_ran.I <- colnames(mm_ran.I)
   n_ran.II <- colnames(mm_ran.II)
 
-  mm_ran.I <- as.matrix(mm_ran.I[,-(no_terms_ran.I+1)])
-  colnames(mm_ran.I) <- n_ran.I[-(no_terms_ran.I+1)]
+  mm_ran.I <- as.matrix(mm_ran.I[,1:ncol(mm_ran.I)-1])
+  colnames(mm_ran.I) <- n_ran.I[1:ncol(mm_ran.I)]
 
-  mm_ran.II <- as.matrix(mm_ran.II[,-(no_terms_ran.II+1)])
-  colnames(mm_ran.II) <- n_ran.II[-(no_terms_ran.II+1)]
+  mm_ran.II <- as.matrix(mm_ran.II[,1:ncol(mm_ran.II)-1])
+  colnames(mm_ran.II) <- n_ran.II[1:ncol(mm_ran.II)]
 
   X_I   <- split(model.matrix(fix_form.I, data), data[,lab_ran.I[no_terms_ran.I]])
   X_II  <- split(model.matrix(fix_form.II, data), data[,lab_ran.II[no_terms_ran.II]])
@@ -305,6 +310,8 @@ mmme <- function(pred.I, data, pred.II){
 #'
 #' @param output from the regression estimation function pnr()
 #' @param mm output from the function mmr()
+#'
+#' @keywords internal
 #'
 
 sumr <- function(output, mm){
@@ -850,6 +857,8 @@ sumr <- function(output, mm){
 #'
 #' @param output from a mixed-effects model
 #' @param mm output from the function mmme()
+#'
+#' @keywords internal
 #'
 
 summe <- function(output, mm){

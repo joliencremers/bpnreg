@@ -21,7 +21,8 @@
 #'   A tutorial on how to use this function can be found in Cremers & Klugkist
 #'   (2018). More details on the sampling algorithm and interpretation of the
 #'   coefficients from the model can be found in Cremers, Mulder & Klugkist
-#'   (2018) and Cremers, Mainhard & Klugkist (2018).
+#'   (2018) and Cremers, Mainhard & Klugkist (2018). The uninformative priors
+#'   for the regression coefficients of the two components are set to N(0, 10000).
 #'
 #' @return A \code{bpnr} object, which can be further analyzed using the
 #'   associated functions \code{\link{traceplot.bpnr}}, \code{\link{BFc.bpnr}},
@@ -160,7 +161,8 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   A tutorial on how to use this function can be found in Cremers & Klugkist
 #'   (2018). More details on the sampling algorithm and interpretation of the
 #'   coefficients from the model can be found in Nuñez-Antonio & Guttiérrez-Peña
-#'   (2014) and Cremers, Pennings, Mainhard & Klugkist (2019).
+#'   (2014) and Cremers, Pennings, Mainhard & Klugkist (2019). The uninformative priors
+#'   for the fixed effect regression coefficients of the two components are set to N(0, 10000).
 #'
 #' @return A \code{bpnme} object, which can be further analyzed using the
 #'   associated functions \code{\link{traceplot.bpnme}},
@@ -284,6 +286,10 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
 
   }
 
+  if(!all(is.numeric(unlist(mm$ZI))) | !all(is.numeric(unlist(mm$ZII)))){
+    stop("Not all random effects are numeric variables")
+  }
+
   burn <- burn * n.lag
   tm <- burn + (its * n.lag)
   p1 <- length(mm$XI[[mm$N]][1, ])
@@ -298,11 +304,11 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
   v1  <- q1
   v2  <- q2
 
-  B1  <- diag(v1) * 0.001
-  B2  <- diag(v2) * 0.001
+  B1  <- diag(v1) * 0.0001
+  B2  <- diag(v2) * 0.0001
 
-  A1  <- matrix(0, p1, p1)
-  A2  <- matrix(0, p2, p2)
+  A1  <- diag(p1) * 0.0001 #matrix(0, p1, p1)
+  A2  <- diag(p2) * 0.0001 #matrix(0, p2, p2)
 
   #matrices for final results
   Beta.I   <- matrix(NA, its, p1)

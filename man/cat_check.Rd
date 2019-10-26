@@ -17,3 +17,4 @@ TRUE, if the vector only contains 0 and 1, FALSE is the vector
 \code{cat_check} checks whether a vector contains only 0 and 1 and thus is a
 dummy variable.
 }
+\keyword{internal}

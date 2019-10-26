@@ -22,3 +22,4 @@ lik(X1, X2, theta, b1, b2, n)
 \description{
 Compute the Likelihood of the PN distribution
 }
+\keyword{internal}

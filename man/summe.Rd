@@ -16,3 +16,4 @@ summe(output, mm)
 Compute summary and model fit statistics for the circular mixed-effects
 regression model
 }
+\keyword{internal}

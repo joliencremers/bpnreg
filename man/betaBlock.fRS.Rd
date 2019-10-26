@@ -24,3 +24,4 @@ betaBlock.fRS(Omega, Y, X, Z, p, A, N)
 \description{
 Sample fixed effect coefficients in a Random Slope model
 }
+\keyword{internal}

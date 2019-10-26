@@ -21,3 +21,4 @@ Omega.f(b, B, v, q, N)
 \description{
 Sample precision matrix
 }
+\keyword{internal}

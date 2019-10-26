@@ -26,3 +26,4 @@ b.f(Omega, beta, Y, X, q, Z, ZtZ, N)
 \description{
 Sample subject specific random effects
 }
+\keyword{internal}

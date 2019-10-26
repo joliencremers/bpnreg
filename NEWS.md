@@ -13,3 +13,11 @@ The documentation now states that the circular outcome needs to be measured in r
 The references in the documentation have been updated.
 
 The functions mmr and mmme now give out a warning message when the circular outcome is out of range.
+
+An error in the assignment of column names in the random effect model matrix (in mmme function) was fixed.
+
+An error in the check for whether random effects are numeric (in bpnme function) was fixed.
+
+Internal functions were taken out of the package documentation on CRAN.
+
+The priors for the (fixed effect) regression coefficients in the regression and mixed-effects model are now both N(0, 10000), We also note this in the documentation of bpnr() and bpnme(). 
