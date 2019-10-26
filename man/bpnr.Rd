@@ -107,7 +107,8 @@ Because the model is based on the projected normal distribution, a
   A tutorial on how to use this function can be found in Cremers & Klugkist
   (2018). More details on the sampling algorithm and interpretation of the
   coefficients from the model can be found in Cremers, Mulder & Klugkist
-  (2018) and Cremers, Mainhard & Klugkist (2018).
+  (2018) and Cremers, Mainhard & Klugkist (2018). The uninformative priors
+  for the regression coefficients of the two components are set to N(0, 10000).
 }
 \examples{
 library(bpnreg)

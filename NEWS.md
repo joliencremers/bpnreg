@@ -1,8 +1,4 @@
-# bpnreg 1.0.0
-This is the first version of the package.
-
-## bpnreg 1.0.0.9000
-This is a developement version.
+# bpnreg 1.0.1
 
 The function bpnme can now also handle the standard R data.frame instead of only Data Frame Tbl (from dplyr, tbl_df(data))
 
@@ -20,4 +16,9 @@ An error in the check for whether random effects are numeric (in bpnme function)
 
 Internal functions were taken out of the package documentation on CRAN.
 
-The priors for the (fixed effect) regression coefficients in the regression and mixed-effects model are now both N(0, 10000), We also note this in the documentation of bpnr() and bpnme(). 
+The priors for the (fixed effect) regression coefficients in the regression and mixed-effects model are now both N(0, 10000), We also note this in the documentation of bpnr() and bpnme().
+
+We note the fact that the mixed-effects model is only developed for models with one nesting variable in the documentation.
+
+# bpnreg 1.0.0
+This is the first version of the package.
