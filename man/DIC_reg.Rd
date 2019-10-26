@@ -16,3 +16,4 @@ DIC_reg(Output, X1, X2)
 \description{
 Compute Model Fit Measures Regression Model
 }
+\keyword{internal}

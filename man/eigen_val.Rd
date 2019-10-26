@@ -12,3 +12,4 @@ eigen_val(X)
 \description{
 Compute Eigenvalues
 }
+\keyword{internal}

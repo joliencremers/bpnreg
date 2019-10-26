@@ -12,3 +12,4 @@ eigen_vec(X)
 \description{
 Compute Eigenvectors
 }
+\keyword{internal}

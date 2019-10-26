@@ -18,3 +18,4 @@ slice_r_me(t, mu1, mu2, r)
 \description{
 Sample R (latent lengths)
 }
+\keyword{internal}

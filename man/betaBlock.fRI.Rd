@@ -24,3 +24,4 @@ betaBlock.fRI(Omega, Y, X, Z, p, A, N)
 \description{
 Sample fixed effect coefficients in a Random Intercept model
 }
+\keyword{internal}

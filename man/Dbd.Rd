@@ -16,3 +16,4 @@ Dbd(t, mu1, mu2)
 \description{
 Compute utmu
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ circ_coef_rcpp(a1, a2, b1, b2)
 \description{
 Compute circular coefficients
 }
+\keyword{internal}
