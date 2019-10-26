@@ -138,6 +138,7 @@ Because the model is based on the projected normal distribution, a
   coefficients from the model can be found in Nuñez-Antonio & Guttiérrez-Peña
   (2014) and Cremers, Pennings, Mainhard & Klugkist (2019). The uninformative priors
   for the fixed effect regression coefficients of the two components are set to N(0, 10000).
+  Note that the model is only developed for models with a single nesting variable.
 }
 \examples{
 library(bpnreg)
