@@ -14,6 +14,8 @@ An error in the assignment of column names in the random effect model matrix (in
 
 An error in the check for whether random effects are numeric (in bpnme function) was fixed.
 
+Several checks and error warnings for wrong specifications of nesting structure were added.
+
 Internal functions were taken out of the package documentation on CRAN.
 
 The priors for the (fixed effect) regression coefficients in the regression and mixed-effects model are now both N(0, 10000), We also note this in the documentation of bpnr() and bpnme().

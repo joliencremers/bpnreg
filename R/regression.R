@@ -275,21 +275,21 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
 
   mm <- mmme(pred.I, data, pred.II)
 
-  if(!"(Intercept)" %in% colnames(mm$mm_ran.I) | !"(Intercept)" %in% colnames(mm$mm_ran.II)){
-
-    stop("No random intercept in the model")
-
-  }
-
-  if(!all(colnames(mm$mm_ran.I) %in% colnames(mm$mm.I)) | !all(colnames(mm$mm_ran.II) %in% colnames(mm$mm.II))){
-
-    stop("Not all random effects have a corresponding fixed effect")
-
-  }
-
-  if(!all(is.numeric(unlist(mm$ZI))) | !all(is.numeric(unlist(mm$ZII)))){
-    stop("Not all random effects are numeric variables")
-  }
+  # if(!"(Intercept)" %in% colnames(mm$mm_ran.I) | !"(Intercept)" %in% colnames(mm$mm_ran.II)){
+  #
+  #   stop("No random intercept in the model")
+  #
+  # }
+  #
+  # if(!all(colnames(mm$mm_ran.I) %in% colnames(mm$mm.I)) | !all(colnames(mm$mm_ran.II) %in% colnames(mm$mm.II))){
+  #
+  #   stop("Not all random effects have a corresponding fixed effect")
+  #
+  # }
+#
+#   if(!all(is.numeric(unlist(mm$ZI))) | !all(is.numeric(unlist(mm$ZII)))){
+#     stop("Not all random effects are numeric variables")
+#   }
 
   burn <- burn * n.lag
   tm <- burn + (its * n.lag)
