@@ -5,8 +5,6 @@
 #'
 #' @param theta a circular variable in radians.
 #'
-#' @keywords internal
-#'
 rho <- function(theta) {
     .Call(`_bpnreg_rho`, theta)
 }
@@ -14,8 +12,6 @@ rho <- function(theta) {
 #' Compute a mean direction
 #'
 #' @inheritParams rho
-#'
-#' @keywords internal
 #'
 theta_bar <- function(theta) {
     .Call(`_bpnreg_theta_bar`, theta)
@@ -25,8 +21,6 @@ theta_bar <- function(theta) {
 #'
 #' @param X A matrix.
 #'
-#' @keywords internal
-#'
 eigen_val <- function(X) {
     .Call(`_bpnreg_eigen_val`, X)
 }
@@ -34,8 +28,6 @@ eigen_val <- function(X) {
 #' Compute Eigenvectors
 #'
 #' @inheritParams eigen_val
-#'
-#' @keywords internal
 #'
 eigen_vec <- function(X) {
     .Call(`_bpnreg_eigen_vec`, X)
@@ -47,8 +39,6 @@ eigen_vec <- function(X) {
 #' @param mu A mean vector.
 #' @param n An integer indicating the number of samples to take.
 #'
-#' @keywords internal
-#'
 mvrnorm_arma_eigen <- function(n, mu, sigma) {
     .Call(`_bpnreg_mvrnorm_arma_eigen`, n, mu, sigma)
 }
@@ -59,8 +49,6 @@ mvrnorm_arma_eigen <- function(n, mu, sigma) {
 #' @param a2 intercept estimate of component I.
 #' @param b1 slope estimate of component I.
 #' @param b2 slope estimate of component I.
-#'
-#' @keywords internal
 #'
 circ_coef_rcpp <- function(a1, a2, b1, b2) {
     .Call(`_bpnreg_circ_coef_rcpp`, a1, a2, b1, b2)
@@ -75,8 +63,6 @@ circ_coef_rcpp <- function(a1, a2, b1, b2) {
 #' @param b2 estimated linear coefficients of the second component
 #' @param n sample size
 #'
-#' @keywords internal
-#'
 lik <- function(X1, X2, theta, b1, b2, n) {
     .Call(`_bpnreg_lik`, X1, X2, theta, b1, b2, n)
 }
@@ -86,8 +72,6 @@ lik <- function(X1, X2, theta, b1, b2, n) {
 #' @param Output output from the circular regression function Regression()
 #' @param X1 model matrix for the first component
 #' @param X2 model matrix for the second component
-#'
-#' @keywords internal
 #'
 DIC_reg <- function(Output, X1, X2) {
     .Call(`_bpnreg_DIC_reg`, Output, X1, X2)
@@ -103,8 +87,6 @@ DIC_reg <- function(Output, X1, X2) {
 #' @param n An integer indicating the sample size of the data.
 #' @param r A matrix with the estimates of r of the previous iteration.
 #'
-#' @keywords internal
-#'
 slice_rcpp <- function(X1, X2, theta, b1, b2, n, r) {
     .Call(`_bpnreg_slice_rcpp`, X1, X2, theta, b1, b2, n, r)
 }
@@ -118,8 +100,6 @@ slice_rcpp <- function(X1, X2, theta, b1, b2, n, r) {
 #' @param lag An integer specifying the amount of lag.
 #' @param burn An integer specifying the number of burn-in iterations.
 #'
-#' @keywords internal
-#'
 pnr <- function(theta, X1r, X2r, its, lag, burn) {
     .Call(`_bpnreg_pnr`, theta, X1r, X2r, its, lag, burn)
 }
@@ -131,8 +111,6 @@ pnr <- function(theta, X1r, X2r, its, lag, burn) {
 #'
 #' @return a scalar containing the estimate of the mode
 #'
-#' @keywords internal
-#'
 hmodeC <- function(x, cip) {
     .Call(`_bpnreg_hmodeC`, x, cip)
 }
@@ -142,8 +120,6 @@ hmodeC <- function(x, cip) {
 #' @inheritParams hmodeC
 #'
 #' @return a vector of length 2 containing the lower and upper bound of the interval
-#'
-#' @keywords internal
 #'
 hmodeciC <- function(x, cip) {
     .Call(`_bpnreg_hmodeciC`, x, cip)
@@ -155,8 +131,6 @@ hmodeciC <- function(x, cip) {
 #'
 #' @return a scalar containing the estimate of the mode
 #'
-#' @keywords internal
-#'
 hmode <- function(x, cip) {
     .Call(`_bpnreg_hmode`, x, cip)
 }
@@ -167,8 +141,6 @@ hmode <- function(x, cip) {
 #' @inheritParams hmodeC
 #'
 #' @return a vector of length 2 containing the lower and upper bound of the interval.
-#'
-#' @keywords internal
 #'
 hmodeci <- function(x, cip) {
     .Call(`_bpnreg_hmodeci`, x, cip)

@@ -1,3 +1,8 @@
+# bpnreg 1.0.2
+This version contains an update of code containing the class function to make sure the package works with R version 4.0.0
+
+The check for the range of the circular outcome was corrected.
+
 # bpnreg 1.0.1
 
 The function bpnme can now also handle the standard R data.frame instead of only Data Frame Tbl (from dplyr, tbl_df(data))

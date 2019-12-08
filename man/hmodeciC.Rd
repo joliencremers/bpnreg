@@ -17,4 +17,3 @@ a vector of length 2 containing the lower and upper bound of the interval
 \description{
 Find the highest density interval of a circular variable
 }
-\keyword{internal}

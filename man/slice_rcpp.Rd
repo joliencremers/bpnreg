@@ -24,4 +24,3 @@ slice_rcpp(X1, X2, theta, b1, b2, n, r)
 \description{
 A slice sampler for the latent lengths r
 }
-\keyword{internal}
