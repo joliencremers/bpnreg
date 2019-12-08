@@ -251,7 +251,7 @@ mmme <- function(pred.I, data, pred.II){
   }
 
   if(!all(sapply(data[, nesting.I], inherits, TRUE, what =  "numeric")) |
-     !all(sapply(data[, nesting.II], inherits, TRUE, what =  "numeric")){
+     !all(sapply(data[, nesting.II], inherits, TRUE, what =  "numeric"))){
     stop("Not all nesting variables are class numeric.")
   }
 
