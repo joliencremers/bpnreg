@@ -16,4 +16,3 @@ mvrnorm_arma_eigen(n, mu, sigma)
 \description{
 Sample from a multivariate normal distribution
 }
-\keyword{internal}

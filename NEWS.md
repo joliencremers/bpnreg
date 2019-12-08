@@ -1,6 +1,7 @@
-# bpnreg 1.0.1.9000
+# bpnreg 1.0.2
+This version contains an update of code containing the class function to make sure the package works with R version 4.0.0
 
-This is a development version
+The check for the range of the circular outcome was corrected.
 
 # bpnreg 1.0.1
 

@@ -17,4 +17,3 @@ a scalar containing the estimate of the mode
 \description{
 Estimate the mode by finding the highest posterior density interval
 }
-\keyword{internal}

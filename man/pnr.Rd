@@ -22,4 +22,3 @@ pnr(theta, X1r, X2r, its, lag, burn)
 \description{
 A Gibbs sampler for a projected normal regression model
 }
-\keyword{internal}

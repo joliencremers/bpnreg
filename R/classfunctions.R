@@ -697,7 +697,7 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
 
   if(type == "continuous"){
 
-    if(class(object$circ.coef) == "character"){
+    if(inherits(object$circ.coef, "character")){
 
       return(object$circ.coef)
 
@@ -731,7 +731,7 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
 
   }else if(type == "categorical"){
 
-    if(class(object$circ.coef.cat) == "character"){
+    if(inherits(object$circ.coef.cat, "character")){
 
       return(object$circ.coef.cat)
 
@@ -805,7 +805,7 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 
   if(type == "continuous"){
 
-    if(class(object$circ.coef) == "character"){
+    if(inherits(object$circ.coef, "character")){
 
       return(object$circ.coef)
 
@@ -839,7 +839,7 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 
   }else if(type == "categorical"){
 
-    if(class(object$circ.coef.cat) == "character"){
+    if(inherits(object$circ.coef.cat, "character")){
 
       return(object$circ.coef.cat)
 
@@ -1007,7 +1007,7 @@ print.bpnr <- function(x, ...){
   cat("Circular Coefficients \n\n")
 
   cat("Continuous variables: \n")
-  if(class(x$circ.coef) == "character"){
+  if(inherits(x$circ.coef, "character")){
     print(x$circ.coef)
   }else{
     print(x$circ.coef[,1:5])
@@ -1098,7 +1098,7 @@ print.bpnme <- function(x, ...){
   cat("Circular Coefficients \n\n")
 
   cat("Continuous variables: \n")
-  if(class(x$circ.coef) == "character"){
+  if(inherits(x$circ.coef, "character")){
     print(x$circ.coef)
   }else{
     print(x$circ.coef[,1:5])

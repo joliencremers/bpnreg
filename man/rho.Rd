@@ -12,4 +12,3 @@ rho(theta)
 \description{
 Compute a mean resultant length
 }
-\keyword{internal}

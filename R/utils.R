@@ -201,8 +201,8 @@ mmr <- function(pred.I, data, pred.II){
 
   #Warning message if theta is not measures in radians:
 
-  if(max(theta) > 2*pi | min(theta) < 0){
-    cat("The circular outcome contains values that are out of range. \n")
+  if(!(max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) & !(max(unlist(theta)) < pi & min(unlist(theta)) >= -pi)){
+    cat("The circular outcome may contain values that are out of range. \n")
     cat("Please check that the circular outcome is measured in radians.")
   }
 
@@ -250,8 +250,8 @@ mmme <- function(pred.I, data, pred.II){
       stop("More than one nesting variable defined")
   }
 
-  if(!all(sapply(data[, nesting.I], class) == "numeric") |
-     !all(sapply(data[, nesting.II], class) == "numeric")){
+  if(!all(sapply(data[, nesting.I], inherits, TRUE, what =  "numeric")) |
+     !all(sapply(data[, nesting.II], inherits, TRUE, what =  "numeric"))){
     stop("Not all nesting variables are class numeric.")
   }
 
@@ -341,8 +341,8 @@ mmme <- function(pred.I, data, pred.II){
 
   #Warning message if theta is not measures in radians:
 
-  if(max(unlist(theta)) > 2*pi | min(unlist(theta)) < 0){
-    cat("The circular outcome contains values that are out of range. \n")
+  if(!(max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) & !(max(unlist(theta)) < pi & min(unlist(theta)) >= -pi)){
+    cat("The circular outcome may contain values that are out of range. \n")
     cat("Please check that the circular outcome is measured in radians.")
   }
 
