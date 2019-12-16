@@ -1,3 +1,6 @@
+# bpnreg 1.0.2.9000
+This is a development version
+
 # bpnreg 1.0.2
 This version contains an update of code containing the class function to make sure the package works with R version 4.0.0
 
