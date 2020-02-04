@@ -7,6 +7,10 @@
 \title{bpnreg: A package to analyze Bayesian projected normal circular regression
 models}
 \source{
+Cremers, J., Pennings, H.J.M., Mainhard, M.T. & Klugkist, I. (2019).
+Circular Modelling of Circumplex Measurements for Interpersonal Behavior.
+Assessment.
+
 Cremers, J., Mulder, K.T. & Klugkist, I. (2018). Circular
   interpretation of regression coefficients. British Journal of Mathematical
   and Statistical Psychology, 71(1), 75-95.
@@ -28,15 +32,14 @@ This package contains functions to analyze circular regression type models
 (multivariate and mixed-effects). It is based on the 'embedding' approach to
 circular modelling and makes use of the projected normal distribution. Its
 estimation method is a Bayesian MCMC sampler. Further technical details can
-be found in Cremers, Mulder & Klugkist (2018) and Cremers & Klugkist (2017,
-working paper).
+be found in Cremers, Mulder & Klugkist (2018) and Cremers & Klugkist (2018).
 }
 \details{
 A tutorial on how to use this package can be found in Cremers & Klugkist
-(2017, under review). More details on the sampling algorithm and
+(2018). More details on the sampling algorithm and
 interpretation of the coefficients from the model can be found in Cremers,
-Mulder & Klugkist (2018), Nuñez-Antonio & Gutiérrez-Peña and Cremers,
-Mainhard & Klugkist (in press).
+Mulder & Klugkist (2018), Nuñez-Antonio & Gutiérrez-Peña, Cremers,
+Mainhard & Klugkist (2018) and Cremers, Pennings, Mainhard & Klugkist (2019).
 }
 \section{Functions}{
  The main functions of the package are:
