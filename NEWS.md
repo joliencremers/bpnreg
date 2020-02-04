@@ -1,3 +1,8 @@
+# bpnreg 1.0.3
+Delete arguments from function documentation that are not in `\usage`.
+
+Update references in the packages description.
+
 # bpnreg 1.0.2
 This version contains an update of code containing the class function to make sure the package works with R version 4.0.0
 
