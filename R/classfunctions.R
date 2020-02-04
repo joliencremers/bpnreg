@@ -41,7 +41,6 @@ UseMethod("traceplot", object)
 #' @param object an object used to select a method.
 #' @param hypothesis the inequality constrained hypothesis to test.
 #' @param type type of hypothesis to test c("anchor", "isotropic").
-#' @param ... further arguments passed to or from other methods.
 #'
 #' @details the methods \link[bpnreg]{BFc.bpnr} and
 #'   \link[bpnreg]{BFc.bpnme} have their own help page.
