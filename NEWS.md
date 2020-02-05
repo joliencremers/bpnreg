@@ -1,3 +1,6 @@
+# bpnreg 1.0.3.9000
+This is a development version.
+
 # bpnreg 1.0.3
 Delete arguments from function documentation that are not in `\usage`.
 
