@@ -19,12 +19,26 @@ The goal of bpnreg is to fit Bayesian projected normal regression models for cir
 
 ## Installation
 
-You can install bpnreg from github with:
+
+The R-package bpnreg can be installed from CRAN as follows:
+
+```{r gh-installation cran, eval = FALSE}
+install.packages("bpnreg")
+```
+
+You can install  a beta-version of bpnreg from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("joliencremers/bpnreg")
 ```
+
+## Citation
+
+To cite the package ‘bpnreg’ in publications use:
+
+  Jolien Cremers (2020). bpnreg: Bayesian Projected Normal Regression Models for
+  Circular Data. R package version 1.0.3. https://CRAN.R-project.org/package=bpnreg
 
 ## Example
 
