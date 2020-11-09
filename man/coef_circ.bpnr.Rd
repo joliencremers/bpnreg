@@ -4,8 +4,7 @@
 \alias{coef_circ.bpnr}
 \title{Obtain the circular coefficients of a Bayesian circular regression model}
 \usage{
-\method{coef_circ}{bpnr}(object, type = "continuous",
-  units = "radians")
+\method{coef_circ}{bpnr}(object, type = "continuous", units = "radians")
 }
 \arguments{
 \item{object}{a \code{bpnr object} obtained from the function

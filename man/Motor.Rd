@@ -4,13 +4,15 @@
 \name{Motor}
 \alias{Motor}
 \title{Phase differences in hand flexion-extension movements.}
-\format{A data frame with 42 rows and 4 variables: \describe{ \item{Cond}{a
+\format{
+A data frame with 42 rows and 4 variables: \describe{ \item{Cond}{a
   factor variable indicating the condition a participant was placed in; 1 =
   'explicit', 2 = 'semi.implicit' or 3 = 'implicit'} \item{PhaseDiff}{a
   numeric variable the phase difference between 'observer' and 'mover' in
   degrees} \item{AvAmp}{a numeric variable indicating the average amplitude
   of the hand movement of the 'observer'} \item{Phaserad}{a numeric variable
-  the phase difference between 'observer' and 'mover' in radians} }}
+  the phase difference between 'observer' and 'mover' in radians} }
+}
 \source{
 \url{https://doi.org/10.1371/journal.pone.0177457}
 }

@@ -331,6 +331,7 @@ mmme <- function(pred.I, data, pred.II){
     no.Meas[i]    <- length(theta[[i]])
     R[[i]]        <- as.matrix(rep(1, length(theta[[i]])))
     theta[[i]]    <- as.matrix(theta[[i]])
+
     X_I[[i]]      <- matrix(X_I[[i]], no.Meas[i], length(X_I[[i]])/no.Meas[i], dimnames = list(NULL, colnames(mm.I)))
     X_II[[i]]     <- matrix(X_II[[i]], no.Meas[i], length(X_II[[i]])/no.Meas[i], dimnames = list(NULL, colnames(mm.II)))
     Z_I[[i]]      <- matrix(Z_I[[i]], no.Meas[i], length(Z_I[[i]])/no.Meas[i], dimnames = list(NULL, colnames(mm_ran.I)))

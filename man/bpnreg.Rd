@@ -3,7 +3,6 @@
 \docType{package}
 \name{bpnreg}
 \alias{bpnreg}
-\alias{bpnreg-package}
 \title{bpnreg: A package to analyze Bayesian projected normal circular regression
 models}
 \source{

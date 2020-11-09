@@ -4,7 +4,8 @@
 \name{Maps}
 \alias{Maps}
 \title{The geometry of human knowledge of navigation space.}
-\format{A data frame with 160 rows and 8 variables: \describe{
+\format{
+A data frame with 160 rows and 8 variables: \describe{
  \item{Subject}{a numeric variable indicating the participant number}
  \item{Trial.no}{a numeric variable indicating the trial number of the target
  a participant had to locate (1-8)} \item{Maze}{a between subjects factor
@@ -14,7 +15,8 @@
  containing the angular error in degrees} \item{Learn}{a numeric variable
  indicating the number of trials a participant completed in the training
  phase} \item{L.c}{mean centered Learning} \item{Error.rad}{a numeric
- variable containing the angular error in radians} }}
+ variable containing the angular error in radians} }
+}
 \source{
 \url{https://doi.org/10.1016/j.cognition.2017.05.020}
 }

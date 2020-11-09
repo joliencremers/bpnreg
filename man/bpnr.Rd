@@ -21,8 +21,15 @@ Presnell, B., Morrison, S.P. & Littell, R.C. (1998). Projected
   Statistical Association, 93 (443), 1068 - 1077.
 }
 \usage{
-bpnr(pred.I, data, pred.II = pred.I, its = 1000, burn = 1,
-  n.lag = 1, seed = NULL)
+bpnr(
+  pred.I,
+  data,
+  pred.II = pred.I,
+  its = 1000,
+  burn = 1,
+  n.lag = 1,
+  seed = NULL
+)
 }
 \arguments{
 \item{pred.I}{model equation for effects of component 1.}
