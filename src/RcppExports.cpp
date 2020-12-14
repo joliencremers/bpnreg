@@ -6,6 +6,167 @@
 
 using namespace Rcpp;
 
+// betaBlock
+arma::mat betaBlock(arma::mat Omega, Rcpp::List R, Rcpp::List theta, Rcpp::List X, Rcpp::List Z, int p, arma::mat A, int N);
+RcppExport SEXP _bpnreg_betaBlock(SEXP OmegaSEXP, SEXP RSEXP, SEXP thetaSEXP, SEXP XSEXP, SEXP ZSEXP, SEXP pSEXP, SEXP ASEXP, SEXP NSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type Omega(OmegaSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type R(RSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type A(ASEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    rcpp_result_gen = Rcpp::wrap(betaBlock(Omega, R, theta, X, Z, p, A, N));
+    return rcpp_result_gen;
+END_RCPP
+}
+// b_samp
+arma::mat b_samp(arma::mat Omega, arma::mat beta, Rcpp::List R, Rcpp::List theta, Rcpp::List X, int q, Rcpp::List Z, Rcpp::List ZtZ, int N);
+RcppExport SEXP _bpnreg_b_samp(SEXP OmegaSEXP, SEXP betaSEXP, SEXP RSEXP, SEXP thetaSEXP, SEXP XSEXP, SEXP qSEXP, SEXP ZSEXP, SEXP ZtZSEXP, SEXP NSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type Omega(OmegaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type R(RSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type ZtZ(ZtZSEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    rcpp_result_gen = Rcpp::wrap(b_samp(Omega, beta, R, theta, X, q, Z, ZtZ, N));
+    return rcpp_result_gen;
+END_RCPP
+}
+// omega_samp
+arma::mat omega_samp(arma::mat b, arma::mat B, int v, int q, int N);
+RcppExport SEXP _bpnreg_omega_samp(SEXP bSEXP, SEXP BSEXP, SEXP vSEXP, SEXP qSEXP, SEXP NSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type B(BSEXP);
+    Rcpp::traits::input_parameter< int >::type v(vSEXP);
+    Rcpp::traits::input_parameter< int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    rcpp_result_gen = Rcpp::wrap(omega_samp(b, B, v, q, N));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lik_me
+Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin, Rcpp::List X1, Rcpp::List X2, Rcpp::List Z1, Rcpp::List Z2, arma::mat beta1, arma::mat beta2, arma::mat b1, arma::mat b2, int N, Rcpp::List pred, int iteration);
+RcppExport SEXP _bpnreg_lik_me(SEXP theta_cosSEXP, SEXP theta_sinSEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP Z1SEXP, SEXP Z2SEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP b1SEXP, SEXP b2SEXP, SEXP NSEXP, SEXP predSEXP, SEXP iterationSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type theta_cos(theta_cosSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type theta_sin(theta_sinSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type X2(X2SEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type Z1(Z1SEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type Z2(Z2SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta1(beta1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type b1(b1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type b2(b2SEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type pred(predSEXP);
+    Rcpp::traits::input_parameter< int >::type iteration(iterationSEXP);
+    rcpp_result_gen = Rcpp::wrap(lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred, iteration));
+    return rcpp_result_gen;
+END_RCPP
+}
+// pnme
+Rcpp::List pnme(List theta_cos, List theta_sin, List X1, List X2, List Z1, List Z2, List ZtZ1, List ZtZ2, List R, Rcpp::List pred, int its, int lag, int burn, int N);
+RcppExport SEXP _bpnreg_pnme(SEXP theta_cosSEXP, SEXP theta_sinSEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP Z1SEXP, SEXP Z2SEXP, SEXP ZtZ1SEXP, SEXP ZtZ2SEXP, SEXP RSEXP, SEXP predSEXP, SEXP itsSEXP, SEXP lagSEXP, SEXP burnSEXP, SEXP NSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type theta_cos(theta_cosSEXP);
+    Rcpp::traits::input_parameter< List >::type theta_sin(theta_sinSEXP);
+    Rcpp::traits::input_parameter< List >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< List >::type X2(X2SEXP);
+    Rcpp::traits::input_parameter< List >::type Z1(Z1SEXP);
+    Rcpp::traits::input_parameter< List >::type Z2(Z2SEXP);
+    Rcpp::traits::input_parameter< List >::type ZtZ1(ZtZ1SEXP);
+    Rcpp::traits::input_parameter< List >::type ZtZ2(ZtZ2SEXP);
+    Rcpp::traits::input_parameter< List >::type R(RSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type pred(predSEXP);
+    Rcpp::traits::input_parameter< int >::type its(itsSEXP);
+    Rcpp::traits::input_parameter< int >::type lag(lagSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    rcpp_result_gen = Rcpp::wrap(pnme(theta_cos, theta_sin, X1, X2, Z1, Z2, ZtZ1, ZtZ2, R, pred, its, lag, burn, N));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lik_reg
+arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n);
+RcppExport SEXP _bpnreg_lik_reg(SEXP X1SEXP, SEXP X2SEXP, SEXP thetaSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X2(X2SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta1(beta1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(lik_reg(X1, X2, theta, beta1, beta2, n));
+    return rcpp_result_gen;
+END_RCPP
+}
+// DIC_reg
+Rcpp::List DIC_reg(Rcpp::List output, arma::mat X1, arma::mat X2);
+RcppExport SEXP _bpnreg_DIC_reg(SEXP outputSEXP, SEXP X1SEXP, SEXP X2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type output(outputSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X2(X2SEXP);
+    rcpp_result_gen = Rcpp::wrap(DIC_reg(output, X1, X2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// slice_rcpp
+arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n, arma::mat r);
+RcppExport SEXP _bpnreg_slice_rcpp(SEXP X1SEXP, SEXP X2SEXP, SEXP thetaSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP nSEXP, SEXP rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X2(X2SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta1(beta1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type r(rSEXP);
+    rcpp_result_gen = Rcpp::wrap(slice_rcpp(X1, X2, theta, beta1, beta2, n, r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// pnr
+Rcpp::List pnr(arma::vec theta, NumericMatrix X1r, NumericMatrix X2r, int its, int lag, int burn);
+RcppExport SEXP _bpnreg_pnr(SEXP thetaSEXP, SEXP X1rSEXP, SEXP X2rSEXP, SEXP itsSEXP, SEXP lagSEXP, SEXP burnSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X1r(X1rSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X2r(X2rSEXP);
+    Rcpp::traits::input_parameter< int >::type its(itsSEXP);
+    Rcpp::traits::input_parameter< int >::type lag(lagSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    rcpp_result_gen = Rcpp::wrap(pnr(theta, X1r, X2r, its, lag, burn));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rho
 Rcpp::List rho(arma::vec theta);
 RcppExport SEXP _bpnreg_rho(SEXP thetaSEXP) {
@@ -77,68 +238,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// lik
-arma::vec lik(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat b1, arma::mat b2, int n);
-RcppExport SEXP _bpnreg_lik(SEXP X1SEXP, SEXP X2SEXP, SEXP thetaSEXP, SEXP b1SEXP, SEXP b2SEXP, SEXP nSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type X1(X1SEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type X2(X2SEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type b1(b1SEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type b2(b2SEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(lik(X1, X2, theta, b1, b2, n));
-    return rcpp_result_gen;
-END_RCPP
-}
-// DIC_reg
-Rcpp::List DIC_reg(Rcpp::List Output, arma::mat X1, arma::mat X2);
-RcppExport SEXP _bpnreg_DIC_reg(SEXP OutputSEXP, SEXP X1SEXP, SEXP X2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::List >::type Output(OutputSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type X1(X1SEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type X2(X2SEXP);
-    rcpp_result_gen = Rcpp::wrap(DIC_reg(Output, X1, X2));
-    return rcpp_result_gen;
-END_RCPP
-}
-// slice_rcpp
-arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat b1, arma::mat b2, int n, arma::mat r);
-RcppExport SEXP _bpnreg_slice_rcpp(SEXP X1SEXP, SEXP X2SEXP, SEXP thetaSEXP, SEXP b1SEXP, SEXP b2SEXP, SEXP nSEXP, SEXP rSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type X1(X1SEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type X2(X2SEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type b1(b1SEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type b2(b2SEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type r(rSEXP);
-    rcpp_result_gen = Rcpp::wrap(slice_rcpp(X1, X2, theta, b1, b2, n, r));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pnr
-Rcpp::List pnr(arma::vec theta, NumericMatrix X1r, NumericMatrix X2r, int its, int lag, int burn);
-RcppExport SEXP _bpnreg_pnr(SEXP thetaSEXP, SEXP X1rSEXP, SEXP X2rSEXP, SEXP itsSEXP, SEXP lagSEXP, SEXP burnSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X1r(X1rSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X2r(X2rSEXP);
-    Rcpp::traits::input_parameter< int >::type its(itsSEXP);
-    Rcpp::traits::input_parameter< int >::type lag(lagSEXP);
-    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
-    rcpp_result_gen = Rcpp::wrap(pnr(theta, X1r, X2r, its, lag, burn));
-    return rcpp_result_gen;
-END_RCPP
-}
 // hmodeC
 double hmodeC(NumericVector x, double cip);
 RcppExport SEXP _bpnreg_hmodeC(SEXP xSEXP, SEXP cipSEXP) {
@@ -189,16 +288,21 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_bpnreg_betaBlock", (DL_FUNC) &_bpnreg_betaBlock, 8},
+    {"_bpnreg_b_samp", (DL_FUNC) &_bpnreg_b_samp, 9},
+    {"_bpnreg_omega_samp", (DL_FUNC) &_bpnreg_omega_samp, 5},
+    {"_bpnreg_lik_me", (DL_FUNC) &_bpnreg_lik_me, 13},
+    {"_bpnreg_pnme", (DL_FUNC) &_bpnreg_pnme, 14},
+    {"_bpnreg_lik_reg", (DL_FUNC) &_bpnreg_lik_reg, 6},
+    {"_bpnreg_DIC_reg", (DL_FUNC) &_bpnreg_DIC_reg, 3},
+    {"_bpnreg_slice_rcpp", (DL_FUNC) &_bpnreg_slice_rcpp, 7},
+    {"_bpnreg_pnr", (DL_FUNC) &_bpnreg_pnr, 6},
     {"_bpnreg_rho", (DL_FUNC) &_bpnreg_rho, 1},
     {"_bpnreg_theta_bar", (DL_FUNC) &_bpnreg_theta_bar, 1},
     {"_bpnreg_eigen_val", (DL_FUNC) &_bpnreg_eigen_val, 1},
     {"_bpnreg_eigen_vec", (DL_FUNC) &_bpnreg_eigen_vec, 1},
     {"_bpnreg_mvrnorm_arma_eigen", (DL_FUNC) &_bpnreg_mvrnorm_arma_eigen, 3},
     {"_bpnreg_circ_coef_rcpp", (DL_FUNC) &_bpnreg_circ_coef_rcpp, 4},
-    {"_bpnreg_lik", (DL_FUNC) &_bpnreg_lik, 6},
-    {"_bpnreg_DIC_reg", (DL_FUNC) &_bpnreg_DIC_reg, 3},
-    {"_bpnreg_slice_rcpp", (DL_FUNC) &_bpnreg_slice_rcpp, 7},
-    {"_bpnreg_pnr", (DL_FUNC) &_bpnreg_pnr, 6},
     {"_bpnreg_hmodeC", (DL_FUNC) &_bpnreg_hmodeC, 2},
     {"_bpnreg_hmodeciC", (DL_FUNC) &_bpnreg_hmodeciC, 2},
     {"_bpnreg_hmode", (DL_FUNC) &_bpnreg_hmode, 2},

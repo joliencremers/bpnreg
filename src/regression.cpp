@@ -232,7 +232,7 @@ Rcpp::List pnr(arma::vec theta,
 
     beta1.row(i) = beta1_tmp.row(index);
     beta2.row(i) = beta2_tmp.row(index);
-    predictiva.row(i) = Predictiva_tmp.row(index);
+    predictiva.row(i) = predictiva_tmp.row(index);
 
   }
 
