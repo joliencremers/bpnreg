@@ -17,184 +17,15 @@
 #include <iostream>
 #include <math.h>
 
+#include "utils.h"
+
 using namespace Rcpp;
 using namespace std;
 using namespace arma;
 
 const double pi = boost::math::constants::pi<double>();
 
-
-//' Compute a mean resultant length
-//'
-//' @param theta a circular variable in radians.
-//'
-// [[Rcpp::export]]
-
-Rcpp::List rho(arma::vec theta){
-
-  double n = theta.n_elem;
-
-  double S = arma::sum(arma::sin(theta));
-  double C = arma::sum(arma::cos(theta));
-
-  double rho = sqrt(pow(S, 2) + pow(C, 2))/n;
-
-  return  Rcpp::List::create(Rcpp::Named("rho") = rho,
-                             Rcpp::Named("C") = C,
-                             Rcpp::Named("S") = S);
-
-}
-
-
-//' Compute circular coefficients
-//'
-//' @param a1 intercept estimate of component I.
-//' @param a2 intercept estimate of component I.
-//' @param b1 slope estimate of component I.
-//' @param b2 slope estimate of component I.
-//'
-// [[Rcpp::export]]
-
-NumericVector circ_coef_rcpp(double a1, double a2, double b1, double b2) {
-
-  double ax = -(a1*b1 + a2*b2)/(pow(b1,2) + pow(b2,2));
-  double ac = atan2(a2 + b2*ax, a1 + b1*ax);
-  double bc = (tan(atan2(a2, a1))-ac/-ax);
-  double SDO = sqrt(pow(a1 + b1, 2) + pow(a2 + b2, 2));
-  double SSDO = R::sign(sin(ac - atan2(b2, b1)))*SDO;
-
-  Rcpp::NumericVector out = NumericVector::create(ax, ac, bc, SDO, SSDO);
-
-  out.names() = CharacterVector::create("ax", "ac", "bc", "SDO", "SSDO");
-
-  return out;
-}
-
-
-//' Compute the Likelihood of the PN distribution
-//'
-//' @param X1 the model matrix of the first component
-//' @param X2 the model matrix of the second component
-//' @param theta a circular outcome value
-//' @param b1 estimated linear coefficients of the first component
-//' @param b2 estimated linear coefficients of the second component
-//' @param n sample size
-//'
-//[[Rcpp::export]]
-
-arma::vec lik(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat b1, arma::mat b2, int n){
-
-  arma::mat mub1 = b1*X1.t();
-  arma::mat mub2 = b2*X2.t();
-  arma::mat Dbd = cos(theta)%mub1.t() + sin(theta)%mub2.t();
-  arma::mat norm2 = arma::pow(mub1, 2) + arma::pow(mub2, 2);
-  arma::vec L(n);
-  arma::vec c(n);
-
-  for (int jjj=0; jjj < n; ++jjj){
-    c(jjj) = 1 + ((Dbd.row(jjj)(0)*R::pnorm(Dbd.row(jjj)(0), 0, 1, TRUE, FALSE))/R::dnorm(Dbd.row(jjj)(0),0, 1, FALSE));
-    L(jjj) = (1/(2*pi))*exp(-0.5*norm2.col(jjj)(0))*c(jjj);
-  }
-
-  return L;
-
-}
-
-//' Compute Model Fit Measures ME Model
-//'
-//' @param Output output from the circular regression function Regression()
-//' @param X1 model matrix for the first component
-//' @param X2 model matrix for the second component
-//'
-//[[Rcpp::export]]
-
-Rcpp::List DIC_reg(Rcpp::List Output, arma::mat X1, arma::mat X2){
-
-  arma::vec theta = Rcpp::as<arma::vec>(Output["theta"]);
-  arma::mat B1 = Rcpp::as<arma::mat>(Output["B1"]);
-  arma::mat B2 = Rcpp::as<arma::mat>(Output["B2"]);
-  arma::mat Likelihood = Rcpp::as<arma::mat>(Output["Likelihood"]);
-
-  double n = theta.n_elem;
-  double p1 = X1.n_cols;
-  double p2 = X2.n_cols;
-
-  arma::mat u = arma::join_rows(cos(theta),sin(theta));
-
-  arma::mat m_B1 = arma::mean(B1, 0);
-  arma::mat m_B2 = arma::mean(B2, 0);
-
-  arma::vec Likelihood_m = lik(X1, X2, theta, m_B1, m_B2, n);
-
-  arma::mat personsum = arma::sum(log(Likelihood), 1);
-  double D_hat = arma::sum(log(Likelihood_m));
-  arma::vec D_bar = arma::mean(personsum,0);
-
-  double pD = 2*(D_hat - D_bar(0));
-  arma::vec pV = 2*var(personsum);
-  double pV_alt = 2*(p1 + p2);
-
-  double DIC = -2*D_hat + 2*pD;
-  double DIC_alt = -2*D_hat + 2*pV(0);
-  double DIC_alt2 = -2*D_hat + 2*pV_alt;
-
-  arma::mat lppd = arma::sum(log(arma::mean(Likelihood, 0)),1);
-
-  arma::mat pWAIC = 2*arma::sum(log(arma::mean(Likelihood, 0)) - arma::mean(log(Likelihood), 0),1);
-  arma::mat pWAIC2 = arma::sum(var(log(Likelihood), 0),1);
-
-  double WAIC = -2*(lppd.col(0)(0) - pWAIC.col(0)(0));
-  double WAIC2 = -2*(lppd.col(0)(0) - pWAIC2.col(0)(0));
-
-  return  Rcpp::List::create(Rcpp::Named("pD") = pD,
-                             Rcpp::Named("pV") = pV,
-                             Rcpp::Named("pV_alt") = pV_alt,
-                             Rcpp::Named("pWAIC") = pWAIC,
-                             Rcpp::Named("pWAIC2") = pWAIC2,
-                             Rcpp::Named("lppd") = lppd,
-                             Rcpp::Named("D_hat") = D_hat,
-                             Rcpp::Named("D_bar") = D_bar,
-                             Rcpp::Named("DIC") = DIC,
-                             Rcpp::Named("DIC_alt") = DIC_alt,
-                             Rcpp::Named("DIC_alt2") = DIC_alt2,
-                             Rcpp::Named("WAIC") = WAIC,
-                             Rcpp::Named("WAIC2") = WAIC2);
-
-}
-
-//' A slice sampler for the latent lengths r
-//'
-//' @param X1 A model matrix for component I.
-//' @param X2 A model matrix for component II.
-//' @param theta A vector with the circular dependent variable.
-//' @param b1 A matrix containing the coefficients of component I for the current iteration.
-//' @param b2 A matrix containing the coefficients of component II for the current iteration.
-//' @param n An integer indicating the sample size of the data.
-//' @param r A matrix with the estimates of r of the previous iteration.
-//'
-//[[Rcpp::export]]
-
-arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat b1, arma::mat b2, int n, arma::mat r){
-
-  arma::mat mub1 = b1*X1.t();
-  arma::mat mub2 = b2*X2.t();
-  arma::mat Dbd = cos(theta)%mub1.t() + sin(theta)%mub2.t();
-  for (int jjj=0; jjj < n; ++jjj){
-
-    arma::mat y = as<arma::vec>(runif(1,0,1)) % exp(-.5*pow((r.row(jjj)-Dbd.row(jjj)),2));
-    arma::mat u = as<arma::vec>(runif(1,0,1));
-
-    arma::mat r1 = Dbd.row(jjj) + max(-Dbd.row(jjj), -sqrt(-2*log(y)));
-    arma::mat r2 = Dbd.row(jjj) + sqrt(-2*log(y));
-    r.row(jjj)  = sqrt(((pow(r2,2)-pow(r1,2)) % u) + pow(r1,2));
-  }
-  return r;
-}
-
-
-
-
-//' Sample fixed effect coefficients in a Random Intercept model
+//' Sample fixed effect coefficients
 //'
 //' @param Omega current covariance matrix
 //' @param Y current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)
@@ -208,172 +39,255 @@ arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat b1, 
 //'
 //[[Rcpp::export]]
 
-double betaBlock.fRI(Omega, Y, X, Z, p, A, N){
+arma::mat betaBlock(arma::mat Omega, Rcpp::List R, Rcpp::List theta, Rcpp::List X, Rcpp::List Z, int p, arma::mat A, int N){
 
-//compute inverse of precision matrix (so this is the covariance matrix)
-  invOmega <- solve(Omega)
+  //compute inverse of precision matrix (so this is the covariance matrix)
+  arma::mat invOmega = arma::inv(Omega);
 
-//compute the covariance and precision (inverse) matrix of the outcome vector
-    Vi    <- list(NA)
-      invVi <- list(NA)
+  //compute the covariance and precision (inverse) matrix of the outcome vector
 
-      for (i in 1:N){
-        Vi[[i]]    <- (Z[[i]] %*% invOmega %*% t(Z[[i]])) + diag(length(Z[[i]]))
-        invVi[[i]] <- chol2inv(chol(Vi[[i]]))
-      }
+  arma::mat sXtVX = arma::mat(p,p) * 0.0;
+  arma::mat sXtVY_tmp = arma::mat(p, N);
+  arma::mat sXtVY;
 
-//Compute variance of the distribution for the coefficients vector
-      sXtVX <- diag(p) * 0.0
-      aux   <- lapply( (1:N), function(w){t(X[[w]]) %*% invVi[[w]] %*% X[[w]]} )
+  for (int i = 0; i < N; ++i){
 
-        for (i in 1:N){sXtVX <- sXtVX + aux[[i]]}
+    arma::mat Z_tmp = Z[i];
+    arma::mat X_tmp = X[i];
+    arma::mat theta_tmp = theta[i];
+    arma::mat R_temp = R[i];
+    arma::mat Y = theta_tmp%R_temp;
 
-        Var.beta <- chol2inv(chol(A + sXtVX ))
+    int l = Z_tmp.n_rows;
+    arma::mat Vi    = Z_tmp*invOmega*Z_tmp.t() + arma::mat(l,l,fill::eye);
+    arma::mat invVi = arma::inv_sympd(Vi);
+    arma::mat aux  = X_tmp.t()*invVi*X_tmp;
+    sXtVX = sXtVX + aux;
+    sXtVY_tmp.col(i) = X_tmp.t()*invVi*Y;
 
-//Compute the mean of the distribution for the coefficients vector.
-          sXtVY <- vapply( (1:N),
-                           function(w){t(X[[w]]) %*% invVi[[w]] %*% Y[[w]]},
-                           FUN.VALUE = rep(1,p))
+  }
 
-            if(p > 1){
-              sXtVY <- rowSums(sXtVY)
-            }else{
-              sXtVY <- sum(sXtVY)
-            }
+  //Compute variance of the distribution for the coefficients vector
+  arma::mat beta_var = arma::inv_sympd(A + sXtVX);
 
-            betaF <- c(Var.beta %*% sXtVY)
+  //Compute the mean of the distribution for the coefficients vector.
+
+  if(p > 1){
+    sXtVY = arma::sum(sXtVY_tmp, 1);
+  }else{
+    sXtVY = arma::sum(sXtVY_tmp);
+  }
+
+  arma::mat beta_mu = beta_var*sXtVY;
 
 
-//Sample the coefficients vector.
-              beta.aux <- MASS::mvrnorm(1, betaF, Var.beta)
+  //Sample the coefficients vector
+  arma::mat beta = arma::mvnrnd(beta_mu, beta_var);
 
-                drop(beta.aux)
+  return beta;
+
 }
 
 
-// //' A Gibbs sampler for a projected normal mixed-effects model
-// //'
-// //' @param theta A List with the circular dependent variable.
-// //' @param X1r A list of fixed effect model matrices for component I.
-// //' @param X2r A list of fixed effect model matrices for component II.
-// //' @param X1r A list of random effect model matrices for component I.
-// //' @param X2r A list of random effect model matrices for component II.
-// //' @param its An integer specifying the number of iterations
-// //' @param lag An integer specifying the amount of lag.
-// //' @param burn An integer specifying the number of burn-in iterations.
-// //'
-// // [[Rcpp::export]]
-// arma::mat pnme(List theta,
-//                 List X1r,
-//                 List X2r,
-//                 List Z1r,
-//                 List Z2r,
-//                 int its, int lag, int burn) {
-//
-//   int n = X1r.length();
-//   arma::mat p1 = X1r[n];
-//
-//   return p1;
-//
-//
-//   // arma::mat X1 = Rcpp::as<arma::mat>(X1r);
-//   // arma::mat X2 = Rcpp::as<arma::mat>(X2r);
-//   //
-//   // double n = theta.n_elem;
-//   // double p1 = X1.n_cols;
-//   // double p2 = X2.n_cols;
-//   //
-//   // arma::mat datose(n, 2);
-//   // datose.col(0) = cos(theta);
-//   // datose.col(1) = sin(theta);
-//   //
-//   // //Prior specification regression parameters
-//   // arma::vec mu1 = arma::ones<arma::vec>(p1)*0;
-//   // arma::vec mu2 = arma::ones<arma::vec>(p2)*0;
-//   // arma::mat v1 = arma::eye<arma::mat>(p1,p1)*0.0001;
-//   // arma::mat v2 = arma::eye<arma::mat>(p2,p2)*0.0001;
-//   //
-//   // //Posterior specification regression parameters
-//   // arma::mat XtX1 = X1.t()*X1;
-//   // arma::mat XtX2 = X2.t()*X2;
-//   // arma::mat vstar1 = v1 + XtX1;
-//   // arma::mat vstar2 = v2 + XtX2;
-//   // arma::mat sigma1 = arma::inv(vstar1);
-//   // arma::mat sigma2 = arma::inv(vstar2);
-//   // arma::mat v1mu1 = v1*mu1;
-//   // arma::mat v2mu2 = v2*mu2;
-//   //
-//   // //Initialize matrices for results
-//   //
-//   // int bb = burn*lag;
-//   // int kk = bb + (its*lag);
-//   //
-//   // arma::mat r = arma::ones<arma::mat>(n,1);
-//   // arma::mat B1(kk, p1);
-//   // arma::mat B2(kk, p2);
-//   // arma::mat bc(kk, p1-1);
-//   // arma::mat SSDO(kk, p1-1);
-//   // arma::mat ac(kk, p1-1);
-//   // arma::mat ax(kk, p1-1);
-//   // arma::mat SAM(kk, p1-1);
-//   // arma::mat AS(kk, p1-1);
-//   // arma::mat Predictiva(kk, n);
-//   //
-//   // arma::mat B1s(its, p1);
-//   // arma::mat B2s(its, p2);
-//   // arma::mat bcs(its, p1-1);
-//   // arma::mat SSDOs(its, p1-1);
-//   // arma::mat acs(its, p1-1);
-//   // arma::mat axs(its, p1-1);
-//   // arma::mat SAMs(its, p1-1);
-//   // arma::mat ASs(its, p1-1);
-//   // arma::mat Predictivas(its, n);
-//   //
-//   // arma::mat Y = r%datose.each_col();
-//   //
-//   // //Gibbs iterations
-//   // for(int iii=0; iii < kk; ++iii){
-//   //
-//   //   arma::mat XtY1 = X1.t()*Y.col(0);
-//   //   arma::mat XtY2 = X2.t()*Y.col(1);
-//   //   arma::mat mstar1 = sigma1*(v1mu1 + XtY1);
-//   //   arma::mat mstar2 = sigma2*(v2mu2 + XtY2);
-//   //
-//   //   //Sample coefficients
-//   //   arma::mat b1 = mvrnorm_arma_eigen(1, mstar1.col(0), sigma1).t();
-//   //   arma::mat b2 = mvrnorm_arma_eigen(1, mstar2.col(0), sigma2).t();
-//   //
-//   //   //Sample R
-//   //   r = slice_rcpp(X1, X2, theta, b1, b2, n, r);
-//   //
-//   //   //Compute Y
-//   //   Y = r%datose.each_col();
-//   //
-//   //   //Fill posterior coefficient matrices
-//   //   B1.row(iii) = b1;
-//   //   B2.row(iii) = b2;
-//   //
-//   //   Predictiva.row(iii) = lik(X1, X2, theta, b1, b2, n).t();
-//   //
-//   // }
-//   //
-//   // for(int i=0; i < its; ++i){
-//   //
-//   //   int index = (i*lag) + bb;
-//   //
-//   //   B1s.row(i) = B1.row(index);
-//   //   B2s.row(i) = B2.row(index);
-//   //   Predictivas.row(i) = Predictiva.row(index);
-//   // }
-//   //
-//   // return  Rcpp::List::create(Rcpp::Named("B1") = B1s,
-//   //                            Rcpp::Named("B2") = B2s,
-//   //                            Rcpp::Named("Likelihood") = Predictivas,
-//   //                            Rcpp::Named("its") = its,
-//   //                            Rcpp::Named("lag") = lag,
-//   //                            Rcpp::Named("burn-in") = burn,
-//   //                            Rcpp::Named("p1") = p1,
-//   //                            Rcpp::Named("p2") = p2,
-//   //                            Rcpp::Named("theta") = theta);
-//
-// }
+//' Sample subject specific random effects
+//'
+//' @param Omega current covariance matrix
+//' @param beta current fixed effect coefficients vector
+//' @param Y current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)
+//' @param X design matrix model parameters (differs per person)
+//' @param q dimension Z(number of random effects)
+//' @param Z design matrix for random effects (differs per person)
+//' @param ZtZ transpose(Z)*Z
+//' @param N sample size at second level
+//'
+//' @keywords internal
+//'
+//[[Rcpp::export]]
+
+arma::mat b_samp(arma::mat Omega, arma::mat beta,
+                 Rcpp::List R, Rcpp::List theta, Rcpp::List X,
+                 int q, Rcpp::List Z, Rcpp::List ZtZ, int N){
+
+  arma::mat b(N, q);
+
+  for (int i = 0; i < N; ++i){
+
+    arma::mat Z_tmp = Z[i];
+    arma::mat ZtZ_tmp = ZtZ[i];
+    arma::mat X_tmp = X[i];
+    arma::mat theta_tmp = theta[i];
+    arma::mat R_temp = R[i];
+    arma::mat Y = theta_tmp%R_temp;
+
+    //Compute variance of the distribution for the subject specific random effects
+    arma::mat invD = arma::inv(ZtZ_tmp + Omega);
+    //Compute mean of the distribution for the subject specific random effects
+    arma::mat etilde = Y - (X_tmp*beta);
+    arma::mat Zetilde = Z_tmp.t()*etilde;
+    arma::mat b_mu = invD*Zetilde;
+    //Sample subject specific random effects vectors
+    b.row(i) = arma::mvnrnd(b_mu, invD).t();
+
+  }
+
+  return(b);
+
+}
+
+//' Sample precision matrix
+//'
+//' @param b subject specific random effects vectors
+//' @param B prior sum of squares matrix, scale parameter Wishart distribution
+//'   (of b=random effect if prior close to 0-->no random effect)
+//' @param q dimension Z(number of random effects)
+//' @param v prior df=dimension Z
+//' @param N sample size at second level
+//'
+//' @keywords internal
+//'
+//[[Rcpp::export]]
+
+arma::mat omega_samp(arma::mat b, arma::mat B, int v, int q, int N){
+
+  arma::mat bb = b.t()*b;
+  arma::mat Bbb = arma::inv(B + bb);
+  arma::mat Omega = arma::wishrnd(Bbb, v + N);
+
+  return(Omega);
+
+}
+
+//' A Gibbs sampler for a projected normal mixed-effects model
+//'
+//' @param theta A List with the circular dependent variable.
+//' @param X1r A list of fixed effect model matrices for component I.
+//' @param X2r A list of fixed effect model matrices for component II.
+//' @param X1r A list of random effect model matrices for component I.
+//' @param X2r A list of random effect model matrices for component II.
+//' @param its An integer specifying the number of iterations
+//' @param lag An integer specifying the amount of lag.
+//' @param burn An integer specifying the number of burn-in iterations.
+//'
+// [[Rcpp::export]]
+Rcpp::List pnme(List theta_cos, List theta_sin,
+         List X1, List X2, List Z1, List Z2, List ZtZ1, List ZtZ2,
+         List R,
+         int its, int lag, int burn,
+         int N) {
+
+  int burn_new = burn * lag;
+  int tm = burn_new + (its * lag);
+
+  arma::mat X1_temp = X1[0];
+  arma::mat X2_temp = X2[0];
+  arma::mat Z1_temp = Z1[0];
+  arma::mat Z2_temp = Z2[0];
+
+  int p1 = X1_temp.n_cols;
+  int p2 = X2_temp.n_cols;
+  int q1 = Z1_temp.n_cols;
+  int q2 = Z2_temp.n_cols;
+
+  //Specify priors
+  int v1 = q1;
+  int v2 = q2;
+
+  arma::mat B1 = arma::eye(v1, v1)*0.0001;
+  arma::mat B2 = arma::eye(v2, v2)*0.0001;
+  arma::mat A1 = arma::eye(p1, p1)*0.0001;
+  arma::mat A2 = arma::eye(p2, p2)*0.0001;
+
+  //Create results objects
+
+  arma::mat beta1(p1,its);
+  arma::mat beta2(p2,its);
+  arma::cube b1(N,q1,its);
+  arma::cube b2(N,q2,its);
+  arma::cube omega1(q1,q1,its);
+  arma::cube omega2(q2,q2,its);
+
+  arma::mat beta1_tmp(p1,tm);
+  arma::mat beta2_tmp(p2,tm);
+  arma::cube b1_tmp(N,q1,tm);
+  arma::cube b2_tmp(N,q2,tm);
+  arma::cube omega1_tmp(q1,q1,tm);
+  arma::cube omega2_tmp(q2,q2,tm);
+
+
+  //Set starting values
+
+  omega1_tmp.slice(0) = arma::eye(q1,q1);
+  omega2_tmp.slice(0) = arma::eye(q2,q2);
+  Rcpp::List R_tmp = R;
+
+  for (int it = 1; it < tm; ++ it){
+
+    beta1_tmp.col(it) = betaBlock(omega1_tmp.slice(it-1), theta_cos, R_tmp, X1, Z1, p1, A1, N);
+    beta2_tmp.col(it) = betaBlock(omega2_tmp.slice(it-1), theta_sin, R_tmp, X2, Z2, p2, A2, N);
+    b1_tmp.slice(it) = b_samp(omega1_tmp.slice(it-1), beta1_tmp.col(it), theta_cos, R_tmp, X1, q1, Z1, ZtZ1, N);
+    b2_tmp.slice(it) = b_samp(omega2_tmp.slice(it-1), beta2_tmp.col(it), theta_sin, R_tmp, X2, q2, Z2, ZtZ2, N);
+    omega1_tmp.slice(it) = omega_samp(b1_tmp.slice(it), B1, v1, q1, N);
+    omega2_tmp.slice(it) = omega_samp(b2_tmp.slice(it), B2, v2, q2, N);
+
+    //Sample latent lengths
+    for (int i = 0; i < N; ++i){
+
+      arma::vec R_temp = R_tmp[i];
+
+      arma::mat Z1_tmp = Z1[i];
+      arma::mat X1_tmp = X1[i];
+      arma::mat theta_cos_tmp = theta_cos[i];
+
+      arma::mat Z2_tmp = Z2[i];
+      arma::mat X2_tmp = X2[i];
+      arma::mat theta_sin_tmp = theta_sin[i];
+
+      arma::rowvec mub1 = beta1_tmp.col(it).t()*X1_tmp.t() + b1_tmp.row(i)(it)*Z1_tmp.t();
+      arma::rowvec mub2 = beta2_tmp.col(it).t()*X2_tmp.t() + b2_tmp.row(i)(it)*Z2_tmp.t();
+      arma::rowvec b = theta_cos_tmp.t()%mub1 + theta_sin_tmp.t()%mub2;
+
+      for (int j = 0; j < R_temp.n_elem; ++j){
+
+        arma::vec y = as<arma::vec>(runif(1,0,exp(-.5*pow(R_temp(j)-b.row(0)(j), 2))));
+
+        double r1 = b.row(0)(j) + max(-b(j), -sqrt(-2*log(y(0))));
+        double r2 = b.row(0)(j) + sqrt(-2*log(y(0)));
+        R_temp(j)  = sqrt(((pow(r2,2)-pow(r1,2)) * arma::randu()) + pow(r1,2));
+
+      }
+
+    R_tmp[i] = R_temp;
+
+    }
+
+    if (it - burn_new > 0 & (it-burn_new) % lag == 0){
+
+      int ii = (it - burn_new) / lag;
+      Rcout << "Iteration:" << ii << "\n";
+
+      beta1.col(ii-1) = beta1_tmp.col(it);
+      beta2.col(ii-1) = beta2_tmp.col(it);
+      b1.slice(ii-1) = b1_tmp.slice(it);
+      b2.slice(ii-1) = b2_tmp.slice(it);
+      omega1.slice(ii-1) = omega1_tmp.slice(it);
+      omega2.slice(ii-1) = omega2_tmp.slice(it);
+
+    }
+
+  }
+
+  return  Rcpp::List::create(Rcpp::Named("beta1") = beta1,
+                             Rcpp::Named("beta2") = beta2,
+                             Rcpp::Named("b1") = b1,
+                             Rcpp::Named("b2") = b2,
+                             Rcpp::Named("omega1") = omega1,
+                             Rcpp::Named("omega2") = omega2,
+                             Rcpp::Named("its") = its,
+                             Rcpp::Named("lag") = lag,
+                             Rcpp::Named("burn-in") = burn_new,
+                             Rcpp::Named("p1") = p1,
+                             Rcpp::Named("p2") = p2,
+                             Rcpp::Named("q1") = q1,
+                             Rcpp::Named("q2") = q2);
+
+}
