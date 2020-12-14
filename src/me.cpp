@@ -157,6 +157,62 @@ arma::mat omega_samp(arma::mat b, arma::mat B, int v, int q, int N){
 
 }
 
+// ' Compute the Likelihood of the PN distribution (mixed effects)
+// '
+// ' @param X1 the model matrix of the first component
+// ' @param X2 the model matrix of the second component
+// ' @param theta a circular outcome value
+// ' @param b1 estimated linear coefficients of the first component
+// ' @param b2 estimated linear coefficients of the second component
+// ' @param n sample size
+// '
+// [[Rcpp::export]]
+
+Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin,
+                  Rcpp::List X1, Rcpp::List X2,
+                  Rcpp::List Z1, Rcpp::List Z2,
+                  arma::mat beta1, arma::mat beta2, arma::mat b1, arma::mat b2,
+                  int N, Rcpp::List pred, int iteration){
+
+  for (int i = 0; i < N; ++i){
+
+    arma::mat pred_tmp = pred[i];
+
+    arma::mat Z1_tmp = Z1[i];
+    arma::mat X1_tmp = X1[i];
+    arma::mat theta_cos_tmp = theta_cos[i];
+
+    arma::mat Z2_tmp = Z2[i];
+    arma::mat X2_tmp = X2[i];
+    arma::mat theta_sin_tmp = theta_sin[i];
+
+    arma::rowvec mub1 = beta1.t()*X1_tmp.t() + b1.row(i)*Z1_tmp.t();
+    arma::rowvec mub2 = beta2.t()*X2_tmp.t() + b2.row(i)*Z2_tmp.t();
+    arma::rowvec Dbd = theta_cos_tmp.t()%mub1 + theta_sin_tmp.t()%mub2;
+    arma::rowvec norm2 = arma::pow(mub1, 2) + arma::pow(mub2, 2);
+
+    int n = mub1.n_cols;
+    arma::vec c(n);
+    arma::vec L(n);
+
+    for (int j = 0; j < n; ++j){
+
+      double Dbd_tmp = Dbd.row(0)(j);
+
+      c(j) = 1 + ((Dbd_tmp*R::pnorm(Dbd_tmp, 0, 1, TRUE, FALSE))/R::dnorm(Dbd_tmp,0, 1, FALSE));
+      L(j) = (1/(2*pi))*exp(-0.5*norm2.row(0)(j))*c(j);
+
+    }
+
+    pred_tmp.row(iteration) = L.t();
+    pred[i] = pred_tmp;
+
+  }
+
+  return(pred);
+
+}
+
 //' A Gibbs sampler for a projected normal mixed-effects model
 //'
 //' @param theta A List with the circular dependent variable.
@@ -171,7 +227,7 @@ arma::mat omega_samp(arma::mat b, arma::mat B, int v, int q, int N){
 // [[Rcpp::export]]
 Rcpp::List pnme(List theta_cos, List theta_sin,
          List X1, List X2, List Z1, List Z2, List ZtZ1, List ZtZ2,
-         List R,
+         List R, Rcpp::List pred,
          int its, int lag, int burn,
          int N) {
 
@@ -272,6 +328,10 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
       omega1.slice(ii-1) = omega1_tmp.slice(it);
       omega2.slice(ii-1) = omega2_tmp.slice(it);
 
+      pred = lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2,
+                    beta1_tmp.col(it), beta2_tmp.col(it), b1_tmp.slice(it), b2_tmp.slice(it),
+                    N, pred, ii-1);
+
     }
 
   }
@@ -288,6 +348,7 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
                              Rcpp::Named("p1") = p1,
                              Rcpp::Named("p2") = p2,
                              Rcpp::Named("q1") = q1,
-                             Rcpp::Named("q2") = q2);
+                             Rcpp::Named("q2") = q2,
+                             Rcpp::Named("predictiva") = pred);
 
 }
