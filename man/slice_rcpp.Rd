@@ -4,7 +4,7 @@
 \alias{slice_rcpp}
 \title{A slice sampler for the latent lengths r}
 \usage{
-slice_rcpp(X1, X2, theta, b1, b2, n, r)
+slice_rcpp(X1, X2, theta, beta1, beta2, n, r)
 }
 \arguments{
 \item{X1}{A model matrix for component I.}
@@ -13,9 +13,9 @@ slice_rcpp(X1, X2, theta, b1, b2, n, r)
 
 \item{theta}{A vector with the circular dependent variable.}
 
-\item{b1}{A matrix containing the coefficients of component I for the current iteration.}
+\item{beta1}{A matrix containing the coefficients of component I for the current iteration.}
 
-\item{b2}{A matrix containing the coefficients of component II for the current iteration.}
+\item{beta2}{A matrix containing the coefficients of component II for the current iteration.}
 
 \item{n}{An integer indicating the sample size of the data.}
 

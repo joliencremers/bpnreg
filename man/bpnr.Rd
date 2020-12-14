@@ -56,9 +56,9 @@ A \code{bpnr} object, which can be further analyzed using the
   A \code{bpnr} object contains the following elements (some elements are not
   returned if not applicable)
 
-  \describe{ \item{\code{B1}}{A matrix of posterior samples for the
-  coefficients \code{B1} of the first component.} \item{\code{B2}}{A matrix
-  of posterior samples for the coefficients \code{B2} for the second
+  \describe{ \item{\code{beta1}}{A matrix of posterior samples for the
+  coefficients \code{beta1} of the first component.} \item{\code{beta2}}{A matrix
+  of posterior samples for the coefficients \code{beta2} for the second
   component.} \item{\code{Likelihood}}{A matrix containing the posterior
   density values for all individuals in the dataset for all iterations. The
   rowsums of this matrix are the likelihood values for all iterations}
@@ -83,9 +83,9 @@ A \code{bpnr} object, which can be further analyzed using the
   categorical variables and the intercept.} \item{\code{Call}}{The matched
   call.} \item{\code{lin.coef.I}}{The mean, mode, standard deviation and 95 %
   confidence interval of the highest posterior density of the linear
-  coefficients for \code{B1}.} \item{\code{lin.coef.II}}{The mean, mode,
+  coefficients for \code{beta1}.} \item{\code{lin.coef.II}}{The mean, mode,
   standard deviation and 95 % confidence interval of the highest posterior
-  density of the linear coefficients for \code{B2}.}
+  density of the linear coefficients for \code{beta2}.}
   \item{\code{circ.coef}}{The mean, mode, standard deviation and 95 %
   confidence interval of the highest posterior density for the \code{a.x},
   \code{a.c}, \code{b.c}, \code{AS}, \code{SAM} and \code{SSDO} of the

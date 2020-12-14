@@ -60,15 +60,15 @@ A \code{bpnme} object, which can be further analyzed using the
   A \code{bpnr} object contains the following elements (some elements are not
   returned if not applicable)
 
-  \describe{ \item{\code{Beta.I}}{A matrix of posterior samples for the fixed
-  effects coefficients for the first component.} \item{\code{Beta.II}}{A
+  \describe{ \item{\code{beta1}}{A matrix of posterior samples for the fixed
+  effects coefficients for the first component.} \item{\code{beta2}}{A
   matrix of posterior samples for the fixed effects coefficients for the
-  second component.} \item{\code{B.I}}{An array of posterior samples for the
-  random effects coefficients for the first component.} \item{\code{B.II}}{An
+  second component.} \item{\code{b1}}{An array of posterior samples for the
+  random effects coefficients for the first component.} \item{\code{b2}}{An
   array of posterior samples for the random effects coefficients for the
-  second component.} \item{\code{VCovI}}{An array of posterior samples for
+  second component.} \item{\code{omega1}}{An array of posterior samples for
   the random effect variances of the first component.}
-  \item{\code{VCovII}}{An array of posterior samples for the random effect
+  \item{\code{omega2}}{An array of posterior samples for the random effect
   variances of the second component.} \item{\code{predictiva}}{A list
   containing the posterior density values for all timepoints of individuals
   in the dataset for all iterations. The rowsums of this matrix are the
@@ -104,10 +104,10 @@ A \code{bpnme} object, which can be further analyzed using the
   length of the circular random intercept, a measure of concentration.}
   \item{\code{Call}}{The matched call.} \item{\code{lin.coef.I}}{The mean,
   mode, standard deviation and 95 % confidence interval of the highest
-  posterior density of the linear fixed effect coefficients for \code{B1}.}
+  posterior density of the linear fixed effect coefficients for \code{beta1}.}
   \item{\code{lin.coef.II}}{The mean, mode, standard deviation and 95 %
   confidence interval of the highest posterior density of the linear fixed
-  effect coefficients for \code{B2}.} \item{\code{circ.coef}}{The mean, mode,
+  effect coefficients for \code{beta2}.} \item{\code{circ.coef}}{The mean, mode,
   standard deviation and 95 % confidence interval of the highest posterior
   density for \code{a.x}, \code{a.c}, \code{SSDO}, and the circular fixed
   effect coefficients \code{b.c}, \code{AS}, and \code{SAM}}
