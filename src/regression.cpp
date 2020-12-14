@@ -29,16 +29,16 @@ const double pi = boost::math::constants::pi<double>();
 //' @param X1 the model matrix of the first component
 //' @param X2 the model matrix of the second component
 //' @param theta a circular outcome value
-//' @param b1 estimated linear coefficients of the first component
-//' @param b2 estimated linear coefficients of the second component
+//' @param beta1 estimated linear coefficients of the first component
+//' @param beta2 estimated linear coefficients of the second component
 //' @param n sample size
 //'
 //[[Rcpp::export]]
 
-arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat b1, arma::mat b2, int n){
+arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n){
 
-  arma::mat mub1 = b1*X1.t();
-  arma::mat mub2 = b2*X2.t();
+  arma::mat mub1 = beta1*X1.t();
+  arma::mat mub2 = beta2*X2.t();
   arma::mat Dbd = cos(theta)%mub1.t() + sin(theta)%mub2.t();
   arma::mat norm2 = arma::pow(mub1, 2) + arma::pow(mub2, 2);
   arma::vec L(n);
@@ -61,12 +61,12 @@ arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat b1, arm
 //'
 //[[Rcpp::export]]
 
-Rcpp::List DIC_reg(Rcpp::List Output, arma::mat X1, arma::mat X2){
+Rcpp::List DIC_reg(Rcpp::List output, arma::mat X1, arma::mat X2){
 
-  arma::vec theta = Rcpp::as<arma::vec>(Output["theta"]);
-  arma::mat B1 = Rcpp::as<arma::mat>(Output["B1"]);
-  arma::mat B2 = Rcpp::as<arma::mat>(Output["B2"]);
-  arma::mat Likelihood = Rcpp::as<arma::mat>(Output["Likelihood"]);
+  arma::vec theta = Rcpp::as<arma::vec>(output["theta"]);
+  arma::mat beta1 = Rcpp::as<arma::mat>(output["beta1"]);
+  arma::mat beta2 = Rcpp::as<arma::mat>(output["beta2"]);
+  arma::mat Likelihood = Rcpp::as<arma::mat>(output["Likelihood"]);
 
   double n = theta.n_elem;
   double p1 = X1.n_cols;
@@ -74,10 +74,10 @@ Rcpp::List DIC_reg(Rcpp::List Output, arma::mat X1, arma::mat X2){
 
   arma::mat u = arma::join_rows(cos(theta),sin(theta));
 
-  arma::mat m_B1 = arma::mean(B1, 0);
-  arma::mat m_B2 = arma::mean(B2, 0);
+  arma::mat m_beta1 = arma::mean(beta1, 0);
+  arma::mat m_beta2 = arma::mean(beta2, 0);
 
-  arma::vec Likelihood_m = lik_reg(X1, X2, theta, m_B1, m_B2, n);
+  arma::vec Likelihood_m = lik_reg(X1, X2, theta, m_beta1, m_beta2, n);
 
   arma::mat personsum = arma::sum(log(Likelihood), 1);
   double D_hat = arma::sum(log(Likelihood_m));
@@ -120,17 +120,17 @@ Rcpp::List DIC_reg(Rcpp::List Output, arma::mat X1, arma::mat X2){
 //' @param X1 A model matrix for component I.
 //' @param X2 A model matrix for component II.
 //' @param theta A vector with the circular dependent variable.
-//' @param b1 A matrix containing the coefficients of component I for the current iteration.
-//' @param b2 A matrix containing the coefficients of component II for the current iteration.
+//' @param beta1 A matrix containing the coefficients of component I for the current iteration.
+//' @param beta2 A matrix containing the coefficients of component II for the current iteration.
 //' @param n An integer indicating the sample size of the data.
 //' @param r A matrix with the estimates of r of the previous iteration.
 //'
 //[[Rcpp::export]]
 
-arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat b1, arma::mat b2, int n, arma::mat r){
+arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n, arma::mat r){
 
-  arma::mat mub1 = b1*X1.t();
-  arma::mat mub2 = b2*X2.t();
+  arma::mat mub1 = beta1*X1.t();
+  arma::mat mub2 = beta2*X2.t();
   arma::mat Dbd = cos(theta)%mub1.t() + sin(theta)%mub2.t();
   for (int jjj=0; jjj < n; ++jjj){
 
@@ -194,25 +194,13 @@ Rcpp::List pnr(arma::vec theta,
   int kk = bb + (its*lag);
 
   arma::mat r = arma::ones<arma::mat>(n,1);
-  arma::mat B1(kk, p1);
-  arma::mat B2(kk, p2);
-  arma::mat bc(kk, p1-1);
-  arma::mat SSDO(kk, p1-1);
-  arma::mat ac(kk, p1-1);
-  arma::mat ax(kk, p1-1);
-  arma::mat SAM(kk, p1-1);
-  arma::mat AS(kk, p1-1);
-  arma::mat Predictiva(kk, n);
+  arma::mat beta1_tmp(kk, p1);
+  arma::mat beta2_tmp(kk, p2);
+  arma::mat predictiva_tmp(kk, n);
 
-  arma::mat B1s(its, p1);
-  arma::mat B2s(its, p2);
-  arma::mat bcs(its, p1-1);
-  arma::mat SSDOs(its, p1-1);
-  arma::mat acs(its, p1-1);
-  arma::mat axs(its, p1-1);
-  arma::mat SAMs(its, p1-1);
-  arma::mat ASs(its, p1-1);
-  arma::mat Predictivas(its, n);
+  arma::mat beta1(its, p1);
+  arma::mat beta2(its, p2);
+  arma::mat predictiva(its, n);
 
   arma::mat Y = r%datose.each_col();
 
@@ -225,20 +213,16 @@ Rcpp::List pnr(arma::vec theta,
     arma::mat mstar2 = sigma2*(v2mu2 + XtY2);
 
     //Sample coefficients
-    arma::mat b1 = mvrnorm_arma_eigen(1, mstar1.col(0), sigma1).t();
-    arma::mat b2 = mvrnorm_arma_eigen(1, mstar2.col(0), sigma2).t();
+    beta1_tmp.row(iii) = mvrnorm_arma_eigen(1, mstar1.col(0), sigma1).t();
+    beta2_tmp.row(iii) = mvrnorm_arma_eigen(1, mstar2.col(0), sigma2).t();
 
     //Sample R
-    r = slice_rcpp(X1, X2, theta, b1, b2, n, r);
+    r = slice_rcpp(X1, X2, theta, beta1_tmp.row(iii), beta2_tmp.row(iii), n, r);
 
     //Compute Y
     Y = r%datose.each_col();
 
-    //Fill posterior coefficient matrices
-    B1.row(iii) = b1;
-    B2.row(iii) = b2;
-
-    Predictiva.row(iii) = lik_reg(X1, X2, theta, b1, b2, n).t();
+    predictiva_tmp.row(iii) = lik_reg(X1, X2, theta, beta1_tmp.row(iii), beta2_tmp.row(iii), n).t();
 
   }
 
@@ -246,14 +230,15 @@ Rcpp::List pnr(arma::vec theta,
 
     int index = (i*lag) + bb;
 
-    B1s.row(i) = B1.row(index);
-    B2s.row(i) = B2.row(index);
-    Predictivas.row(i) = Predictiva.row(index);
+    beta1.row(i) = beta1_tmp.row(index);
+    beta2.row(i) = beta2_tmp.row(index);
+    predictiva.row(i) = Predictiva_tmp.row(index);
+
   }
 
-  return  Rcpp::List::create(Rcpp::Named("B1") = B1s,
-                             Rcpp::Named("B2") = B2s,
-                             Rcpp::Named("Likelihood") = Predictivas,
+  return  Rcpp::List::create(Rcpp::Named("beta1") = beta1,
+                             Rcpp::Named("beta2") = beta2,
+                             Rcpp::Named("Likelihood") = predictiva,
                              Rcpp::Named("its") = its,
                              Rcpp::Named("lag") = lag,
                              Rcpp::Named("burn-in") = burn,
