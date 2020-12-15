@@ -157,15 +157,22 @@ arma::mat omega_samp(arma::mat b, arma::mat B, int v, int q, int N){
 
 }
 
-// ' Compute the Likelihood of the PN distribution (mixed effects)
-// '
-// ' @param X1 the model matrix of the first component
-// ' @param X2 the model matrix of the second component
-// ' @param theta a circular outcome value
-// ' @param b1 estimated linear coefficients of the first component
-// ' @param b2 estimated linear coefficients of the second component
-// ' @param n sample size
-// '
+//' Compute the Likelihood of the PN distribution (mixed effects)
+//'
+//' @param theta_cos A List with the cosine of the circular dependent variable.
+//' @param theta_sin A List with the sine of the circular dependent variable.
+//' @param X1 A list of fixed effect model matrices for component I.
+//' @param X2 A list of fixed effect model matrices for component II.
+//' @param Z1 A list of random effect model matrices for component I.
+//' @param Z2 A list of random effect model matrices for component II.
+//' @param beta1 estimated fixed effect coefficients of the first component
+//' @param beta2 estimated fixed effect coefficients of the second component
+//' @param b1 estimated random effect coefficients of the first component
+//' @param b2 estimated random effect coefficients of the second component
+//' @param pred An empty list for likelihood computation.
+//' @param N sample size at second level
+//' @param iteration iteration number
+//'
 // [[Rcpp::export]]
 
 Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin,
@@ -215,14 +222,20 @@ Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin,
 
 //' A Gibbs sampler for a projected normal mixed-effects model
 //'
-//' @param theta A List with the circular dependent variable.
+//' @param theta_cos A List with the cosine of the circular dependent variable.
+//' @param theta_sin A List with the sine of the circular dependent variable.
 //' @param X1 A list of fixed effect model matrices for component I.
 //' @param X2 A list of fixed effect model matrices for component II.
 //' @param Z1 A list of random effect model matrices for component I.
 //' @param Z2 A list of random effect model matrices for component II.
+//' @param ZtZ1 A list of transformed random effect model matrices for component I.
+//' @param ZtZ2 A list of transformed random effect model matrices for component II.
+//' @param R A list of starting values for R.
+//' @param pred An empty list for likelihood computation.
 //' @param its An integer specifying the number of iterations
 //' @param lag An integer specifying the amount of lag.
 //' @param burn An integer specifying the number of burn-in iterations.
+//' @param N An integer specifying the number of burn-in iterations.
 //'
 // [[Rcpp::export]]
 Rcpp::List pnme(List theta_cos, List theta_sin,
