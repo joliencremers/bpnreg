@@ -316,7 +316,7 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
 
     }
 
-    if (it - burn_new > 0 & (it-burn_new) % lag == 0){
+    if ((it - burn_new > 0) & ((it-burn_new) % lag == 0)){
 
       int ii = (it - burn_new) / lag;
       Rcout << "Iteration:" << ii << "\n";
