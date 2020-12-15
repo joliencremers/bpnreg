@@ -940,9 +940,10 @@ fit.bpnme <- function(object){
   rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
   mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in%
                                c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
-  mf[,2] <- c(object$p1 + object$p2 + (object$N*2),
-              object$model.fit[dimnames(object$model.fit)[[2]] %in%
-                                 c("pD", "pV", "pWAIC", "pWAIC2")])
+  object$model.fit[dimnames(object$model.fit)[[2]] %in% c("pD", "pV", "pWAIC", "pWAIC2")]
+  # mf[,2] <- c(object$p1 + object$p2 + (object$N*2),
+  #             object$model.fit[dimnames(object$model.fit)[[2]] %in%
+  #                                c("pD", "pV", "pWAIC", "pWAIC2")])
   as.data.frame(mf)
 
 }
