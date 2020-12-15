@@ -22,6 +22,10 @@ pnme(
 )
 }
 \arguments{
+\item{theta_cos}{A List with the cosine of the circular dependent variable.}
+
+\item{theta_sin}{A List with the sine of the circular dependent variable.}
+
 \item{X1}{A list of fixed effect model matrices for component I.}
 
 \item{X2}{A list of fixed effect model matrices for component II.}
@@ -30,13 +34,21 @@ pnme(
 
 \item{Z2}{A list of random effect model matrices for component II.}
 
+\item{ZtZ1}{A list of transformed random effect model matrices for component I.}
+
+\item{ZtZ2}{A list of transformed random effect model matrices for component II.}
+
+\item{R}{A list of starting values for R.}
+
+\item{pred}{An empty list for likelihood computation.}
+
 \item{its}{An integer specifying the number of iterations}
 
 \item{lag}{An integer specifying the amount of lag.}
 
 \item{burn}{An integer specifying the number of burn-in iterations.}
 
-\item{theta}{A List with the circular dependent variable.}
+\item{N}{An integer specifying the number of burn-in iterations.}
 }
 \description{
 A Gibbs sampler for a projected normal mixed-effects model
