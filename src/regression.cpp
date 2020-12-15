@@ -55,7 +55,7 @@ arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, 
 
 //' Compute Model Fit Measures Regression Model
 //'
-//' @param Output output from the circular regression function Regression()
+//' @param output output from the circular regression function Regression()
 //' @param X1 model matrix for the first component
 //' @param X2 model matrix for the second component
 //'
@@ -148,8 +148,8 @@ arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta
 //' A Gibbs sampler for a projected normal regression model
 //'
 //' @param theta A vector with the circular dependent variable.
-//' @param X1r A model matrix for component I.
-//' @param X2r A model matrix for component II.
+//' @param X1 A model matrix for component I.
+//' @param X2 A model matrix for component II.
 //' @param its An integer specifying the number of iterations
 //' @param lag An integer specifying the amount of lag.
 //' @param burn An integer specifying the number of burn-in iterations.
@@ -157,12 +157,9 @@ arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta
 // [[Rcpp::export]]
 
 Rcpp::List pnr(arma::vec theta,
-               NumericMatrix X1r,
-               NumericMatrix X2r,
+               arma::mat X1,
+               arma::mat X2,
                int its, int lag, int burn) {
-
-  arma::mat X1 = Rcpp::as<arma::mat>(X1r);
-  arma::mat X2 = Rcpp::as<arma::mat>(X2r);
 
   double n = theta.n_elem;
   double p1 = X1.n_cols;

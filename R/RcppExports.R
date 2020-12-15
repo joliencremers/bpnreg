@@ -56,10 +56,10 @@ lik_me <- function(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N
 #' A Gibbs sampler for a projected normal mixed-effects model
 #'
 #' @param theta A List with the circular dependent variable.
-#' @param X1r A list of fixed effect model matrices for component I.
-#' @param X2r A list of fixed effect model matrices for component II.
-#' @param X1r A list of random effect model matrices for component I.
-#' @param X2r A list of random effect model matrices for component II.
+#' @param X1 A list of fixed effect model matrices for component I.
+#' @param X2 A list of fixed effect model matrices for component II.
+#' @param Z1 A list of random effect model matrices for component I.
+#' @param Z2 A list of random effect model matrices for component II.
 #' @param its An integer specifying the number of iterations
 #' @param lag An integer specifying the amount of lag.
 #' @param burn An integer specifying the number of burn-in iterations.
@@ -83,7 +83,7 @@ lik_reg <- function(X1, X2, theta, beta1, beta2, n) {
 
 #' Compute Model Fit Measures Regression Model
 #'
-#' @param Output output from the circular regression function Regression()
+#' @param output output from the circular regression function Regression()
 #' @param X1 model matrix for the first component
 #' @param X2 model matrix for the second component
 #'
@@ -108,14 +108,14 @@ slice_rcpp <- function(X1, X2, theta, beta1, beta2, n, r) {
 #' A Gibbs sampler for a projected normal regression model
 #'
 #' @param theta A vector with the circular dependent variable.
-#' @param X1r A model matrix for component I.
-#' @param X2r A model matrix for component II.
+#' @param X1 A model matrix for component I.
+#' @param X2 A model matrix for component II.
 #' @param its An integer specifying the number of iterations
 #' @param lag An integer specifying the amount of lag.
 #' @param burn An integer specifying the number of burn-in iterations.
 #'
-pnr <- function(theta, X1r, X2r, its, lag, burn) {
-    .Call(`_bpnreg_pnr`, theta, X1r, X2r, its, lag, burn)
+pnr <- function(theta, X1, X2, its, lag, burn) {
+    .Call(`_bpnreg_pnr`, theta, X1, X2, its, lag, burn)
 }
 
 #' Compute a mean resultant length

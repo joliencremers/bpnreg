@@ -22,6 +22,14 @@ pnme(
 )
 }
 \arguments{
+\item{X1}{A list of fixed effect model matrices for component I.}
+
+\item{X2}{A list of fixed effect model matrices for component II.}
+
+\item{Z1}{A list of random effect model matrices for component I.}
+
+\item{Z2}{A list of random effect model matrices for component II.}
+
 \item{its}{An integer specifying the number of iterations}
 
 \item{lag}{An integer specifying the amount of lag.}
@@ -29,10 +37,6 @@ pnme(
 \item{burn}{An integer specifying the number of burn-in iterations.}
 
 \item{theta}{A List with the circular dependent variable.}
-
-\item{X1r}{A list of random effect model matrices for component I.}
-
-\item{X2r}{A list of random effect model matrices for component II.}
 }
 \description{
 A Gibbs sampler for a projected normal mixed-effects model

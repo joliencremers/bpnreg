@@ -216,10 +216,10 @@ Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin,
 //' A Gibbs sampler for a projected normal mixed-effects model
 //'
 //' @param theta A List with the circular dependent variable.
-//' @param X1r A list of fixed effect model matrices for component I.
-//' @param X2r A list of fixed effect model matrices for component II.
-//' @param X1r A list of random effect model matrices for component I.
-//' @param X2r A list of random effect model matrices for component II.
+//' @param X1 A list of fixed effect model matrices for component I.
+//' @param X2 A list of fixed effect model matrices for component II.
+//' @param Z1 A list of random effect model matrices for component I.
+//' @param Z2 A list of random effect model matrices for component II.
 //' @param its An integer specifying the number of iterations
 //' @param lag An integer specifying the amount of lag.
 //' @param burn An integer specifying the number of burn-in iterations.

@@ -152,18 +152,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // pnr
-Rcpp::List pnr(arma::vec theta, NumericMatrix X1r, NumericMatrix X2r, int its, int lag, int burn);
-RcppExport SEXP _bpnreg_pnr(SEXP thetaSEXP, SEXP X1rSEXP, SEXP X2rSEXP, SEXP itsSEXP, SEXP lagSEXP, SEXP burnSEXP) {
+Rcpp::List pnr(arma::vec theta, arma::mat X1, arma::mat X2, int its, int lag, int burn);
+RcppExport SEXP _bpnreg_pnr(SEXP thetaSEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP itsSEXP, SEXP lagSEXP, SEXP burnSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X1r(X1rSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X2r(X2rSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X2(X2SEXP);
     Rcpp::traits::input_parameter< int >::type its(itsSEXP);
     Rcpp::traits::input_parameter< int >::type lag(lagSEXP);
     Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
-    rcpp_result_gen = Rcpp::wrap(pnr(theta, X1r, X2r, its, lag, burn));
+    rcpp_result_gen = Rcpp::wrap(pnr(theta, X1, X2, its, lag, burn));
     return rcpp_result_gen;
 END_RCPP
 }
