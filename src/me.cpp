@@ -279,8 +279,8 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
   arma::mat beta2_tmp(p2,tm);
   arma::cube b1_tmp(N,q1,tm);
   arma::cube b2_tmp(N,q2,tm);
-  arma::cube omega1_tmp(q1,q1,tm);
-  arma::cube omega2_tmp(q2,q2,tm);
+  arma::cube omega1_tmp(q1,q1,tm + 1);
+  arma::cube omega2_tmp(q2,q2,tm + 1);
 
 
   //Set starting values
@@ -338,8 +338,8 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
       beta2.col(ii) = beta2_tmp.col(it);
       b1.slice(ii) = b1_tmp.slice(it);
       b2.slice(ii) = b2_tmp.slice(it);
-      omega1.slice(ii) = omega1_tmp.slice(it);
-      omega2.slice(ii) = omega2_tmp.slice(it);
+      omega1.slice(ii) = omega1_tmp.slice(it + 1);
+      omega2.slice(ii) = omega2_tmp.slice(it + 1);
 
       pred = lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2,
                     beta1_tmp.col(it), beta2_tmp.col(it), b1_tmp.slice(it), b2_tmp.slice(it),
