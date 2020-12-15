@@ -54,7 +54,6 @@ A \code{bpnme} object, which can be further analyzed using the
   associated functions \code{\link{traceplot.bpnme}},
   \code{\link{BFc.bpnme}}, \code{\link{coef_lin.bpnme}},
   \code{\link{coef_circ.bpnme}}, \code{\link{coef_ran.bpnme}},
-  \code{\link{residuals.bpnme}}, \code{\link{predict.bpnme}},
   \code{\link{fit.bpnme}} and \code{\link{print.bpnme}}.
 
   A \code{bpnr} object contains the following elements (some elements are not

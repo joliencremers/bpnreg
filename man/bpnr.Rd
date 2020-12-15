@@ -50,7 +50,6 @@ bpnr(
 A \code{bpnr} object, which can be further analyzed using the
   associated functions \code{\link{traceplot.bpnr}}, \code{\link{BFc.bpnr}},
   \code{\link{coef_lin.bpnr}}, \code{\link{coef_circ.bpnr}},
-  \code{\link{residuals.bpnr}} ,\code{\link{predict.bpnr}},
   \code{\link{fit.bpnr}} and \code{\link{print.bpnr}}.
 
   A \code{bpnr} object contains the following elements (some elements are not
