@@ -898,7 +898,7 @@ sumr <- function(output, mm){
        circ.res.means = circ.res.means,
        a.x = a.x, a.c = a.c, b.c = b.c,
        SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
-       B1 = output$beta1, B2 = output$beta2,
+       beta1 = output$beta1, beta2 = output$beta2,
        model.fit = model.fit, var.num = var.num, var.cat = var.cat)
 
 }
