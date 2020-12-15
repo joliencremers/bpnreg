@@ -4,14 +4,14 @@
 \alias{pnr}
 \title{A Gibbs sampler for a projected normal regression model}
 \usage{
-pnr(theta, X1r, X2r, its, lag, burn)
+pnr(theta, X1, X2, its, lag, burn)
 }
 \arguments{
 \item{theta}{A vector with the circular dependent variable.}
 
-\item{X1r}{A model matrix for component I.}
+\item{X1}{A model matrix for component I.}
 
-\item{X2r}{A model matrix for component II.}
+\item{X2}{A model matrix for component II.}
 
 \item{its}{An integer specifying the number of iterations}
 

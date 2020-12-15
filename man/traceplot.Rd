@@ -9,17 +9,17 @@ traceplot(object, parameter = "SAM", variable = NULL)
 \arguments{
 \item{object}{an object used to select a method.}
 
-\item{parameter}{one of \code{c("B1", "B2", Beta.I", "Beta.II", a.x", "a.c",
-"b.c", "SAM", "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS")}
-to indicate for which parameter a traceplot is required. \code{B1},
-\code{Beta.I}, \code{B2} and \code{Beta.II} are the linear intercepts and
-coefficients of the first and second component for a regression model and
-the fixed effects coefficients of a mixed-effects model. \code{circ.diff}
-are the circular differences with the intercept on the outcome variable for
-the different levels of categorical variables. \code{VCovI} and
-\code{VCovII} are the linear random effect variances and \code{cRI} and
-\code{cRS} are the variances of the circular random intercept and circular
-random slope.}
+\item{parameter}{one of \code{c("b1", "b2", beta1", "beta2", a.x", "a.c",
+"b.c", "SAM", "AS", "SSDO", "circ.diff", "omega1", "omega2", "cRI", "cRS")}
+to indicate for which parameter a traceplot is required. \code{beta1} and
+\code{beta2} are the linear intercepts and coefficients of the first and
+second component for a regression model and the fixed effects coefficients
+of a mixed-effects model. \code{b1} and \code{b2} are the random effects
+coefficients of a mixed-effects model. \code{circ.diff} are the circular
+differences with the intercept on the outcome variable for the different
+levels of categorical variables. \code{omega1} and \code{omega2} are the
+linear random effect variances and \code{cRI} and \code{cRS} are the
+variances of the circular random intercept and circular random slope.}
 
 \item{variable}{a character string with variable name(s) to indicate for
 which variable(s) a traceplot is required.}
