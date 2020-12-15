@@ -295,8 +295,8 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
     beta2_tmp.col(it) = betaBlock(omega2_tmp.slice(it), theta_sin, R_tmp, X2, Z2, p2, A2, N);
     b1_tmp.slice(it) = b_samp(omega1_tmp.slice(it), beta1_tmp.col(it), theta_cos, R_tmp, X1, q1, Z1, ZtZ1, N);
     b2_tmp.slice(it) = b_samp(omega2_tmp.slice(it), beta2_tmp.col(it), theta_sin, R_tmp, X2, q2, Z2, ZtZ2, N);
-    omega1_tmp.slice(it) = omega_samp(b1_tmp.slice(it), B1, v1, q1, N);
-    omega2_tmp.slice(it) = omega_samp(b2_tmp.slice(it), B2, v2, q2, N);
+    omega1_tmp.slice(it + 1) = omega_samp(b1_tmp.slice(it), B1, v1, q1, N);
+    omega2_tmp.slice(it + 1) = omega_samp(b2_tmp.slice(it), B2, v2, q2, N);
 
     //Sample latent lengths
     for (int i = 0; i < N; ++i){
