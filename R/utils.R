@@ -1,3 +1,14 @@
+#' Compute utmu
+#'
+#' @param t current outcome value
+#' @param mu1 current predicted linear mean of the first component
+#' @param mu2 current predicted linear mean of the second component
+#'
+#' @keywords internal
+#'
+
+Dbd <- function(t, mu1, mu2){ cos(t)*mu1 + sin(t)*mu2 }
+
 #' Check whether a variable is categorical
 #'
 #' \code{cat_check} checks whether a vector contains only 0 and 1 and thus is a
