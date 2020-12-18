@@ -346,7 +346,7 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
 
       pred = lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2,
                     beta1_tmp.col(it), beta2_tmp.col(it), b1_tmp.slice(it), b2_tmp.slice(it),
-                    N, pred, ii);
+                    N, pred, ii-1);
 
     }
 
