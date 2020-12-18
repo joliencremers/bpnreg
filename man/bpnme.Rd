@@ -136,8 +136,9 @@ Because the model is based on the projected normal distribution, a
   components. By default the model equation of the second component
   \code{pred.II} is set to be equal to that of the first component. Note that
   the circular outcome needs to be measured in radians on a scale from 0 to
-  2\eqn{\pi}. For more information about the projected normal distribution see
-  Presnell, Morrisson & Littell (1998).
+  2\eqn{\pi}. For more information about the projected normal distribution
+  see Presnell, Morrisson & Littell (1998). The model can handle at most one
+  grouping factor.
 
   A tutorial on how to use this function can be found in Cremers & Klugkist
   (2018). More details on the sampling algorithm and interpretation of the
