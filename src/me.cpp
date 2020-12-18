@@ -286,8 +286,8 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
 
   arma::mat beta1_tmp;
   arma::mat beta2_tmp;
-  arma::cube b1_tmp;
-  arma::cube b2_tmp;
+  arma::mat b1_tmp;
+  arma::mat b2_tmp;
   arma::mat omega1_tmp;
   arma::mat omega2_tmp;
 
