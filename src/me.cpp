@@ -275,28 +275,39 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
   arma::cube omega1(q1,q1,its);
   arma::cube omega2(q2,q2,its);
 
-  arma::mat beta1_tmp(p1,tm);
-  arma::mat beta2_tmp(p2,tm);
-  arma::cube b1_tmp(N,q1,tm);
-  arma::cube b2_tmp(N,q2,tm);
-  arma::cube omega1_tmp(q1,q1,tm + 1);
-  arma::cube omega2_tmp(q2,q2,tm + 1);
+  // arma::mat beta1_tmp(p1,tm);
+  // arma::mat beta2_tmp(p2,tm);
+  // arma::cube b1_tmp(N,q1,tm);
+  // arma::cube b2_tmp(N,q2,tm);
+  // arma::cube omega1_tmp(q1,q1,tm + 1);
+  // arma::cube omega2_tmp(q2,q2,tm + 1);
 
+
+
+  arma::mat beta1_tmp;
+  arma::mat beta2_tmp;
+  arma::cube b1_tmp;
+  arma::cube b2_tmp;
+  arma::mat omega1_tmp;
+  arma::mat omega2_tmp;
 
   //Set starting values
 
-  omega1_tmp.slice(0) = arma::eye(q1,q1);
-  omega2_tmp.slice(0) = arma::eye(q2,q2);
+  omega1_tmp = arma::eye(q1,q1);
+  omega2_tmp = arma::eye(q2,q2);
+
+  // omega1_tmp.slice(0) = arma::eye(q1,q1);
+  // omega2_tmp.slice(0) = arma::eye(q2,q2);
   Rcpp::List R_tmp = R;
 
   for (int it = 0; it < tm ; ++ it){
 
-    beta1_tmp.col(it) = betaBlock(omega1_tmp.slice(it), theta_cos, R_tmp, X1, Z1, p1, A1, N);
-    beta2_tmp.col(it) = betaBlock(omega2_tmp.slice(it), theta_sin, R_tmp, X2, Z2, p2, A2, N);
-    b1_tmp.slice(it) = b_samp(omega1_tmp.slice(it), beta1_tmp.col(it), theta_cos, R_tmp, X1, q1, Z1, ZtZ1, N);
-    b2_tmp.slice(it) = b_samp(omega2_tmp.slice(it), beta2_tmp.col(it), theta_sin, R_tmp, X2, q2, Z2, ZtZ2, N);
-    omega1_tmp.slice(it + 1) = omega_samp(b1_tmp.slice(it), B1, v1, q1, N);
-    omega2_tmp.slice(it + 1) = omega_samp(b2_tmp.slice(it), B2, v2, q2, N);
+    beta1_tmp = betaBlock(omega1_tmp, theta_cos, R_tmp, X1, Z1, p1, A1, N);
+    beta2_tmp = betaBlock(omega2_tmp, theta_sin, R_tmp, X2, Z2, p2, A2, N);
+    b1_tmp = b_samp(omega1_tmp, beta1_tmp, theta_cos, R_tmp, X1, q1, Z1, ZtZ1, N);
+    b2_tmp = b_samp(omega2_tmp, beta2_tmp, theta_sin, R_tmp, X2, q2, Z2, ZtZ2, N);
+    omega1_tmp.slice = omega_samp(b1_tmp, B1, v1, q1, N);
+    omega2_tmp.slice = omega_samp(b2_tmp, B2, v2, q2, N);
 
     //Sample latent lengths
     for (int i = 0; i < N; ++i){
@@ -311,8 +322,10 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
       arma::mat X2_tmp = X2[i];
       arma::mat theta_sin_tmp = theta_sin[i];
 
-      arma::rowvec mub1 = beta1_tmp.col(it).t()*X1_tmp.t() + b1_tmp.row(i)(it)*Z1_tmp.t();
-      arma::rowvec mub2 = beta2_tmp.col(it).t()*X2_tmp.t() + b2_tmp.row(i)(it)*Z2_tmp.t();
+      arma::rowvec mub1 = beta1_tmp.t()*X1_tmp.t() + b1_tmp.row(i)*Z1_tmp.t();
+      arma::rowvec mub2 = beta2_tmp.t()*X2_tmp.t() + b2_tmp.row(i)*Z2_tmp.t();
+      // arma::rowvec mub1 = beta1_tmp.col(it).t()*X1_tmp.t() + b1_tmp.row(i)(it)*Z1_tmp.t();
+      // arma::rowvec mub2 = beta2_tmp.col(it).t()*X2_tmp.t() + b2_tmp.row(i)(it)*Z2_tmp.t();
       arma::rowvec b = theta_cos_tmp.t()%mub1 + theta_sin_tmp.t()%mub2;
 
       for (int j = 0; j < R_temp.n_elem; ++j){
@@ -337,33 +350,33 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
       int ii = (it + 1 - burn_new) / lag;
       Rcout << "Iteration:" << ii << "\n";
 
-      // beta1.col(ii) = beta1_tmp.col(it);
-      // beta2.col(ii) = beta2_tmp.col(it);
-      // b1.slice(ii) = b1_tmp.slice(it);
-      // b2.slice(ii) = b2_tmp.slice(it);
-      // omega1.slice(ii) = omega1_tmp.slice(it + 1);
-      // omega2.slice(ii) = omega2_tmp.slice(it + 1);
+      beta1.col(ii) = beta1_tmp;
+      beta2.col(ii) = beta2_tmp;
+      b1.slice(ii) = b1_tmp;
+      b2.slice(ii) = b2_tmp;
+      omega1.slice(ii) = omega1_tmp;
+      omega2.slice(ii) = omega2_tmp;
 
       pred = lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2,
-                    beta1_tmp.col(it), beta2_tmp.col(it), b1_tmp.slice(it), b2_tmp.slice(it),
+                    beta1_tmp, beta2_tmp, b1_tmp, b2_tmp,
                     N, pred, ii-1);
 
     }
 
   }
 
-  for(int ii=0; ii < its; ++ii){
-
-    int index = (ii*lag) + burn_new;
-
-    beta1.col(ii) = beta1_tmp.col(index);
-    beta2.col(ii) = beta2_tmp.col(index);
-    b1.slice(ii) = b1_tmp.slice(index);
-    b2.slice(ii) = b2_tmp.slice(index);
-    omega1.slice(ii) = omega1_tmp.slice(index + 1);
-    omega2.slice(ii) = omega2_tmp.slice(index + 1);
-
-  }
+  // for(int ii=0; ii < its; ++ii){
+  //
+  //   int index = (ii*lag) + burn_new;
+  //
+  //   beta1.col(ii) = beta1_tmp.col(index);
+  //   beta2.col(ii) = beta2_tmp.col(index);
+  //   b1.slice(ii) = b1_tmp.slice(index);
+  //   b2.slice(ii) = b2_tmp.slice(index);
+  //   omega1.slice(ii) = omega1_tmp.slice(index + 1);
+  //   omega2.slice(ii) = omega2_tmp.slice(index + 1);
+  //
+  // }
 
 
   return  Rcpp::List::create(Rcpp::Named("beta1") = beta1,
