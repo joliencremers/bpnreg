@@ -187,13 +187,13 @@ Rcpp::List pnr(arma::vec theta,
 
   //Initialize matrices for results
 
-  int bb = burn*lag;
-  int kk = bb + (its*lag);
+  int burn_new = burn*lag;
+  int tm = burn_new + (its*lag);
 
   arma::mat r = arma::ones<arma::mat>(n,1);
-  arma::mat beta1_tmp(kk, p1);
-  arma::mat beta2_tmp(kk, p2);
-  arma::mat predictiva_tmp(kk, n);
+  arma::mat beta1_tmp(tm, p1);
+  arma::mat beta2_tmp(tm, p2);
+  arma::mat predictiva_tmp(tm, n);
 
   arma::mat beta1(its, p1);
   arma::mat beta2(its, p2);
@@ -202,7 +202,7 @@ Rcpp::List pnr(arma::vec theta,
   arma::mat Y = r%datose.each_col();
 
   //Gibbs iterations
-  for(int iii=0; iii < kk; ++iii){
+  for(int iii=0; iii < tm; ++iii){
 
     arma::mat XtY1 = X1.t()*Y.col(0);
     arma::mat XtY2 = X2.t()*Y.col(1);
@@ -225,7 +225,7 @@ Rcpp::List pnr(arma::vec theta,
 
   for(int i=0; i < its; ++i){
 
-    int index = (i*lag) + bb;
+    int index = (i*lag) + burn_new;
 
     beta1.row(i) = beta1_tmp.row(index);
     beta2.row(i) = beta2_tmp.row(index);

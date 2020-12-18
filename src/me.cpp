@@ -329,17 +329,20 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
 
     }
 
+
+
+
     if ((it + 1 - burn_new > 0) & ((it + 1 -burn_new) % lag == 0)){
 
       int ii = (it + 1 - burn_new) / lag;
       Rcout << "Iteration:" << ii << "\n";
 
-      beta1.col(ii) = beta1_tmp.col(it);
-      beta2.col(ii) = beta2_tmp.col(it);
-      b1.slice(ii) = b1_tmp.slice(it);
-      b2.slice(ii) = b2_tmp.slice(it);
-      omega1.slice(ii) = omega1_tmp.slice(it + 1);
-      omega2.slice(ii) = omega2_tmp.slice(it + 1);
+      // beta1.col(ii) = beta1_tmp.col(it);
+      // beta2.col(ii) = beta2_tmp.col(it);
+      // b1.slice(ii) = b1_tmp.slice(it);
+      // b2.slice(ii) = b2_tmp.slice(it);
+      // omega1.slice(ii) = omega1_tmp.slice(it + 1);
+      // omega2.slice(ii) = omega2_tmp.slice(it + 1);
 
       pred = lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2,
                     beta1_tmp.col(it), beta2_tmp.col(it), b1_tmp.slice(it), b2_tmp.slice(it),
@@ -348,6 +351,20 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
     }
 
   }
+
+  for(int ii=0; ii < its; ++ii){
+
+    int index = (ii*lag) + burn_new;
+
+    beta1.col(ii) = beta1_tmp.col(index);
+    beta2.col(ii) = beta2_tmp.col(index);
+    b1.slice(ii) = b1_tmp.slice(index);
+    b2.slice(ii) = b2_tmp.slice(index);
+    omega1.slice(ii) = omega1_tmp.slice(index + 1);
+    omega2.slice(ii) = omega2_tmp.slice(index + 1);
+
+  }
+
 
   return  Rcpp::List::create(Rcpp::Named("beta1") = beta1,
                              Rcpp::Named("beta2") = beta2,
