@@ -350,12 +350,12 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
       int ii = (it + 1 - burn_new) / lag;
       Rcout << "Iteration:" << ii << "\n";
 
-      beta1.col(ii) = beta1_tmp;
-      beta2.col(ii) = beta2_tmp;
-      b1.slice(ii) = b1_tmp;
-      b2.slice(ii) = b2_tmp;
-      omega1.slice(ii) = omega1_tmp;
-      omega2.slice(ii) = omega2_tmp;
+      beta1.col(ii-1) = beta1_tmp;
+      beta2.col(ii-1) = beta2_tmp;
+      b1.slice(ii-1) = b1_tmp;
+      b2.slice(ii-1) = b2_tmp;
+      omega1.slice(ii-1) = omega1_tmp;
+      omega2.slice(ii-1) = omega2_tmp;
 
       pred = lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2,
                     beta1_tmp, beta2_tmp, b1_tmp, b2_tmp,
