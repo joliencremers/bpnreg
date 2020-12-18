@@ -10,9 +10,9 @@
 \item{object}{a \code{bpnr object} obtained from the function
 \code{\link{bpnr}}}
 
-\item{parameter}{one of \code{c("B1", "B2", "a.x", "a.c", "b.c", "SAM", "AS",
+\item{parameter}{one of \code{c("beta1", "beta2", "a.x", "a.c", "b.c", "SAM", "AS",
 "SSDO", "circ.diff")} to indicate for which parameter a traceplot is
-required. \code{B1} and \code{B2} are the linear intercepts and
+required. \code{beta1} and \code{beta2} are the linear intercepts and
 coefficients of the first and second component. \code{circ.diff} are the
 circular differences with the intercept on the outcome variable for the
 different levels of categorical variables.}
@@ -27,6 +27,6 @@ General plot function for a \code{bpnr object}.
 library(bpnreg)
 fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
 its = 100, burn = 10, n.lag = 3)
-traceplot(fit.Motor, parameter = "B1")
+traceplot(fit.Motor, parameter = "beta1")
 
 }

@@ -27,15 +27,14 @@
 #' @return A \code{bpnr} object, which can be further analyzed using the
 #'   associated functions \code{\link{traceplot.bpnr}}, \code{\link{BFc.bpnr}},
 #'   \code{\link{coef_lin.bpnr}}, \code{\link{coef_circ.bpnr}},
-#'   \code{\link{residuals.bpnr}} ,\code{\link{predict.bpnr}},
 #'   \code{\link{fit.bpnr}} and \code{\link{print.bpnr}}.
 #'
 #'   A \code{bpnr} object contains the following elements (some elements are not
 #'   returned if not applicable)
 #'
-#'   \describe{ \item{\code{B1}}{A matrix of posterior samples for the
-#'   coefficients \code{B1} of the first component.} \item{\code{B2}}{A matrix
-#'   of posterior samples for the coefficients \code{B2} for the second
+#'   \describe{ \item{\code{beta1}}{A matrix of posterior samples for the
+#'   coefficients \code{beta1} of the first component.} \item{\code{beta2}}{A matrix
+#'   of posterior samples for the coefficients \code{beta2} for the second
 #'   component.} \item{\code{Likelihood}}{A matrix containing the posterior
 #'   density values for all individuals in the dataset for all iterations. The
 #'   rowsums of this matrix are the likelihood values for all iterations}
@@ -60,9 +59,9 @@
 #'   categorical variables and the intercept.} \item{\code{Call}}{The matched
 #'   call.} \item{\code{lin.coef.I}}{The mean, mode, standard deviation and 95 %
 #'   confidence interval of the highest posterior density of the linear
-#'   coefficients for \code{B1}.} \item{\code{lin.coef.II}}{The mean, mode,
+#'   coefficients for \code{beta1}.} \item{\code{lin.coef.II}}{The mean, mode,
 #'   standard deviation and 95 % confidence interval of the highest posterior
-#'   density of the linear coefficients for \code{B2}.}
+#'   density of the linear coefficients for \code{beta2}.}
 #'   \item{\code{circ.coef}}{The mean, mode, standard deviation and 95 %
 #'   confidence interval of the highest posterior density for the \code{a.x},
 #'   \code{a.c}, \code{b.c}, \code{AS}, \code{SAM} and \code{SSDO} of the
@@ -114,8 +113,8 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 
   summary.stats <- sumr(output, mm)
 
-  output$B1 <- summary.stats$B1
-  output$B2 <- summary.stats$B2
+  output$beta1 <- summary.stats$beta1
+  output$beta2 <- summary.stats$beta2
   output$a.x <- summary.stats$a.x
   output$a.c <- summary.stats$a.c
   output$b.c <- summary.stats$b.c
@@ -155,8 +154,9 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   components. By default the model equation of the second component
 #'   \code{pred.II} is set to be equal to that of the first component. Note that
 #'   the circular outcome needs to be measured in radians on a scale from 0 to
-#'   2\eqn{\pi}. For more information about the projected normal distribution see
-#'   Presnell, Morrisson & Littell (1998).
+#'   2\eqn{\pi}. For more information about the projected normal distribution
+#'   see Presnell, Morrisson & Littell (1998). The model can handle at most one
+#'   grouping factor.
 #'
 #'   A tutorial on how to use this function can be found in Cremers & Klugkist
 #'   (2018). More details on the sampling algorithm and interpretation of the
@@ -169,21 +169,20 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   associated functions \code{\link{traceplot.bpnme}},
 #'   \code{\link{BFc.bpnme}}, \code{\link{coef_lin.bpnme}},
 #'   \code{\link{coef_circ.bpnme}}, \code{\link{coef_ran.bpnme}},
-#'   \code{\link{residuals.bpnme}}, \code{\link{predict.bpnme}},
 #'   \code{\link{fit.bpnme}} and \code{\link{print.bpnme}}.
 #'
 #'   A \code{bpnr} object contains the following elements (some elements are not
 #'   returned if not applicable)
 #'
-#'   \describe{ \item{\code{Beta.I}}{A matrix of posterior samples for the fixed
-#'   effects coefficients for the first component.} \item{\code{Beta.II}}{A
+#'   \describe{ \item{\code{beta1}}{A matrix of posterior samples for the fixed
+#'   effects coefficients for the first component.} \item{\code{beta2}}{A
 #'   matrix of posterior samples for the fixed effects coefficients for the
-#'   second component.} \item{\code{B.I}}{An array of posterior samples for the
-#'   random effects coefficients for the first component.} \item{\code{B.II}}{An
+#'   second component.} \item{\code{b1}}{An array of posterior samples for the
+#'   random effects coefficients for the first component.} \item{\code{b2}}{An
 #'   array of posterior samples for the random effects coefficients for the
-#'   second component.} \item{\code{VCovI}}{An array of posterior samples for
+#'   second component.} \item{\code{omega1}}{An array of posterior samples for
 #'   the random effect variances of the first component.}
-#'   \item{\code{VCovII}}{An array of posterior samples for the random effect
+#'   \item{\code{omega2}}{An array of posterior samples for the random effect
 #'   variances of the second component.} \item{\code{predictiva}}{A list
 #'   containing the posterior density values for all timepoints of individuals
 #'   in the dataset for all iterations. The rowsums of this matrix are the
@@ -219,10 +218,10 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   length of the circular random intercept, a measure of concentration.}
 #'   \item{\code{Call}}{The matched call.} \item{\code{lin.coef.I}}{The mean,
 #'   mode, standard deviation and 95 % confidence interval of the highest
-#'   posterior density of the linear fixed effect coefficients for \code{B1}.}
+#'   posterior density of the linear fixed effect coefficients for \code{beta1}.}
 #'   \item{\code{lin.coef.II}}{The mean, mode, standard deviation and 95 %
 #'   confidence interval of the highest posterior density of the linear fixed
-#'   effect coefficients for \code{B2}.} \item{\code{circ.coef}}{The mean, mode,
+#'   effect coefficients for \code{beta2}.} \item{\code{circ.coef}}{The mean, mode,
 #'   standard deviation and 95 % confidence interval of the highest posterior
 #'   density for \code{a.x}, \code{a.c}, \code{SSDO}, and the circular fixed
 #'   effect coefficients \code{b.c}, \code{AS}, and \code{SAM}}
@@ -275,65 +274,8 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
 
   mm <- mmme(pred.I, data, pred.II)
 
-  # if(!"(Intercept)" %in% colnames(mm$mm_ran.I) | !"(Intercept)" %in% colnames(mm$mm_ran.II)){
-  #
-  #   stop("No random intercept in the model")
-  #
-  # }
-  #
-  # if(!all(colnames(mm$mm_ran.I) %in% colnames(mm$mm.I)) | !all(colnames(mm$mm_ran.II) %in% colnames(mm$mm.II))){
-  #
-  #   stop("Not all random effects have a corresponding fixed effect")
-  #
-  # }
-#
-#   if(!all(is.numeric(unlist(mm$ZI))) | !all(is.numeric(unlist(mm$ZII)))){
-#     stop("Not all random effects are numeric variables")
-#   }
-
-  burn <- burn * n.lag
-  tm <- burn + (its * n.lag)
-  p1 <- length(mm$XI[[mm$N]][1, ])
-  p2 <- length(mm$XII[[mm$N]][1, ])
-  q1 <- length(mm$ZI[[mm$N]][1, ])
-  q2 <- length(mm$ZII[[mm$N]][1, ])
-  OmegaI  <- diag(q1)
-  OmegaII <- diag(q2)
-
-  #priors
-
-  v1  <- q1
-  v2  <- q2
-
-  B1  <- diag(v1) * 0.0001
-  B2  <- diag(v2) * 0.0001
-
-  A1  <- diag(p1) * 0.0001 #matrix(0, p1, p1)
-  A2  <- diag(p2) * 0.0001 #matrix(0, p2, p2)
-
-  #matrices for final results
-  Beta.I   <- matrix(NA, its, p1)
-  Beta.II  <- matrix(NA, its, p2)
-  colnames(Beta.I) <- colnames(mm$XI[[1]])
-  colnames(Beta.II) <- colnames(mm$XII[[1]])
-  B.I      <- array(NA, c(mm$N, q1, its))
-  B.II     <- array(NA, c(mm$N, q2, its))
-  colnames(B.I) <- colnames(mm$ZI[[1]])
-  colnames(B.II) <- colnames(mm$ZII[[1]])
-  VCovI    <- array(NA, dim = c(q1, q1, its))
-  VCovII   <- array(NA, dim = c(q2, q2, its))
-  colnames(VCovI) <- colnames(mm$ZI[[1]])
-  colnames(VCovII) <- colnames(mm$ZII[[1]])
-  rownames(VCovI) <- colnames(mm$ZI[[1]])
-  rownames(VCovII) <- colnames(mm$ZII[[1]])
-  int_rand_c <- c()
   circular.ri <- matrix(NA, mm$N, its)
 
-
-  Y1       <- list()
-  Y2       <- list()
-  YI       <- list()
-  YII      <- list()
   predictiva <- list()
 
   for (i in 1:mm$N){
@@ -341,372 +283,50 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
   }
 
 
-  if (q1 == 1 & q2 == 1){
+  output <- pnme(lapply(mm$theta, cos), lapply(mm$theta, sin),
+                 mm$XI, mm$XII, mm$ZI, mm$ZII, mm$ZtZI, mm$ZtZII,
+                 mm$R, predictiva,
+                 its = its, burn = burn, lag = n.lag, mm$N)
 
-    ####real iterations####
-    for (k in 1:(tm)){
+  class(output) <- c("bpnme", class(output))
 
-      for (i in 1:mm$N){
-        YI[[i]]  <- mm$R[[i]] * cos(mm$theta[[i]])
-        YII[[i]] <- mm$R[[i]] * sin(mm$theta[[i]])
-      }
+  rownames(output$beta1) <- colnames(mm$XI[[1]])
+  rownames(output$beta2) <- colnames(mm$XII[[1]])
+  colnames(output$b1) <- colnames(mm$ZI[[1]])
+  colnames(output$b2) <- colnames(mm$ZII[[1]])
+  colnames(output$omega1) <- colnames(mm$ZI[[1]])
+  rownames(output$omega1) <- colnames(mm$ZI[[1]])
+  colnames(output$omega2) <- colnames(mm$ZII[[1]])
+  rownames(output$omega2) <- colnames(mm$ZII[[1]])
 
-      #simulations for beta, bi's and Omega
+  # Compute circular RI
 
-      beta.I    <- betaBlock.fRI(OmegaI, YI, mm$XI, mm$ZI, p1, A1, mm$N)
-      beta.II   <- betaBlock.fRI(OmegaII, YII, mm$XII, mm$ZII, p2, A2, mm$N)
-      b.I       <- b.f(OmegaI, beta.I, YI, mm$XI, q1, mm$ZI, mm$ZtZI, mm$N)
-      b.II      <- b.f(OmegaII, beta.II, YII, mm$XII, q2, mm$ZII, mm$ZtZII, mm$N)
-      OmegaI    <- Omega.f(b.I, B1, v1, q1, mm$N)
-      OmegaII   <- Omega.f(b.II, B2, v2, q2, mm$N)
+  for (i in 1:mm$N){
 
-      for (i in 1:mm$N){
+    if(!("(Intercept)" %in% colnames(mm$XI[[i]])) & !("(Intercept)" %in% colnames(mm$XII[[i]]))){
 
-        if(!("(Intercept)" %in% colnames(mm$XI[[i]])) & !("(Intercept)" %in% colnames(mm$XII[[i]]))){
+      circular.ri[i,] <- atan2(0 + output$b2[i,1,], 0 + output$b1[i,1,])
 
-          int_rand_c[i] <- atan2(0+b.II[i], 0+b.I[i])
+    }else if(!("(Intercept)" %in% colnames(mm$XI[[i]]))){
 
-        }else if(!("(Intercept)" %in% colnames(mm$XI[[i]]))){
+      circular.ri[i,] <- atan2(output$beta2[1,] + output$b2[i,1,], 0 + output$b1[i,1,])
 
-          int_rand_c[i] <- atan2(beta.II[1]+b.II[i,1], 0+b.I[i])
+    }else if(!("(Intercept)" %in% colnames(mm$XII[[i]]))){
 
-        }else if(!("(Intercept)" %in% colnames(mm$XII[[i]]))){
+      circular.ri[i,] <- atan2(0 + output$b2[i,1,], output$beta1[1,] + output$b1[i,1,])
 
-          int_rand_c[i] <- atan2(0+b.II[i], beta.I[1]+b.I[i])
+    }else{
 
-        }else{
+      circular.ri[i,] <- atan2(output$beta2[1,] + output$b2[i,1,], output$beta1[1,] + output$b1[i,1,])
 
-          int_rand_c[i] <- atan2(beta.II[1]+b.II[i], beta.I[1]+b.I[i])
-
-        }
-
-        for (j in 1:mm$no.Meas[i]){
-
-          t.aux     <- mm$theta[[i]][j]
-          mu.ij.I   <- c(beta.I %*% mm$XI[[i]][j, ] + b.I[i])
-          mu.ij.II  <- c(beta.II %*% mm$XII[[i]][j, ] + b.II[i])
-          bb        <- Dbd(t.aux, mu.ij.I, mu.ij.II)
-          mm$R[[i]][j] <- slice_r_me(t.aux, mu.ij.I, mu.ij.II, mm$R[[i]][j])
-
-          if (k - burn > 0){
-            if ( ( (k - burn) %% n.lag) == 0){
-              ii <- (k - burn) / n.lag
-
-              norm2  <- mu.ij.I^2 + mu.ij.II^2
-              c         <- (1 + ( (bb * pnorm(bb)) / dnorm(bb)))
-
-              predictiva[[i]][ii,j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2))*c
-            }
-          }
-        }
-      }
-
-      if (k - burn <= 0 & ( (burn-k) / n.lag) %% 50 == 0){
-
-        ii <- (burn - k) / n.lag; print(paste("burn-in iteration", ii))
-
-        }
-
-      #save values for each iteration
-      if(k - burn > 0){
-        if ( ( (k-burn) %% n.lag) == 0){
-
-          ii <- (k - burn) / n.lag
-          if ( (ii %% 50) == 0) {print(paste("iteration", ii))}
-
-          Beta.I[ii, ]  <- beta.I
-          Beta.II[ii, ] <- beta.II
-          B.I[,,ii]    <- b.I
-          B.II[,,ii]   <- b.II
-          VCovI[,,ii]  <- solve(OmegaI)
-          VCovII[,,ii] <- solve(OmegaII)
-          Y1[[ii]] <- YI
-          Y2[[ii]] <- YII
-          circular.ri[, ii] <- int_rand_c
-
-        }
-      }
-    }
-
-
-
-
-  }else if(q1 >= 1 & q2 == 1){
-
-
-    ####real iterations####
-    for(k in 1:(tm))
-    {
-
-      for(i in 1:mm$N){
-        YI[[i]]  <- mm$R[[i]] * cos(mm$theta[[i]])
-        YII[[i]] <- mm$R[[i]] * sin(mm$theta[[i]])
-      }
-
-      #simulations for beta, bi's and Omega
-      beta.I    <- betaBlock.fRS(OmegaI, YI, mm$XI, mm$ZI, p1, A1, mm$N)
-      beta.II   <- betaBlock.fRI(OmegaII, YII, mm$XII, mm$ZII, p2, A2, mm$N)
-      b.I       <- b.f(OmegaI, beta.I, YI, mm$XI, q1, mm$ZI, mm$ZtZI, mm$N)
-      b.II      <- b.f(OmegaII, beta.II, YII, mm$XII, q2, mm$ZII, mm$ZtZII, mm$N)
-      OmegaI    <- Omega.f(b.I, B1, v1, q1, mm$N)
-      OmegaII   <- Omega.f(b.II, B2, v2, q2, mm$N)
-
-      for(i in 1:mm$N){
-
-        if(!("(Intercept)" %in% colnames(mm$XI[[i]])) & !("(Intercept)" %in% colnames(mm$XII[[i]]))){
-
-          int_rand_c[i] <- atan2(0+b.II[i], 0+b.I[i,1])
-
-        }else if(!("(Intercept)" %in% colnames(mm$XI[[i]]))){
-
-          int_rand_c[i] <- atan2(beta.II[1]+b.II[i], 0+b.I[i,1])
-
-        }else if(!("(Intercept)" %in% colnames(mm$XII[[i]]))){
-
-          int_rand_c[i] <- atan2(0+b.II[i], beta.I[1]+b.I[i,1])
-
-        }else{
-
-          int_rand_c[i] <- atan2(beta.II[1]+b.II[i], beta.I[1]+b.I[i,1])
-
-        }
-
-        for(j in 1:mm$no.Meas[i]){
-
-          t.aux     <- mm$theta[[i]][j]
-          mu.ij.I   <- c(beta.I %*% mm$XI[[i]][j, ]+b.I[i, ]%*%mm$ZI[[i]][j, ])
-          mu.ij.II  <- c(beta.II %*% mm$XII[[i]][j, ] + b.II[i])
-          bb        <- Dbd(t.aux, mu.ij.I, mu.ij.II)
-          mm$R[[i]][j] <- slice_r_me(t.aux, mu.ij.I, mu.ij.II, mm$R[[i]][j])
-
-          if (k - burn > 0){
-            if ( ( (k - burn) %% n.lag) == 0){
-              ii <- ( k - burn) / n.lag
-
-              norm2  <- mu.ij.I^2 + mu.ij.II^2
-              c         <- (1 + ( (bb * pnorm(bb)) / dnorm(bb)))
-
-              predictiva[[i]][ii,j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2))*c
-            }
-          }
-        }
-      }
-
-      if(k-burn <=0 & ((burn-k)/n.lag)%%50 == 0){
-
-        ii <- (burn-k)/n.lag; print(paste("burn-in iteration",ii))
-
-        }
-
-      #save values for each iteration
-      if(k-burn > 0){
-        if(((k-burn)%%n.lag)==0){
-
-          ii <- (k-burn)/n.lag
-          if((ii%%50)==0) {print(paste("iteration",ii))}
-
-          Beta.I[ii,]  <- beta.I
-          Beta.II[ii,] <- beta.II
-          B.I[,,ii]    <- b.I
-          B.II[,,ii]   <- b.II
-          VCovI[,,ii]  <- solve(OmegaI)
-          VCovII[,,ii] <- solve(OmegaII)
-          Y1[[ii]] <- YI
-          Y2[[ii]] <- YII
-          circular.ri[,ii] <- int_rand_c
-
-        }
-      }
-    }
-
-  }else if(q1 == 1 & q2 >= 1){
-
-    ####real iterations####
-    for(k in 1:(tm))
-    {
-
-      for(i in 1:mm$N){
-        YI[[i]]  <- mm$R[[i]]*cos(mm$theta[[i]])
-        YII[[i]] <- mm$R[[i]]*sin(mm$theta[[i]])
-      }
-
-      #simulations for beta, bi's and Omega
-
-      beta.I    <- betaBlock.fRI(OmegaI, YI, mm$XI, mm$ZI, p1, A1, mm$N)
-      beta.II   <- betaBlock.fRS(OmegaII, YII, mm$XII, mm$ZII, p2, A2, mm$N)
-      b.I       <- b.f(OmegaI, beta.I, YI, mm$XI, q1, mm$ZI, mm$ZtZI, mm$N)
-      b.II      <- b.f(OmegaII, beta.II, YII, mm$XII, q2, mm$ZII, mm$ZtZII, mm$N)
-      OmegaI    <- Omega.f(b.I, B1, v1, q1, mm$N)
-      OmegaII   <- Omega.f(b.II ,B2, v2, q2, mm$N)
-
-      for(i in 1:mm$N){
-
-        if(!("(Intercept)" %in% colnames(mm$XI[[i]])) & !("(Intercept)" %in% colnames(mm$XII[[i]]))){
-
-          int_rand_c[i] <- atan2(0+b.II[i,1], 0+b.I[i])
-
-        }else if(!("(Intercept)" %in% colnames(mm$XI[[i]]))){
-
-          int_rand_c[i] <- atan2(beta.II[1]+b.II[i,1], 0+b.I[i])
-
-        }else if(!("(Intercept)" %in% colnames(mm$XII[[i]]))){
-
-          int_rand_c[i] <- atan2(0+b.II[i,1], beta.I[1]+b.I[i])
-
-        }else{
-
-          int_rand_c[i] <- atan2(beta.II[1]+b.II[i,1], beta.I[1]+b.I[i])
-
-        }
-
-        for(j in 1:mm$no.Meas[i]){
-
-          t.aux     <- mm$theta[[i]][j]
-          mu.ij.I   <- c(beta.I%*%mm$XI[[i]][j,] + b.I[i])
-          mu.ij.II  <- c(beta.II%*%mm$XII[[i]][j,] + b.II[i,]%*%mm$ZII[[i]][j,])
-          bb        <- Dbd(t.aux, mu.ij.I, mu.ij.II)
-          mm$R[[i]][j] <- slice_r_me(t.aux, mu.ij.I, mu.ij.II, mm$R[[i]][j])
-
-          if(k-burn > 0){
-            if(((k-burn)%%n.lag)==0){
-              ii <- (k-burn)/n.lag
-
-              norm2  <- mu.ij.I^2 + mu.ij.II^2
-              c         <- (1 + ((bb*pnorm(bb))/dnorm(bb)))
-
-              predictiva[[i]][ii,j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2))*c
-            }
-          }
-        }
-      }
-
-      if(k-burn <=0 & ((burn-k)/n.lag)%%50 == 0){
-
-        ii <- (burn-k)/n.lag; print(paste("burn-in iteration",ii))
-
-        }
-
-      #save values for each iteration
-      if(k-burn > 0){
-        if(((k-burn)%%n.lag)==0){
-
-          ii <- (k-burn)/n.lag
-          if((ii%%50)==0) {print(paste("iteration",ii))}
-
-          Beta.I[ii,]  <- beta.I
-          Beta.II[ii,] <- beta.II
-          B.I[,,ii]    <- b.I
-          B.II[,,ii]   <- b.II
-          VCovI[,,ii]  <- solve(OmegaI)
-          VCovII[,,ii] <- solve(OmegaII)
-          Y1[[ii]] <- YI
-          Y2[[ii]] <- YII
-          circular.ri[,ii] <- int_rand_c
-
-        }
-      }
-    }
-
-
-
-  }else{
-
-    ####real iterations####
-    for(k in 1:(tm)){
-
-      for(i in 1:mm$N){
-        YI[[i]]  <- mm$R[[i]]*cos(mm$theta[[i]])
-        YII[[i]] <- mm$R[[i]]*sin(mm$theta[[i]])
-      }
-
-      #simulations for beta, bi's and Omega
-
-      beta.I    <- betaBlock.fRS(OmegaI, YI, mm$XI, mm$ZI, p1, A1, mm$N)
-      beta.II   <- betaBlock.fRS(OmegaII, YII, mm$XII, mm$ZII, p2, A2, mm$N)
-      b.I       <- b.f(OmegaI, beta.I, YI, mm$XI, q1, mm$ZI, mm$ZtZI, mm$N)
-      b.II      <- b.f(OmegaII, beta.II, YII, mm$XII, q2, mm$ZII, mm$ZtZII, mm$N)
-      OmegaI    <- Omega.f(b.I, B1, v1, q1, mm$N)
-      OmegaII   <- Omega.f(b.II ,B2, v2, q2, mm$N)
-
-      for(i in 1:mm$N){
-
-        if(!("(Intercept)" %in% colnames(mm$XI[[i]])) & !("(Intercept)" %in% colnames(mm$XII[[i]]))){
-
-          int_rand_c[i] <- atan2(0+b.II[i,1], 0+b.I[i,1])
-
-        }else if(!("(Intercept)" %in% colnames(mm$XI[[i]]))){
-
-          int_rand_c[i] <- atan2(beta.II[1]+b.II[i,1], 0+b.I[i,1])
-
-        }else if(!("(Intercept)" %in% colnames(mm$XII[[i]]))){
-
-          int_rand_c[i] <- atan2(0+b.II[i,1], beta.I[1]+b.I[i,1])
-
-        }else{
-
-          int_rand_c[i] <- atan2(beta.II[1]+b.II[i,1], beta.I[1]+b.I[i,1])
-
-        }
-
-        for(j in 1:mm$no.Meas[i]){
-
-          t.aux     <- mm$theta[[i]][j]
-          mu.ij.I   <- c(beta.I%*%mm$XI[[i]][j,] + b.I[i,]%*%mm$ZI[[i]][j,])
-          mu.ij.II  <- c(beta.II%*%mm$XII[[i]][j,] + b.II[i,]%*%mm$ZII[[i]][j,])
-          bb        <- Dbd(t.aux, mu.ij.I, mu.ij.II)
-          mm$R[[i]][j] <- slice_r_me(t.aux, mu.ij.I, mu.ij.II, mm$R[[i]][j])
-
-          if(k-burn > 0){
-            if(((k-burn)%%n.lag)==0){
-              ii <- (k-burn)/n.lag
-
-              norm2  <- mu.ij.I^2 + mu.ij.II^2
-              c         <- (1 + ((bb*pnorm(bb))/dnorm(bb)))
-
-              predictiva[[i]][ii,j] <- as.numeric((1/(2*pi))*exp(-0.5*norm2))*c
-            }
-          }
-        }
-      }
-
-
-      if(k-burn <=0 & ((burn-k)/n.lag)%%50 == 0){
-
-        ii <- (burn-k)/n.lag; print(paste("burn-in iteration",ii))
-
-        }
-
-      #save values for each iteration
-      if(k-burn > 0){
-        if(((k-burn)%%n.lag)==0){
-
-          ii <- (k-burn)/n.lag
-          if((ii%%50)==0) {print(paste("iteration",ii))}
-
-          Beta.I[ii,]  <- beta.I
-          Beta.II[ii,] <- beta.II
-          B.I[,,ii]    <- b.I
-          B.II[,,ii]   <- b.II
-          VCovI[,,ii]  <- solve(OmegaI)
-          VCovII[,,ii] <- solve(OmegaII)
-          Y1[[ii]] <- YI
-          Y2[[ii]] <- YII
-          circular.ri[,ii] <- int_rand_c
-
-        }
-      }
     }
   }
 
-  output <- list(Beta.I = Beta.I, Beta.II = Beta.II, B.I = B.I, B.II = B.II,
-                 VCovI = VCovI, VCovII = VCovII, predictiva = predictiva,
-                 circular.ri = circular.ri, N = mm$N,
-                 its = its, n.lag = n.lag, burn = burn,
-                 p1 = p1, p2 = p2, q1 = q1, q2 = q2)
+  output[["circular.ri"]] = circular.ri
+  output$beta1 = t(output$beta1)
+  output$beta2 = t(output$beta2)
 
   summary.stats <- summe(output, mm)
-
-  class(output) <- c("bpnme", class(output))
 
   output$a.x <- summary.stats$a.x
   output$a.c <- summary.stats$a.c

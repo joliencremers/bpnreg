@@ -176,6 +176,7 @@ Omega.f<-function(b, B, v, q, N){
 #'
 
 slice_r_me<-function(t, mu1, mu2, r){
+
   b    <- Dbd(t, mu1, mu2)
   y    <- runif(1, 0, exp(-0.5 * (r-b)^2) )
   u    <- runif(1, 0, 1)

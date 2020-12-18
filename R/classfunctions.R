@@ -3,17 +3,17 @@
 #' Traceplot function for a \code{bpnr object} or \code{bpnme object}.
 #'
 #' @param object an object used to select a method.
-#' @param parameter one of \code{c("B1", "B2", Beta.I", "Beta.II", a.x", "a.c",
-#'   "b.c", "SAM", "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS")}
-#'   to indicate for which parameter a traceplot is required. \code{B1},
-#'   \code{Beta.I}, \code{B2} and \code{Beta.II} are the linear intercepts and
-#'   coefficients of the first and second component for a regression model and
-#'   the fixed effects coefficients of a mixed-effects model. \code{circ.diff}
-#'   are the circular differences with the intercept on the outcome variable for
-#'   the different levels of categorical variables. \code{VCovI} and
-#'   \code{VCovII} are the linear random effect variances and \code{cRI} and
-#'   \code{cRS} are the variances of the circular random intercept and circular
-#'   random slope.
+#' @param parameter one of \code{c("b1", "b2", beta1", "beta2", a.x", "a.c",
+#'   "b.c", "SAM", "AS", "SSDO", "circ.diff", "omega1", "omega2", "cRI", "cRS")}
+#'   to indicate for which parameter a traceplot is required. \code{beta1} and
+#'   \code{beta2} are the linear intercepts and coefficients of the first and
+#'   second component for a regression model and the fixed effects coefficients
+#'   of a mixed-effects model. \code{b1} and \code{b2} are the random effects
+#'   coefficients of a mixed-effects model. \code{circ.diff} are the circular
+#'   differences with the intercept on the outcome variable for the different
+#'   levels of categorical variables. \code{omega1} and \code{omega2} are the
+#'   linear random effect variances and \code{cRI} and \code{cRS} are the
+#'   variances of the circular random intercept and circular random slope.
 #' @param variable a character string with variable name(s) to indicate for
 #'   which variable(s) a traceplot is required.
 #'
@@ -21,7 +21,7 @@
 #' library(bpnreg)
 #' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
 #' its = 100, burn = 10, n.lag = 3)
-#' traceplot(fit.Motor, parameter = "B1")
+#' traceplot(fit.Motor, parameter = "beta1")
 #'
 #' @export
 #'
@@ -353,196 +353,6 @@ BFc.bpnme <- function(object, hypothesis, type = "anchor"){
   }
 
   return(out)
-
-}
-
-#' Predicted values for a Bayesian circular regression model
-#'
-#' Outputs predicted values for a Bayesian circular regression model for each
-#' iteration of the MCMC sampler.
-#'
-#' @param object a \code{bpnr object} obtained from the function
-#'   \code{\link{bpnr}}.
-#' @param ... further arguments passed to or from other methods.
-#'
-#' @return a matrix (rows = N, columns = iterations) containing predicted values
-#'   for the circular outcome for each iteration of the MCMC sampler.
-#'
-#' @method predict bpnr
-#'
-#' @examples
-#' library(bpnreg)
-#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
-#' its = 100, burn = 10, n.lag = 3)
-#' predict(fit.Motor)
-#'
-#' @export
-#'
-
-predict.bpnr <- function(object, ...){
-
-  YI <- object$mm$XI%*%t(object$B1)
-  YII <- object$mm$XII%*%t(object$B2)
-
-  theta <- atan2(YII, YI)%%(2*pi)
-
-  return(theta)
-
-}
-
-#' Predicted values for a Bayesian circular mixed-effects model
-#'
-#' Outputs predicted values for a Bayesian circular mixed-effects model for each
-#' iteration of the MCMC sampler.
-#'
-#' @param object a \code{bpnme object} obtained from the function
-#'   \code{\link{bpnme}}.
-#' @param ... further arguments passed to or from other methods.
-#'
-#' @return a matrix (rows = N, columns = iterations) containing predicted values
-#'   for the circular outcome for each iteration of the MCMC sampler.
-#'
-#' @method predict bpnme
-#'
-#' @examples
-#' library(bpnreg)
-#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
-#' its = 100, burn = 10, n.lag = 3)
-#' predict(fit.Motor)
-#'
-#' @export
-#'
-
-predict.bpnme <- function(object, ...){
-
-  YI <- list()
-  YII <- list()
-  theta <- list()
-
-  for(i in 1:object$mm$N){
-
-    YI[[i]] <- object$mm$XI[[i]] %*% t(object$Beta.I) +
-               object$mm$ZI[[i]]%*%object$B.I[i,,]
-    YII[[i]] <- object$mm$XII[[i]]%*%t(object$Beta.II) +
-                object$mm$ZII[[i]]%*%object$B.II[i,,]
-
-    theta[[i]] <- atan2(YII[[i]], YI[[i]])
-
-  }
-
-  YI <- do.call(rbind, YI)
-  YII <- do.call(rbind, YII)
-  theta <- do.call(rbind, theta)%%(2*pi)
-
-  return(theta)
-
-}
-
-#' Residuals for a Bayesian circular regression model
-#'
-#' Outputs residuals for a Bayesian circular regression model for each iteration
-#' of the MCMC sampler.
-#'
-#' @param object a \code{bpnr object} obtained from the function
-#'   \code{\link{bpnr}}.
-#' @param type the type of residuals, one of \code{c("arc", "cos")}. The
-#'   \code{"arc"} residuals are based on a computation of the circular arc
-#'   length between predicted value and original outcome. The \code{"cos"}
-#'   residuals are based on the cosine of the difference between predicted value
-#'   and original outcome.
-#' @param ... further arguments passed to or from other methods.
-#'
-#' @return a matrix (rows = N, columns = iterations) containing residuals for
-#'   each iteration of the MCMC sampler.
-#'
-#' @method residuals bpnr
-#'
-#' @examples
-#' library(bpnreg)
-#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
-#' its = 100, burn = 10, n.lag = 3)
-#' residuals(fit.Motor)
-#' residuals(fit.Motor, type = "cos")
-#'
-#' @export
-#'
-
-residuals.bpnr <- function(object, type = "arc", ...){
-
-  if(!(type == "arc" | type == "cos")){
-
-    stop("Invalid type argument")
-
-  }
-
-  pred.val <- predict(object)
-  diff <- pred.val - as.numeric(object$theta)
-  sign <- sign(sin(diff))
-
-  if(type == "arc"){
-
-    residuals <- (pi - abs(pi - abs(diff)))*sign
-
-  }else if(type == "cos"){
-
-    residuals <- cos(abs(diff))
-
-  }
-
-  return(residuals)
-
-}
-
-#' Residuals for a Bayesian circular mixed-effects model
-#'
-#' Outputs residuals for a Bayesian circular mixed-effects model for each
-#' iteration of the MCMC sampler.
-#'
-#' @param object a \code{bpnme object} obtained from the function
-#'   \code{\link{bpnme}}.
-#' @param type the type of residuals, one of \code{c("arc", "cos")}. The
-#'   \code{"arc"} residuals are based on a computation of the circular arc
-#'   length between predicted value and original outcome. The \code{"cos"}
-#'   residuals are based on the cosine of the difference between predicted value
-#'   and original outcome.
-#' @param ... further arguments passed to or from other methods.
-#'
-#' @return a matrix (rows = N, columns = iterations) containing residuals for
-#'   each iteration of the MCMC sampler.
-#'
-#' @method residuals bpnme
-#'
-#' @examples
-#' library(bpnreg)
-#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
-#' data = Maps,
-#' its = 100, burn = 1, n.lag = 1)
-#' residuals(fit.Maps)
-#' residuals(fit.Maps, type = "cos")
-#'
-#' @export
-#'
-
-residuals.bpnme <- function(object, type = "arc", ...){
-
-  pred.val <- predict(object)
-
-  theta <- do.call(rbind, object$mm$theta)
-
-  diff <- pred.val - as.numeric(theta)
-  sign <- sign(sin(diff))
-
-  if(type == "arc"){
-
-    residuals <- (pi - abs(pi - abs(diff)))*sign
-
-  }else if(type == "cos"){
-
-    residuals <- cos(abs(diff))
-
-  }
-
-  return(residuals)
 
 }
 
@@ -935,15 +745,17 @@ fit.bpnr <- function(object){
 
 fit.bpnme <- function(object){
 
-  mf <- matrix(NA, 5L, 2L)
-  colnames(mf) <- c("Statistic", "Parameters")
-  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
-  mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in%
-                               c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
-  mf[,2] <- c(object$p1 + object$p2 + (object$N*2),
-              object$model.fit[dimnames(object$model.fit)[[2]] %in%
-                                 c("pD", "pV", "pWAIC", "pWAIC2")])
-  as.data.frame(mf)
+  # mf <- matrix(NA, 5L, 2L)
+  # colnames(mf) <- c("Statistic", "Parameters")
+  # rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  # mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in%
+  #                              c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
+  # object$model.fit[dimnames(object$model.fit)[[2]] %in% c("pD", "pV", "pWAIC", "pWAIC2")]
+  # # mf[,2] <- c(object$p1 + object$p2 + (object$N*2),
+  #             object$model.fit[dimnames(object$model.fit)[[2]] %in%
+  #                                c("pD", "pV", "pWAIC", "pWAIC2")])
+  # as.data.frame(mf)
+  print(object$model.fit)
 
 }
 
@@ -1071,15 +883,15 @@ print.bpnme <- function(x, ...){
       "\n\n", sep = "")
 
   cat("Model Fit: \n")
-  mf <- matrix(NA, 5L, 2L)
-  colnames(mf) <- c("Statistic", "Parameters")
-  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
-  mf[,1] <- x$model.fit[dimnames(x$model.fit)[[2]] %in%
-                          c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
-  mf[,2] <- c(x$p1 + x$p2,
-              x$model.fit[dimnames(x$model.fit)[[2]] %in%
-                            c("pD", "pV", "pWAIC", "pWAIC2")])
-  print(mf)
+  # mf <- matrix(NA, 5L, 2L)
+  # colnames(mf) <- c("Statistic", "Parameters")
+  # rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  # mf[,1] <- x$model.fit[dimnames(x$model.fit)[[2]] %in%
+  #                         c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
+  # mf[,2] <- c(x$p1 + x$p2,
+  #             x$model.fit[dimnames(x$model.fit)[[2]] %in%
+  #                           c("pD", "pV", "pWAIC", "pWAIC2")])
+  # print(mf)
   cat("\n\n")
 
   cat("Fixed Effects \n\n")
@@ -1145,9 +957,9 @@ print.bpnme <- function(x, ...){
 #'
 #' @param object a \code{bpnr object} obtained from the function
 #'   \code{\link{bpnr}}
-#' @param parameter one of \code{c("B1", "B2", "a.x", "a.c", "b.c", "SAM", "AS",
+#' @param parameter one of \code{c("beta1", "beta2", "a.x", "a.c", "b.c", "SAM", "AS",
 #'   "SSDO", "circ.diff")} to indicate for which parameter a traceplot is
-#'   required. \code{B1} and \code{B2} are the linear intercepts and
+#'   required. \code{beta1} and \code{beta2} are the linear intercepts and
 #'   coefficients of the first and second component. \code{circ.diff} are the
 #'   circular differences with the intercept on the outcome variable for the
 #'   different levels of categorical variables.
@@ -1160,7 +972,7 @@ print.bpnme <- function(x, ...){
 #' library(bpnreg)
 #' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
 #' its = 100, burn = 10, n.lag = 3)
-#' traceplot(fit.Motor, parameter = "B1")
+#' traceplot(fit.Motor, parameter = "beta1")
 #'
 #' @export
 #'
@@ -1196,18 +1008,19 @@ traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 #'
 #' @param object a \code{bpnme object} obtained from the function
 #'   \code{\link{bpnme}}
-#' @param parameter one of \code{c(Beta.I", "Beta.II", a.x", "a.c", "b.c",
-#'   "SAM", "AS", "SSDO", "circ.diff", "VCovI", "VCovII", "cRI", "cRS")} to
-#'   indicate for which parameter a traceplot is required. \code{Beta.I} and
-#'   \code{Beta.II} are the fixed effects coefficients of a mixed-effects model.
-#'   \code{circ.diff} are the circular differences with the intercept on the
-#'   outcome variable for the different levels of categorical variables.
-#'   \code{VCovI} and \code{VCovII} are the linear random effect variances and
-#'   \code{cRI} and \code{cRS} are the variances of the circular random
-#'   intercept and circular random slope.
+#' @param parameter one of \code{c(beta1", "beta2", "b1", "b2", a.x", "a.c",
+#'   "b.c", "SAM", "AS", "SSDO", "circ.diff", "omega1", "omega2", "cRI", "cRS")}
+#'   to indicate for which parameter a traceplot is required. \code{beta1} and
+#'   \code{beta2} are the fixed effects coefficients of a mixed-effects model.
+#'   \code{b1} and \code{b2} are the random effects coefficients of a
+#'   mixed-effects model. \code{circ.diff} are the circular differences with the
+#'   intercept on the outcome variable for the different levels of categorical
+#'   variables. \code{omega1} and \code{omega2} are the linear random effect
+#'   variances and \code{cRI} and \code{cRS} are the variances of the circular
+#'   random intercept and circular random slope.
 #' @param variable a character string with variable name(s) to indicate for
 #'   which variable(s) a traceplot is required. This cannot be used in
-#'   combination with the parameters \code{c("VCovI", "VCovII", "cRI", "cRS")}.
+#'   combination with the parameters \code{c("omega1", "omega2", "cRI", "cRS")}.
 #'
 #' @method traceplot bpnme
 #'
@@ -1226,15 +1039,15 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
 
   if(is.null(variable)){
 
-    if(parameter == "VCovI"){
+    if(parameter == "omega1"){
 
-      Vars <- as.matrix(object$VCovI[1,1,])
+      Vars <- as.matrix(object$omega1[1,1,])
 
       if(object$q1 > 1){
 
         for(i in 2:object$q1){
 
-          Vars <- cbind(Vars, object$VCovI[i,i,])
+          Vars <- cbind(Vars, object$omega1[i,i,])
 
         }
 
@@ -1248,15 +1061,15 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
               mar.multi=c(gap=0.5, 5.1, gap=0.5, 2.1))
 
 
-    }else if(parameter == "VCovII"){
+    }else if(parameter == "omega2"){
 
-      Vars <- as.matrix(object$VCovII[1,1,])
+      Vars <- as.matrix(object$omega2[1,1,])
 
       if(object$q2 > 1){
 
         for(i in 2:object$q2){
 
-          Vars <- cbind(Vars, object$VCovII[i,i,])
+          Vars <- cbind(Vars, object$omega2[i,i,])
 
         }
 
@@ -1324,7 +1137,7 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
 
   }else{
 
-    if(parameter == "VCovI" | parameter == "VCovII" |
+    if(parameter == "omega1" | parameter == "omega2" |
        parameter == "cRI" | parameter == "cRS"){
 
       stop("Cannot request separate plots for random effect variances")
