@@ -18,6 +18,8 @@ A matrix with posterior summaries of the random effect variances.
 }
 \description{
 Gives posterior summaries of the circular or linear random effect variances.
+The circular random intercept variance and circular random slope variance of
+categorical predictors is computed as 1 - mean resultant length.
 }
 \examples{
 library(bpnreg)

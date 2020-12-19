@@ -1542,10 +1542,10 @@ summe <- function(output, mm){
   }
 
   circ.varrand.ri <- apply(output$circular.ri, 2, rho_circ)
-  circ.res.varrand[1,1] <- mean(circ.varrand.ri)
-  circ.res.varrand[1,2] <- mode_est(circ.varrand.ri)
-  circ.res.varrand[1,3] <- sd(circ.varrand.ri)
-  circ.res.varrand[1,4:5] <- hpd_est(circ.varrand.ri)
+  circ.res.varrand[1,1] <- mean(1-circ.varrand.ri)
+  circ.res.varrand[1,2] <- mode_est(1-circ.varrand.ri)
+  circ.res.varrand[1,3] <- sd(1-circ.varrand.ri)
+  circ.res.varrand[1,4:5] <- hpd_est(1-circ.varrand.ri)
 
 
   circest.rand.num <- array(NA,
@@ -1698,10 +1698,10 @@ summe <- function(output, mm){
 
       varrand.cat[,c] <- apply(circest.rand.cat[,,"circ.diff"], 2, rho_circ)
 
-      circ.res.varrand[paste("RS", c), 1] <- mean(varrand.cat)
-      circ.res.varrand[paste("RS", c), 2] <- mode_est(varrand.cat)
-      circ.res.varrand[paste("RS", c), 3] <- sd(varrand.cat)
-      circ.res.varrand[paste("RS", c), 4:5] <- hpd_est(varrand.cat)
+      circ.res.varrand[paste("RS", c), 1] <- mean(1-varrand.cat)
+      circ.res.varrand[paste("RS", c), 2] <- mode_est(1-varrand.cat)
+      circ.res.varrand[paste("RS", c), 3] <- sd(1-varrand.cat)
+      circ.res.varrand[paste("RS", c), 4:5] <- hpd_est(1-varrand.cat)
 
 
     }
