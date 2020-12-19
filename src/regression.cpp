@@ -206,7 +206,7 @@ Rcpp::List pnr(arma::vec theta,
   arma::mat Y = r%datose.each_col();
 
   //Gibbs iterations
-  for(int iii=0; iii < tm; ++iii){
+  for(int it=0; it < tm; ++it){
 
     arma::mat XtY1 = X1.t()*Y.col(0);
     arma::mat XtY2 = X2.t()*Y.col(1);
