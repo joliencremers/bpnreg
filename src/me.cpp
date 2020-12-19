@@ -275,15 +275,6 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
   arma::cube omega1(q1,q1,its);
   arma::cube omega2(q2,q2,its);
 
-  // arma::mat beta1_tmp(p1,tm);
-  // arma::mat beta2_tmp(p2,tm);
-  // arma::cube b1_tmp(N,q1,tm);
-  // arma::cube b2_tmp(N,q2,tm);
-  // arma::cube omega1_tmp(q1,q1,tm + 1);
-  // arma::cube omega2_tmp(q2,q2,tm + 1);
-
-
-
   arma::mat beta1_tmp;
   arma::mat beta2_tmp;
   arma::mat b1_tmp;
@@ -296,8 +287,6 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
   omega1_tmp = arma::eye(q1,q1);
   omega2_tmp = arma::eye(q2,q2);
 
-  // omega1_tmp.slice(0) = arma::eye(q1,q1);
-  // omega2_tmp.slice(0) = arma::eye(q2,q2);
   Rcpp::List R_tmp = R;
 
   for (int it = 0; it < tm ; ++ it){
@@ -324,8 +313,6 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
 
       arma::rowvec mub1 = beta1_tmp.t()*X1_tmp.t() + b1_tmp.row(i)*Z1_tmp.t();
       arma::rowvec mub2 = beta2_tmp.t()*X2_tmp.t() + b2_tmp.row(i)*Z2_tmp.t();
-      // arma::rowvec mub1 = beta1_tmp.col(it).t()*X1_tmp.t() + b1_tmp.row(i)(it)*Z1_tmp.t();
-      // arma::rowvec mub2 = beta2_tmp.col(it).t()*X2_tmp.t() + b2_tmp.row(i)(it)*Z2_tmp.t();
       arma::rowvec b = theta_cos_tmp.t()%mub1 + theta_sin_tmp.t()%mub2;
 
       for (int j = 0; j < R_temp.n_elem; ++j){
@@ -364,20 +351,6 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
     }
 
   }
-
-  // for(int ii=0; ii < its; ++ii){
-  //
-  //   int index = (ii*lag) + burn_new;
-  //
-  //   beta1.col(ii) = beta1_tmp.col(index);
-  //   beta2.col(ii) = beta2_tmp.col(index);
-  //   b1.slice(ii) = b1_tmp.slice(index);
-  //   b2.slice(ii) = b2_tmp.slice(index);
-  //   omega1.slice(ii) = omega1_tmp.slice(index + 1);
-  //   omega2.slice(ii) = omega2_tmp.slice(index + 1);
-  //
-  // }
-
 
   return  Rcpp::List::create(Rcpp::Named("beta1") = beta1,
                              Rcpp::Named("beta2") = beta2,
