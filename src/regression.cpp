@@ -195,9 +195,9 @@ Rcpp::List pnr(arma::vec theta,
   // arma::mat beta2_tmp(tm, p2);
   // arma::mat predictiva_tmp(tm, n);
 
-  arma::vec beta1_tmp;
-  arma::vec beta2_tmp;
-  arma::vec predictiva_tmp;
+  arma::mat beta1_tmp;
+  arma::mat beta2_tmp;
+  arma::mat predictiva_tmp;
 
   arma::mat beta1(its, p1);
   arma::mat beta2(its, p2);
