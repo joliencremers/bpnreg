@@ -359,6 +359,8 @@ BFc.bpnme <- function(object, hypothesis, type = "anchor"){
 #' Obtain random effect variances of a Bayesian circular mixed-effects model
 #'
 #' Gives posterior summaries of the circular or linear random effect variances.
+#' The circular random intercept variance and circular random slope variance of
+#' categorical predictors is computed as 1 - mean resultant length.
 #'
 #' @param object a \code{bpnme object} obtained from the function
 #'   \code{\link{bpnme}}.
@@ -745,17 +747,17 @@ fit.bpnr <- function(object){
 
 fit.bpnme <- function(object){
 
-  # mf <- matrix(NA, 5L, 2L)
-  # colnames(mf) <- c("Statistic", "Parameters")
-  # rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
-  # mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in%
-  #                              c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
-  # object$model.fit[dimnames(object$model.fit)[[2]] %in% c("pD", "pV", "pWAIC", "pWAIC2")]
-  # # mf[,2] <- c(object$p1 + object$p2 + (object$N*2),
-  #             object$model.fit[dimnames(object$model.fit)[[2]] %in%
-  #                                c("pD", "pV", "pWAIC", "pWAIC2")])
-  # as.data.frame(mf)
-  print(object$model.fit)
+  mf <- matrix(NA, 5L, 2L)
+  colnames(mf) <- c("Statistic", "Parameters")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in%
+                               c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
+  object$model.fit[dimnames(object$model.fit)[[2]] %in% c("pD", "pV", "pWAIC", "pWAIC2")]
+  mf[,2] <- c(object$p1 + object$p2 + (object$N*2),
+              object$model.fit[dimnames(object$model.fit)[[2]] %in%
+                                 c("pD", "pV", "pWAIC", "pWAIC2")])
+  as.data.frame(mf)
+  # print(object$model.fit)
 
 }
 
@@ -883,15 +885,15 @@ print.bpnme <- function(x, ...){
       "\n\n", sep = "")
 
   cat("Model Fit: \n")
-  # mf <- matrix(NA, 5L, 2L)
-  # colnames(mf) <- c("Statistic", "Parameters")
-  # rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
-  # mf[,1] <- x$model.fit[dimnames(x$model.fit)[[2]] %in%
-  #                         c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
-  # mf[,2] <- c(x$p1 + x$p2,
-  #             x$model.fit[dimnames(x$model.fit)[[2]] %in%
-  #                           c("pD", "pV", "pWAIC", "pWAIC2")])
-  # print(mf)
+  mf <- matrix(NA, 5L, 2L)
+  colnames(mf) <- c("Statistic", "Parameters")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  mf[,1] <- x$model.fit[dimnames(x$model.fit)[[2]] %in%
+                          c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
+  mf[,2] <- c(x$p1 + x$p2,
+              x$model.fit[dimnames(x$model.fit)[[2]] %in%
+                            c("pD", "pV", "pWAIC", "pWAIC2")])
+  print(mf)
   cat("\n\n")
 
   cat("Fixed Effects \n\n")
