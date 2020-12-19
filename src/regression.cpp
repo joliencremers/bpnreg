@@ -191,9 +191,13 @@ Rcpp::List pnr(arma::vec theta,
   int tm = burn_new + (its*lag);
 
   arma::mat r = arma::ones<arma::mat>(n,1);
-  arma::mat beta1_tmp(tm, p1);
-  arma::mat beta2_tmp(tm, p2);
-  arma::mat predictiva_tmp(tm, n);
+  // arma::mat beta1_tmp(tm, p1);
+  // arma::mat beta2_tmp(tm, p2);
+  // arma::mat predictiva_tmp(tm, n);
+
+  arma::vec beta1_tmp;
+  arma::vec beta2_tmp;
+  arma::vec predictiva_tmp;
 
   arma::mat beta1(its, p1);
   arma::mat beta2(its, p2);
@@ -210,28 +214,43 @@ Rcpp::List pnr(arma::vec theta,
     arma::mat mstar2 = sigma2*(v2mu2 + XtY2);
 
     //Sample coefficients
-    beta1_tmp.row(iii) = mvrnorm_arma_eigen(1, mstar1.col(0), sigma1).t();
-    beta2_tmp.row(iii) = mvrnorm_arma_eigen(1, mstar2.col(0), sigma2).t();
+    // beta1_tmp.row(iii) = mvrnorm_arma_eigen(1, mstar1.col(0), sigma1).t();
+    // beta2_tmp.row(iii) = mvrnorm_arma_eigen(1, mstar2.col(0), sigma2).t();
+    beta1_tmp = mvrnorm_arma_eigen(1, mstar1.col(0), sigma1).t();
+    beta2_tmp = mvrnorm_arma_eigen(1, mstar2.col(0), sigma2).t();
 
     //Sample R
-    r = slice_rcpp(X1, X2, theta, beta1_tmp.row(iii), beta2_tmp.row(iii), n, r);
+    // r = slice_rcpp(X1, X2, theta, beta1_tmp.row(iii), beta2_tmp.row(iii), n, r);
+    r = slice_rcpp(X1, X2, theta, beta1_tmp, beta2_tmp, n, r);
 
     //Compute Y
     Y = r%datose.each_col();
 
-    predictiva_tmp.row(iii) = lik_reg(X1, X2, theta, beta1_tmp.row(iii), beta2_tmp.row(iii), n).t();
+    // predictiva_tmp.row(iii) = lik_reg(X1, X2, theta, beta1_tmp.row(iii), beta2_tmp.row(iii), n).t();
+    predictiva_tmp = lik_reg(X1, X2, theta, beta1_tmp, beta2_tmp, n).t();
+
+    if ((it + 1 - burn_new > 0) & ((it + 1 -burn_new) % lag == 0)){
+
+      int ii = (it + 1 - burn_new) / lag;
+      Rcout << "Iteration:" << ii << "\n";
+
+      beta1.row(ii-1) = beta1_tmp;
+      beta2.row(ii-1) = beta2_tmp;
+      predictiva.row(ii-1) = predictiva_tmp;
+
+    }
 
   }
 
-  for(int i=0; i < its; ++i){
-
-    int index = (i*lag) + burn_new;
-
-    beta1.row(i) = beta1_tmp.row(index);
-    beta2.row(i) = beta2_tmp.row(index);
-    predictiva.row(i) = predictiva_tmp.row(index);
-
-  }
+  // for(int i=0; i < its; ++i){
+  //
+  //   int index = (i*lag) + burn_new;
+  //
+  //   beta1.row(i) = beta1_tmp.row(index);
+  //   beta2.row(i) = beta2_tmp.row(index);
+  //   predictiva.row(i) = predictiva_tmp.row(index);
+  //
+  // }
 
   return  Rcpp::List::create(Rcpp::Named("beta1") = beta1,
                              Rcpp::Named("beta2") = beta2,
