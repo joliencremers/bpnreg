@@ -1,10 +1,20 @@
-# bpnreg 1.0.3.9000
-This is a development version.
+# bpnreg 1.1.0
+Adapted documentation bpnme function such that it clearly states only 1 grouping factor can be used.
+
+Changed the names of the mcmc output objects. B1, B2, Beta.I, Beta.II, B.I, B.II, VCov.I and VCov.II are now named beta1, beta2, beta1, beta2, b1, b2, omega1 and omega2 respectively.
+
+Functions predict() and residual() were removed from the package.
+
+MCMC sampler underlying the bpnme function is rewritten in c++. This should significantly increase computational speed.
+
+Increased memory efficiency.
+
+Made sure that the circular random intercept variance (and circular random slope variance of categorical predictors) is computed as 1 - mean resultant length. Also updated documentation accordingly.
 
 # bpnreg 1.0.3
-Delete arguments from function documentation that are not in `\usage`.
+Deleted arguments from function documentation that are not in `\usage`.
 
-Update references in the packages description.
+Updated references in the packages description.
 
 # bpnreg 1.0.2
 This version contains an update of code containing the class function to make sure the package works with R version 4.0.0
