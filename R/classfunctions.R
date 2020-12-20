@@ -756,7 +756,6 @@ fit.bpnme <- function(object){
               object$model.fit[dimnames(object$model.fit)[[2]] %in%
                             c("pD", "pV", "pWAIC", "pWAIC2")])
   as.data.frame(mf)
-  # print(object$model.fit)
 
 }
 
