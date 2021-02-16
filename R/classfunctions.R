@@ -519,12 +519,16 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
       a.x <-  object$circ.coef[,1:5]
       if(units == "degrees"){
         a.c <-  object$circ.coef[,6:10]*(180/pi)
+        b.c <- object$circ.coef[,11:15]*(180/pi)
+        AS <-  object$circ.coef[,16:20]*(180/pi)
+        SAM <-  object$circ.coef[,21:25]*(180/pi)
       }else if(units == "radians"){
         a.c <-  object$circ.coef[,6:10]
+        b.c <- object$circ.coef[,11:15]
+        AS <-  object$circ.coef[,16:20]
+        SAM <-  object$circ.coef[,21:25]
       }
-      b.c <- object$circ.coef[,11:15]
-      AS <-  object$circ.coef[,16:20]
-      SAM <-  object$circ.coef[,21:25]
+
       SSDO <-  object$circ.coef[,26:30]
 
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
@@ -626,13 +630,15 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 
       if(units == "degrees"){
         a.c <-  object$circ.coef[,6:10]*(180/pi)
+        b.c <- object$circ.coef[,11:15]*(180/pi)
+        AS <-  object$circ.coef[,16:20]*(180/pi)
+        SAM <-  object$circ.coef[,21:25]*(180/pi)
       }else if(units == "radians"){
         a.c <-  object$circ.coef[,6:10]
+        b.c <- object$circ.coef[,11:15]
+        AS <-  object$circ.coef[,16:20]
+        SAM <-  object$circ.coef[,21:25]
       }
-
-      b.c <-  object$circ.coef[,11:15]
-      AS <-  object$circ.coef[,16:20]
-      SAM <-  object$circ.coef[,21:25]
       SSDO <-  object$circ.coef[,26:30]
 
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))

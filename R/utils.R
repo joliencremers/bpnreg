@@ -212,7 +212,7 @@ mmr <- function(pred.I, data, pred.II){
 
   #Warning message if theta is not measures in radians:
 
-  if(!(max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) & !(max(unlist(theta)) < pi & min(unlist(theta)) >= -pi)){
+  if(!((max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) | (max(unlist(theta)) < pi & min(unlist(theta)) >= -pi))){
     cat("The circular outcome may contain values that are out of range. \n")
     cat("Please check that the circular outcome is measured in radians.")
   }
@@ -353,7 +353,7 @@ mmme <- function(pred.I, data, pred.II){
 
   #Warning message if theta is not measures in radians:
 
-  if(!(max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) & !(max(unlist(theta)) < pi & min(unlist(theta)) >= -pi)){
+  if(!((max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) | (max(unlist(theta)) < pi & min(unlist(theta)) >= -pi))){
     cat("The circular outcome may contain values that are out of range. \n")
     cat("Please check that the circular outcome is measured in radians.")
   }
@@ -874,25 +874,25 @@ sumr <- function(output, mm){
       circ.res[v,3] <- sd(a.x[,v])
       circ.res[v,4:5] <- hpd_est(a.x[,v])
 
-      circ.res[v,6] <- theta_bar(a.c[,v])
-      circ.res[v,7] <- mode_est_circ(a.c[,v])
-      circ.res[v,8] <- sd_circ(a.c[,v])
-      circ.res[v,9:10] <- hpd_est_circ(a.c[,v])
+      circ.res[v,6] <- theta_bar(a.c[,v]) %% (2*pi)
+      circ.res[v,7] <- mode_est_circ(a.c[,v]) %% (2*pi)
+      circ.res[v,8] <- sd_circ(a.c[,v]) %% (2*pi)
+      circ.res[v,9:10] <- hpd_est_circ(a.c[,v]) %% (2*pi)
 
-      circ.res[v,11] <- mean(b.c[,v])
-      circ.res[v,12] <- mode_est(b.c[,v])
-      circ.res[v,13] <- sd(b.c[,v])
-      circ.res[v,14:15] <- hpd_est(b.c[,v])
+      circ.res[v,11] <- mean(b.c[,v]) %% (2*pi)
+      circ.res[v,12] <- mode_est(b.c[,v]) %% (2*pi)
+      circ.res[v,13] <- sd(b.c[,v]) %% (2*pi)
+      circ.res[v,14:15] <- hpd_est(b.c[,v]) %% (2*pi)
 
-      circ.res[v,16] <- mean(AS[,v])
-      circ.res[v,17] <- mode_est(AS[,v])
-      circ.res[v,18] <- sd(AS[,v])
-      circ.res[v,19:20] <- hpd_est(AS[,v])
+      circ.res[v,16] <- mean(AS[,v]) %% (2*pi)
+      circ.res[v,17] <- mode_est(AS[,v]) %% (2*pi)
+      circ.res[v,18] <- sd(AS[,v]) %% (2*pi)
+      circ.res[v,19:20] <- hpd_est(AS[,v]) %% (2*pi)
 
-      circ.res[v,21] <- mean(SAM[,v])
-      circ.res[v,22] <- mode_est(SAM[,v])
-      circ.res[v,23] <- sd(SAM[,v])
-      circ.res[v,24:25] <- hpd_est(SAM[,v])
+      circ.res[v,21] <- mean(SAM[,v]) %% (2*pi)
+      circ.res[v,22] <- mode_est(SAM[,v]) %% (2*pi)
+      circ.res[v,23] <- sd(SAM[,v]) %% (2*pi)
+      circ.res[v,24:25] <- hpd_est(SAM[,v]) %% (2*pi)
 
       circ.res[v,26] <- mean(SSDO[,v])
       circ.res[v,27] <- mode_est(SSDO[,v])
@@ -905,10 +905,10 @@ sumr <- function(output, mm){
 
 
   list(lin.res.I = lin.res.I, lin.res.II = lin.res.II,
-       circ.res = circ.res, circ.res.cat = circ.res.cat,
-       circ.res.means = circ.res.means,
+       circ.res = circ.res, circ.res.cat = circ.res.cat %% (2*pi),
+       circ.res.means = circ.res.means %% (2*pi),
        a.x = a.x, a.c = a.c, b.c = b.c,
-       SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
+       SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff %% (2*pi),
        beta1 = output$beta1, beta2 = output$beta2,
        model.fit = model.fit, var.num = var.num, var.cat = var.cat)
 
@@ -1456,25 +1456,25 @@ summe <- function(output, mm){
       circ.res[v,3] <- sd(a.x[,v])
       circ.res[v,4:5] <- hpd_est(a.x[,v])
 
-      circ.res[v,6] <- theta_bar(a.c[,v])
-      circ.res[v,7] <- mode_est_circ(a.c[,v])
-      circ.res[v,8] <- sd_circ(a.c[,v])
-      circ.res[v,9:10] <- hpd_est_circ(a.c[,v])
+      circ.res[v,6] <- theta_bar(a.c[,v]) %% (2*pi)
+      circ.res[v,7] <- mode_est_circ(a.c[,v]) %% (2*pi)
+      circ.res[v,8] <- sd_circ(a.c[,v]) %% (2*pi)
+      circ.res[v,9:10] <- hpd_est_circ(a.c[,v]) %% (2*pi)
 
-      circ.res[v,11] <- mean(b.c[,v])
-      circ.res[v,12] <- mode_est(b.c[,v])
-      circ.res[v,13] <- sd(b.c[,v])
-      circ.res[v,14:15] <- hpd_est(b.c[,v])
+      circ.res[v,11] <- mean(b.c[,v]) %% (2*pi)
+      circ.res[v,12] <- mode_est(b.c[,v]) %% (2*pi)
+      circ.res[v,13] <- sd(b.c[,v]) %% (2*pi)
+      circ.res[v,14:15] <- hpd_est(b.c[,v]) %% (2*pi)
 
-      circ.res[v,16] <- mean(AS[,v])
-      circ.res[v,17] <- mode_est(AS[,v])
-      circ.res[v,18] <- sd(AS[,v])
-      circ.res[v,19:20] <- hpd_est(AS[,v])
+      circ.res[v,16] <- mean(AS[,v]) %% (2*pi)
+      circ.res[v,17] <- mode_est(AS[,v]) %% (2*pi)
+      circ.res[v,18] <- sd(AS[,v]) %% (2*pi)
+      circ.res[v,19:20] <- hpd_est(AS[,v]) %% (2*pi)
 
-      circ.res[v,21] <- mean(SAM[,v])
-      circ.res[v,22] <- mode_est(SAM[,v])
-      circ.res[v,23] <- sd(SAM[,v])
-      circ.res[v,24:25] <- hpd_est(SAM[,v])
+      circ.res[v,21] <- mean(SAM[,v]) %% (2*pi)
+      circ.res[v,22] <- mode_est(SAM[,v]) %% (2*pi)
+      circ.res[v,23] <- sd(SAM[,v]) %% (2*pi)
+      circ.res[v,24:25] <- hpd_est(SAM[,v]) %% (2*pi)
 
       circ.res[v,26] <- mean(SSDO[,v])
       circ.res[v,27] <- mode_est(SSDO[,v])
@@ -1917,10 +1917,10 @@ summe <- function(output, mm){
        varrand.cat = varrand.cat,
        circ.varrand.ri = circ.varrand.ri,
        circ.res = circ.res,
-       circ.res.cat = circ.res.cat,
-       circ.res.means = circ.res.means,
+       circ.res.cat = circ.res.cat %% (2*pi),
+       circ.res.means = circ.res.means %% (2*pi),
        a.x = a.x, a.c = a.c, b.c = b.c,
-       SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
+       SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff %% (2*pi),
        lin.res.varrand.I = lin.res.varrand.I,
        lin.res.varrand.II = lin.res.varrand.II,
        circ.res.varrand = circ.res.varrand)
