@@ -11,6 +11,8 @@ Increased memory efficiency.
 
 Made sure that the circular random intercept variance (and circular random slope variance of categorical predictors) is computed as 1 - mean resultant length. Also updated documentation accordingly.
 
+to do:: need to fix scale issue in output tables.
+
 # bpnreg 1.0.3
 Deleted arguments from function documentation that are not in `\usage`.
 
