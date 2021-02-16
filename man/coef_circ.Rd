@@ -13,7 +13,7 @@ coef_circ(object, type = "continuous", units = "radians")
 coefficients for the continuous or categorical predictor variables.}
 
 \item{units}{one of \code{c("degrees", "radians")} to get categorical
-coefficients estimates and estimates for \code{$a_c$} in degrees or
+coefficients estimates and estimates for \code{$ac$, $bc$, AS and SAM} in degrees or
 radians.}
 }
 \description{

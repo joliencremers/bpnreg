@@ -117,7 +117,7 @@ coef_lin <- function(object){
 #' @param type one of \code{c("continuous", "categorical")} to get either the
 #'   coefficients for the continuous or categorical predictor variables.
 #' @param units one of \code{c("degrees", "radians")} to get categorical
-#'   coefficients estimates and estimates for \code{$a_c$} in degrees or
+#'   coefficients estimates and estimates for \code{$ac$, $bc$, AS and SAM} in degrees or
 #'   radians.
 #'
 #' @details the methods \link[bpnreg]{coef_circ.bpnr} and
@@ -473,7 +473,7 @@ coef_lin.bpnme <- function(object){
 #' @param type one of \code{c("continuous", "categorical")} to get either the
 #'   coefficients for the continuous or categorical predictor variables
 #' @param units one of \code{c("degrees", "radians")} to get categorical
-#'   coefficients estimates and estimates for \code{$a_c$} in degrees or
+#'   coefficients estimates and estimates for \code{$ac$, $bc$, AS and SAM} in degrees or
 #'   radians.
 #'
 #' @return A matrix or list with posterior summaries of the circular
@@ -585,7 +585,7 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
 #' @param type one of \code{c("continuous", "categorical")} to get either the
 #'   coefficients for the continuous or categorical predictor variables
 #' @param units one of \code{c("degrees", "radians")} to get categorical
-#'   coefficients estimates and estimates for \code{$a_c$} in degrees or
+#'   coefficients estimates and estimates for \code{$ac$, $bc$, AS and SAM} in degrees or
 #'   radians.
 #'
 #' @return A matrix or list with posterior summaries of the circular
