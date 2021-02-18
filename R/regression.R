@@ -103,6 +103,10 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
                  its = 1000, burn = 1, n.lag = 1,
                  seed = NULL){
 
+  if(sum(complete.cases(data))/length(complete.cases(data)) != 1){
+    stop("The data contains missing values.")
+  }
+
   if (!is.null(seed)){set.seed(seed)}
 
   mm <- mmr(pred.I, data, pred.II)
@@ -269,6 +273,10 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 bpnme <- function(pred.I, data, pred.II = pred.I,
                   its = 1000, burn = 1, n.lag = 1,
                   seed = NULL){
+
+  if(sum(complete.cases(data))/length(complete.cases(data)) != 1){
+    stop("The data contains missing values.")
+  }
 
   if (!is.null(seed)){set.seed(seed)}
 
