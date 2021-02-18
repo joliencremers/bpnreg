@@ -695,7 +695,7 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 #' @return a matrix containing the computed log pointwise predictive density
 #'   (lppd), Deviance Information Criterion (DIC), an alternative version of the
 #'   DIC (DIC_alt), and the Watanabe-Akaike Information Criterion computed in
-#'   two different ways (WAIC, WAIC2). The matrix also contains the number of
+#'   two different ways (WAIC1, WAIC2). The matrix also contains the number of
 #'   parameters or 'effective number' of parameters that the several statistics
 #'   are based on. Computation of the criteria is done according to Gelman et.al
 #'   (2014) in *Bayesian Data Analysis*.
@@ -715,7 +715,7 @@ fit.bpnr <- function(object){
 
   mf <- matrix(NA, 5L, 2L)
   colnames(mf) <- c("Statistic", "Parameters")
-  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC1", "WAIC2")
   mf[,1] <- unlist(object$model.fit[c("lppd", "DIC", "DIC_alt", "WAIC", "WAIC2")])
   mf[,2] <- c(object$p1 + object$p2,
               unlist(object$model.fit[c("pD", "pV", "pWAIC", "pWAIC2")]))
@@ -734,7 +734,7 @@ fit.bpnr <- function(object){
 #' @return a matrix containing the computed log pointwise predictive density
 #'   (lppd), Deviance Information Criterion (DIC), an alternative version of the
 #'   DIC (DIC_alt), and the Watanabe-Akaike Information Criterion computed in
-#'   two different ways (WAIC, WAIC2). The matrix also contains the number of
+#'   two different ways (WAIC1, WAIC2). The matrix also contains the number of
 #'   parameters or 'effective number' of parameters that the several statistics
 #'   are based on. Computation of the criteria is done according to Gelman et.al
 #'   (2014) in *Bayesian Data Analysis*.
@@ -755,7 +755,7 @@ fit.bpnme <- function(object){
 
   mf <- matrix(NA, 5L, 2L)
   colnames(mf) <- c("Statistic", "Parameters")
-  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC1", "WAIC2")
   mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in%
                           c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
   mf[,2] <- c(object$p1 + object$p2,
@@ -804,7 +804,7 @@ print.bpnr <- function(x, ...){
   cat("Model Fit: \n")
   mf <- matrix(NA, 5L, 2L)
   colnames(mf) <- c("Statistic", "Parameters")
-  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC1", "WAIC2")
   mf[,1] <- unlist(x$model.fit[c("lppd", "DIC", "DIC_alt", "WAIC", "WAIC2")])
   mf[,2] <- c(x$p1 + x$p2,
               unlist(x$model.fit[c("pD", "pV", "pWAIC", "pWAIC2")]))
@@ -891,7 +891,7 @@ print.bpnme <- function(x, ...){
   cat("Model Fit: \n")
   mf <- matrix(NA, 5L, 2L)
   colnames(mf) <- c("Statistic", "Parameters")
-  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC1", "WAIC2")
   mf[,1] <- x$model.fit[dimnames(x$model.fit)[[2]] %in%
                           c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
   mf[,2] <- c(x$p1 + x$p2,
