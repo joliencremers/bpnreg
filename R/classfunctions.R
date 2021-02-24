@@ -40,7 +40,8 @@ UseMethod("traceplot", object)
 #'
 #' @param object an object used to select a method.
 #' @param hypothesis the inequality constrained hypothesis to test.
-#' @param type type of hypothesis to test c("anchor", "isotropic").
+#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}. As of
+#'   yet only anchor hypotheses can be tested.
 #'
 #' @details the methods \link[bpnreg]{BFc.bpnr} and
 #'   \link[bpnreg]{BFc.bpnme} have their own help page.
@@ -175,7 +176,8 @@ coef_ran <- function(object, type = "linear"){
 #'
 #' @param object a \code{bpnr object} obtained from the function \code{bpnr()}.
 #' @param hypothesis the inequality constrained hypothesis to test.
-#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}.
+#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}. As of
+#'   yet only anchor hypotheses can be tested.
 #'
 #' @return Bayes Factors for inequality constrained hypotheses on mean
 #'   differences.
@@ -270,7 +272,8 @@ BFc.bpnr <- function(object, hypothesis, type = "anchor"){
 #' @param object a \code{bpnme object} obtained from the function
 #'   \code{\link{bpnme}}.
 #' @param hypothesis the inequality constrained hypothesis to test.
-#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}.
+#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}. As of
+#'   yet only anchor hypotheses can be tested.
 #'
 #' @return Bayes Factors for inequality constrained hypotheses on mean
 #'   differences.

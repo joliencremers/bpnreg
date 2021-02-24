@@ -11,7 +11,8 @@
 
 \item{hypothesis}{the inequality constrained hypothesis to test.}
 
-\item{type}{type of hypothesis to test \code{c("anchor", "isotropic")}.}
+\item{type}{type of hypothesis to test \code{c("anchor", "isotropic")}. As of
+yet only anchor hypotheses can be tested.}
 }
 \value{
 Bayes Factors for inequality constrained hypotheses on mean

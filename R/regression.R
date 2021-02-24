@@ -213,13 +213,14 @@ bpnr <- function(pred.I, data, pred.II = pred.I,
 #'   \item{\code{SSDO}}{A matrix of posterior samples for the signed shortest
 #'   distance to the origin.} \item{\code{circ.diff}}{A matrix of posterior
 #'   samples for the circular difference found between levels of categorical
-#'   variables and the intercept.} \item{\code{cRSnum}}{A string indicating
-#'   whether there are continuous variables with a random slope}
-#'   \item{\code{cRScat}}{A string indicating whether there are categorical
-#'   variables with a random slope} \item{\code{cRS}}{A string indicating
-#'   whether there are categorical or continuous variables with a random slope}
-#'   \item{\code{cRI}}{A vector of posterior samples of the mean resultant
-#'   length of the circular random intercept, a measure of concentration.}
+#'   variables and the intercept.} \item{\code{cRSnum}}{A vector of posterior
+#'   samples of the circular random slope estimates for the continuous
+#'   variables} \item{\code{cRScat}}{A vector of posterior samples of the
+#'   circular random slope estimates for the categorical variables}
+#'   \item{\code{cRS}}{A vector of posterior samples of the circular random
+#'   slope estimates} \item{\code{cRI}}{A vector of posterior samples of the
+#'   mean resultant length of the circular random intercept, a measure of
+#'   concentration.}
 #'   \item{\code{Call}}{The matched call.} \item{\code{lin.coef.I}}{The mean,
 #'   mode, standard deviation and 95 % confidence interval of the highest
 #'   posterior density of the linear fixed effect coefficients for \code{beta1}.}
