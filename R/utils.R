@@ -23,8 +23,7 @@ Dbd <- function(t, mu1, mu2){ cos(t)*mu1 + sin(t)*mu2 }
 #'
 
 cat_check <- function(x){
-  #length(which(!x%in%c(0,1))) == 0
-  is.factor(x)
+  length(which(!x%in%c(0,1))) == 0
 }
 
 #' Compute circular coefficients from linear coefficients
