@@ -227,11 +227,11 @@ head(fit$a.x)
 ### How to obtain random effect variances and individual random effects in circular mixed-effects models:
 
 ```{r, echo = FALSE, results = FALSE}
-fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1 + Maze|Subject), Maps, its = 100)
+fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps, its = 100)
 ```
 
 ```{r, eval = FALSE}
-fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1 + Maze|Subject), Maps, its = 100)
+fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps, its = 100)
 ```
 
 In circular mixed-effects models the following parameters contain the individual random effects and random effect variances:
@@ -258,12 +258,6 @@ apply(fitme$circular.ri, 1, mean_circ)*180/pi
 ```
 
 Indeed the circular random intercepts of the 20 individuals in the `Maps` data lie very close together.
-
-The posterior samples of the circular slope variance can be obtained using the following code:
-
-```{r}
-fitme$cRS[, "Maze1"]
-```
 
 An explanation of the computation of random intercept and slope variances can be found in the supplementary material of Cremers, Pennings, Mainhard \& Klugkist (2021).
 
