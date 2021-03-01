@@ -24,6 +24,7 @@ Imports:
    Rcpp (>= 1.0.2), MASS (>= 7.3.51.4), haven (>= 2.1.1), methods (>= 3.6.0)
 RoxygenNote: 7.1.0
 Suggests: 
+    qpdf,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
