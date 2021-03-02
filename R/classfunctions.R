@@ -989,6 +989,11 @@ print.bpnme <- function(x, ...){
 
 traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 
+  if(parameter %in% c("B1", "B2", "Beta.I", "Beta.II", "B.I", "B.II", "VCov.I", "VCov.II")){
+    stop("The names of the mcmc output objects have changed. `B1`, `B2`, `Beta.I`, `Beta.II`, `B.I`, `B.II`, `VCov.I` and `VCov.II` are now named `beta1`, `beta2`, `beta1`, `beta2`, `b1`, `b2`, `omega1` and `omega2` respectively",
+         call. = FALSE)
+  }
+
  if(is.null(variable)){
 
    text <- paste0(as.character(bquote(object)), "$", parameter)
@@ -1045,6 +1050,11 @@ traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 #'
 
 traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
+
+  if(parameter %in% c("B1", "B2", "Beta.I", "Beta.II", "B.I", "B.II", "VCov.I", "VCov.II")){
+    stop("The names of the mcmc output objects have changed. `B1`, `B2`, `Beta.I`, `Beta.II`, `B.I`, `B.II`, `VCov.I` and `VCov.II` are now named `beta1`, `beta2`, `beta1`, `beta2`, `b1`, `b2`, `omega1` and `omega2` respectively",
+            call. = FALSE)
+  }
 
   if(is.null(variable)){
 
@@ -1163,202 +1173,5 @@ traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
     }
 
   }
-
-}
-
-#' Predicted values for a Bayesian circular regression model
-#'
-#' Outputs predicted values for a Bayesian circular regression model for each
-#' iteration of the MCMC sampler.
-#'
-#' @param object a \code{bpnr object} obtained from the function
-#'   \code{\link{bpnr}}.
-#' @param ... further arguments passed to or from other methods.
-#'
-#' @return a matrix (rows = N, columns = iterations) containing predicted values
-#'   for the circular outcome for each iteration of the MCMC sampler.
-#'
-#' @method predict bpnr
-#'
-#' @examples
-#' library(bpnreg)
-#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
-#' its = 100, burn = 10, n.lag = 3)
-#' predict(fit.Motor)
-#'
-#' @export
-#'
-
-predict.bpnr <- function(object, ...){
-
-  .Deprecated()
-  YI <- object$mm$XI%*%t(object$beta1)
-  YII <- object$mm$XII%*%t(object$beta2)
-
-  theta <- atan2(YII, YI)%%(2*pi)
-
-  return(theta)
-
-}
-
-#' Predicted values for a Bayesian circular mixed-effects model
-#'
-#' Outputs predicted values for a Bayesian circular mixed-effects model for each
-#' iteration of the MCMC sampler.
-#'
-#' @param object a \code{bpnme object} obtained from the function
-#'   \code{\link{bpnme}}.
-#' @param ... further arguments passed to or from other methods.
-#'
-#' @return a matrix (rows = N, columns = iterations) containing predicted values
-#'   for the circular outcome for each iteration of the MCMC sampler.
-#'
-#' @method predict bpnme
-#'
-#' @examples
-#' library(bpnreg)
-#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
-#' its = 100, burn = 10, n.lag = 3)
-#' predict(fit.Motor)
-#'
-#' @export
-#'
-
-predict.bpnme <- function(object, ...){
-
-  .Deprecated()
-
-  YI <- list()
-  YII <- list()
-  theta <- list()
-
-  for(i in 1:object$mm$N){
-
-    YI[[i]] <- object$mm$XI[[i]] %*% t(object$beta1) +
-      object$mm$ZI[[i]]%*%object$b1[i,,]
-    YII[[i]] <- object$mm$XII[[i]]%*%t(object$beta2) +
-      object$mm$ZII[[i]]%*%object$b2[i,,]
-
-    theta[[i]] <- atan2(YII[[i]], YI[[i]])
-
-  }
-
-  YI <- do.call(rbind, YI)
-  YII <- do.call(rbind, YII)
-  theta <- do.call(rbind, theta)%%(2*pi)
-
-  return(theta)
-
-}
-
-#' Residuals for a Bayesian circular regression model
-#'
-#' Outputs residuals for a Bayesian circular regression model for each iteration
-#' of the MCMC sampler.
-#'
-#' @param object a \code{bpnr object} obtained from the function
-#'   \code{\link{bpnr}}.
-#' @param type the type of residuals, one of \code{c("arc", "cos")}. The
-#'   \code{"arc"} residuals are based on a computation of the circular arc
-#'   length between predicted value and original outcome. The \code{"cos"}
-#'   residuals are based on the cosine of the difference between predicted value
-#'   and original outcome.
-#' @param ... further arguments passed to or from other methods.
-#'
-#' @return a matrix (rows = N, columns = iterations) containing residuals for
-#'   each iteration of the MCMC sampler.
-#'
-#' @method residuals bpnr
-#'
-#' @examples
-#' library(bpnreg)
-#' fit.Motor <- bpnr(pred.I = Phaserad ~ 1 + Cond, data = Motor,
-#' its = 100, burn = 10, n.lag = 3)
-#' residuals(fit.Motor)
-#' residuals(fit.Motor, type = "cos")
-#'
-#' @export
-#'
-
-residuals.bpnr <- function(object, type = "arc", ...){
-
-  .Deprecated()
-
-  if(!(type == "arc" | type == "cos")){
-
-    stop("Invalid type argument")
-
-  }
-
-  pred.val <- predict(object)
-  diff <- pred.val - as.numeric(object$theta)
-  sign <- sign(sin(diff))
-
-  if(type == "arc"){
-
-    residuals <- (pi - abs(pi - abs(diff)))*sign
-
-  }else if(type == "cos"){
-
-    residuals <- cos(abs(diff))
-
-  }
-
-  return(residuals)
-
-}
-
-#' Residuals for a Bayesian circular mixed-effects model
-#'
-#' Outputs residuals for a Bayesian circular mixed-effects model for each
-#' iteration of the MCMC sampler.
-#'
-#' @param object a \code{bpnme object} obtained from the function
-#'   \code{\link{bpnme}}.
-#' @param type the type of residuals, one of \code{c("arc", "cos")}. The
-#'   \code{"arc"} residuals are based on a computation of the circular arc
-#'   length between predicted value and original outcome. The \code{"cos"}
-#'   residuals are based on the cosine of the difference between predicted value
-#'   and original outcome.
-#' @param ... further arguments passed to or from other methods.
-#'
-#' @return a matrix (rows = N, columns = iterations) containing residuals for
-#'   each iteration of the MCMC sampler.
-#'
-#' @method residuals bpnme
-#'
-#' @examples
-#' library(bpnreg)
-#' fit.Maps <- bpnme(pred.I = Error.rad ~ Maze + Trial.type + L.c + (1|Subject),
-#' data = Maps,
-#' its = 100, burn = 1, n.lag = 1)
-#' residuals(fit.Maps)
-#' residuals(fit.Maps, type = "cos")
-#'
-#' @export
-#'
-
-residuals.bpnme <- function(object, type = "arc", ...){
-
-  .Deprecated()
-
-  pred.val <- predict(object)
-
-  theta <- do.call(rbind, object$mm$theta)
-
-  diff <- pred.val - as.numeric(theta)
-  sign <- sign(sin(diff))
-
-  if(type == "arc"){
-
-    residuals <- (pi - abs(pi - abs(diff)))*sign
-
-  }else if(type == "cos"){
-
-    residuals <- cos(abs(diff))
-
-  }
-
-  return(residuals)
 
 }
