@@ -1,10 +1,10 @@
 ## Test environments:
 
-*Local Windows Install, R 3.6.1 & R 3.6.2
+*Local Windows Install, R 4.0.1
 
 *CRAN win-builder (devel and release)
 
-*Ubuntu 16.04 (on travis.ci), R 3.6.2
+*Ubuntu 16.04.6 (on travis.ci), R 4.0.2
 
 ## R CMD check results 
 
