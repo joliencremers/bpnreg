@@ -40,8 +40,13 @@ neurology, environmetrics, psychology and geology among others. Software
 implementations for the analysis of regression type models for circular data are
 however scarce.
 
-To date `bpnreg` is the only software package that implements methods to analyse
-both regression and mixed-effects models for circular outcomes.
+To date `bpnreg` is the only software package that implements methods to analyze
+both regression and mixed-effects models for circular outcomes. The implemented
+regression models are Bayesian and assume projected normal distributions for the
+residuals. 
+Models based on PN distributions are heterogeneous in the sense that the circular
+mean and variance are modeled simultaneously.
+
 
 
 # Statement of Need
