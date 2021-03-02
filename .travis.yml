@@ -3,4 +3,4 @@
 language: R
 sudo: false
 cache: packages
-# r_check_args: "--no-build-vignettes --ignore-vignettes"
+warnings_are_errors: false
