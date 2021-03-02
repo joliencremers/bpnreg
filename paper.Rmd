@@ -58,9 +58,9 @@ only R-package providing Bayesian regression and mixed-effects models for
 circular outcomes based on the projected normal distribution.
 
 From its first release in 2018 at least eight published articles
-[@Tyson-Carr2020-mu,
-@Cremers2021-mm, @Cote2020-xg, @Rafferty2020-pb, @Ojeda_undated-by,
-@Olson2020-al, @Klugkist2018-ag, @Spinks2019-ya] have used `bpnreg` in their
+[@Tyson-Carr2020-mu;
+@Cremers2021-mm; @Cote2020-xg; @Rafferty2020-pb; @Ojeda_undated-by;
+@Olson2020-al; @Klugkist2018-ag; @Spinks2019-ya] have used `bpnreg` in their
 analyses.
 
 # Example Usage
