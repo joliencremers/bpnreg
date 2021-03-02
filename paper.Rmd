@@ -34,10 +34,14 @@ knitr::opts_chunk$set(echo = TRUE)
 The analysis of circular data, measured in degrees or radians, is inherently
 different from standard linear data due to its periodic nature ($0^\circ =
 360^\circ$). Special methods are needed, even for computing basic summary
-statistics [@mardia2009directional]. Although circular data occur in a diverse
-range of research areas, astronomy, medicine, genetics, neurology,
-environmetrics, psychology and geology among others, software implementations
-for the analysis of regression type models are scarce.
+statistics [@mardia2009directional]. Although circular data is not very common
+they occur in a diverse range of research areas, astronomy, medicine, genetics,
+neurology, environmetrics, psychology and geology among others. Software
+implementations for the analysis of regression type models for circular data are
+however scarce.
+
+To date `bpnreg` is the only software package that implements methods to analyse
+both regression and mixed-effects models for circular outcomes.
 
 
 # Statement of Need
@@ -65,11 +69,10 @@ date however, `bpnreg` is the only R-package providing Bayesian multiple
 regression as well as mixed-effects models for circular outcomes based on the
 projected normal distribution.
 
-From its first release in 2018 at least eight published articles
-[@Tyson-Carr2020-mu;
+From its first release several published articles [@Tyson-Carr2020-mu;
 @Cremers2021-mm; @Cote2020-xg; @Rafferty2020-pb; @Ojeda_undated-by;
-@Olson2020-al; @Klugkist2018-ag; @Spinks2019-ya] have used `bpnreg` in their
-analyses.
+@Olson2020-al; @Klugkist2018-ag; @Spinks2019-ya] have used `bpnreg` for circular
+data analysis.
 
 # Use
 
