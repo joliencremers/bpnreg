@@ -14,7 +14,7 @@ A data frame with 42 rows and 4 variables: \describe{ \item{Cond}{a
   the phase difference between 'observer' and 'mover' in radians} }
 }
 \source{
-\url{https://doi.org/10.1371/journal.pone.0177457}
+\doi{10.1371/journal.pone.0177457}
 }
 \usage{
 Motor
