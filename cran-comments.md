@@ -1,3 +1,8 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Replaced URLs in Maps.Rd and Motor.Rd such that they use \doi with the DOI name only
+
 ## Test environments:
 
 *Local Windows Install, R 4.0.1
