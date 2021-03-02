@@ -49,7 +49,7 @@
 #'  phase} \item{L.c}{mean centered Learning} \item{Error.rad}{a numeric
 #'  variable containing the angular error in radians} }
 #'
-#'@source \url{https://doi.org/10.1016/j.cognition.2017.05.020}
+#'@source  \doi{10.1016/j.cognition.2017.05.020}
 #'
 "Maps"
 
@@ -99,7 +99,7 @@
 #'   of the hand movement of the 'observer'} \item{Phaserad}{a numeric variable
 #'   the phase difference between 'observer' and 'mover' in radians} }
 #'
-#' @source \url{https://doi.org/10.1371/journal.pone.0177457}
+#' @source  \doi{10.1371/journal.pone.0177457}
 #'
 "Motor"
 
