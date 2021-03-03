@@ -39,15 +39,6 @@ environmetrics, psychology and geology among others. Software
 implementations for the analysis of regression type models for circular
 data are however scarce.
 
-To date `bpnreg` is the only software package that implements methods to
-analyze both regression and mixed-effects models for circular outcomes.
-The implemented regression models are Bayesian and assume projected
-normal distributions for the residuals. Models based on PN distributions
-are heterogeneous in the sense that the circular mean and variance are
-modeled simultaneously.
-
-# Statement of Need
-
 The purpose of `bpnreg` is to provide methods for fitting circular
 regression and mixed-effects models to `R`-users. Its two main functions
 allow for fitting Bayesian multiple and mixed-effect regression models
@@ -59,7 +50,11 @@ implemented in `c++` that allows for fast computation (see
 @Cremers2018-ta and @Cremers2021-mm for a description and assessment of
 the MCMC samplers). Posterior descriptives of all parameters, model fit
 statistics and Bayes factors for hypothesis tests for inequality
-constrained hypotheses are provided.
+constrained hypotheses are provided. To date `bpnreg` is the only
+software package that implements methods to analyze both regression and
+mixed-effects models for circular outcomes.
+
+# Statement of Need
 
 There are several R-packages that provide methods for circular data
 analyses, but only a couple contain functionality for circular
@@ -73,9 +68,9 @@ circular outcomes based on the von Mises distribution. To date however,
 well as mixed-effects models for circular outcomes based on the
 projected normal distribution.
 
-From its first release several published articles
-[@Tyson-Carr2020-mu; @Cremers2021-mm; @Cote2020-xg; @Rafferty2020-pb; @Ojeda_undated-by; @Olson2020-al; @Klugkist2018-ag; @Spinks2019-ya]
-have used `bpnreg` for circular data analysis.
+From its first release `bpnreg` has been used for circular data analysis
+in several publications
+[@Tyson-Carr2020-mu; @Cremers2021-mm; @Cote2020-xg; @Rafferty2020-pb; @Ojeda_undated-by; @Olson2020-al; @Klugkist2018-ag; @Spinks2019-ya].
 
 # Use
 
@@ -211,6 +206,6 @@ vignette available on `CRAN`.
 
 JC is supported for this work by a research grant from the Novo Nordisk
 Foundation ("Harnessing The Power of Big Data to Address the Societal
-Challenge of Aging." NNF17OC0027812)
+Challenge of Aging." NNF17OC0027812).
 
 # References {#references .unnumbered}
