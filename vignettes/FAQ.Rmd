@@ -1,0 +1,328 @@
+---
+title: "FAQ"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FAQ}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = TRUE, echo = FALSE}
+library(bpnreg)
+```
+
+This vignette contains answers to some frequently asked questions about the
+package `bpnreg` for analyzing Bayesian projected normal circular regression and
+mixed-effects models. Answers are given and illustrated with the `Motor` and
+`Maps` datasets.
+
+To obtain more information about the `Motor` and `Maps` datasets the following
+code can be used:
+
+```{r, eval = FALSE}
+library(bpnreg)
+?Maps
+?Motor
+```
+
+
+### How to fit a circular regression model:
+
+A circular regression model for the `Motor` data can be fit using the `bpnr`
+function as follows:
+
+```{r, eval = FALSE}
+bpnr(Phaserad ~ Cond + AvAmp, data = Motor)
+```
+
+Note that categorical variables should be of class `factor` in order to be
+handled correctly by bpnreg.
+
+### How to fit a circular mixed effects model:
+
+A circular mixed-effects model for the `Maps` data can be fit using the `bpnme`
+function as follows:
+
+```{r, eval = FALSE}
+bpnme(Error.rad ~ Maze + Trial.type + (1|Subject),data =  Maps, its = 100)
+```
+
+Note that categorical variables should be of class `factor` in order to be
+handled correctly by bpnreg.
+
+### How to specify interaction effects:
+
+An interaction effect between the `Cond` and `AvAmp` variables can be included
+in the regression model in the following two ways:
+
+```{r, eval = FALSE}
+bpnr(Phaserad ~ Cond + AvAmp + Cond:AvAmp, data = Motor)
+```
+
+```{r, eval = FALSE}
+bpnr(Phaserad ~ Cond*AvAmp, data = Motor)
+```
+
+### How to format the input data:
+
+The input data should be formatted as a standard `R` `data.frame` or `dplyr`
+`tbl()`.
+
+### Are missing values allowed in the input data and how are missing values dealt with?
+
+In case of missing values in the input data an error will be returned. In case
+of mixed effects models subgroups do not need to be of the same size, e.g. in
+case of repeated measures data not all individuals need to have been observed at
+each measurement occasion.
+
+### How to scale the dependent variable:
+
+The dependent variable should be a circular variable measured on a scale from 0
+to 2$\pi$ radians or -$\pi$ to $\pi$ radians. An warning message if returned in
+case the dependent variable contains values outside these ranges.
+
+### Can user-specified priors be used?
+
+The package does not currently contain an option to include a user-specified
+priors. Priors for regression coefficients and fixed-effect coefficients used in
+the current version of the package are uninformative normal distributions, $N(0,
+10000)$.
+
+### Can multiple grouping/nesting factors be used?
+
+No. Unlike packages for mixed-effects models such as `lme4` and `nlme` the
+mixed-effects model in `bpnreg` may only contain one nesting variable/grouping
+factor.
+
+### How to specify a seed:
+
+A seed can be specified in the `bpnr` and `bpnme` functions using the `seed`
+option as follows:
+
+```{r, eval = FALSE}
+bpnr(Phaserad ~ Cond + AvAmp, data = Motor, seed = 101)
+```
+
+### How to obtain model summaries:
+
+The `coef_circ()` function can be used to extract model summaries for both
+categorical and continuous predictors. The units in which the results are
+displayed can be chosen to be either radians or degrees.
+
+```{r, echo = FALSE, results = FALSE}
+fit <- bpnr(Phaserad ~ Cond + AvAmp, data = Motor, seed = 101)
+```
+
+```{r, eval = FALSE}
+fit <- bpnr(Phaserad ~ Cond + AvAmp, data = Motor, seed = 101)
+```
+
+
+E.g. circular coefficients for the circular regression model above can be obtained as follows:
+```{r, results = FALSE}
+coef_circ(fit, type = "continuous", units = "degrees")
+coef_circ(fit, type = "categorical", units = "degrees")
+coef_circ(fit, type = "continuous", units = "radians")
+coef_circ(fit, type = "categorical", units = "radians")
+```
+
+### How to interpret the output of the `coef_circ()` function:
+
+```{r, eval = FALSE}
+fit <- bpnr(Phaserad ~ Cond + AvAmp, data = Motor, seed = 101)
+```
+
+To obtain circular coefficients in degrees for the continuous variable `AvAmp` in the circular regression model above are obtained as:
+
+```{r, eval = FALSE}
+coef_circ(fit, type = "continuous", units = "degrees")
+```
+
+```{r, echo = FALSE}
+coef_circ(fit, type = "continuous", units = "degrees")
+```
+
+The output returns summary statistics for the posterior distributions for several parameters of the circular regression line of the `AvAmp` variable.
+
+These parameters are interpreted as follows:
+
+* `ax` = the location of the inflection point of the regression curve on the axis of the predictor.
+* `ac` = the location of the inflection point of the regression curve on the axis of the circular outcome.
+* `bc` = the slope of the tangent line at the inflection point. An increase of 1 unit of the predictor at the inflection point leads to a `bc` change in the circular outcome.
+* `AS` = the average slopes of the circular regression. An increase of 1 unit of the predictor leads to a `AS` change in the circular outcome on average.
+* `SAM` = the circular regression slopes at the mean.An increase of 1 unit of the predictor leads to a `SAM` change in the circular outcome at the average predictor value.
+* `SSDO`= the signed shortest distance to the origin.
+
+A more detailed explanation of the above parameters is given in Cremers, Mulder \& Klugkist (2018).
+
+To obtain circular coefficients in degrees for the categorical variable `Cond` we use:
+
+```{r, eval = FALSE}
+coef_circ(fit, type = "categorical", units = "degrees")
+```
+
+```{r, echo = FALSE}
+coef_circ(fit, type = "categorical", units = "degrees")
+```
+
+The output returns summary statistics for the posterior distributions of the circular means for all categories and combination of categories of the categorical variables in the model, as well as differences between these means. 
+
+### How to obtain model fit statistics:
+
+By using the `fit()` function on a `bpnr` or `bpnme` object 5 different fit statistics together with the (effective) number of parameters they are based on can be obtained.
+
+```{r}
+fit(fit)
+```
+
+All five fit statistics are computed as in Gelman et.al. (2014). The `lppd` is
+an estimate of the expected log predictive density, the `DIC` is the Deviance
+Information Criterion, the `DIC_alt` is a version of the DIC that uses a
+slightly different definition of the effective number of parameters, the `WAIC1`
+and `WAIC2` are the two versions of the Watanabe-Akaike or Widely Available
+Information Criterion presented in Gelman et.al. (2014).
+
+### How to obtain the raw posterior estimates:
+
+Raw posterior estimates are stored in the following objects:
+
+* `a.x` = posterior samples for the the locations of the inflection point of the regression curve on the axis of the predictor.
+* `a.c` = posterior samples for the the locations of the inflection point of the regression curve on the axis of the circular outcome.
+* `b.c` = posterior samples for the slopes of the tangent line at the inflection point. 
+* `AS` = posterior samples for the average slopes of the circular regression.
+* `SAM` = posterior samples for the circular regression slopes at the mean.
+* `SSDO`= posterior samples for the signed shortest distance to the origin.
+* `circ.diff` = posterior samples for the circular differences between intercept and other categories of categorical variables.
+* `beta1` = posterior samples for the fixed effects coefficients for the first component.
+* `beta2` = posterior samples for the fixed effects coefficients for the second component.
+
+In circular mixed-effects models the following additional parameters can be obtained:
+
+* `b1` = posterior samples for the random effects coefficients for the first component.
+* `b2` = posterior samples for the random effects coefficients for the second component.
+* `circular.ri` = posterior samples for the circular random intercepts for each individual.
+* `omega1` = posterior samples for the random effect variances of the first component.
+* `omega2` = posterior samples for the random effect variances of the first component.
+* `cRS` = posterior samples for the circular random slope variance.
+* `cRI` = posterior samples of the mean resultant length of the circular random intercept, a measure of concentration. 
+
+
+E.g. to obtain the first six posterior samples for `beta1` and `a.x` we use the following code:
+
+```{r}
+head(fit$beta1)
+```
+
+```{r}
+head(fit$a.x)
+```
+
+### How to obtain random effect variances and individual random effects in circular mixed-effects models:
+
+```{r, echo = FALSE, results = FALSE}
+fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps, its = 100)
+```
+
+```{r, eval = FALSE}
+fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps, its = 100)
+```
+
+In circular mixed-effects models the following parameters contain the individual random effects and random effect variances:
+
+* `b1` = posterior samples for the random effects coefficients for the first component.
+* `b2` = posterior samples for the random effects coefficients for the second component.
+* `circular.ri` = posterior samples for the circular random intercepts for each individual.
+* `omega1` = posterior samples for the random effect variances of the first component.
+* `omega2` = posterior samples for the random effect variances of the first component.
+* `cRS` = posterior samples for the circular random slope variance (for `bc`).
+* `cRI` = posterior samples of the mean resultant length of the circular random intercept, a measure of concentration. 
+
+E.g. if we want to obtain the posterior mean for the mean resultant length of the circular random intercept we use the following code:
+
+```{r}
+mean(fitme$cRI)
+```
+
+This estimate is very close to 1, meaning there is almost no variation in the individual circular random intercepts.
+We can check this by plotting the posterior means of the individual circular random intercepts (in degrees):
+
+```{r}
+apply(fitme$circular.ri, 1, mean_circ)*180/pi
+```
+
+Indeed the circular random intercepts of the 20 individuals in the `Maps` data lie very close together.
+
+An explanation of the computation of random intercept and slope variances can be found in the supplementary material of Cremers, Pennings, Mainhard \& Klugkist (2021).
+
+### How to obtain the estimated variance for different groups in a circular regression or circular mixed-effects models:
+
+Because projected normal models are heterogeneous models, i.e. they
+simultaneously model mean and variance, we can in addition to investigating
+effects on the circular mean also investigate effects on the circular variance.
+
+Kendall (1974) gives the following formula for computation of the circular variance in a projected normal model:
+
+$$1 - \hat{\rho} = 1 - \sqrt{\pi\xi/2}\exp{-\xi}[I_0(\xi) + I_1(\xi)]$$
+
+where $\xi = ||\boldsymbol{\mu}||^2$ and $I_\nu()$  is the modified Bessel function of the first kind and order $\nu$. For the effect of a variable $x$ on the variance, $\boldsymbol{\mu} = (\beta_0^I + \beta_1^Ix,\beta_0^{II} + \beta_1^{II}x)$, where $\beta_0^I$, $\beta_1^I$, $\beta_0^{II}$ and $\beta_1^{II}$ are the intercepts and slopes of the first and second linear component respectively.
+
+Automated summaries for effects on the circular variance are however not yet
+implemented in `bpnreg` and will need to be computed explicitly using the raw
+posterior samples. E.g. the effect of the trial type on the circular variance can be computed as follows:
+
+```{r}
+a1 <- fitme$beta1[,"(Intercept)"]
+a2 <- fitme$beta2[,"(Intercept)"]
+b1 <- fitme$beta1[,"Trial.type1"]
+b2 <- fitme$beta2[,"Trial.type1"]
+
+zeta_standard <- sqrt((a1)^2 + (a2 + b2)^2)^2/4
+var_standard  <- 1 - sqrt((pi * zeta_standard)/2) * exp(-zeta_standard) * 
+                        (besselI(zeta_standard, 0) + besselI(zeta_standard, 1))
+
+zeta_probe <- sqrt((a1 + b1)^2 + (a2 + b2)^2)^2/4
+var_probe  <- 1 - sqrt((pi * zeta_probe)/2) * exp(-zeta_probe) * 
+                        (besselI(zeta_probe, 0) + besselI(zeta_probe, 1))
+
+standard <- c(mode_est(var_standard), 
+              mean(var_standard),
+              sd(var_standard),
+              hpd_est(var_standard))
+probe <- c(mode_est(var_probe), 
+           mean(var_probe),
+           sd(var_probe),
+           hpd_est(var_probe))
+
+results <- rbind(standard, probe)
+
+colnames(results) <- c("mode", "mean", "sd", "HPD LB", "HPD UB")
+rownames(results) <- c("standard", "probe")
+
+```
+
+The posterior estimates of the circular variance for the standard and probe trials are:
+
+```{r}
+results
+```
+
+From these results we conclude that the circular variance for the standard and probe trials is not significantly different, the 95\% Highest Posterior Density (HPD) intervals overlap.
+
+## References
+
+- Cremers, J. , Mulder, K.T. \& Klugkist, I. (2018). Circular Interpretation of Regression Coefficients. *British Journal of Mathematical and Statistical Psychology, 71*(1), 75-95. [[Full-text]](https://doi.org/10.1111/bmsp.12108)
+
+- Cremers, J., Pennings, H.J.M., Mainhard, T. \& Klugkist, I. (2021). Circular Modelling of Circumplex Measurements for Interpersonal Behavior. *Assessment, 28*(2), 585-600. [[Full-text]](https://doi.org/10.1177/1073191119858407)
+
+- Gelman, A., Carlin, J.B., Stern, H.S., Dunson, D.B., Vehtari, A. \& Rubin, D. (2014). Bayesian Data Analysis, 3rd ed.
+
+- Kendall, D.G. (1974). Pole-seeking Brownian motion and bird navigation. *Journal of the Royal
+Statistical Society. Series B, 37*, 97–133.
+

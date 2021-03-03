@@ -40,7 +40,8 @@ UseMethod("traceplot", object)
 #'
 #' @param object an object used to select a method.
 #' @param hypothesis the inequality constrained hypothesis to test.
-#' @param type type of hypothesis to test c("anchor", "isotropic").
+#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}. As of
+#'   yet only anchor hypotheses can be tested.
 #'
 #' @details the methods \link[bpnreg]{BFc.bpnr} and
 #'   \link[bpnreg]{BFc.bpnme} have their own help page.
@@ -117,7 +118,7 @@ coef_lin <- function(object){
 #' @param type one of \code{c("continuous", "categorical")} to get either the
 #'   coefficients for the continuous or categorical predictor variables.
 #' @param units one of \code{c("degrees", "radians")} to get categorical
-#'   coefficients estimates and estimates for \code{$a_c$} in degrees or
+#'   coefficients estimates and estimates for \code{$ac$, $bc$, AS and SAM} in degrees or
 #'   radians.
 #'
 #' @details the methods \link[bpnreg]{coef_circ.bpnr} and
@@ -175,7 +176,8 @@ coef_ran <- function(object, type = "linear"){
 #'
 #' @param object a \code{bpnr object} obtained from the function \code{bpnr()}.
 #' @param hypothesis the inequality constrained hypothesis to test.
-#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}.
+#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}. As of
+#'   yet only anchor hypotheses can be tested.
 #'
 #' @return Bayes Factors for inequality constrained hypotheses on mean
 #'   differences.
@@ -270,7 +272,8 @@ BFc.bpnr <- function(object, hypothesis, type = "anchor"){
 #' @param object a \code{bpnme object} obtained from the function
 #'   \code{\link{bpnme}}.
 #' @param hypothesis the inequality constrained hypothesis to test.
-#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}.
+#' @param type type of hypothesis to test \code{c("anchor", "isotropic")}. As of
+#'   yet only anchor hypotheses can be tested.
 #'
 #' @return Bayes Factors for inequality constrained hypotheses on mean
 #'   differences.
@@ -359,6 +362,8 @@ BFc.bpnme <- function(object, hypothesis, type = "anchor"){
 #' Obtain random effect variances of a Bayesian circular mixed-effects model
 #'
 #' Gives posterior summaries of the circular or linear random effect variances.
+#' The circular random intercept variance and circular random slope variance of
+#' categorical predictors is computed as 1 - mean resultant length.
 #'
 #' @param object a \code{bpnme object} obtained from the function
 #'   \code{\link{bpnme}}.
@@ -471,7 +476,7 @@ coef_lin.bpnme <- function(object){
 #' @param type one of \code{c("continuous", "categorical")} to get either the
 #'   coefficients for the continuous or categorical predictor variables
 #' @param units one of \code{c("degrees", "radians")} to get categorical
-#'   coefficients estimates and estimates for \code{$a_c$} in degrees or
+#'   coefficients estimates and estimates for \code{$ac$, $bc$, AS and SAM} in degrees or
 #'   radians.
 #'
 #' @return A matrix or list with posterior summaries of the circular
@@ -517,12 +522,16 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
       a.x <-  object$circ.coef[,1:5]
       if(units == "degrees"){
         a.c <-  object$circ.coef[,6:10]*(180/pi)
+        b.c <- object$circ.coef[,11:15]*(180/pi)
+        AS <-  object$circ.coef[,16:20]*(180/pi)
+        SAM <-  object$circ.coef[,21:25]*(180/pi)
       }else if(units == "radians"){
         a.c <-  object$circ.coef[,6:10]
+        b.c <- object$circ.coef[,11:15]
+        AS <-  object$circ.coef[,16:20]
+        SAM <-  object$circ.coef[,21:25]
       }
-      b.c <- object$circ.coef[,11:15]
-      AS <-  object$circ.coef[,16:20]
-      SAM <-  object$circ.coef[,21:25]
+
       SSDO <-  object$circ.coef[,26:30]
 
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
@@ -579,7 +588,7 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
 #' @param type one of \code{c("continuous", "categorical")} to get either the
 #'   coefficients for the continuous or categorical predictor variables
 #' @param units one of \code{c("degrees", "radians")} to get categorical
-#'   coefficients estimates and estimates for \code{$a_c$} in degrees or
+#'   coefficients estimates and estimates for \code{$ac$, $bc$, AS and SAM} in degrees or
 #'   radians.
 #'
 #' @return A matrix or list with posterior summaries of the circular
@@ -624,13 +633,15 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 
       if(units == "degrees"){
         a.c <-  object$circ.coef[,6:10]*(180/pi)
+        b.c <- object$circ.coef[,11:15]*(180/pi)
+        AS <-  object$circ.coef[,16:20]*(180/pi)
+        SAM <-  object$circ.coef[,21:25]*(180/pi)
       }else if(units == "radians"){
         a.c <-  object$circ.coef[,6:10]
+        b.c <- object$circ.coef[,11:15]
+        AS <-  object$circ.coef[,16:20]
+        SAM <-  object$circ.coef[,21:25]
       }
-
-      b.c <-  object$circ.coef[,11:15]
-      AS <-  object$circ.coef[,16:20]
-      SAM <-  object$circ.coef[,21:25]
       SSDO <-  object$circ.coef[,26:30]
 
       coefficients <- (rbind(a.x, a.c, b.c, AS, SAM, SSDO))
@@ -687,7 +698,7 @@ coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
 #' @return a matrix containing the computed log pointwise predictive density
 #'   (lppd), Deviance Information Criterion (DIC), an alternative version of the
 #'   DIC (DIC_alt), and the Watanabe-Akaike Information Criterion computed in
-#'   two different ways (WAIC, WAIC2). The matrix also contains the number of
+#'   two different ways (WAIC1, WAIC2). The matrix also contains the number of
 #'   parameters or 'effective number' of parameters that the several statistics
 #'   are based on. Computation of the criteria is done according to Gelman et.al
 #'   (2014) in *Bayesian Data Analysis*.
@@ -707,7 +718,7 @@ fit.bpnr <- function(object){
 
   mf <- matrix(NA, 5L, 2L)
   colnames(mf) <- c("Statistic", "Parameters")
-  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC1", "WAIC2")
   mf[,1] <- unlist(object$model.fit[c("lppd", "DIC", "DIC_alt", "WAIC", "WAIC2")])
   mf[,2] <- c(object$p1 + object$p2,
               unlist(object$model.fit[c("pD", "pV", "pWAIC", "pWAIC2")]))
@@ -726,7 +737,7 @@ fit.bpnr <- function(object){
 #' @return a matrix containing the computed log pointwise predictive density
 #'   (lppd), Deviance Information Criterion (DIC), an alternative version of the
 #'   DIC (DIC_alt), and the Watanabe-Akaike Information Criterion computed in
-#'   two different ways (WAIC, WAIC2). The matrix also contains the number of
+#'   two different ways (WAIC1, WAIC2). The matrix also contains the number of
 #'   parameters or 'effective number' of parameters that the several statistics
 #'   are based on. Computation of the criteria is done according to Gelman et.al
 #'   (2014) in *Bayesian Data Analysis*.
@@ -745,17 +756,15 @@ fit.bpnr <- function(object){
 
 fit.bpnme <- function(object){
 
-  # mf <- matrix(NA, 5L, 2L)
-  # colnames(mf) <- c("Statistic", "Parameters")
-  # rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
-  # mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in%
-  #                              c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
-  # object$model.fit[dimnames(object$model.fit)[[2]] %in% c("pD", "pV", "pWAIC", "pWAIC2")]
-  # # mf[,2] <- c(object$p1 + object$p2 + (object$N*2),
-  #             object$model.fit[dimnames(object$model.fit)[[2]] %in%
-  #                                c("pD", "pV", "pWAIC", "pWAIC2")])
-  # as.data.frame(mf)
-  print(object$model.fit)
+  mf <- matrix(NA, 5L, 2L)
+  colnames(mf) <- c("Statistic", "Parameters")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC1", "WAIC2")
+  mf[,1] <- object$model.fit[dimnames(object$model.fit)[[2]] %in%
+                          c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
+  mf[,2] <- c(object$p1 + object$p2,
+              object$model.fit[dimnames(object$model.fit)[[2]] %in%
+                            c("pD", "pV", "pWAIC", "pWAIC2")])
+  as.data.frame(mf)
 
 }
 
@@ -798,7 +807,7 @@ print.bpnr <- function(x, ...){
   cat("Model Fit: \n")
   mf <- matrix(NA, 5L, 2L)
   colnames(mf) <- c("Statistic", "Parameters")
-  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC1", "WAIC2")
   mf[,1] <- unlist(x$model.fit[c("lppd", "DIC", "DIC_alt", "WAIC", "WAIC2")])
   mf[,2] <- c(x$p1 + x$p2,
               unlist(x$model.fit[c("pD", "pV", "pWAIC", "pWAIC2")]))
@@ -878,20 +887,20 @@ print.bpnme <- function(x, ...){
 
   cat("MCMC: \n", paste("iterations = ", x$its, "\n",
                         "burn-in = ", x$burn, "\n",
-                        "lag = ", x$n.lag,
+                        "lag = ", x$lag,
                         sep = ""),
       "\n\n", sep = "")
 
   cat("Model Fit: \n")
-  # mf <- matrix(NA, 5L, 2L)
-  # colnames(mf) <- c("Statistic", "Parameters")
-  # rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC", "WAIC2")
-  # mf[,1] <- x$model.fit[dimnames(x$model.fit)[[2]] %in%
-  #                         c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
-  # mf[,2] <- c(x$p1 + x$p2,
-  #             x$model.fit[dimnames(x$model.fit)[[2]] %in%
-  #                           c("pD", "pV", "pWAIC", "pWAIC2")])
-  # print(mf)
+  mf <- matrix(NA, 5L, 2L)
+  colnames(mf) <- c("Statistic", "Parameters")
+  rownames(mf) <- c("lppd", "DIC", "DIC.alt", "WAIC1", "WAIC2")
+  mf[,1] <- x$model.fit[dimnames(x$model.fit)[[2]] %in%
+                          c("lppd", "DIC", "DICalt", "WAIC", "WAIC2")]
+  mf[,2] <- c(x$p1 + x$p2,
+              x$model.fit[dimnames(x$model.fit)[[2]] %in%
+                            c("pD", "pV", "pWAIC", "pWAIC2")])
+  print(mf)
   cat("\n\n")
 
   cat("Fixed Effects \n\n")
@@ -980,6 +989,11 @@ print.bpnme <- function(x, ...){
 
 traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 
+  if(parameter %in% c("B1", "B2", "Beta.I", "Beta.II", "B.I", "B.II", "VCov.I", "VCov.II")){
+    stop("The names of the mcmc output objects have changed. `B1`, `B2`, `Beta.I`, `Beta.II`, `B.I`, `B.II`, `VCov.I` and `VCov.II` are now named `beta1`, `beta2`, `beta1`, `beta2`, `b1`, `b2`, `omega1` and `omega2` respectively",
+         call. = FALSE)
+  }
+
  if(is.null(variable)){
 
    text <- paste0(as.character(bquote(object)), "$", parameter)
@@ -1036,6 +1050,11 @@ traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){
 #'
 
 traceplot.bpnme <- function(object, parameter = "SAM", variable = NULL){
+
+  if(parameter %in% c("B1", "B2", "Beta.I", "Beta.II", "B.I", "B.II", "VCov.I", "VCov.II")){
+    stop("The names of the mcmc output objects have changed. `B1`, `B2`, `Beta.I`, `Beta.II`, `B.I`, `B.II`, `VCov.I` and `VCov.II` are now named `beta1`, `beta2`, `beta1`, `beta2`, `b1`, `b2`, `omega1` and `omega2` respectively",
+            call. = FALSE)
+  }
 
   if(is.null(variable)){
 

@@ -8,3 +8,6 @@
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 ^LICENSE.txt
+^paper.md
+^paper.Rmd
+^paper.bib

@@ -13,7 +13,7 @@
 a matrix containing the computed log pointwise predictive density
   (lppd), Deviance Information Criterion (DIC), an alternative version of the
   DIC (DIC_alt), and the Watanabe-Akaike Information Criterion computed in
-  two different ways (WAIC, WAIC2). The matrix also contains the number of
+  two different ways (WAIC1, WAIC2). The matrix also contains the number of
   parameters or 'effective number' of parameters that the several statistics
   are based on. Computation of the criteria is done according to Gelman et.al
   (2014) in *Bayesian Data Analysis*.

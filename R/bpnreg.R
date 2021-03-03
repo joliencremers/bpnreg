@@ -54,10 +54,8 @@
 #'
 #' @useDynLib bpnreg, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
-#' @importFrom stats sd rnorm runif pnorm dnorm var model.matrix predict
-#'   rWishart terms
+#' @importFrom stats sd var model.matrix terms complete.cases pnorm dnorm
 #' @importFrom stats model.frame plot.ts reformulate as.formula formula
-#' @importFrom MASS mvrnorm
 #' @importFrom haven read_spss
 #' @importFrom methods is
 #' @importFrom utils combn

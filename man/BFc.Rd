@@ -11,7 +11,8 @@ BFc(object, hypothesis, type = "anchor")
 
 \item{hypothesis}{the inequality constrained hypothesis to test.}
 
-\item{type}{type of hypothesis to test c("anchor", "isotropic").}
+\item{type}{type of hypothesis to test \code{c("anchor", "isotropic")}. As of
+yet only anchor hypotheses can be tested.}
 }
 \description{
 \code{BF} gives Bayes factors for inequality constrained hypotheses on

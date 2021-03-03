@@ -1,3 +1,14 @@
+#' Compute utmu
+#'
+#' @param t current outcome value
+#' @param mu1 current predicted linear mean of the first component
+#' @param mu2 current predicted linear mean of the second component
+#'
+#' @keywords internal
+#'
+
+Dbd <- function(t, mu1, mu2){ cos(t)*mu1 + sin(t)*mu2 }
+
 #' Check whether a variable is categorical
 #'
 #' \code{cat_check} checks whether a vector contains only 0 and 1 and thus is a
@@ -201,7 +212,7 @@ mmr <- function(pred.I, data, pred.II){
 
   #Warning message if theta is not measures in radians:
 
-  if(!(max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) & !(max(unlist(theta)) < pi & min(unlist(theta)) >= -pi)){
+  if(!((max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) | (max(unlist(theta)) < pi & min(unlist(theta)) >= -pi))){
     cat("The circular outcome may contain values that are out of range. \n")
     cat("Please check that the circular outcome is measured in radians.")
   }
@@ -342,7 +353,7 @@ mmme <- function(pred.I, data, pred.II){
 
   #Warning message if theta is not measures in radians:
 
-  if(!(max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) & !(max(unlist(theta)) < pi & min(unlist(theta)) >= -pi)){
+  if(!((max(unlist(theta)) < 2*pi & min(unlist(theta)) >= 0) | (max(unlist(theta)) < pi & min(unlist(theta)) >= -pi))){
     cat("The circular outcome may contain values that are out of range. \n")
     cat("Please check that the circular outcome is measured in radians.")
   }
@@ -1531,10 +1542,10 @@ summe <- function(output, mm){
   }
 
   circ.varrand.ri <- apply(output$circular.ri, 2, rho_circ)
-  circ.res.varrand[1,1] <- mean(circ.varrand.ri)
-  circ.res.varrand[1,2] <- mode_est(circ.varrand.ri)
-  circ.res.varrand[1,3] <- sd(circ.varrand.ri)
-  circ.res.varrand[1,4:5] <- hpd_est(circ.varrand.ri)
+  circ.res.varrand[1,1] <- mean(1-circ.varrand.ri)
+  circ.res.varrand[1,2] <- mode_est(1-circ.varrand.ri)
+  circ.res.varrand[1,3] <- sd(1-circ.varrand.ri)
+  circ.res.varrand[1,4:5] <- hpd_est(1-circ.varrand.ri)
 
 
   circest.rand.num <- array(NA,
@@ -1687,10 +1698,10 @@ summe <- function(output, mm){
 
       varrand.cat[,c] <- apply(circest.rand.cat[,,"circ.diff"], 2, rho_circ)
 
-      circ.res.varrand[paste("RS", c), 1] <- mean(varrand.cat)
-      circ.res.varrand[paste("RS", c), 2] <- mode_est(varrand.cat)
-      circ.res.varrand[paste("RS", c), 3] <- sd(varrand.cat)
-      circ.res.varrand[paste("RS", c), 4:5] <- hpd_est(varrand.cat)
+      circ.res.varrand[paste("RS", c), 1] <- mean(1-varrand.cat)
+      circ.res.varrand[paste("RS", c), 2] <- mode_est(1-varrand.cat)
+      circ.res.varrand[paste("RS", c), 3] <- sd(1-varrand.cat)
+      circ.res.varrand[paste("RS", c), 4:5] <- hpd_est(1-varrand.cat)
 
 
     }
@@ -1906,10 +1917,10 @@ summe <- function(output, mm){
        varrand.cat = varrand.cat,
        circ.varrand.ri = circ.varrand.ri,
        circ.res = circ.res,
-       circ.res.cat = circ.res.cat,
-       circ.res.means = circ.res.means,
+       circ.res.cat = circ.res.cat ,
+       circ.res.means = circ.res.means ,
        a.x = a.x, a.c = a.c, b.c = b.c,
-       SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff,
+       SAM = SAM, AS = AS, SSDO = SSDO, circ.diff = circ.diff ,
        lin.res.varrand.I = lin.res.varrand.I,
        lin.res.varrand.II = lin.res.varrand.II,
        circ.res.varrand = circ.res.varrand)

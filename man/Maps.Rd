@@ -18,7 +18,7 @@ A data frame with 160 rows and 8 variables: \describe{
  variable containing the angular error in radians} }
 }
 \source{
-\url{https://doi.org/10.1016/j.cognition.2017.05.020}
+\doi{10.1016/j.cognition.2017.05.020}
 }
 \usage{
 Maps
