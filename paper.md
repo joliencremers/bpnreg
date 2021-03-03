@@ -31,10 +31,20 @@ title: |
 
 The analysis of circular data, measured in degrees or radians, is
 inherently different from standard linear data due to its periodic
-nature ($0^\circ = 360^\circ$). Even though circular data occur in a
-diverse range of research areas, among others astronomy, medicine,
-genetics, neurology, environmetrics, psychology and geology, software
-implementations for the analysis of regression type models are scarce.
+nature ($0^\circ = 360^\circ$). Special methods are needed, even for
+computing basic summary statistics [@mardia2009directional]. Although
+circular data is not very common they occur in a diverse range of
+research areas, astronomy, medicine, genetics, neurology,
+environmetrics, psychology and geology among others. Software
+implementations for the analysis of regression type models for circular
+data are however scarce.
+
+To date `bpnreg` is the only software package that implements methods to
+analyze both regression and mixed-effects models for circular outcomes.
+The implemented regression models are Bayesian and assume projected
+normal distributions for the residuals. Models based on PN distributions
+are heterogeneous in the sense that the circular mean and variance are
+modeled simultaneously.
 
 # Statement of Need
 
@@ -46,8 +56,8 @@ for circular data based on the projected normal distribution (see
 models). Both continuous and categorical predictors can be included.
 Sampling from the posterior is performed via an MCMC algorithm
 implemented in `c++` that allows for fast computation (see
-@Cremers2018-ta and @Cremers2021-mm for a description of the MCMC
-samplers). Posterior descriptives of all parameters, model fit
+@Cremers2018-ta and @Cremers2021-mm for a description and assessment of
+the MCMC samplers). Posterior descriptives of all parameters, model fit
 statistics and Bayes factors for hypothesis tests for inequality
 constrained hypotheses are provided.
 
@@ -63,29 +73,139 @@ circular outcomes based on the von Mises distribution. To date however,
 well as mixed-effects models for circular outcomes based on the
 projected normal distribution.
 
-From its first release in 2018 at least eight published articles
+From its first release several published articles
 [@Tyson-Carr2020-mu; @Cremers2021-mm; @Cote2020-xg; @Rafferty2020-pb; @Ojeda_undated-by; @Olson2020-al; @Klugkist2018-ag; @Spinks2019-ya]
-have used `bpnreg` in their analyses.
+have used `bpnreg` for circular data analysis.
 
 # Use
 
-To use `bpnreg` the user first needs install the package from `CRAN` and
-load the package as follows:
+In a study by @Brunye2015-kb on cognitive maps, map-like memories of
+familiar environments that are used when we try to navigate in a certain
+environment, the hypothesis that like physical maps, cognitive maps also
+have a north-up orientation was tested. This hypothesis was tested by
+asking university students to point North at several campus locations.
+The variable of interest in this study was the pointing direction of the
+students, measured on a compass, and thus a circular variable. See
+@Brunye2015-kb and @Cremers2018-ta for a more detailed description of
+the data.
+
+To test whether this pointing direction is affected by a set of
+covariates a circular regression model can be used. To use `bpnreg` for
+fitting such a circular regression model, the user first needs install
+the package from `CRAN` and load the package as follows:
 
 ``` {.r}
 install.packages("bpnreg")
 library(bpnreg)
 ```
 
-    ## Warning: package 'bpnreg' was built under R version 4.0.3
+Subsequently, a circular regression model with the covariances sex, age,
+experience living on campus and a sense of direction score (sbsod) can
+be fit to the data using the `bpnr` function as follows:
 
-The two main functions are `bpnr` for fitting Bayesian projected normal
-multiple regression models for circular outcomes and `bpnme` for fitting
-Bayesian projected normal mixed-effects models for circular outcomes.
-For detailed examples on how to fit these two types of models using
-`bpnreg` and circular data analysis in general we refer to
-@Cremers2018-ys. Answers to frequently asked questions regarding the use
-of `bpnreg` can be found in the `FAQ` vignette available on `CRAN`.
+``` {.r}
+fit <- bpnr(theta ~ sex + age + experience + sbsod,
+            data = data,
+            its = 10000, burn = 100,
+            seed = 101)
+```
+
+The first argument contain the regression equation (theta is the
+circular outcome), in the second argument the data is defined, the
+following arguments are used to set the amount of iterations (`its`) and
+burn-in period (`burn`) for the MCMC algorithm and finally a seed is set
+to make the code reproducible. The results from the circular regression
+are stored in a new object `fit`.
+
+The package `bpnreg` contains several functions for evaluating the
+results. The function `coef_circ` can be used to obtain summary
+statistics (mean, mode, standard deviation and 95% highest posterior
+density interval) of the posterior samples of circular coefficients for
+categorical and continuous covariates (`type` argument) and can be
+displayed in both degrees and radians (`units` argument). We obtain
+posterior summaries for our regression model as follows:
+
+``` {.r}
+coef_circ(fit, type = "categorical", units = "degrees")
+```
+
+    ## $Means
+    ##                 mean     mode       sd        LB       UB
+    ## (Intercept) 10.91581 12.51876 7.287363 -3.881367 24.71201
+    ## sexfemale   32.03992 35.23071 9.899158 12.424166 51.38847
+    ## 
+    ## $Differences
+    ##                mean      mode       sd        LB       UB
+    ## sexfemale -21.12715 -24.96999 12.46132 -44.62454 4.085632
+
+``` {.r}
+coef_circ(fit, type = "continuous", units = "degrees")
+```
+
+    ##                          mean         mode         sd       LB HPD      UB HPD
+    ## age ax            2.897325423   3.26623800 14.2413397 -13.76326870  17.9224273
+    ## experience ax    -3.465114456  -2.58932332  3.9316227 -10.31365020   0.7863506
+    ## sbsod ax         -2.457471572  -1.99850842  1.0779868  -4.37109376  -0.9011196
+    ## age ac           13.764494100  85.00124494 60.8868251 -76.78851723 100.4764410
+    ## experience ac    39.384279129  84.91190612 71.3904659 -82.11633736 102.0535661
+    ## sbsod ac        -44.739788932 -47.95133857 22.4231868 -74.67460116 -15.7085238
+    ## age bc            0.023707866   0.15100117  0.2399134  -0.40662388   0.4286430
+    ## experience bc    -0.102887355  -0.28859719  0.3718297  -0.64924097   0.6056139
+    ## sbsod bc          0.413672164   0.39693554  0.1938878   0.15751283   0.7554667
+    ## age AS            0.184621807  -0.09150729 89.8509768  -3.14054029   2.4995293
+    ## experience AS    -0.201669044   0.15157543 25.3753151  -5.96345978   6.5016081
+    ## sbsod AS          0.331455408   0.21796304 10.5726678   0.07310866   0.4741250
+    ## age SAM          -0.619642601  -0.09091504 27.9175588  -3.61151565   2.8392686
+    ## experience SAM    0.005830653   0.15489250 37.1975405  -6.96156526   8.3401377
+    ## sbsod SAM         0.241668768   0.20614609  0.5651854   0.08770392   0.3725631
+    ## age SSDO         -0.114801211  -0.93193143  0.9025450  -1.16041858   1.1377521
+    ## experience SSDO   0.371653323   1.17152515  1.1647099  -1.47120986   1.5297273
+    ## sbsod SSDO       -1.206288960  -1.26083254  0.4353654  -1.60815235  -0.9450275
+
+As can be seen, posterior summaries for the circular means for males
+(intercept) and females as well as the difference in means is displayed.
+For the three continuous covariates in the model three types of circular
+regression coefficients, `bc`, `AS` and `SAM`, are displayed. For more
+information on the interpretation of the results we refer to
+@Cremers2018-ys.
+
+Functionality for obtaining fit statistics for model comparison is
+implemented in the `fit` function:
+
+``` {.r}
+fit(fit)
+```
+
+    ##         Statistic Parameters
+    ## lppd    -311.7524   10.00000
+    ## DIC      643.8494   10.03051
+    ## DIC.alt  643.8094   10.01050
+    ## WAIC     644.1330   10.31412
+    ## WAIC2    644.7860   10.64061
+
+Finally, `traceplot` is a useful function to evaluate sampler
+convergence. E.g. traceplots for the circular regression coefficient
+`bc` for all continuous variables in the model are obtained as follows:
+
+``` {.r}
+traceplot(fit, parameter = "b.c")
+```
+
+![](paper_files/figure-markdown/unnamed-chunk-8-1.png) If a traceplot
+for a specific variable is needed the `variable` argument can be used.
+For example:
+
+``` {.r}
+traceplot(fit, parameter = "b.c", variable = "age")
+```
+
+![](paper_files/figure-markdown/unnamed-chunk-9-1.png)
+
+For more detailed examples on how to fit circular regression and
+mixed-effects models using `bpnreg` and circular data analysis in
+general we refer to @Cremers2018-ys. Answers to frequently asked
+questions regarding the use of `bpnreg` can be found in the `FAQ`
+vignette available on `CRAN`.
 
 # Acknowledgements
 

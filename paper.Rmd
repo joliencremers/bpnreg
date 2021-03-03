@@ -81,29 +81,99 @@ data analysis.
 
 # Use
 
-To use `bpnreg` the user first needs install the package from `CRAN` and load the
-package as follows:
+In a study by @Brunye2015-kb on cognitive maps, map-like memories of familiar
+environments that are used when we try to navigate in a certain environment, the
+hypothesis that like physical maps, cognitive maps also have a north-up
+orientation was tested. This hypothesis was tested by asking university students
+to point North at several campus locations. The variable of interest in this
+study was the pointing direction of the students, measured on a compass, and
+thus a circular variable. See @Brunye2015-kb and
+@Cremers2018-ta for a more detailed description of the data.
+
+To test whether this pointing direction is affected by a set of covariates a circular
+regression model can be used. To use `bpnreg` for fitting such a circular
+regression model, the user first needs install the package from `CRAN` and load
+the package as follows:
 
 ```{r message=FALSE, eval = FALSE}
 install.packages("bpnreg")
 library(bpnreg)
 ```
 
-```{r message=FALSE, echo = FALSE}
+```{r message=FALSE, echo = FALSE, warning = FALSE}
 library(bpnreg)
 ```
 
-The two main functions are `bpnr` for fitting Bayesian projected normal multiple
-regression models for circular outcomes and `bpnme` for fitting Bayesian
-projected normal mixed-effects models for circular outcomes. For detailed
-examples on how to fit these two types of models using `bpnreg` and circular
-data analysis in general we refer to @Cremers2018-ys. Answers to frequently
-asked questions regarding the use of `bpnreg` can be found in the `FAQ` vignette
-available on `CRAN`.
+```{r, echo = FALSE, results = FALSE}
+data <- read.table("DatatoSamplerPointingNorth.txt", header = TRUE, sep = "\t", dec = ".")
+data$sex <- factor(data$sex, labels = c("male", "female"))
+```
+
+Subsequently, a circular regression model with the covariances sex, age,
+experience living on campus and a sense of direction score (sbsod) can be fit to
+the data using the `bpnr` function as follows:
+
+```{r, warning = FALSE, message = FALSE, results = FALSE}
+fit <- bpnr(theta ~ sex + age + experience + sbsod,
+            data = data,
+            its = 10000, burn = 100,
+            seed = 101)
+```
+
+The first argument contain the regression equation (theta is the circular
+outcome), in the second argument the data is defined, the following arguments
+are used to set the amount of iterations (`its`) and burn-in period (`burn`) for
+the MCMC algorithm and finally a seed is set to make the code reproducible. The
+results from the circular regression are stored in a new object `fit`.
+
+The package `bpnreg` contains several functions for evaluating the results. The
+function `coef_circ` can be used to obtain summary statistics (mean, mode,
+standard deviation and 95\% highest posterior density interval) of the posterior
+samples of circular coefficients for categorical and continuous covariates
+(`type` argument) and can be displayed in both degrees and radians (`units`
+argument). We obtain posterior summaries for our regression model as follows:
+
+```{r}
+coef_circ(fit, type = "categorical", units = "degrees")
+```
+
+```{r}
+coef_circ(fit, type = "continuous", units = "degrees")
+```
+
+As can be seen, posterior summaries for the circular means for males (intercept)
+and females as well as the difference in means is displayed. For the three
+continuous covariates in the model three types of circular regression
+coefficients, `bc`, `AS` and `SAM`, are displayed. For more information on the
+interpretation of the results we refer to @Cremers2018-ys.
+
+Functionality for obtaining fit statistics for model comparison is implemented in the `fit` function:
+
+```{r}
+fit(fit)
+```
+
+Finally, `traceplot` is a useful function  to evaluate sampler convergence. E.g. traceplots for the circular regression coefficient `bc` for all continuous variables in the model are obtained as follows:
+
+```{r}
+traceplot(fit, parameter = "b.c")
+```
+If a traceplot for a specific variable is needed the `variable` argument can be used. For example:
+
+```{r}
+traceplot(fit, parameter = "b.c", variable = "age")
+```
+
+For more detailed examples on how to fit circular regression and mixed-effects
+models using `bpnreg` and circular data analysis in general we refer to
+@Cremers2018-ys. Answers to frequently asked questions regarding the use of
+`bpnreg` can be found in the `FAQ` vignette available on `CRAN`.
 
 
 # Acknowledgements
-JC is supported for this work by a research grant from the Novo Nordisk Foundation (“Harnessing The Power of Big Data to Address the Societal Challenge of Aging.” NNF17OC0027812)
+JC is supported for this work by a research grant from the Novo Nordisk
+Foundation (“Harnessing The Power of Big Data to Address the Societal Challenge
+of Aging.” NNF17OC0027812)
 
 
 # References
