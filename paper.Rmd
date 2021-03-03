@@ -1,7 +1,7 @@
 ---
 title: |
   bpnreg: A package to analyze Bayesian projected normal circular regression
-  models
+  and mixed-effects models
 tags:
   - R
   - Bayesian statistics
@@ -38,11 +38,16 @@ statistics [@mardia2009directional]. Although circular data is not very common
 they occur in a diverse range of research areas, astronomy, medicine, genetics,
 neurology, environmetrics, psychology and geology among others. Software
 implementations for the analysis of regression type models for circular data are
-however scarce.
+however scarce. To date `bpnreg` is the only software package that implements
+methods to analyze both regression and mixed-effects models for circular
+outcomes.
+
+
+# Statement of Need
 
 The purpose of `bpnreg` is to provide methods for fitting circular regression
 and mixed-effects models to `R`-users. Its two main functions allow for fitting
-Bayesian multiple and mixed-effect regression models for circular data based on
+Bayesian multiple and mixed-effects regression models for circular data based on
 the projected normal distribution (see @Nunez-Antonio2011-fm and
 @Nunez-Antonio2014-bd for a description of the models). Both continuous and
 categorical predictors can be included. Sampling from the posterior is performed
@@ -50,12 +55,7 @@ via an MCMC algorithm implemented in `c++` that allows for fast computation (see
 @Cremers2018-ta  and @Cremers2021-mm  for a description and assessment of the
 MCMC samplers). Posterior descriptives of all parameters, model fit statistics
 and Bayes factors for hypothesis tests for inequality constrained hypotheses are
-provided. To date `bpnreg` is the only software package that implements methods
-to analyze both regression and mixed-effects models for circular outcomes.
-
-
-
-# Statement of Need
+provided. 
 
 There are several R-packages that provide methods for circular data analyses,
 but only a couple contain functionality for circular regression models (see
@@ -72,6 +72,7 @@ From its first release `bpnreg` has been used for circular data analysis in
 several publications [@Tyson-Carr2020-mu;
 @Cremers2021-mm; @Cote2020-xg; @Rafferty2020-pb; @Ojeda_undated-by;
 @Olson2020-al; @Klugkist2018-ag; @Spinks2019-ya].
+
 
 # Use
 
@@ -131,8 +132,12 @@ argument). We obtain posterior summaries for our regression model as follows:
 coef_circ(fit, type = "categorical", units = "degrees")
 ```
 
-```{r}
+```{r, eval = FALSE}
 coef_circ(fit, type = "continuous", units = "degrees")
+```
+
+```{r, echo = FALSE}
+round(coef_circ(fit, type = "continuous", units = "degrees"), 2)
 ```
 
 As can be seen, posterior summaries for the circular means for males (intercept)

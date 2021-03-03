@@ -24,7 +24,7 @@ tags:
 - 'Mixed-effects models'
 title: |
     bpnreg: A package to analyze Bayesian projected normal circular
-    regression models
+    regression and mixed-effects models
 ---
 
 # Summary
@@ -37,11 +37,15 @@ circular data is not very common they occur in a diverse range of
 research areas, astronomy, medicine, genetics, neurology,
 environmetrics, psychology and geology among others. Software
 implementations for the analysis of regression type models for circular
-data are however scarce.
+data are however scarce. To date `bpnreg` is the only software package
+that implements methods to analyze both regression and mixed-effects
+models for circular outcomes.
+
+# Statement of Need
 
 The purpose of `bpnreg` is to provide methods for fitting circular
 regression and mixed-effects models to `R`-users. Its two main functions
-allow for fitting Bayesian multiple and mixed-effect regression models
+allow for fitting Bayesian multiple and mixed-effects regression models
 for circular data based on the projected normal distribution (see
 @Nunez-Antonio2011-fm and @Nunez-Antonio2014-bd for a description of the
 models). Both continuous and categorical predictors can be included.
@@ -50,11 +54,7 @@ implemented in `c++` that allows for fast computation (see
 @Cremers2018-ta and @Cremers2021-mm for a description and assessment of
 the MCMC samplers). Posterior descriptives of all parameters, model fit
 statistics and Bayes factors for hypothesis tests for inequality
-constrained hypotheses are provided. To date `bpnreg` is the only
-software package that implements methods to analyze both regression and
-mixed-effects models for circular outcomes.
-
-# Statement of Need
+constrained hypotheses are provided.
 
 There are several R-packages that provide methods for circular data
 analyses, but only a couple contain functionality for circular
@@ -137,25 +137,25 @@ coef_circ(fit, type = "categorical", units = "degrees")
 coef_circ(fit, type = "continuous", units = "degrees")
 ```
 
-    ##                          mean         mode         sd       LB HPD      UB HPD
-    ## age ax            2.897325423   3.26623800 14.2413397 -13.76326870  17.9224273
-    ## experience ax    -3.465114456  -2.58932332  3.9316227 -10.31365020   0.7863506
-    ## sbsod ax         -2.457471572  -1.99850842  1.0779868  -4.37109376  -0.9011196
-    ## age ac           13.764494100  85.00124494 60.8868251 -76.78851723 100.4764410
-    ## experience ac    39.384279129  84.91190612 71.3904659 -82.11633736 102.0535661
-    ## sbsod ac        -44.739788932 -47.95133857 22.4231868 -74.67460116 -15.7085238
-    ## age bc            0.023707866   0.15100117  0.2399134  -0.40662388   0.4286430
-    ## experience bc    -0.102887355  -0.28859719  0.3718297  -0.64924097   0.6056139
-    ## sbsod bc          0.413672164   0.39693554  0.1938878   0.15751283   0.7554667
-    ## age AS            0.184621807  -0.09150729 89.8509768  -3.14054029   2.4995293
-    ## experience AS    -0.201669044   0.15157543 25.3753151  -5.96345978   6.5016081
-    ## sbsod AS          0.331455408   0.21796304 10.5726678   0.07310866   0.4741250
-    ## age SAM          -0.619642601  -0.09091504 27.9175588  -3.61151565   2.8392686
-    ## experience SAM    0.005830653   0.15489250 37.1975405  -6.96156526   8.3401377
-    ## sbsod SAM         0.241668768   0.20614609  0.5651854   0.08770392   0.3725631
-    ## age SSDO         -0.114801211  -0.93193143  0.9025450  -1.16041858   1.1377521
-    ## experience SSDO   0.371653323   1.17152515  1.1647099  -1.47120986   1.5297273
-    ## sbsod SSDO       -1.206288960  -1.26083254  0.4353654  -1.60815235  -0.9450275
+    ##                   mean   mode    sd LB HPD UB HPD
+    ## age ax            2.90   3.27 14.24 -13.76  17.92
+    ## experience ax    -3.47  -2.59  3.93 -10.31   0.79
+    ## sbsod ax         -2.46  -2.00  1.08  -4.37  -0.90
+    ## age ac           13.76  85.00 60.89 -76.79 100.48
+    ## experience ac    39.38  84.91 71.39 -82.12 102.05
+    ## sbsod ac        -44.74 -47.95 22.42 -74.67 -15.71
+    ## age bc            0.02   0.15  0.24  -0.41   0.43
+    ## experience bc    -0.10  -0.29  0.37  -0.65   0.61
+    ## sbsod bc          0.41   0.40  0.19   0.16   0.76
+    ## age AS            0.18  -0.09 89.85  -3.14   2.50
+    ## experience AS    -0.20   0.15 25.38  -5.96   6.50
+    ## sbsod AS          0.33   0.22 10.57   0.07   0.47
+    ## age SAM          -0.62  -0.09 27.92  -3.61   2.84
+    ## experience SAM    0.01   0.15 37.20  -6.96   8.34
+    ## sbsod SAM         0.24   0.21  0.57   0.09   0.37
+    ## age SSDO         -0.11  -0.93  0.90  -1.16   1.14
+    ## experience SSDO   0.37   1.17  1.16  -1.47   1.53
+    ## sbsod SSDO       -1.21  -1.26  0.44  -1.61  -0.95
 
 As can be seen, posterior summaries for the circular means for males
 (intercept) and females as well as the difference in means is displayed.
@@ -186,7 +186,7 @@ convergence. E.g. traceplots for the circular regression coefficient
 traceplot(fit, parameter = "b.c")
 ```
 
-![](paper_files/figure-markdown/unnamed-chunk-8-1.png) If a traceplot
+![](paper_files/figure-markdown/unnamed-chunk-9-1.png) If a traceplot
 for a specific variable is needed the `variable` argument can be used.
 For example:
 
@@ -194,7 +194,7 @@ For example:
 traceplot(fit, parameter = "b.c", variable = "age")
 ```
 
-![](paper_files/figure-markdown/unnamed-chunk-9-1.png)
+![](paper_files/figure-markdown/unnamed-chunk-10-1.png)
 
 For more detailed examples on how to fit circular regression and
 mixed-effects models using `bpnreg` and circular data analysis in
