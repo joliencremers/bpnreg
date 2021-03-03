@@ -29,17 +29,18 @@ title: |
 
 # Summary
 
-The analysis of circular data, measured in degrees or radians, is
-inherently different from standard linear data due to its periodic
-nature ($0^\circ = 360^\circ$). Special methods are needed, even for
-computing basic summary statistics [@mardia2009directional]. Although
-circular data is not very common they occur in a diverse range of
-research areas, astronomy, medicine, genetics, neurology,
+Circular data is measured in degrees or radians and could for example be
+compass directions or clock times. Its analysis is inherently different
+from standard linear data due to its periodic nature
+($0^\circ = 360^\circ$ and 24:00 = 00:00). Special methods are needed,
+even for computing basic summary statistics [@mardia2009directional].
+Although circular data are not very common they occur in a diverse range
+of research areas, astronomy, medicine, genetics, neurology,
 environmetrics, psychology and geology among others. Software
-implementations for the analysis of regression type models for circular
-data are however scarce. To date `bpnreg` is the only software package
-that implements methods to analyze both regression and mixed-effects
-models for circular outcomes.
+implementations for the analysis of regression and mixed-effects models
+for circular data are however scarce. To date `bpnreg` is the only
+software package that implements methods to analyze both regression and
+mixed-effects models for circular outcomes.
 
 # Statement of Need
 
@@ -52,9 +53,7 @@ models). Both continuous and categorical predictors can be included.
 Sampling from the posterior is performed via an MCMC algorithm
 implemented in `c++` that allows for fast computation (see
 @Cremers2018-ta and @Cremers2021-mm for a description and assessment of
-the MCMC samplers). Posterior descriptives of all parameters, model fit
-statistics and Bayes factors for hypothesis tests for inequality
-constrained hypotheses are provided.
+the MCMC samplers).
 
 There are several R-packages that provide methods for circular data
 analyses, but only a couple contain functionality for circular
@@ -64,25 +63,25 @@ contains functionality for fitting frequentist regression models for
 circular outcomes based on the von Mises distribution. The package
 `circglmbayes` [@Mulder2017] provides a Bayesian regression model for
 circular outcomes based on the von Mises distribution. To date however,
-`bpnreg` is the only R-package providing Bayesian multiple regression as
-well as mixed-effects models for circular outcomes based on the
-projected normal distribution.
+`bpnreg` is the only R-package providing Bayesian regression as well as
+mixed-effects models for circular outcomes based on the projected normal
+distribution.
 
 From its first release `bpnreg` has been used for circular data analysis
 in several publications
 [@Tyson-Carr2020-mu; @Cremers2021-mm; @Cote2020-xg; @Rafferty2020-pb; @Ojeda_undated-by; @Olson2020-al; @Klugkist2018-ag; @Spinks2019-ya].
 
-# Use
+# Example
 
-In a study by @Brunye2015-kb on cognitive maps, map-like memories of
+@Brunye2015-kb studies cognitive maps, defined as map-like memories of
 familiar environments that are used when we try to navigate in a certain
-environment, the hypothesis that like physical maps, cognitive maps also
-have a north-up orientation was tested. This hypothesis was tested by
-asking university students to point North at several campus locations.
-The variable of interest in this study was the pointing direction of the
-students, measured on a compass, and thus a circular variable. See
-@Brunye2015-kb and @Cremers2018-ta for a more detailed description of
-the data.
+environment. Their hypothesis of interest is that similar to physical
+maps, cognitive maps also have a north-up orientation. The north-up
+hypothesis was tested by asking university students to point North at
+several campus locations. The variable of interest, the pointing
+direction of the students, was measured on a compass and is thus a
+circular variable. See @Brunye2015-kb and @Cremers2018-ta for a more
+detailed description of the data.
 
 To test whether this pointing direction is affected by a set of
 covariates a circular regression model can be used. To use `bpnreg` for
