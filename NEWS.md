@@ -1,3 +1,7 @@
+# bpnreg 2.0.0.9000
+
+* This is a development version
+
 # bpnreg 2.0.0
 ## Major changes
 * Changed the names of the mcmc output objects. `B1`, `B2`, `Beta.I`, `Beta.II`, `B.I`, `B.II`, `VCov.I` and `VCov.II` are now named `beta1`, `beta2`, `beta1`, `beta2`, `b1`, `b2`, `omega1` and `omega2` respectively.
