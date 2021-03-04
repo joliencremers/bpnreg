@@ -4,6 +4,9 @@ language: R
 sudo: false
 cache: packages
 warnings_are_errors: false
+
+r_check_args: '--use-valgrind'
+
 addons:
   apt:
     packages:
@@ -13,8 +16,5 @@ r:
   - release
   - devel
 
-after_success:
-  - R -e "install.packages('${PKG_TARBALL}', repos=NULL, type='source')"
-  - cd tests
-  - R -d "valgrind --tool=memcheck --leak-check=full --track-origins=yes"  --vanilla < testthat.R
-  - cd ..
+env:
+  - VALGRIND_OPTS='--leak-check=full --track-origins=yes'
