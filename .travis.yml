@@ -8,3 +8,13 @@ addons:
   apt:
     packages:
       - valgrind
+r:
+  - oldrel
+  - release
+  - devel
+
+after_success:
+  - R -e "install.packages('${PKG_TARBALL}', repos=NULL, type='source')"
+  - cd tests
+  - R -d "valgrind --tool=memcheck --leak-check=full --track-origins=yes"  --vanilla < testthat.R
+  - cd ..
