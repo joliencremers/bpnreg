@@ -23,8 +23,10 @@ addons:
       - ghostscript
       - valgrind
 
+--tool=memcheck --leak-check=full"
+
 env:
-  - VALGRIND_OPTS='--leak-check=full --track-origins=yes'
+  - VALGRIND_OPTS='--tool=memcheck --leak-check=full --track-origins=yes'
 
 # language: R
 # sudo: false
