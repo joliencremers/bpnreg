@@ -8,7 +8,6 @@ r:
   - oldrel
   - release
   - devel
-  - bioc-devel
 
 script:
 - R CMD build . --compact-vignettes=gs+qpdf
@@ -23,6 +22,9 @@ addons:
       - qpdf
       - ghostscript
       - valgrind
+
+env:
+  - VALGRIND_OPTS='--leak-check=full --track-origins=yes'
 
 # language: R
 # sudo: false
@@ -40,5 +42,4 @@ addons:
 #   - release
 #   - devel
 #
-# env:
-#   - VALGRIND_OPTS='--leak-check=full --track-origins=yes'
+
