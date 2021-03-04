@@ -11,7 +11,7 @@ r:
 
 script:
 - R CMD build . --compact-vignettes=gs+qpdf
-- R CMD check *tar.gz --as-cran --use-valgrind
+- R CMD check --as-cran --use-valgrind bpnreg_2.0.0.tar.gz
 
 
 addons:
