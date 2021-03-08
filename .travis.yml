@@ -18,8 +18,6 @@ r:
 os:
   - osx
   - linux
-osx_image: xcode8
-
 
 addons:
   apt:
