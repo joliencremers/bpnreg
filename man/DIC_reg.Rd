@@ -4,10 +4,16 @@
 \alias{DIC_reg}
 \title{Compute Model Fit Measures Regression Model}
 \usage{
-DIC_reg(output, X1, X2)
+DIC_reg(theta, beta1, beta2, Likelihood, X1, X2)
 }
 \arguments{
-\item{output}{output from the circular regression function Regression()}
+\item{theta}{circular outcome values}
+
+\item{beta1}{regression coefficients for the second component for each mcmc iteration from pnr function}
+
+\item{beta2}{regression coefficients for the second component for each mcmc iteration from pnr function}
+
+\item{Likelihood}{likelihood values for each individual and mcmc itertion from pnr function}
 
 \item{X1}{model matrix for the first component}
 

@@ -901,7 +901,10 @@ sumr <- function(output, mm){
     }
   }
 
-  model.fit <- DIC_reg(output, mm$XI, mm$XII)
+  model.fit <- DIC_reg(output$theta,
+                       output$beta1, output$beta2,
+                       output$Likelihood,
+                       mm$XI, mm$XII)
 
 
   list(lin.res.I = lin.res.I, lin.res.II = lin.res.II,

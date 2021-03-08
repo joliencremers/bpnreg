@@ -25,7 +25,6 @@
 #'
 #' @export
 #'
-#'
 
 traceplot <- function(object, parameter = "SAM", variable = NULL){
 
@@ -428,7 +427,6 @@ coef_ran.bpnme <- function(object, type = "linear"){
 #'
 #' @export
 #'
-#'
 
 coef_lin.bpnr <- function(object){
 
@@ -457,7 +455,6 @@ coef_lin.bpnr <- function(object){
 #' coef_lin(fit.Maps)
 #'
 #' @export
-#'
 #'
 
 coef_lin.bpnme <- function(object){
@@ -492,7 +489,6 @@ coef_lin.bpnme <- function(object){
 #' coef_circ(fit.Motor, type = "categorical")
 #'
 #' @export
-#'
 #'
 
 coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
@@ -604,7 +600,6 @@ coef_circ.bpnr <- function(object, type = "continuous", units = "radians"){
 #' coef_circ(fit.Maps)
 #'
 #' @export
-#'
 #'
 
 coef_circ.bpnme <- function(object, type = "continuous", units = "radians"){
@@ -984,7 +979,6 @@ print.bpnme <- function(x, ...){
 #' traceplot(fit.Motor, parameter = "beta1")
 #'
 #' @export
-#'
 #'
 
 traceplot.bpnr <- function(object, parameter = "SAM", variable = NULL){

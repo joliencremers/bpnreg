@@ -46,7 +46,7 @@ arma::mat betaBlock(arma::mat Omega, Rcpp::List R, Rcpp::List theta, Rcpp::List 
 
   //compute the covariance and precision (inverse) matrix of the outcome vector
 
-  arma::mat sXtVX = arma::mat(p,p) * 0.0;
+  arma::mat sXtVX = arma::mat(p,p, fill::zeros);
   arma::mat sXtVY_tmp = arma::mat(p, N);
   arma::mat sXtVY;
 
@@ -60,7 +60,7 @@ arma::mat betaBlock(arma::mat Omega, Rcpp::List R, Rcpp::List theta, Rcpp::List 
 
     int l = Z_tmp.n_rows;
     arma::mat Vi    = Z_tmp*invOmega*Z_tmp.t() + arma::mat(l,l,fill::eye);
-    arma::mat invVi = arma::inv_sympd(Vi);
+    arma::mat invVi = arma::inv(Vi);
     arma::mat aux  = X_tmp.t()*invVi*X_tmp;
     sXtVX = sXtVX + aux;
     sXtVY_tmp.col(i) = X_tmp.t()*invVi*Y;
@@ -68,7 +68,7 @@ arma::mat betaBlock(arma::mat Omega, Rcpp::List R, Rcpp::List theta, Rcpp::List 
   }
 
   //Compute variance of the distribution for the coefficients vector
-  arma::mat beta_var = arma::inv_sympd(A + sXtVX);
+  arma::mat beta_var = arma::inv(A + sXtVX);
 
   //Compute the mean of the distribution for the coefficients vector.
 
@@ -78,7 +78,7 @@ arma::mat betaBlock(arma::mat Omega, Rcpp::List R, Rcpp::List theta, Rcpp::List 
     sXtVY = arma::sum(sXtVY_tmp);
   }
 
-  arma::mat beta_mu = beta_var*sXtVY;
+  arma::colvec beta_mu = beta_var*sXtVY;
 
 
   //Sample the coefficients vector
@@ -124,7 +124,7 @@ arma::mat b_samp(arma::mat Omega, arma::mat beta,
     //Compute mean of the distribution for the subject specific random effects
     arma::mat etilde = Y - (X_tmp*beta);
     arma::mat Zetilde = Z_tmp.t()*etilde;
-    arma::mat b_mu = invD*Zetilde;
+    arma::colvec b_mu = invD*Zetilde;
     //Sample subject specific random effects vectors
     b.row(i) = arma::mvnrnd(b_mu, invD).t();
 
@@ -171,7 +171,6 @@ arma::mat omega_samp(arma::mat b, arma::mat B, int v, int q, int N){
 //' @param b2 estimated random effect coefficients of the second component
 //' @param pred An empty list for likelihood computation.
 //' @param N sample size at second level
-//' @param iteration iteration number
 //'
 // [[Rcpp::export]]
 
@@ -179,11 +178,9 @@ Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin,
                   Rcpp::List X1, Rcpp::List X2,
                   Rcpp::List Z1, Rcpp::List Z2,
                   arma::mat beta1, arma::mat beta2, arma::mat b1, arma::mat b2,
-                  int N, Rcpp::List pred, int iteration){
+                   int N, Rcpp::List pred){
 
   for (int i = 0; i < N; ++i){
-
-    arma::mat pred_tmp = pred[i];
 
     arma::mat Z1_tmp = Z1[i];
     arma::mat X1_tmp = X1[i];
@@ -199,8 +196,8 @@ Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin,
     arma::rowvec norm2 = arma::pow(mub1, 2) + arma::pow(mub2, 2);
 
     int n = mub1.n_cols;
-    arma::vec c(n);
-    arma::vec L(n);
+    arma::vec c(n, fill::zeros);
+    arma::vec L(n, fill::zeros);
 
     for (int j = 0; j < n; ++j){
 
@@ -211,8 +208,7 @@ Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin,
 
     }
 
-    pred_tmp.row(iteration) = L.t();
-    pred[i] = pred_tmp;
+    pred[i] = L.t();
 
   }
 
@@ -275,17 +271,15 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
   arma::cube omega1(q1,q1,its);
   arma::cube omega2(q2,q2,its);
 
-  arma::mat beta1_tmp;
-  arma::mat beta2_tmp;
-  arma::mat b1_tmp;
-  arma::mat b2_tmp;
-  arma::mat omega1_tmp;
-  arma::mat omega2_tmp;
+  arma::mat beta1_tmp(p1, 1, fill::zeros);
+  arma::mat beta2_tmp(p2, 1, fill::zeros);
+  arma::mat b1_tmp(N,q1, fill::zeros);
+  arma::mat b2_tmp(N,q1, fill::zeros);
 
   //Set starting values
 
-  omega1_tmp = arma::eye(q1,q1);
-  omega2_tmp = arma::eye(q2,q2);
+  arma::mat omega1_tmp(q1,q1, fill::eye);
+  arma::mat omega2_tmp(q2,q2, fill::eye);
 
   Rcpp::List R_tmp = R;
 
@@ -346,7 +340,7 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
 
       pred = lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2,
                     beta1_tmp, beta2_tmp, b1_tmp, b2_tmp,
-                    N, pred, ii-1);
+                    N, pred);
 
     }
 

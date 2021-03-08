@@ -59,8 +59,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lik_me
-Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin, Rcpp::List X1, Rcpp::List X2, Rcpp::List Z1, Rcpp::List Z2, arma::mat beta1, arma::mat beta2, arma::mat b1, arma::mat b2, int N, Rcpp::List pred, int iteration);
-RcppExport SEXP _bpnreg_lik_me(SEXP theta_cosSEXP, SEXP theta_sinSEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP Z1SEXP, SEXP Z2SEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP b1SEXP, SEXP b2SEXP, SEXP NSEXP, SEXP predSEXP, SEXP iterationSEXP) {
+Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin, Rcpp::List X1, Rcpp::List X2, Rcpp::List Z1, Rcpp::List Z2, arma::mat beta1, arma::mat beta2, arma::mat b1, arma::mat b2, int N, Rcpp::List pred);
+RcppExport SEXP _bpnreg_lik_me(SEXP theta_cosSEXP, SEXP theta_sinSEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP Z1SEXP, SEXP Z2SEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP b1SEXP, SEXP b2SEXP, SEXP NSEXP, SEXP predSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -76,8 +76,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type b2(b2SEXP);
     Rcpp::traits::input_parameter< int >::type N(NSEXP);
     Rcpp::traits::input_parameter< Rcpp::List >::type pred(predSEXP);
-    Rcpp::traits::input_parameter< int >::type iteration(iterationSEXP);
-    rcpp_result_gen = Rcpp::wrap(lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred, iteration));
+    rcpp_result_gen = Rcpp::wrap(lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -106,7 +105,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // lik_reg
-arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n);
+arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::vec beta1, arma::vec beta2, int n);
 RcppExport SEXP _bpnreg_lik_reg(SEXP X1SEXP, SEXP X2SEXP, SEXP thetaSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -114,28 +113,31 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type X1(X1SEXP);
     Rcpp::traits::input_parameter< arma::mat >::type X2(X2SEXP);
     Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type beta1(beta1SEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta1(beta1SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta2(beta2SEXP);
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
     rcpp_result_gen = Rcpp::wrap(lik_reg(X1, X2, theta, beta1, beta2, n));
     return rcpp_result_gen;
 END_RCPP
 }
 // DIC_reg
-Rcpp::List DIC_reg(Rcpp::List output, arma::mat X1, arma::mat X2);
-RcppExport SEXP _bpnreg_DIC_reg(SEXP outputSEXP, SEXP X1SEXP, SEXP X2SEXP) {
+Rcpp::List DIC_reg(arma::mat theta, arma::mat beta1, arma::mat beta2, arma::mat Likelihood, arma::mat X1, arma::mat X2);
+RcppExport SEXP _bpnreg_DIC_reg(SEXP thetaSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP LikelihoodSEXP, SEXP X1SEXP, SEXP X2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::List >::type output(outputSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta1(beta1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type Likelihood(LikelihoodSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type X1(X1SEXP);
     Rcpp::traits::input_parameter< arma::mat >::type X2(X2SEXP);
-    rcpp_result_gen = Rcpp::wrap(DIC_reg(output, X1, X2));
+    rcpp_result_gen = Rcpp::wrap(DIC_reg(theta, beta1, beta2, Likelihood, X1, X2));
     return rcpp_result_gen;
 END_RCPP
 }
 // slice_rcpp
-arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n, arma::mat r);
+arma::vec slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n, arma::vec r);
 RcppExport SEXP _bpnreg_slice_rcpp(SEXP X1SEXP, SEXP X2SEXP, SEXP thetaSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP nSEXP, SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -146,7 +148,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type beta1(beta1SEXP);
     Rcpp::traits::input_parameter< arma::mat >::type beta2(beta2SEXP);
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type r(rSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type r(rSEXP);
     rcpp_result_gen = Rcpp::wrap(slice_rcpp(X1, X2, theta, beta1, beta2, n, r));
     return rcpp_result_gen;
 END_RCPP
@@ -225,7 +227,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // circ_coef_rcpp
-NumericVector circ_coef_rcpp(double a1, double a2, double b1, double b2);
+Rcpp::NumericVector circ_coef_rcpp(double a1, double a2, double b1, double b2);
 RcppExport SEXP _bpnreg_circ_coef_rcpp(SEXP a1SEXP, SEXP a2SEXP, SEXP b1SEXP, SEXP b2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -251,7 +253,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // hmodeciC
-NumericVector hmodeciC(NumericVector x, double cip);
+Rcpp::NumericVector hmodeciC(NumericVector x, double cip);
 RcppExport SEXP _bpnreg_hmodeciC(SEXP xSEXP, SEXP cipSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -275,7 +277,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // hmodeci
-NumericVector hmodeci(NumericVector x, double cip);
+Rcpp::NumericVector hmodeci(NumericVector x, double cip);
 RcppExport SEXP _bpnreg_hmodeci(SEXP xSEXP, SEXP cipSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -291,10 +293,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_bpnreg_betaBlock", (DL_FUNC) &_bpnreg_betaBlock, 8},
     {"_bpnreg_b_samp", (DL_FUNC) &_bpnreg_b_samp, 9},
     {"_bpnreg_omega_samp", (DL_FUNC) &_bpnreg_omega_samp, 5},
-    {"_bpnreg_lik_me", (DL_FUNC) &_bpnreg_lik_me, 13},
+    {"_bpnreg_lik_me", (DL_FUNC) &_bpnreg_lik_me, 12},
     {"_bpnreg_pnme", (DL_FUNC) &_bpnreg_pnme, 14},
     {"_bpnreg_lik_reg", (DL_FUNC) &_bpnreg_lik_reg, 6},
-    {"_bpnreg_DIC_reg", (DL_FUNC) &_bpnreg_DIC_reg, 3},
+    {"_bpnreg_DIC_reg", (DL_FUNC) &_bpnreg_DIC_reg, 6},
     {"_bpnreg_slice_rcpp", (DL_FUNC) &_bpnreg_slice_rcpp, 7},
     {"_bpnreg_pnr", (DL_FUNC) &_bpnreg_pnr, 6},
     {"_bpnreg_rho", (DL_FUNC) &_bpnreg_rho, 1},

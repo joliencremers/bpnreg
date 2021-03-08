@@ -126,7 +126,7 @@ arma::mat mvrnorm_arma_eigen(int n, arma::vec mu, arma::mat sigma) {
 //'
 // [[Rcpp::export]]
 
-NumericVector circ_coef_rcpp(double a1, double a2, double b1, double b2) {
+Rcpp::NumericVector circ_coef_rcpp(double a1, double a2, double b1, double b2) {
 
   double ax = -(a1*b1 + a2*b2)/(pow(b1,2) + pow(b2,2));
   double ac = atan2(a2 + b2*ax, a1 + b1*ax);
@@ -198,7 +198,7 @@ double hmodeC(NumericVector x, double cip) {
 //'
 // [[Rcpp::export]]
 
-NumericVector hmodeciC(NumericVector x, double cip) {
+Rcpp::NumericVector hmodeciC(NumericVector x, double cip) {
 
   int n, cil, chiv;
   double ln;
@@ -291,7 +291,7 @@ double hmode(NumericVector x, double cip) {
 //'
 // [[Rcpp::export]]
 
-NumericVector hmodeci(NumericVector x, double cip) {
+Rcpp::NumericVector hmodeci(NumericVector x, double cip) {
 
   int n, cil, chiv;
   double ln;

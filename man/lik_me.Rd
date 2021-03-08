@@ -4,21 +4,7 @@
 \alias{lik_me}
 \title{Compute the Likelihood of the PN distribution (mixed effects)}
 \usage{
-lik_me(
-  theta_cos,
-  theta_sin,
-  X1,
-  X2,
-  Z1,
-  Z2,
-  beta1,
-  beta2,
-  b1,
-  b2,
-  N,
-  pred,
-  iteration
-)
+lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred)
 }
 \arguments{
 \item{theta_cos}{A List with the cosine of the circular dependent variable.}
@@ -44,8 +30,6 @@ lik_me(
 \item{N}{sample size at second level}
 
 \item{pred}{An empty list for likelihood computation.}
-
-\item{iteration}{iteration number}
 }
 \description{
 Compute the Likelihood of the PN distribution (mixed effects)

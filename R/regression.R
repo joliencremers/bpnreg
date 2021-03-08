@@ -291,7 +291,6 @@ bpnme <- function(pred.I, data, pred.II = pred.I,
     predictiva[[i]] <- matrix(NA, its, mm$no.Meas[i])
   }
 
-
   output <- pnme(lapply(mm$theta, cos), lapply(mm$theta, sin),
                  mm$XI, mm$XII, mm$ZI, mm$ZII, mm$ZtZI, mm$ZtZII,
                  mm$R, predictiva,

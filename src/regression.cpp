@@ -35,18 +35,19 @@ const double pi = boost::math::constants::pi<double>();
 //'
 //[[Rcpp::export]]
 
-arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n){
+arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::vec beta1, arma::vec beta2, int n){
 
-  arma::mat mub1 = beta1*X1.t();
-  arma::mat mub2 = beta2*X2.t();
-  arma::mat Dbd = cos(theta)%mub1.t() + sin(theta)%mub2.t();
-  arma::mat norm2 = arma::pow(mub1, 2) + arma::pow(mub2, 2);
-  arma::vec L(n);
-  arma::vec c(n);
+  arma::vec mub1 = X1*beta1;
+  arma::vec mub2 = X2*beta2;
+  arma::vec Dbd = cos(theta)%mub1 + sin(theta)%mub2;
+
+  arma::vec norm2 = arma::pow(mub1, 2) + arma::pow(mub2, 2);
+  arma::vec L(n, fill::zeros);
+  arma::vec c(n, fill::zeros);
 
   for (int jjj=0; jjj < n; ++jjj){
-    c(jjj) = 1 + ((Dbd.row(jjj)(0)*R::pnorm(Dbd.row(jjj)(0), 0, 1, TRUE, FALSE))/R::dnorm(Dbd.row(jjj)(0),0, 1, FALSE));
-    L(jjj) = (1/(2*pi))*exp(-0.5*norm2.col(jjj)(0))*c(jjj);
+    c(jjj) = 1 + ((Dbd(jjj)*R::pnorm(Dbd(jjj), 0, 1, TRUE, FALSE))/R::dnorm(Dbd(jjj),0, 1, FALSE));
+    L(jjj) = (1/(2*pi))*exp(-0.5*norm2(jjj))*c(jjj);
   }
 
   return L;
@@ -55,46 +56,44 @@ arma::vec lik_reg(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, 
 
 //' Compute Model Fit Measures Regression Model
 //'
-//' @param output output from the circular regression function Regression()
+//' @param theta circular outcome values
+//' @param beta1 regression coefficients for the second component for each mcmc iteration from pnr function
+//' @param beta2 regression coefficients for the second component for each mcmc iteration from pnr function
+//' @param Likelihood likelihood values for each individual and mcmc itertion from pnr function
 //' @param X1 model matrix for the first component
 //' @param X2 model matrix for the second component
 //'
 //[[Rcpp::export]]
 
-Rcpp::List DIC_reg(Rcpp::List output, arma::mat X1, arma::mat X2){
+Rcpp::List DIC_reg(arma::mat theta, arma::mat beta1, arma::mat beta2, arma::mat Likelihood, arma::mat X1, arma::mat X2){
 
-  arma::vec theta = Rcpp::as<arma::vec>(output["theta"]);
-  arma::mat beta1 = Rcpp::as<arma::mat>(output["beta1"]);
-  arma::mat beta2 = Rcpp::as<arma::mat>(output["beta2"]);
-  arma::mat Likelihood = Rcpp::as<arma::mat>(output["Likelihood"]);
-
-  double n = theta.n_elem;
+  double n = theta.n_rows;
   double p1 = X1.n_cols;
   double p2 = X2.n_cols;
 
   arma::mat u = arma::join_rows(cos(theta),sin(theta));
 
-  arma::mat m_beta1 = arma::mean(beta1, 0);
-  arma::mat m_beta2 = arma::mean(beta2, 0);
+  arma::rowvec m_beta1 = arma::mean(beta1, 0);
+  arma::rowvec m_beta2 = arma::mean(beta2, 0);
 
-  arma::vec Likelihood_m = lik_reg(X1, X2, theta, m_beta1, m_beta2, n);
+  arma::vec Likelihood_m = lik_reg(X1, X2, theta, m_beta1.t(), m_beta2.t(), n);
 
-  arma::mat personsum = arma::sum(log(Likelihood), 1);
+  arma::vec personsum = arma::sum(trunc_log(Likelihood), 1);
   double D_hat = arma::sum(log(Likelihood_m));
-  arma::vec D_bar = arma::mean(personsum,0);
+  double D_bar = arma::mean(personsum);
 
-  double pD = 2*(D_hat - D_bar(0));
-  arma::vec pV = 2*var(personsum);
+  double pD = 2*(D_hat - D_bar);
+  double pV = 2*var(personsum);
   double pV_alt = 2*(p1 + p2);
 
   double DIC = -2*D_hat + 2*pD;
-  double DIC_alt = -2*D_hat + 2*pV(0);
+  double DIC_alt = -2*D_hat + 2*pV;
   double DIC_alt2 = -2*D_hat + 2*pV_alt;
 
   arma::mat lppd = arma::sum(log(arma::mean(Likelihood, 0)),1);
 
-  arma::mat pWAIC = 2*arma::sum(log(arma::mean(Likelihood, 0)) - arma::mean(log(Likelihood), 0),1);
-  arma::mat pWAIC2 = arma::sum(var(log(Likelihood), 0),1);
+  arma::mat pWAIC = 2*arma::sum(log(arma::mean(Likelihood, 0)) - arma::mean(trunc_log(Likelihood), 0),1);
+  arma::mat pWAIC2 = arma::sum(var(trunc_log(Likelihood), 0),1);
 
   double WAIC = -2*(lppd.col(0)(0) - pWAIC.col(0)(0));
   double WAIC2 = -2*(lppd.col(0)(0) - pWAIC2.col(0)(0));
@@ -127,19 +126,20 @@ Rcpp::List DIC_reg(Rcpp::List output, arma::mat X1, arma::mat X2){
 //'
 //[[Rcpp::export]]
 
-arma::mat slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n, arma::mat r){
+arma::vec slice_rcpp(arma::mat X1, arma::mat X2, arma::vec theta, arma::mat beta1, arma::mat beta2, int n, arma::vec r){
 
-  arma::mat mub1 = beta1*X1.t();
-  arma::mat mub2 = beta2*X2.t();
-  arma::mat Dbd = cos(theta)%mub1.t() + sin(theta)%mub2.t();
+  arma::vec mub1 = X1*beta1;
+  arma::vec mub2 = X2*beta2;
+  arma::vec Dbd = cos(theta)%mub1 + sin(theta)%mub2;
+
   for (int jjj=0; jjj < n; ++jjj){
 
-    arma::mat y = as<arma::vec>(runif(1,0,1)) % exp(-.5*pow((r.row(jjj)-Dbd.row(jjj)),2));
-    arma::mat u = as<arma::vec>(runif(1,0,1));
+    double y = R::runif(0,1)*exp(-.5*pow(r(jjj)-Dbd(jjj),2));
+    double u = R::runif(0,1);
 
-    arma::mat r1 = Dbd.row(jjj) + max(-Dbd.row(jjj), -sqrt(-2*log(y)));
-    arma::mat r2 = Dbd.row(jjj) + sqrt(-2*log(y));
-    r.row(jjj)  = sqrt(((pow(r2,2)-pow(r1,2)) % u) + pow(r1,2));
+    double r1 = Dbd(jjj) + max(-Dbd(jjj), -sqrt(-2*log(y)));
+    double r2 = Dbd(jjj) + sqrt(-2*log(y));
+    r(jjj)  = sqrt(((pow(r2,2)-pow(r1,2))*u) + pow(r1,2));
   }
   return r;
 }
@@ -215,12 +215,12 @@ Rcpp::List pnr(arma::vec theta,
     beta2_tmp = mvrnorm_arma_eigen(1, mstar2.col(0), sigma2).t();
 
     //Sample R
-    r = slice_rcpp(X1, X2, theta, beta1_tmp, beta2_tmp, n, r);
+    r = slice_rcpp(X1, X2, theta, beta1_tmp.t(), beta2_tmp.t(), n, r);
 
     //Compute Y
     Y = r%datose.each_col();
 
-    predictiva_tmp = lik_reg(X1, X2, theta, beta1_tmp, beta2_tmp, n).t();
+    predictiva_tmp = lik_reg(X1, X2, theta, beta1_tmp.t(), beta2_tmp.t(), n).t();
 
     if ((it + 1 - burn_new > 0) & ((it + 1 -burn_new) % lag == 0)){
 

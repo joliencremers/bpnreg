@@ -63,10 +63,9 @@ omega_samp <- function(b, B, v, q, N) {
 #' @param b2 estimated random effect coefficients of the second component
 #' @param pred An empty list for likelihood computation.
 #' @param N sample size at second level
-#' @param iteration iteration number
 #'
-lik_me <- function(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred, iteration) {
-    .Call(`_bpnreg_lik_me`, theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred, iteration)
+lik_me <- function(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred) {
+    .Call(`_bpnreg_lik_me`, theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred)
 }
 
 #' A Gibbs sampler for a projected normal mixed-effects model
@@ -105,12 +104,15 @@ lik_reg <- function(X1, X2, theta, beta1, beta2, n) {
 
 #' Compute Model Fit Measures Regression Model
 #'
-#' @param output output from the circular regression function Regression()
+#' @param theta circular outcome values
+#' @param beta1 regression coefficients for the second component for each mcmc iteration from pnr function
+#' @param beta2 regression coefficients for the second component for each mcmc iteration from pnr function
+#' @param Likelihood likelihood values for each individual and mcmc itertion from pnr function
 #' @param X1 model matrix for the first component
 #' @param X2 model matrix for the second component
 #'
-DIC_reg <- function(output, X1, X2) {
-    .Call(`_bpnreg_DIC_reg`, output, X1, X2)
+DIC_reg <- function(theta, beta1, beta2, Likelihood, X1, X2) {
+    .Call(`_bpnreg_DIC_reg`, theta, beta1, beta2, Likelihood, X1, X2)
 }
 
 #' A slice sampler for the latent lengths r
