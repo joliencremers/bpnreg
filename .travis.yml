@@ -28,3 +28,7 @@ addons:
 
 env:
   - VALGRIND_OPTS='--tool=memcheck --leak-check=full --track-origins=yes'
+
+jobs:
+  allow_failures:
+    - os: osx
