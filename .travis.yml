@@ -2,46 +2,31 @@
 
 
 # Use R language
-language: r
-#Define multiple R-versions, one from bioconductor
+language: R
+
+sudo: false
+cache: packages
+warnings_are_errors: false
+r_check_args: '--use-valgrind'
+
+#Define multiple R-versions
 r:
   - oldrel
   - release
   - devel
 
-script:
-- R CMD build . --compact-vignettes=gs+qpdf
-- R CMD check --as-cran --use-valgrind bpnreg_2.0.0.tar.gz
+os:
+  - osx
+  - linux
+osx_image: xcode8
 
 
 addons:
   apt:
     update: true
     packages:
-      - libgs-dev
       - qpdf
-      - ghostscript
       - valgrind
-
---tool=memcheck --leak-check=full"
 
 env:
   - VALGRIND_OPTS='--tool=memcheck --leak-check=full --track-origins=yes'
-
-# language: R
-# sudo: false
-# cache: packages
-# warnings_are_errors: false
-#
-# r_check_args: '--use-valgrind'
-#
-# addons:
-#   apt:
-#     packages:
-#       - valgrind
-# r:
-#   - oldrel
-#   - release
-#   - devel
-#
-
