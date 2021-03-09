@@ -23,15 +23,15 @@ tags:
 - Regression
 - 'Mixed-effects models'
 title: |
-    bpnreg: A package to analyze Bayesian projected normal circular
+    bpnreg: An R-package to analyze Bayesian projected normal circular
     regression and mixed-effects models
 ---
 
 # Summary
 
-Circular data is measured in degrees or radians and could for example be
-compass directions or clock times. Its analysis is inherently different
-from standard linear data due to its periodic nature
+Circular data is measured in degrees or radians and could for example
+consist of compass directions or clock times. Its analysis is inherently
+different from standard linear data due to its periodic nature
 ($0^\circ = 360^\circ$ and 24:00 = 00:00). Special methods are needed,
 even for computing basic summary statistics [@mardia2009directional].
 Although circular data are not very common they occur in a diverse range

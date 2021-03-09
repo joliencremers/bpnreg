@@ -1,6 +1,6 @@
 ---
 title: |
-  bpnreg: A package to analyze Bayesian projected normal circular regression
+  bpnreg: An R-package to analyze Bayesian projected normal circular regression
   and mixed-effects models
 tags:
   - R
@@ -31,17 +31,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Summary
 
-Circular data is measured in degrees or radians and could for example be compass
-directions or clock times. Its analysis is inherently different from standard
-linear data due to its periodic nature ($0^\circ = 360^\circ$ and 24:00 =
-00:00). Special methods are needed, even for computing basic summary statistics
-[@mardia2009directional]. Although circular data are not very common they occur
-in a diverse range of research areas, astronomy, medicine, genetics, neurology,
-environmetrics, psychology and geology among others. Software implementations
-for the analysis of regression and mixed-effects models for circular data are
-however scarce. To date `bpnreg` is the only software package that implements
-methods to analyze both regression and mixed-effects models for circular
-outcomes.
+Circular data is measured in degrees or radians and could for example consist of
+compass directions or clock times. Its analysis is inherently different from
+standard linear data due to its periodic nature ($0^\circ = 360^\circ$ and 24:00
+= 00:00). Special methods are needed, even for computing basic summary
+statistics [@mardia2009directional]. Although circular data are not very common
+they occur in a diverse range of research areas, astronomy, medicine, genetics,
+neurology, environmetrics, psychology and geology among others. Software
+implementations for the analysis of regression and mixed-effects models for
+circular data are however scarce. To date `bpnreg` is the only software package
+that implements methods to analyze both regression and mixed-effects models for
+circular outcomes.
 
 
 # Statement of Need
