@@ -1,6 +1,11 @@
-# bpnreg 2.0.0.9000
+# bpnreg 2.0.1
 
-* This is a development version
+## Bug fixes
+* Removed MASS from imports to fix note in the 2.0.0 version
+
+* Changes in c++ code to solve errors from CRAN valgrind checks in the 2.0.0 version.
+
+* Changed arma::inv_sympd to arma::inv in c++ code to solve errors on macOS in the 2.0.0 version.
 
 # bpnreg 2.0.0
 ## Major changes
@@ -21,11 +26,11 @@
 
 * Results for `bc`, `AS` and `SAM`  are now also included in degrees if `units = "degrees"` in `circ_coef` function
 
-* An error warning in case of any missings in the data was included.
+* An error warning in case of any missing values was included.
 
 * The `WAIC` criterion in the model fit estimates obtained from the `fit()` function is more correctly referred to as `WAIC1`.
 
-* Format of `cRS` object stored in a `bpnme` fit object was changed from `matrix` to `data.frame` to accomodate for data of more than two types, e.g. `character` and `numeric`.
+* Format of `cRS` object stored in a `bpnme` fit object was changed from `matrix` to `data.frame` to accommodate for data of more than two types, e.g. `character` and `numeric`.
 
 # bpnreg 1.0.3
 * Deleted arguments from function documentation that are not in `\usage`.
