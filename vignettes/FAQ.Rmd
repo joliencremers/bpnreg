@@ -227,11 +227,11 @@ head(fit$a.x)
 ### How to obtain random effect variances and individual random effects in circular mixed-effects models:
 
 ```{r, echo = FALSE, results = FALSE}
-fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps, its = 100)
+fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps)
 ```
 
 ```{r, eval = FALSE}
-fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps, its = 100)
+fitme <- bpnme(Error.rad ~ Maze + Trial.type + (1|Subject), Maps)
 ```
 
 In circular mixed-effects models the following parameters contain the individual random effects and random effect variances:
