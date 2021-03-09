@@ -7,7 +7,7 @@ language: R
 sudo: false
 cache: packages
 warnings_are_errors: false
-# r_check_args: '--use-valgrind'
+r_check_args: '--use-valgrind'
 
 #Define multiple R-versions
 r:
@@ -16,19 +16,15 @@ r:
   - devel
 
 os:
-  - osx
-#   - linux
-#
-# addons:
-#   apt:
-#     update: true
-#     packages:
-#       - qpdf
-#       - valgrind
-#
-# env:
-#   - VALGRIND_OPTS='--tool=memcheck --leak-check=full --track-origins=yes'
-#
-# jobs:
-#   allow_failures:
-#     - os: osx
+  - linux
+
+addons:
+  apt:
+    update: true
+    packages:
+      - qpdf
+      - valgrind
+
+env:
+  - VALGRIND_OPTS='--tool=memcheck --leak-check=full --track-origins=yes'
+
