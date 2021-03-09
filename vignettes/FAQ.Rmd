@@ -318,9 +318,9 @@ From these results we conclude that the circular variance for the standard and p
 
 ## References
 
-- Cremers, J. , Mulder, K.T. \& Klugkist, I. (2018). Circular Interpretation of Regression Coefficients. *British Journal of Mathematical and Statistical Psychology, 71*(1), 75-95. [[Full-text]](https://doi.org/10.1111/bmsp.12108)
+- Cremers, J. , Mulder, K.T. \& Klugkist, I. (2018). Circular Interpretation of Regression Coefficients. *British Journal of Mathematical and Statistical Psychology, 71*(1), 75-95.
 
-- Cremers, J., Pennings, H.J.M., Mainhard, T. \& Klugkist, I. (2021). Circular Modelling of Circumplex Measurements for Interpersonal Behavior. *Assessment, 28*(2), 585-600. [[Full-text]](https://doi.org/10.1177/1073191119858407)
+- Cremers, J., Pennings, H.J.M., Mainhard, T. \& Klugkist, I. (2021). Circular Modelling of Circumplex Measurements for Interpersonal Behavior. *Assessment, 28*(2), 585-600.
 
 - Gelman, A., Carlin, J.B., Stern, H.S., Dunson, D.B., Vehtari, A. \& Rubin, D. (2014). Bayesian Data Analysis, 3rd ed.
 
