@@ -17,18 +17,18 @@ r:
 
 os:
   - osx
-  - linux
-
-addons:
-  apt:
-    update: true
-    packages:
-      - qpdf
-      - valgrind
-
-env:
-  - VALGRIND_OPTS='--tool=memcheck --leak-check=full --track-origins=yes'
-
-jobs:
-  allow_failures:
-    - os: osx
+#   - linux
+#
+# addons:
+#   apt:
+#     update: true
+#     packages:
+#       - qpdf
+#       - valgrind
+#
+# env:
+#   - VALGRIND_OPTS='--tool=memcheck --leak-check=full --track-origins=yes'
+#
+# jobs:
+#   allow_failures:
+#     - os: osx
