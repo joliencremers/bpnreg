@@ -46,7 +46,7 @@ circ_coef <- function(a1, a2, b1, b2){
 
   ax <- - (a1*b1 + a2*b2) / (b1^2 + b2^2)
   ac <- atan2(a2 + b2*ax, a1 + b1*ax)
-  bc <- (tan(atan2(a2, a1)) - ac) / -ax
+  bc <- (tan(atan2(a2, a1) - ac)) / -ax
 
   SDO <- sqrt( (a1 + b1)^2 + (a2 + b2)^2)
   SSDO <- sign(sin(ac - atan2(b2, b1)))*SDO
@@ -783,12 +783,12 @@ sumr <- function(output, mm){
 
         }
 
-        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.II[v])))
+        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.II[v])^2))
 
         ASs <- matrix(NA, output$its, length(mm$XII[,1]))
 
         for(i in seq_along(mm$XII[,1])){
-          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(mm$XII[i,v])-circest$ax)))
+          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(mm$XII[i,v])-circest$ax)^2))
         }
 
       }else if(all(!var.num.II == v)){
@@ -817,12 +817,12 @@ sumr <- function(output, mm){
 
         }
 
-        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.I[v])))
+        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.I[v])^2))
 
         ASs <- matrix(NA, output$its, length(mm$XI[,1]))
 
         for(i in seq_along(mm$XI[,1])){
-          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(mm$XI[i,v])-circest$ax)))
+          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(mm$XI[i,v])-circest$ax)^2))
         }
 
       }else{
@@ -851,12 +851,12 @@ sumr <- function(output, mm){
 
         }
 
-        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.I[v])))
+        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.I[v])^2))
 
         ASs <- matrix(NA, output$its, length(mm$XI[,1]))
 
         for(i in seq_along(mm$XI[,1])){
-          ASs[,i] <- circest$bc/(1+(circest$bc*(mm$XI[i,v]-circest$ax)))
+          ASs[,i] <- circest$bc/(1+(circest$bc*(mm$XI[i,v]-circest$ax)^2))
         }
 
       }
@@ -1356,7 +1356,7 @@ summe <- function(output, mm){
 
         }
 
-        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.II[v])))
+        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.II[v])^2))
 
         for(i in 1:mm$N){
           groupmeans.II[i,v] <- mean(mm$XII[[i]][,v])
@@ -1365,7 +1365,7 @@ summe <- function(output, mm){
         ASs <- matrix(NA, output$its, mm$N)
 
         for(i in 1:mm$N){
-          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(do.call(rbind, mm$XII)[i,v])-circest$ax)))
+          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(do.call(rbind, mm$XII)[i,v])-circest$ax)^2))
         }
 
       }else if(all(!var.num.II == v)){
@@ -1394,7 +1394,7 @@ summe <- function(output, mm){
 
         }
 
-        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.I[v])))
+        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.I[v])^2))
 
         for(i in 1:mm$N){
           groupmeans.I[i,v] <- mean(mm$XI[[i]][,v])
@@ -1403,7 +1403,7 @@ summe <- function(output, mm){
         ASs <- matrix(NA, output$its, mm$N)
 
         for(i in 1:mm$N){
-          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(do.call(rbind, mm$XI)[i,v])-circest$ax)))
+          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(do.call(rbind, mm$XI)[i,v])-circest$ax)^2))
         }
 
       }else{
@@ -1432,7 +1432,7 @@ summe <- function(output, mm){
 
         }
 
-        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.I[v])))
+        SAMs <- circest$bc/(1+(circest$bc*-(circest$ax-grandmeans.I[v])^2))
 
         for(i in 1:mm$N){
           groupmeans.I[i,v] <- mean(mm$XI[[i]][,v])
@@ -1441,7 +1441,7 @@ summe <- function(output, mm){
         ASs <- matrix(NA, output$its, mm$N)
 
         for(i in 1:mm$N){
-          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(do.call(rbind, mm$XI)[i,v])-circest$ax)))
+          ASs[,i] <- circest$bc/(1+(circest$bc*(as.numeric(do.call(rbind, mm$XI)[i,v])-circest$ax)^2))
         }
 
       }

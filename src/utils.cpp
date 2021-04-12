@@ -130,7 +130,7 @@ Rcpp::NumericVector circ_coef_rcpp(double a1, double a2, double b1, double b2) {
 
   double ax = -(a1*b1 + a2*b2)/(pow(b1,2) + pow(b2,2));
   double ac = atan2(a2 + b2*ax, a1 + b1*ax);
-  double bc = (tan(atan2(a2, a1))-ac/-ax);
+  double bc = tan(atan2(a2, a1)-ac)/-ax);
   double SDO = sqrt(pow(a1 + b1, 2) + pow(a2 + b2, 2));
   double SSDO = R::sign(sin(ac - atan2(b2, b1)))*SDO;
 

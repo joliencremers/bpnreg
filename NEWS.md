@@ -1,6 +1,12 @@
 # bpnreg 2.0.1
 
 ## Bug fixes
+
+* Made sure that formulae for SAM, AS and bc correspond to those in Cremers, Mulder \& Klugkist (2018). Circular interpretation of regression coefficients.
+
+# bpnreg 2.0.1
+
+## Bug fixes
 * Removed MASS from imports to fix note in the 2.0.0 version
 
 * Changes in c++ code to solve errors from CRAN valgrind checks in the 2.0.0 version.
