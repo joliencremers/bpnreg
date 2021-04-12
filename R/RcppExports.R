@@ -64,8 +64,8 @@ omega_samp <- function(b, B, v, q, N) {
 #' @param pred An empty list for likelihood computation.
 #' @param N sample size at second level
 #'
-lik_me <- function(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred) {
-    .Call(`_bpnreg_lik_me`, theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred)
+lik_me <- function(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred, iteration) {
+    .Call(`_bpnreg_lik_me`, theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred, iteration)
 }
 
 #' A Gibbs sampler for a projected normal mixed-effects model

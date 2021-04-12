@@ -59,8 +59,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lik_me
-Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin, Rcpp::List X1, Rcpp::List X2, Rcpp::List Z1, Rcpp::List Z2, arma::mat beta1, arma::mat beta2, arma::mat b1, arma::mat b2, int N, Rcpp::List pred);
-RcppExport SEXP _bpnreg_lik_me(SEXP theta_cosSEXP, SEXP theta_sinSEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP Z1SEXP, SEXP Z2SEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP b1SEXP, SEXP b2SEXP, SEXP NSEXP, SEXP predSEXP) {
+Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin, Rcpp::List X1, Rcpp::List X2, Rcpp::List Z1, Rcpp::List Z2, arma::mat beta1, arma::mat beta2, arma::mat b1, arma::mat b2, int N, Rcpp::List pred, int iteration);
+RcppExport SEXP _bpnreg_lik_me(SEXP theta_cosSEXP, SEXP theta_sinSEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP Z1SEXP, SEXP Z2SEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP b1SEXP, SEXP b2SEXP, SEXP NSEXP, SEXP predSEXP, SEXP iterationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -76,7 +76,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type b2(b2SEXP);
     Rcpp::traits::input_parameter< int >::type N(NSEXP);
     Rcpp::traits::input_parameter< Rcpp::List >::type pred(predSEXP);
-    rcpp_result_gen = Rcpp::wrap(lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred));
+    Rcpp::traits::input_parameter< int >::type iteration(iterationSEXP);
+    rcpp_result_gen = Rcpp::wrap(lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2, beta1, beta2, b1, b2, N, pred, iteration));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -293,7 +294,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_bpnreg_betaBlock", (DL_FUNC) &_bpnreg_betaBlock, 8},
     {"_bpnreg_b_samp", (DL_FUNC) &_bpnreg_b_samp, 9},
     {"_bpnreg_omega_samp", (DL_FUNC) &_bpnreg_omega_samp, 5},
-    {"_bpnreg_lik_me", (DL_FUNC) &_bpnreg_lik_me, 12},
+    {"_bpnreg_lik_me", (DL_FUNC) &_bpnreg_lik_me, 13},
     {"_bpnreg_pnme", (DL_FUNC) &_bpnreg_pnme, 14},
     {"_bpnreg_lik_reg", (DL_FUNC) &_bpnreg_lik_reg, 6},
     {"_bpnreg_DIC_reg", (DL_FUNC) &_bpnreg_DIC_reg, 6},

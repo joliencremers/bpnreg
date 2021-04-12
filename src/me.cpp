@@ -178,9 +178,11 @@ Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin,
                   Rcpp::List X1, Rcpp::List X2,
                   Rcpp::List Z1, Rcpp::List Z2,
                   arma::mat beta1, arma::mat beta2, arma::mat b1, arma::mat b2,
-                   int N, Rcpp::List pred){
+                  int N, Rcpp::List pred, int iteration){
 
   for (int i = 0; i < N; ++i){
+
+    arma::mat mtmp = pred[i];
 
     arma::mat Z1_tmp = Z1[i];
     arma::mat X1_tmp = X1[i];
@@ -208,7 +210,8 @@ Rcpp::List lik_me(Rcpp::List theta_cos, Rcpp::List theta_sin,
 
     }
 
-    pred[i] = L.t();
+    mtmp.row(iteration) = L.t();
+    pred[i] = mtmp;
 
   }
 
@@ -340,7 +343,7 @@ Rcpp::List pnme(List theta_cos, List theta_sin,
 
       pred = lik_me(theta_cos, theta_sin, X1, X2, Z1, Z2,
                     beta1_tmp, beta2_tmp, b1_tmp, b2_tmp,
-                    N, pred);
+                    N, pred, ii-1);
 
     }
 
