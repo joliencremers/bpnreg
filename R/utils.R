@@ -46,7 +46,7 @@ circ_coef <- function(a1, a2, b1, b2){
 
   ax <- - (a1*b1 + a2*b2) / (b1^2 + b2^2)
   ac <- atan2(a2 + b2*ax, a1 + b1*ax)
-  bc <- (tan(atan2(a2, a1) - ac)) / -ax
+  bc <- tan(atan2(a2, a1) - ac) / -ax
 
   SDO <- sqrt( (a1 + b1)^2 + (a2 + b2)^2)
   SSDO <- sign(sin(ac - atan2(b2, b1)))*SDO
