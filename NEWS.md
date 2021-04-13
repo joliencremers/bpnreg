@@ -1,8 +1,11 @@
 # bpnreg 2.0.1
 
 ## Bug fixes
-
 * Made sure that formulae for SAM, AS and bc correspond to those in Cremers, Mulder \& Klugkist (2018). Circular interpretation of regression coefficients.
+
+* Corrected c++ code of mcmc sampler for intercept-only circular mixed effects model to solve error warning in v.2.0.0 and v.2.0.1.
+
+* Corrected incorrect computation of model fit estimates for circular mixed effects models in v.2.0.0 and v.2.0.1.
 
 # bpnreg 2.0.1
 
