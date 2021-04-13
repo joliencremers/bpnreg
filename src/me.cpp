@@ -72,19 +72,23 @@ arma::mat betaBlock(arma::mat Omega, Rcpp::List R, Rcpp::List theta, Rcpp::List 
 
   //Compute the mean of the distribution for the coefficients vector.
 
+  sXtVY = arma::sum(sXtVY_tmp,1);
+
   if(p > 1){
-    sXtVY = arma::sum(sXtVY_tmp, 1);
+
+    arma::colvec beta_mu = beta_var*sXtVY;
+    //Sample the coefficients vector
+    arma::mat beta = arma::mvnrnd(beta_mu, beta_var);
+    return beta;
+
   }else{
-    sXtVY = arma::sum(sXtVY_tmp);
+
+    arma::mat beta_mu = beta_var*sXtVY;
+    //Sample the coefficients vector
+    arma::mat beta = arma::randn(1)*sqrt(beta_var)+beta_mu;
+    return beta;
+
   }
-
-  arma::colvec beta_mu = beta_var*sXtVY;
-
-
-  //Sample the coefficients vector
-  arma::mat beta = arma::mvnrnd(beta_mu, beta_var);
-
-  return beta;
 
 }
 
