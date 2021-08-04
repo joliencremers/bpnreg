@@ -1,4 +1,4 @@
-# bpnreg 2.0.1
+# bpnreg 2.0.2
 
 ## Bug fixes
 * Made sure that formulae for SAM, AS and bc correspond to those in Cremers, Mulder \& Klugkist (2018). Circular interpretation of regression coefficients.
