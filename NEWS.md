@@ -1,7 +1,7 @@
 # bpnreg 2.0.2
 
 ## Bug fixes
-* Made sure that formulae for SAM, AS and bc correspond to those in Cremers, Mulder \& Klugkist (2018). Circular interpretation of regression coefficients.
+* Made sure that formulae for SAM, AS and bc correspond to those in Cremers, Mulder \& Klugkist (2018). *Circular interpretation of regression coefficients.* In previous versions of the package there was an error in the computation of SAM, AS and bc causing erroneous results.
 
 * Corrected c++ code of mcmc sampler for intercept-only circular mixed effects model to solve error warning in v.2.0.0 and v.2.0.1.
 
