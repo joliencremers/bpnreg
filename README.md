@@ -18,7 +18,7 @@ The R-package bpnreg can be installed from CRAN as follows:
 install.packages("bpnreg")
 ```
 
-You can install a beta-version of bpnreg from github with:
+You can install a beta-version of bpnreg 2.0.2 from github with:
 
 ``` r
 # install.packages("devtools")
