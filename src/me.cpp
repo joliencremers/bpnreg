@@ -173,8 +173,10 @@ arma::mat omega_samp(arma::mat b, arma::mat B, int v, int q, int N){
 //' @param beta2 estimated fixed effect coefficients of the second component
 //' @param b1 estimated random effect coefficients of the first component
 //' @param b2 estimated random effect coefficients of the second component
-//' @param pred An empty list for likelihood computation.
 //' @param N sample size at second level
+//' @param pred An empty list for likelihood computation.
+//' @param iteration iteration number at which likelihood is computed
+
 //'
 // [[Rcpp::export]]
 
