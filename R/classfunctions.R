@@ -795,7 +795,7 @@ print.bpnr <- function(x, ...){
 
   cat("MCMC: \n", paste("iterations = ", x$its, "\n",
                         "burn-in = ", x$burn, "\n",
-                        "lag = ", x$lag,
+                        "lag = ", x$n.lag,
                         sep = ""),
       "\n\n", sep = "")
 
@@ -882,7 +882,7 @@ print.bpnme <- function(x, ...){
 
   cat("MCMC: \n", paste("iterations = ", x$its, "\n",
                         "burn-in = ", x$burn, "\n",
-                        "lag = ", x$lag,
+                        "lag = ", x$n.lag,
                         sep = ""),
       "\n\n", sep = "")
 
