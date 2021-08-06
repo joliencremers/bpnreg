@@ -7,6 +7,8 @@
 
 * Corrected incorrect computation of model fit estimates for circular mixed effects models in v.2.0.0 and v.2.0.1.
 
+* Made sure that the chosen lag is displayed correctly in the output.
+
 # bpnreg 2.0.1
 
 ## Bug fixes
