@@ -26,7 +26,7 @@ The R-package bpnreg can be installed from CRAN as follows:
 install.packages("bpnreg")
 ```
 
-You can install  a beta-version of bpnreg from github with:
+You can install a beta-version of bpnreg from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
@@ -46,5 +46,5 @@ This is a basic example which shows you how to run a Bayesian projected normal r
 
 ```{r example}
 library(bpnreg)
-bpnr(Phaserad ~ Cond + AvAmp, Motor)
+bpnr(Phaserad ~ Cond + AvAmp, Motor, its = 100)
 ```
