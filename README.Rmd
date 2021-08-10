@@ -37,8 +37,8 @@ devtools::install_github("joliencremers/bpnreg")
 
 To cite the package ‘bpnreg’ in publications use:
 
-  Jolien Cremers (2020). bpnreg: Bayesian Projected Normal Regression Models for
-  Circular Data. R package version 2.0.1. https://CRAN.R-project.org/package=bpnreg
+  Jolien Cremers (2021). bpnreg: Bayesian Projected Normal Regression Models for
+  Circular Data. R package version 2.0.2. https://CRAN.R-project.org/package=bpnreg
 
 ## Example
 
