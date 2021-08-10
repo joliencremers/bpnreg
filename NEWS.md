@@ -1,3 +1,7 @@
+# bpnreg 2.0.2.9000
+
+This is a development version
+
 # bpnreg 2.0.2
 
 ## Bug fixes
