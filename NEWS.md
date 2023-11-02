@@ -1,6 +1,12 @@
-# bpnreg 2.0.2.9000
+# bpnreg 2.0.3
 
-This is a development version
+* Small documentation fixes for the breaking change:
+
+Using @docType package no longer automatically adds a -package alias. Instead document _PACKAGE to get all the defaults for package documentation.
+
+* Documentation fix for unused arguments in b_samp and betaBlock
+
+* Update JSS hyperlinks
 
 # bpnreg 2.0.2
 

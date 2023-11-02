@@ -9,6 +9,8 @@ betaBlock(Omega, R, theta, X, Z, p, A, N)
 \arguments{
 \item{Omega}{current covariance matrix}
 
+\item{R}{component of current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)}
+
 \item{X}{design matrix model parameters (differs per person)}
 
 \item{Z}{design matrix for random effects (differs per person)}
@@ -18,8 +20,6 @@ betaBlock(Omega, R, theta, X, Z, p, A, N)
 \item{A}{prior variance of fixed effect coefficients}
 
 \item{N}{sample size at second level}
-
-\item{Y}{current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)}
 }
 \description{
 Sample fixed effect coefficients

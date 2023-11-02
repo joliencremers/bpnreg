@@ -5,14 +5,10 @@
 #'
 #' @param formula see lme4 package documentation
 #' @param value see lme4 package documentation
-#'
 #' @source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'   Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
-#'   Software, 67(1),
-#'   1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
-#'
+#'   Software, 67(1), 1-48.\doi{10.18637/jss.v067.i01}{}.
 #' @keywords internal
-#'
 
 `RHSForm<-` <- function (formula, value)
 {
@@ -26,12 +22,9 @@
 #' part
 #'
 #' @param term see lme4 package documentation
-#'
 #' @source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'   Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
-#'   Software, 67(1),
-#'   1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
-#'
+#'   Software, 67(1), 1-48.\doi{10.18637/jss.v067.i01}{}.
 #' @keywords internal
 #'
 
@@ -72,7 +65,7 @@ expandDoubleVerts <- function (term)
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'  1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #' @keywords internal
 #'
@@ -135,7 +128,7 @@ findbars <- function (term)
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'  1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #'@keywords internal
 #'
@@ -161,7 +154,7 @@ isAnyArgBar <- function (term)
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'  1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #'@keywords internal
 #'
@@ -186,7 +179,7 @@ isBar <- function (term)
 #' @source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'   Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'   Software, 67(1),
-#'   1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'   1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #'@keywords internal
 #'
@@ -206,7 +199,7 @@ anyBars <- function (term)
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'  1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #'@keywords internal
 #'
@@ -248,7 +241,7 @@ nobars_ <-
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'  1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #'@keywords internal
 #'
@@ -276,7 +269,7 @@ nobars <- function(term)
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'  1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #'@keywords internal
 #'
@@ -308,7 +301,7 @@ subbars <- function (term){
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'  1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #'@keywords internal
 #'
@@ -333,7 +326,7 @@ RHSForm <- function(form, as.form = FALSE){
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'  1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #'@keywords internal
 #'
@@ -359,7 +352,7 @@ reOnly <- function(f, response = FALSE){
 #'@source Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
 #'  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
 #'  Software, 67(1),
-#'  1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+#'  1-48.\doi{10.18637/jss.v067.i01}{}.
 #'
 #'@keywords internal
 #'

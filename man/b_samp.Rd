@@ -11,6 +11,8 @@ b_samp(Omega, beta, R, theta, X, q, Z, ZtZ, N)
 
 \item{beta}{current fixed effect coefficients vector}
 
+\item{R}{component of current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)}
+
 \item{X}{design matrix model parameters (differs per person)}
 
 \item{q}{dimension Z(number of random effects)}
@@ -20,8 +22,6 @@ b_samp(Omega, beta, R, theta, X, q, Z, ZtZ, N)
 \item{ZtZ}{transpose(Z)*Z}
 
 \item{N}{sample size at second level}
-
-\item{Y}{current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)}
 }
 \description{
 Sample subject specific random effects

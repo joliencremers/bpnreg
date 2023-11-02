@@ -28,7 +28,7 @@ const double pi = boost::math::constants::pi<double>();
 //' Sample fixed effect coefficients
 //'
 //' @param Omega current covariance matrix
-//' @param Y current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)
+//' @param R component of current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)
 //' @param X design matrix model parameters (differs per person)
 //' @param Z design matrix for random effects (differs per person)
 //' @param p dimension X (number of columns/variables+indicator variables)
@@ -97,7 +97,7 @@ arma::mat betaBlock(arma::mat Omega, Rcpp::List R, Rcpp::List theta, Rcpp::List 
 //'
 //' @param Omega current covariance matrix
 //' @param beta current fixed effect coefficients vector
-//' @param Y current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)
+//' @param R component of current outcome vector (Y.I=cos(theta)*R, Y.II=sin(theta)*R)
 //' @param X design matrix model parameters (differs per person)
 //' @param q dimension Z(number of random effects)
 //' @param Z design matrix for random effects (differs per person)
@@ -176,7 +176,6 @@ arma::mat omega_samp(arma::mat b, arma::mat B, int v, int q, int N){
 //' @param N sample size at second level
 //' @param pred An empty list for likelihood computation.
 //' @param iteration iteration number at which likelihood is computed
-
 //'
 // [[Rcpp::export]]
 

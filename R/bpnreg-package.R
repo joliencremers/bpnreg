@@ -59,8 +59,9 @@
 #' @importFrom haven read_spss
 #' @importFrom methods is
 #' @importFrom utils combn
-#'
-#' @docType package
-#' @name bpnreg
+#' @keywords internal
+"_PACKAGE"
 
+## usethis namespace: start
+## usethis namespace: end
 NULL

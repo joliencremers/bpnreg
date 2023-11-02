@@ -7,7 +7,7 @@
 Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
  Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical
  Software, 67(1),
- 1-48.\href{https://www.jstatsoft.org/article/view/v067i01/0}{doi:10.18637/jss.v067.i01}.
+ 1-48.\doi{10.18637/jss.v067.i01}{}.
 }
 \usage{
 isBar(term)
